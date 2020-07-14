@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>スポット登録</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+</head>
+
+  <body>
+    <div class="container-fulid m-content">
+      <div class="panel panel-default">
+        <div class="panel-header">
+          <span>スポットを登録</span>
+        </div>
+        <form id="add-spot-item" class="panel-body" [formGroup]="addSpotFormGroup">
+          <div>
+            <span class="panel-item-title">画像</span>
+            <span class="panel-item-input"></span>
+          </div>
+          <div class="panel-item">
+            <div class="panel-item-title">ルート番号</div>
+            <div class="panel-item-colon">：</div>
+            <div class="panel-item-input">
+              <input formControlName="routeNumber">
+            </div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-item-title">スケジュール日時</div>
+            <div class="panel-item-colon">：</div>
+            <div class="panel-item-input">
+              <input formControlName="scheduleDateTime">
+            </div>
+          </div>
+          <div class="panel-item">
+            <div class="panel-item-title">国</div>
+            <div class="panel-item-colon">：</div>
+            <div class="panel-item-input">
+              <input formControlName="country">
+            </div>
+          </div>
+        </form>
+        <div class="panel-footer">
+          <button type="button" (click)="onClickSave()" class="btn btn-primary">
+            <span>保存</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -1,0 +1,15 @@
+.search-area {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    height: 30px;
+    padding: 2px 10px;
+    margin-left: 5px;
+  }
+}

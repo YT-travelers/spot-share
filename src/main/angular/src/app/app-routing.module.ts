@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { AddSpotPageComponent } from './add-spot-page/add-spot-page.component';
+import { ShowSpotPageComponent } from './show-spot-page/show-spot-page.component';
 
-
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'show-spot-page', component: ShowSpotPageComponent },
+  { path: 'add-spot-page', component: AddSpotPageComponent },
+  { path: '', redirectTo: '/show-spot-page', pathMatch: 'full' },
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule { }
