@@ -1,0 +1,53 @@
+<html>
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+test123!!!
+
+<button onClick="postSpot()">新規作成</button>
+<button onClick="patchSpot()">更新</button>
+</body>
+
+<script>
+    function postSpot() {
+        axios.post('/spots', {
+            routeNumber: 1,
+            scheduleDateTime: "2020-07-20T16:12:55",
+            country: '日本',
+            spotName: 'スポット名',
+            costExpectation: 200000,
+            requiredTimeExpectation: 120,
+            favoritePoint: 10,
+            url: "http://example.com",
+            remark: "あいうえお\nかきくけこ\n"
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    function patchSpot() {
+        axios.patch('/spots/1', {
+            routeNumber: 2,
+            scheduleDateTime: "2020-07-21T05:22:44",
+            country: '更新された国',
+            spotName: '更新されたスポット名',
+            costExpectation: 444444,
+            requiredTimeExpectation: 230,
+            favoritePoint: 5,
+            url: "http://update_example.com",
+            remark: "変更されたremark"
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+</script>
+</html>
