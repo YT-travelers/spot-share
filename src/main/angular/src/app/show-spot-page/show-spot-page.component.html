@@ -12,10 +12,9 @@
 <body>
   <div class="container-fulid m-content">
     <div class="search-area">
-      <div class="w-100">
-        <input type="text" [formControl]="searchKeyword">
-      </div>
-      <button type="button" (click)="onClickSearch()" class="btn btn-outline-success">
+      <input type="text" [formControl]="searchKeyword">
+      <button type="button" (click)="onClickSearch()" class="btn btn-outline-info d-flex">
+        <mat-icon>search</mat-icon>
         <span>Search</span>
       </button>
     </div>
@@ -23,7 +22,11 @@
       class="ag-theme-alpine spot-grid"
       [rowData]="spotList"
       [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
     ></ag-grid-angular>
+    <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary add-spot-button">
+      <span>スポット追加</span>
+    </button>
   </div>
 </body>
 

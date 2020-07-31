@@ -5,6 +5,7 @@
 
   input {
     width: 100%;
+    max-width: 700px;
   }
 
   button {
@@ -12,4 +13,13 @@
     padding: 2px 10px;
     margin-left: 5px;
   }
+}
+
+.add-spot-button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+ag-grid-angular {
+  height: calc(100% - 80px);
 }

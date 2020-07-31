@@ -4,6 +4,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
 import { ShowSpotPageComponent } from './show-spot-page.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,12 @@ import { ShowSpotPageComponent } from './show-spot-page.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    MatIconModule,
+    MatProgressSpinnerModule,
+    OverlayModule,
+  ],entryComponents: [
+    MatSpinner,
   ],
   providers: [],
 })

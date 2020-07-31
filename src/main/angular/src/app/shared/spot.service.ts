@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Spot } from '../entity/spot';
 
 @Injectable({ providedIn: 'root' })
-export class ShowSpotPageService {
+export class SpotService {
 
   private url = 'api/spots'
 
@@ -16,6 +16,13 @@ export class ShowSpotPageService {
   };
 
   constructor(private http: HttpClient) {
+  }
+
+  createSpot(spot: Spot): Observable<Spot> {
+    return this.http.post<Spot>(this.url, spot)
+      .pipe(
+        catchError(this.handleError<Spot>(null))
+      );
   }
 
   /**
@@ -32,7 +39,7 @@ export class ShowSpotPageService {
   }
 
   /**
-   * 検索エラーハンドリング
+   * エラーハンドリング
    * @param operation - 失敗した操作の名前
    * @param result - observableな結果として返す任意の値
    */

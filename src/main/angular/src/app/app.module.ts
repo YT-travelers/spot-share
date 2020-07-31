@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClientModule }    from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AddSpotPageModule } from './add-spot-page/add-spot-page.module'
-import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module'
+import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -16,11 +18,12 @@ import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
     AddSpotPageModule,
     ShowSpotPageModule,
-    NgbModule.forRoot(),
     HttpClientModule,
+    NgbModule.forRoot(),
+    MatIconModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
