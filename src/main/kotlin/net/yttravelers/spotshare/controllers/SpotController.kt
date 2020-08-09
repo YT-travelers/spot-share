@@ -31,6 +31,7 @@ class SpotForm() {
 
 @RestController
 @RequestMapping("/spots")
+@CrossOrigin
 class SpotController {
     @Autowired
     lateinit var spotService: SpotService
