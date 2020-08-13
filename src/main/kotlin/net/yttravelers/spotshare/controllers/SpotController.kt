@@ -4,12 +4,13 @@ import net.yttravelers.spotshare.entities.Spot
 import net.yttravelers.spotshare.services.SpotService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 import java.time.LocalDateTime
 
 class SpotForm() {
     var routeNumber: Int? = null
 
-    var scheduleDateTime: LocalDateTime? = null
+    var scheduleDateTime: String? = null
 
     var country: String? = null
 
@@ -25,7 +26,8 @@ class SpotForm() {
 
     var remark: String = ""
 
-    //TODO: 画像を追加
+    var file: MultipartFile? = null
+
     //TODO: 座標を追加
 }
 
@@ -42,12 +44,12 @@ class SpotController {
     }
 
     @PostMapping
-    fun addSpot(@RequestBody spot: SpotForm): Spot {
+    fun addSpot(@ModelAttribute spot: SpotForm): Spot {
         return this.spotService.addSpot(spot)
     }
 
     @PatchMapping("/{id}")
-    fun updateSpot(@PathVariable("id") id: Int, @RequestBody spot: SpotForm): Spot {
+    fun updateSpot(@PathVariable("id") id: Int, @ModelAttribute spot: SpotForm): Spot {
         return this.spotService.updateSpot(id, spot)
     }
 

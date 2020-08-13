@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.time.LocalDateTime
 import javax.persistence.EntityNotFoundException
 
 @Service
@@ -36,7 +37,7 @@ class SpotService {
     //TODO: メソッド名を考える
     fun saveSpot(spot: Spot, spotForm: SpotForm): Spot {
         spot.routeNumber = spotForm.routeNumber
-        spot.scheduleDateTime = spotForm.scheduleDateTime
+        spot.scheduleDateTime = LocalDateTime.parse(spotForm.scheduleDateTime)
         spot.country = spotForm.country
         spot.spotName = spotForm.spotName
         spot.costExpectation = spotForm.costExpectation
