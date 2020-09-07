@@ -23,9 +23,10 @@
           <div class="panel-item-title">画像</div>
           <div class="panel-item-input">
             <div class="drop-zone">
-              <input type="file" class="drop-zone" (drop)="onDrop($event)">
               <img #thumbnail class="thumbnail" src="">
-              <div>クリックするか、画像をドラッグ＆ドロップ</div>
+              <div class="cursor-pointer">画像をドラッグ＆ドロップ</div>
+              <div class="cursor-pointer">または</div>
+              <input type="file" class="cursor-pointer" (drop)="onDrop($event)"> 
             </div>
             <div class="image-info">
               <span>

@@ -53,6 +53,7 @@ export class AddSpotPageComponent {
    */
   onClickSave() {
     const spot: Spot = this.addSpotFormGroup.value;
+    spot.favoritePoint = this.favoritePoint;
     this.service.createSpot(spot).subscribe(result => {
       // TODO 登録完了の通知
       console.log(result);

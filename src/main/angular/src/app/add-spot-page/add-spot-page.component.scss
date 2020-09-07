@@ -3,11 +3,14 @@
   overflow-y: scroll;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 input[type=file] {
-  position: absolute;
-  right: 0;
-  z-index: 2;
-  opacity: 0;
+  line-height: normal;
+  border-radius: initial;
+  width: auto !important;
 }
 
 .drop-zone {
@@ -22,6 +25,10 @@ input[type=file] {
   white-space: nowrap;
   overflow: hidden;
   cursor: pointer;
+}
+
+.drop-zone:hover {
+  border-color: blue;
 }
 
 .thumbnail {
