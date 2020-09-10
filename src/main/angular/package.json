@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:nolit": "ng serve --proxy-config src/proxy.nolit.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
