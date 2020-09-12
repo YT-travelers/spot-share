@@ -15,9 +15,14 @@
   }
 }
 
-.add-spot-button {
+.footer-button {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-spot-button,.create-route-button {
   margin-top: 10px;
-  width: 100%;
+  width: 49.5%;
 }
 
 ag-grid-angular {

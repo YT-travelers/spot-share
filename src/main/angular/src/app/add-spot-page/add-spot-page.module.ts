@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
     NgbModule.forRoot(),
     MatIconModule,
   ],
+  exports: [
+    AddSpotPageComponent,
+  ],
   providers: [],
 })
 export class AddSpotPageModule { }

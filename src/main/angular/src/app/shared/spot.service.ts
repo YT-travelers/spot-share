@@ -18,8 +18,34 @@ export class SpotService {
   constructor(private http: HttpClient) {
   }
 
+  /**
+   * スポット新規作成
+   * @param spot スポット情報
+   */
   createSpot(spot: Spot): Observable<Spot> {
     return this.http.post<Spot>(this.url, spot)
+      .pipe(
+        catchError(this.handleError<Spot>(null))
+      );
+  }
+
+  /**
+   * スポット更新
+   * @param spot スポット情報
+   */
+  updateSpot(spot: Spot): Observable<Spot> {
+    return this.http.put<Spot>(this.url, spot)
+      .pipe(
+        catchError(this.handleError<Spot>(null))
+      );
+  }
+
+  /**
+   * スポット１件取得
+   * @param id id
+   */
+  getSpot(id: string): Observable<Spot> {
+    return this.http.get<Spot>(this.url + '/' + id)
       .pipe(
         catchError(this.handleError<Spot>(null))
       );

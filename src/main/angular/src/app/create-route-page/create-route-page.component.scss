@@ -1,0 +1,31 @@
+.maps {
+  text-align: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+
+  iframe {
+    width: 100%;
+  }
+}
+
+.tabs {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  height: 100%;
+
+  mat-tab-group {
+    height: 100%;
+  }
+
+  ag-grid-angular {
+    height: calc(100% - 80px);
+    min-height: 300px;
+  }
+}
+
+::ng-deep add-spot-page .m-content { 
+  padding: 5px 0 20px 0;
+  height: auto;
+}

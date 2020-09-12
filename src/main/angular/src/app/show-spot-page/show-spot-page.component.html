@@ -23,10 +23,16 @@
       [rowData]="spotList"
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
+      (gridReady)="onGridReady($event)"
     ></ag-grid-angular>
-    <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary add-spot-button">
-      <span>スポット追加</span>
-    </button>
+    <div class="footer-button">
+      <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary add-spot-button">
+        <span>スポットを追加</span>
+      </button>
+      <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary create-route-button">
+        <span>ルートに追加</span>
+      </button>
+    </div>
   </div>
 </body>
 
