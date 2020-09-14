@@ -63,6 +63,16 @@ export class RouteService {
   }
 
   /**
+   * ルート検索処理
+   */
+  searchRoutes(): Observable<Route[]> {
+    return this.http.get<Route[]>(this.url)
+      .pipe(
+        catchError(this.handleError<Route[]>([]))
+      );
+  }
+
+  /**
    * エラーハンドリング
    * @param operation - 失敗した操作の名前
    * @param result - observableな結果として返す任意の値

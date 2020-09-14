@@ -1,22 +1,20 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription, fromEvent } from 'rxjs';
+import { GridOptions } from 'ag-grid-community';
+import { Route } from '../entity/route';
+import { RouteService } from '../shared/route.service';
 import { Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
-import { GridOptions } from 'ag-grid-community';
-import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { Spot } from '../entity/spot';
-import { SpotService } from '../shared/spot.service'
-import { RouteService } from '../shared/route.service';
-
 @Component({
-  selector: 'show-spot-page',
-  templateUrl: './show-spot-page.component.html',
-  styleUrls: ['./show-spot-page.component.scss']
+  selector: 'app-show-route-page',
+  templateUrl: './show-route-page.component.html',
+  styleUrls: ['./show-route-page.component.scss']
 })
-export class ShowSpotPageComponent implements OnInit {
+export class ShowRoutePageComponent implements OnInit {
 
   /** リサイズイベント　オブザーバー */
   resizeObservable$: Observable<Event>
@@ -34,7 +32,7 @@ export class ShowSpotPageComponent implements OnInit {
         element.className = 'btn btn-outline-info'
         element.addEventListener('click', () => {
           // TODO 画面遷移前に確認ダイアログを表示する
-          this.router.navigate(['/add-spot-page', { id: params.data.id }]);
+          this.router.navigate(['/create-route-page', { id: params.data.id }]);
         });
         return element;
       },
@@ -46,16 +44,9 @@ export class ShowSpotPageComponent implements OnInit {
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
     { headerName: 'id', field: 'id', hide: "true" },
-    { headerName: 'ルート番号', field: 'routetNumber', sortable: true, filter: true },
-    { headerName: 'スケジュール日時', field: 'scheduleDateTime', sortable: true, filter: true },
-    { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country' },
-    { headerName: '観光地名', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName' },
-    { headerName: '費用（予算）', field: 'costExpectation', sortable: true, filter: true, tooltipField: 'costExpectation' },
-    { headerName: '所要時間（予想）', field: 'requiredTimeExpectation', sortable: true, filter: true, tooltipField: 'requiredTimeExpectation' },
-    { headerName: '行きたい度', field: 'favoritePoint', sortable: true, filter: true, tooltipField: 'favoritePoint' },
-    { headerName: 'URL', field: 'url', sortable: true, filter: true, tooltipField: 'url' },
-    { headerName: '備考', field: 'remark', sortable: true, filter: true, tooltipField: 'remark' },
+    { headerName: 'ルート名', field: 'routeTitle', sortable: true, filter: true },
   ];
+
 
   /** ag-gridに表示するチェックボックスのレンダラー */
   checkboxCellRenderer(params) {
@@ -85,10 +76,9 @@ export class ShowSpotPageComponent implements OnInit {
   overlayRef;
 
   /** スポット一覧（グリッド表示用データ） */
-  spotList: Spot[] = [];
+  routeList: Route[] = [];
 
   constructor(
-    private spotService: SpotService,
     private routeService: RouteService,
     private router: Router,
     private overlay: Overlay,
@@ -97,7 +87,7 @@ export class ShowSpotPageComponent implements OnInit {
   // -----------------------------------------------------------------------
   // ライフライクル
 
-  ngOnInit() {
+  ngOnInit(): void {
     // リサイズイベントが大量に発生するため、100ms間引いてからグリッドの列幅を調整する
     this.resizeObservable$ = fromEvent(window, 'resize')
     this.resizeSubscription$ = this.resizeObservable$.
@@ -117,45 +107,37 @@ export class ShowSpotPageComponent implements OnInit {
     this.executeSearch();
   }
 
-  // -----------------------------------------------------------------------
+    // -----------------------------------------------------------------------
   // イベント
 
   /**
    * ルート一覧ページ押下イベント
    */
-  onClickRoutePage() {
-    this.router.navigate(['/show-route-page']);
+  onClickSpotPage() {
+    this.router.navigate(['/show-spot-page']);
   }
 
   /**
-   * スポット登録ボタン押下イベント
-   */
-  onClickAddSpot() {
-    this.router.navigate(['/add-spot-page']);
-  }
-
-  /**
-   * ルート追加ボタン押下イベント
+   * ルート作成ボタン押下イベント
    */
   onClickCreateRoute() {
-    const route = [];
-    this.spotList.forEach(e => {
-      if (e['select'] === 'Y') {
-        route.push(e.id);
-      }
+    // ルート作成リクエスト
+    this.routeService.createRoute([]).subscribe(result => {
+      // ルート作成ページに遷移
+      this.router.navigate(['/create-route-page', { routeId: result.id }]);
     });
-
-    if (route.length > 0) {
-      // ルート作成リクエスト
-      this.routeService.createRoute(route).subscribe(result => {
-        // ルート作成ページに遷移
-        this.router.navigate(['/create-route-page', { routeId: result.id }]);
-      });
-    } else {
-      // TODO エラーダイアログ「ルートに追加するスポットが１つも選択されていません。
-    }
-
   }
+
+  /**
+   * ルート削除ボタン押下イベント
+   */
+  onClickDeleteRoute() {
+    // TODO 一括削除か1件削除か決まったら実装する　
+    // this.routeService.deleteRoute().subscribe(result => {
+    //   this.executeSearch();
+    // });
+  }
+
 
   // -----------------------------------------------------------------------
   // 処理
@@ -166,8 +148,8 @@ export class ShowSpotPageComponent implements OnInit {
   executeSearch() {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
-    this.spotService.searchSpots().subscribe(result => {
-      this.spotList = result;
+    this.routeService.searchRoutes().subscribe(result => {
+      this.routeList = result;
       this.gridOptions.api.sizeColumnsToFit();
       // ローディング終了
       this.overlayRef.detach();
@@ -176,4 +158,5 @@ export class ShowSpotPageComponent implements OnInit {
       this.overlayRef.detach();
     });
   }
+
 }

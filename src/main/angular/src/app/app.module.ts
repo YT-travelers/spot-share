@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
 
 import { AddSpotPageModule } from './add-spot-page/add-spot-page.module'
 import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
-import { CreateRoutePageModule } from './create-route-page/create-route-page.module'
+import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { CreateRoutePageModule } from './create-route-page/create-route-page.mod
     AddSpotPageModule,
     ShowSpotPageModule,
     CreateRoutePageModule,
+    ShowSpotPageModule,
     HttpClientModule,
     NgbModule.forRoot(),
     MatIconModule,

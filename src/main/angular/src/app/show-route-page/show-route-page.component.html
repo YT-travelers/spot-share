@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>スポット一覧</title>
+  <title>ルート一覧</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -12,23 +12,23 @@
 <body>
   <div class="container-fulid m-content">
     <div class="title-area">
-      <span class="page-title">スポット一覧</span>
-      <button type="button" (click)="onClickRoutePage()" class="btn btn-outline-info d-flex">
-        <span>ルートの一覧</span>
+      <span class="page-title">ルート一覧</span>
+      <button type="button" (click)="onClickSpotPage()" class="btn btn-outline-info d-flex">
+        <span>スポットの一覧</span>
       </button>
     </div>
-    <ag-grid-angular 
+    <ag-grid-angular
       class="ag-theme-alpine"
-      [rowData]="spotList"
+      [rowData]="routeList"
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
     ></ag-grid-angular>
     <div class="footer-button">
-      <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary add-spot-button">
-        <span>スポットを追加</span>
-      </button>
       <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary create-route-button">
-        <span>ルートに追加</span>
+        <span>ルートを作成</span>
+      </button>
+      <button type="button" (click)="onClickDeleteRoute()" class="btn btn-outline-primary delete-route-button">
+        <span>ルートを削除</span>
       </button>
     </div>
   </div>
