@@ -155,10 +155,11 @@ export class ShowSpotPageComponent implements OnInit {
    * ルート追加ボタン押下イベント
    */
   onClickCreateRoute() {
-    const selectedRows = this.gridApi.getSelectedRows();
     const route = [];
-    selectedRows.map((row) => {
-      route.push(row.spotId);
+    this.spotList.forEach(e => {
+      if (e['select'] === 'Y') {
+        route.push(e.id);
+      }
     });
     // ルート作成リクエスト
     this.routeService.createRoute(route).subscribe(result => {

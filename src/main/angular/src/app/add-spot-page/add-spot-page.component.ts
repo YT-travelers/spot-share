@@ -2,7 +2,6 @@ import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ParamMap, ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbDateParserFormatter, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
 import { Spot } from '../entity/spot';
 import { SpotService } from '../shared/spot.service';
 
