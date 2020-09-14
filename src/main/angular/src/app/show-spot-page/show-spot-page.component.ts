@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 
 import { Spot } from '../entity/spot';
 import { SpotService } from '../shared/spot.service'
+import { RouteService } from '../shared/route.service';
 
 @Component({
   selector: 'show-spot-page',
@@ -49,7 +50,7 @@ export class ShowSpotPageComponent implements OnInit {
     { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
       editable: true, 
       cellRenderer: this.checkboxCellRenderer,
-      cellStyle: { 'text-align': 'center', 'margin-top': '5px' }
+      cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
     { headerName: 'id', field: 'id', hide: "true" },
     { headerName: 'ルート番号', field: 'routetNumber', sortable: true, filter: true },
@@ -97,7 +98,8 @@ export class ShowSpotPageComponent implements OnInit {
   searchKeyword = new FormControl('');
 
   constructor(
-    private service: SpotService,
+    private spotService: SpotService,
+    private routeService: RouteService,
     private router: Router,
     private overlay: Overlay,
   ) {}
@@ -153,13 +155,16 @@ export class ShowSpotPageComponent implements OnInit {
    * ルート追加ボタン押下イベント
    */
   onClickCreateRoute() {
-    let selectedRows;
-    selectedRows = this.gridApi.getSelectedRows();
+    const selectedRows = this.gridApi.getSelectedRows();
+    const route = [];
     selectedRows.map((row) => {
-      // TODO 複数選択（ルート作成）の際の処理を作成する
-      // ローカルストレージ？
+      route.push(row.spotId);
     });
-    this.router.navigate(['/create-route-page']);
+    // ルート作成リクエスト
+    this.routeService.createRoute(route).subscribe(result => {
+      // ルート作成ページに遷移
+      this.router.navigate(['/creat e-route-page', { routeId: result.id }]);
+    });
   }
 
   // -----------------------------------------------------------------------
@@ -171,7 +176,7 @@ export class ShowSpotPageComponent implements OnInit {
   executeSearch() {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
-    this.service.searchSpots(this.searchKeyword.value).subscribe(result => {
+    this.spotService.searchSpots(this.searchKeyword.value).subscribe(result => {
       this.spotList = result;
       this.gridOptions.api.sizeColumnsToFit();
       // ローディング終了

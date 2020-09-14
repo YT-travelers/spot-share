@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ParamMap, ActivatedRoute } from '@angular/router';
+import { NgbDateStruct, NgbDateParserFormatter, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 import { Spot } from '../entity/spot';
 import { SpotService } from '../shared/spot.service';
 
@@ -42,6 +44,12 @@ export class AddSpotPageComponent implements OnInit {
   /** 画像タイトル */
   imageTitle = '';
 
+  /** スケジュール日時：日 */
+  scheduleDate: NgbDateStruct = { year: 2020, month: 1, day: 1};
+
+  /** スケジュール日時：時間 */
+  scheduleTime: NgbTimeStruct = { hour: 9, minute: 0, second: 0 };
+
   addSpotFormGroup = new FormGroup({
     /** id */
     id: new FormControl(''),
@@ -75,12 +83,14 @@ export class AddSpotPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service: SpotService,
+    private dateFormatter: NgbDateParserFormatter
   ) {}
 
   // -----------------------------------------------------------------------
   // ライフサイクル
 
   ngOnInit() {
+
     // スポット編集モードの判定
     this.spotId = this.route.snapshot.paramMap.get('id');
     if (this.spotId) {
@@ -91,6 +101,7 @@ export class AddSpotPageComponent implements OnInit {
           this.spot = result;
           this.addSpotFormGroup.setValue(this.spot);
           this.favoritePoint = this.spot.favoritePoint;
+          this.scheduleDate = this.dateFormatter.parse(this.spot.scheduleDateTime);
         } else {
           // IDによるGET処理に失敗した場合は、新規モードで画面を開く
           this.editMode = EditMode.new;
@@ -121,6 +132,18 @@ export class AddSpotPageComponent implements OnInit {
     this.spot = this.addSpotFormGroup.value;
     this.spot.favoritePoint = this.favoritePoint;
 
+    const date = new Date(
+      this.scheduleDate.year,
+      this.scheduleDate.month - 1, // Date は月を 0~11 で処理するため、入力値-1 しておく
+      this.scheduleDate.day,
+      this.scheduleTime.hour,
+      this.scheduleTime.minute
+    );
+
+    date.setHours(date.getHours() + 9); // タイムゾーンの問題で、時刻によっては日付が変わってしまうためIOS8601に変換前に9時間足す
+
+    console.log(date.toISOString());
+
     switch (this.editMode) {
       case EditMode.new:
         this.service.createSpot(this.spot).subscribe(result => {
@@ -131,7 +154,7 @@ export class AddSpotPageComponent implements OnInit {
       
       case EditMode.edit:
       case EditMode.createRoute:
-        this.service.updateSpot(this.spot).subscribe(result => {
+        this.service.updateSpot(this.spot, this.spotId).subscribe(result => {
           // TODO 更新完了の通知
           console.log(result);
         });

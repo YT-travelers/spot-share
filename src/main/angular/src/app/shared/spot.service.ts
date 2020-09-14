@@ -33,8 +33,19 @@ export class SpotService {
    * スポット更新
    * @param spot スポット情報
    */
-  updateSpot(spot: Spot): Observable<Spot> {
-    return this.http.put<Spot>(this.url, spot)
+  updateSpot(spot: Spot, id: string): Observable<Spot> {
+    return this.http.patch<Spot>(this.url + '/' + id, spot)
+      .pipe(
+        catchError(this.handleError<Spot>(null))
+      );
+  }
+
+  /**
+   * スポット削除
+   * @param id スポット番号
+   */
+  deleteSpot(id: string): Observable<Spot> {
+    return this.http.delete<Spot>(this.url + '/' + id)
       .pipe(
         catchError(this.handleError<Spot>(null))
       );
@@ -42,7 +53,7 @@ export class SpotService {
 
   /**
    * スポット１件取得
-   * @param id id
+   * @param id スポット番号
    */
   getSpot(id: string): Observable<Spot> {
     return this.http.get<Spot>(this.url + '/' + id)

@@ -40,16 +40,9 @@
           </div>
         </div>
         <div class="panel-item">
-          <div class="panel-item-title">ルート番号</div>
+          <div class="panel-item-title">スポット名称</div>
           <div class="panel-item-input">
-            <input formControlName="routeNumber">
-          </div>
-        </div>
-        <div class="panel-item">
-          <div class="panel-item-title">スケジュール日時</div>
-          <div class="panel-item-input">
-            <input type="text" ngbDatepicker #d="ngbDatepicker" (focus)="d.toggle()"
-              formControlName="scheduleDateTime" />
+            <input formControlName="spotName">
           </div>
         </div>
         <div class="panel-item">
@@ -59,9 +52,16 @@
           </div>
         </div>
         <div class="panel-item">
-          <div class="panel-item-title">スポット名称</div>
-          <div class="panel-item-input">
-            <input formControlName="spotName">
+          <div class="panel-item-title">スケジュール日時</div>
+          <div class="panel-item-input schedule-date-time">
+            <input type="text" class="schedule-date" ngbDatepicker
+              #d="ngbDatepicker"
+              [(ngModel)]="scheduleDate"
+              [ngModelOptions]="{ standalone: true }"
+              (focus)="d.toggle()"/>
+            <ngb-timepicker size="small" 
+              [(ngModel)]="scheduleTime"
+              [ngModelOptions]="{ standalone: true }"></ngb-timepicker>
           </div>
         </div>
         <div class="panel-item">

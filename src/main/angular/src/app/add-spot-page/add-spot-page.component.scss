@@ -51,6 +51,15 @@ input[type=file] {
   }
 }
 
+.schedule-date-time {
+  display: flex;
+  align-items: center;
+
+  .schedule-date {
+    margin-right: 10px;
+  }
+}
+
 .panel {
   max-width: 700px;
   margin: 0 auto;
