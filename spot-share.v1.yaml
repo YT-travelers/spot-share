@@ -230,19 +230,22 @@ paths:
       responses:
         '200':
           description: OK
-  '/routes/{route_id}/spots/bulk_insert':
-    parameters:
-      - schema:
-          type: string
-        name: route_id
-        in: path
-        required: true
+  /routes/spots/bulk_insert:
+    parameters: []
     post:
       summary: ''
       operationId: post-routes-route_id-spots-bulk_insert
       responses:
         '200':
           description: OK
+        '':
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  routeId:
+                    type: integer
       requestBody:
         content:
           application/json:
