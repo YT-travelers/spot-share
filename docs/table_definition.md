@@ -27,6 +27,7 @@
 |costExpectation|予想費用|
 |requiredTimeExpectation|必要な時間|
 |memo|メモ|
+|url|参考URL|
 
 ### spot_imagesテーブル
 
