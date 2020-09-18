@@ -45,7 +45,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Spot'
+              $ref: '#/components/schemas/SpotForm'
+        description: ''
     get:
       summary: ''
       operationId: get-spots-id
@@ -74,8 +75,40 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/RouteResponse'
+                  $ref: '#/components/schemas/SimpleRoute'
       operationId: get-routes
+    post:
+      summary: ''
+      operationId: post-routes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type:
+                      - string
+                      - 'null'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type:
+                    - string
+                    - 'null'
+                details:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RouteDetail'
+        description: ''
   '/routes/{id}':
     parameters:
       - schema:
@@ -97,20 +130,30 @@ paths:
                   id:
                     type: integer
                   name:
-                    type: string
-                  spots:
+                    type:
+                      - string
+                      - 'null'
+                  details:
                     type: array
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                        name:
-                          type: string
-                        image_path:
-                          type: string
+                        spot:
+                          $ref: '#/components/schemas/SpotResponse'
+                        scheduledDateTime:
+                          type:
+                            - string
+                            - 'null'
                         order:
+                          type:
+                            - integer
+                            - 'null'
+                        favoritePoint:
                           type: integer
+                        memo:
+                          type: string
       operationId: get-routes-id
     delete:
       summary: ''
@@ -132,123 +175,10 @@ paths:
               properties:
                 name:
                   type: string
-  '/routes/{route_id}/spots/bulk_update':
-    parameters:
-      - schema:
-          type: string
-        name: route_id
-        in: path
-        required: true
-    get:
-      summary: Your GET endpoint
-      tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  route_id:
-                    type: integer
-                  spot_id:
-                    type: integer
-                  order:
-                    type: integer
-                  scheduled_date_time:
-                    type: string
-                  cost_expectation:
-                    type: integer
-                  required_time_expectation:
-                    type: string
-                  favorite_point: {}
-                  memo:
-                    type: string
-                  country:
-                    $ref: '#/components/schemas/Country'
-      operationId: get-routes-route_id-spots-spot_id
-    patch:
-      summary: ''
-      operationId: patch-routes-route_id-spots-spot_id
-      responses:
-        '200':
-          description: OK
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                order:
-                  type: integer
-                scheduled_date_time:
-                  type: string
-                cost_expectation:
-                  type: integer
-                required_time_expectation:
-                  type: string
-                favorite_point:
-                  type: integer
-                memo:
-                  type: string
-    delete:
-      summary: ''
-      operationId: delete-routes-route_id-spots-spot_id
-      responses:
-        '200':
-          description: OK
-  /routes/spots/bulk_insert:
-    parameters: []
-    post:
-      summary: ''
-      operationId: post-routes-route_id-spots-bulk_insert
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  routeId:
-                    type: integer
-        '':
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  routeId:
-                    type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: object
-                properties:
-                  spot_id:
-                    type: integer
-                  order:
-                    type: string
-                  scheduled_date_time:
-                    type: string
-                  cost_expectation:
-                    type: integer
-                  required_time_expectation:
-                    type: string
-                  favorite_point:
-                    type: integer
-                  memo:
-                    type: string
-                required:
-                  - spot_id
+                details:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RouteDetail'
   /countries:
     get:
       summary: Your GET endpoint
@@ -281,6 +211,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Country'
       operationId: get-countries-id
+  '/routeDetails/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: ''
+      operationId: delete-spot_details-id
+      responses:
+        '200':
+          description: OK
 components:
   schemas:
     SpotForm:
@@ -305,25 +248,47 @@ components:
           type:
             - string
             - 'null'
+        costExpectation:
+          type:
+            - integer
+            - 'null'
+        requiredTimeExpectation:
+          type:
+            - string
+            - 'null'
     SpotResponse:
       title: SpotResponse
       type: object
       properties:
         id:
           type: integer
-        country_id:
-          type: integer
+        countryCode:
+          $ref: '#/components/schemas/Country'
         name:
           type: string
         url:
-          type: string
+          type:
+            - string
+            - 'null'
         memo:
-          type: string
-        image_path:
-          type: string
+          type:
+            - string
+            - 'null'
+        imagePaths:
+          type: array
+          items:
+            type: string
+        costExpectation:
+          type:
+            - integer
+            - 'null'
+        requiredTimeExpectation:
+          type:
+            - string
+            - 'null'
       required:
         - id
-    RouteResponse:
+    SimpleRoute:
       title: RouteResponse
       type: object
       properties:
@@ -340,6 +305,64 @@ components:
         name:
           type: string
         currency:
-          type: string
+          type:
+            - string
+            - 'null'
         timezone:
+          type:
+            - string
+            - 'null'
+    RouteDetail:
+      title: SpotDetail
+      type: object
+      properties:
+        spotId:
+          type: integer
+        order:
+          type:
+            - integer
+            - 'null'
+        scheduledTimeExpectation:
+          type:
+            - string
+            - 'null'
+        costExpectation:
+          type:
+            - integer
+            - 'null'
+        requiredTimeExpectation:
+          type:
+            - string
+            - 'null'
+        favoritePoint:
+          type:
+            - string
+            - 'null'
+        memo:
+          type: string
+        id:
+          type:
+            - integer
+            - 'null'
+    SpotAllData:
+      title: SpotAllData
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        country:
+          $ref: '#/components/schemas/Country'
+        costExpectation:
+          type: string
+        requiredTimeExpectation:
+          type: string
+        memo:
+          type: string
+        url:
+          type: string
+        spotId:
+          type: string
+        '':
           type: string
