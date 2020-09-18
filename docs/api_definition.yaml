@@ -20,7 +20,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Spot'
+              $ref: '#/components/schemas/SpotForm'
             examples: {}
         description: ''
     parameters: []
@@ -287,9 +287,9 @@ components:
       title: SpotForm
       type: object
       properties:
-        country_id:
+        countryCode:
           type:
-            - integer
+            - string
             - 'null'
         name:
           type: string
