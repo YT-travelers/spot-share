@@ -76,29 +76,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/RouteResponse'
       operationId: get-routes
-    post:
-      summary: ''
-      operationId: post-routes
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
   '/routes/{id}':
     parameters:
       - schema:
@@ -155,16 +132,11 @@ paths:
               properties:
                 name:
                   type: string
-  '/routes/{route_id}/spots/{spot_id}':
+  '/routes/{route_id}/spots/bulk_update':
     parameters:
       - schema:
           type: string
         name: route_id
-        in: path
-        required: true
-      - schema:
-          type: string
-        name: spot_id
         in: path
         required: true
     get:
@@ -244,7 +216,7 @@ paths:
                 type: object
                 properties:
                   routeId:
-                    type: string
+                    type: integer
         '':
           content:
             application/json:
