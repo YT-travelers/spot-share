@@ -5,30 +5,19 @@ import net.yttravelers.spotshare.services.SpotService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
-import java.time.LocalDateTime
 
 class SpotForm() {
-    var routeNumber: Int? = null
-
-    var scheduleDateTime: String? = null
-
-    var country: String? = null
-
-    var spotName: String? = null
-
-    var costExpectation: Int? = null
-
-    var requiredTimeExpectation: Int? = null
-
-    var favoritePoint: Int? = null
+    var name: String? = null
 
     var url: String? = null
 
-    var remark: String = ""
+    var memo: String? = null
 
     var file: MultipartFile? = null
 
-    //TODO: 座標を追加
+    var costExpectation: Int? = null
+
+    var requiredTimeExpectation: String? = null
 }
 
 @RestController
@@ -56,5 +45,10 @@ class SpotController {
     @GetMapping("/{id}")
     fun findSpot(@PathVariable("id") id: Int): Spot {
         return spotService.findSpotOrException(id)
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteSpot(@PathVariable("id") id: Int) {
+        spotService.deleteSpot(id)
     }
 }

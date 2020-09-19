@@ -1,5 +1,6 @@
 package net.yttravelers.spotshare.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -25,6 +26,7 @@ class Spot {
     @Column(name="imagePath")
     var imagePaths: MutableList<String> = mutableListOf()
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "spot")
     var routeDetails: MutableList<RouteDetail> = mutableListOf()
 }
