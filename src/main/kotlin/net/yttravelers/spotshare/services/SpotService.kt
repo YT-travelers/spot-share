@@ -36,15 +36,15 @@ class SpotService {
 
     //TODO: メソッド名を考える
     fun saveSpot(spot: Spot, spotForm: SpotForm): Spot {
-        spot.routeNumber = spotForm.routeNumber
-        spot.scheduleDateTime = LocalDateTime.parse(spotForm.scheduleDateTime)
-        spot.country = spotForm.country
-        spot.spotName = spotForm.spotName
-        spot.costExpectation = spotForm.costExpectation
-        spot.requiredTimeExpectation = spotForm.requiredTimeExpectation
-        spot.favoritePoint = spotForm.favoritePoint
-        spot.url = spotForm.url
-        spot.remark = spotForm.remark
+//        spot.routeNumber = spotForm.routeNumber
+//        spot.scheduleDateTime = LocalDateTime.parse(spotForm.scheduleDateTime)
+//        spot.country = spotForm.country
+//        spot.spotName = spotForm.spotName
+//        spot.costExpectation = spotForm.costExpectation
+//        spot.requiredTimeExpectation = spotForm.requiredTimeExpectation
+//        spot.favoritePoint = spotForm.favoritePoint
+//        spot.url = spotForm.url
+//        spot.remark = spotForm.remark
 
         //TODO: 画像の保存
         //TODO: 座標の保存

@@ -1,10 +1,6 @@
 package net.yttravelers.spotshare.entities
 
-import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
-import java.time.LocalDateTime
 import javax.persistence.*
-
 
 @Entity
 class Spot {
@@ -12,30 +8,23 @@ class Spot {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
 
-    var imagePath: String? = null
-
-    var routeNumber: Int? = null
-
-    var scheduleDateTime: LocalDateTime? = null
-
-    var country: String? = null
-
-    var spotName: String? = null
-
-    var costExpectation: Int? = null
-
-    var requiredTimeExpectation: Int? = null
-
-    var favoritePoint: Int? = null
+    var name: String? = null
 
     var url: String? = null
 
-    @Column(columnDefinition = "TEXT")
-    var remark: String = ""
+    var costExpectation: Int? = null
 
-    @CreationTimestamp
-    var createDateTime: LocalDateTime? = null
+    var requiredTimeExpectation: String? = null
 
-    @UpdateTimestamp
-    var updateDateTime: LocalDateTime? = null
+    var memo: String? = null
+
+    @ElementCollection(fetch=FetchType.EAGER)
+    @CollectionTable(
+            name="spotImage"
+    )
+    @Column(name="imagePath")
+    var imagePaths: MutableList<String> = mutableListOf()
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "spot")
+    var routeDetails: MutableList<RouteDetail> = mutableListOf()
 }
