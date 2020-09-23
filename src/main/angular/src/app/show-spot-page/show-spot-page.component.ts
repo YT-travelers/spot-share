@@ -10,6 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 import { Spot } from '../entity/spot';
 import { SpotService } from '../shared/spot.service'
 import { RouteService } from '../shared/route.service';
+import { ModalService } from '../shared/modal/modal.service';
 
 @Component({
   selector: 'show-spot-page',
@@ -33,8 +34,26 @@ export class ShowSpotPageComponent implements OnInit {
         element.innerHTML = '編集';
         element.className = 'btn btn-outline-info'
         element.addEventListener('click', () => {
-          // TODO 画面遷移前に確認ダイアログを表示する
           this.router.navigate(['/add-spot-page', { id: params.data.id }]);
+        });
+        return element;
+      },
+      cellStyle: { 'line-height': '30px', 'text-align': 'center' }
+    },
+    {
+      headerName: '', field: 'deleteButton', minWidth: '100', maxWidth: '100',
+      cellRenderer: (params) => {
+        const element = document.createElement('button');
+        element.innerHTML = '削除';
+        element.className = 'btn btn-outline-info'
+        element.addEventListener('click', () => {
+          this.modal.show('スポットを削除しますか？').then(result => {
+            if (result) {
+              this.spotService.deleteSpot(params.data.id).subscribe(result => {
+                this.executeSearch();
+              });
+            }
+          });
         });
         return element;
       },
@@ -90,6 +109,7 @@ export class ShowSpotPageComponent implements OnInit {
   constructor(
     private spotService: SpotService,
     private routeService: RouteService,
+    private modal: ModalService,
     private router: Router,
     private overlay: Overlay,
   ) {}
@@ -152,7 +172,9 @@ export class ShowSpotPageComponent implements OnInit {
         this.router.navigate(['/create-route-page', { routeId: result.id }]);
       });
     } else {
-      // TODO エラーダイアログ「ルートに追加するスポットが１つも選択されていません。
+      this.modal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {
+        // 何もしない
+      });
     }
 
   }

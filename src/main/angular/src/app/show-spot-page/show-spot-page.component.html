@@ -13,24 +13,24 @@
   <div class="container-fulid m-content">
     <div class="title-area">
       <span class="page-title">スポット一覧</span>
-      <button type="button" (click)="onClickRoutePage()" class="btn btn-outline-info d-flex">
-        <span>ルートの一覧</span>
-      </button>
+      <div class="title-area-right">
+        <button type="button" (click)="onClickRoutePage()" class="btn btn-outline-info">
+          <span>ルートの一覧</span>
+        </button>
+        <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary ml-2">
+          <span>スポットを追加</span>
+        </button>
+      </div>
     </div>
-    <ag-grid-angular 
+    <ag-grid-angular
       class="ag-theme-alpine"
       [rowData]="spotList"
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
     ></ag-grid-angular>
-    <div class="footer-button">
-      <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary add-spot-button">
-        <span>スポットを追加</span>
-      </button>
-      <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary create-route-button">
-        <span>ルートに追加</span>
-      </button>
-    </div>
+    <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary footer-button">
+      <span>ルートに追加</span>
+    </button>
   </div>
 </body>
 

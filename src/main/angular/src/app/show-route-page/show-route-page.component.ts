@@ -8,6 +8,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs/operators';
+import { ModalService } from '../shared/modal/modal.service';
 
 @Component({
   selector: 'app-show-route-page',
@@ -31,8 +32,11 @@ export class ShowRoutePageComponent implements OnInit {
         element.innerHTML = '編集';
         element.className = 'btn btn-outline-info'
         element.addEventListener('click', () => {
-          // TODO 画面遷移前に確認ダイアログを表示する
-          this.router.navigate(['/create-route-page', { id: params.data.id }]);
+          this.modal.show('スポットを削除しますか？').then(result => {
+            if (result) {
+              this.router.navigate(['/create-route-page', { id: params.data.id }]);
+            }
+          });          
         });
         return element;
       },
@@ -79,6 +83,7 @@ export class ShowRoutePageComponent implements OnInit {
   routeList: Route[] = [];
 
   constructor(
+    private modal: ModalService,
     private routeService: RouteService,
     private router: Router,
     private overlay: Overlay,
@@ -107,7 +112,7 @@ export class ShowRoutePageComponent implements OnInit {
     this.executeSearch();
   }
 
-    // -----------------------------------------------------------------------
+  // -----------------------------------------------------------------------
   // イベント
 
   /**
