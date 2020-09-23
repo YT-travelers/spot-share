@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AddSpotPageModule } from './add-spot-page/add-spot-page.module'
 import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
+import { ModalModule } from './shared/modal/modal.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CreateRoutePageModule } from './create-route-page/create-route-page.mod
     NgbModule.forRoot(),
     MatIconModule,
     BrowserAnimationsModule,
+    ModalModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

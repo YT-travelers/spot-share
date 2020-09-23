@@ -1,0 +1,28 @@
+.modal-header {
+  padding: 10px 10px 10px 20px;
+  align-items: center;
+
+  .modal-title {
+    font-size: 22px;
+  }
+
+  .error {
+    color: red;
+  }
+}
+
+.modal-body {
+  padding: 20px;
+
+  span {
+    font-size: 15px;
+  }
+}
+
+.modal-footer {
+  padding: 10px;
+
+  button {
+    width: 106px;
+  }
+}
