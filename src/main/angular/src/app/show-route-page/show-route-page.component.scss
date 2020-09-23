@@ -21,13 +21,8 @@
 }
 
 .footer-button {
-  display: flex;
-  justify-content: space-between;
-}
-
-.create-route-button,.delete-route-button {
   margin-top: 10px;
-  width: 49.5%;
+  width: 100%;
 }
 
 ag-grid-angular {

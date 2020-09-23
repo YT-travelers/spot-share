@@ -26,21 +26,36 @@ export class ShowRoutePageComponent implements OnInit {
   /** グリッド列定義 */
   columnDefs = [
     {
-      headerName: '', field: 'editButton', minWidth: '100', maxWidth: '100',
+      headerName: '', field: 'editButton', minWidth: '52', maxWidth: '52',
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '編集';
-        element.className = 'btn btn-outline-info'
+        element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
-          this.modal.show('スポットを削除しますか？').then(result => {
+          this.router.navigate(['/create-route-page', { id: params.data.id }]);
+        });
+        return element;
+      },
+      cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
+    },
+    {
+      headerName: '', field: 'deleteButton', minWidth: '52', maxWidth: '52',
+      cellRenderer: (params) => {
+        const element = document.createElement('button');
+        element.innerHTML = '削除';
+        element.className = 'btn btn-outline-info btn-sm'
+        element.addEventListener('click', () => {
+          this.modal.show('ルートを削除しますか？').then(result => {
             if (result) {
-              this.router.navigate(['/create-route-page', { id: params.data.id }]);
+              this.routeService.deleteRoute(params.data.id).subscribe(result => {
+                this.executeSearch();
+              });
             }
           });          
         });
         return element;
       },
-      cellStyle: { 'line-height': '30px', 'text-align': 'center' }
+      cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
     { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
       editable: true, 
@@ -132,17 +147,6 @@ export class ShowRoutePageComponent implements OnInit {
       this.router.navigate(['/create-route-page', { routeId: result.id }]);
     });
   }
-
-  /**
-   * ルート削除ボタン押下イベント
-   */
-  onClickDeleteRoute() {
-    // TODO 一括削除か1件削除か決まったら実装する　
-    // this.routeService.deleteRoute().subscribe(result => {
-    //   this.executeSearch();
-    // });
-  }
-
 
   // -----------------------------------------------------------------------
   // 処理

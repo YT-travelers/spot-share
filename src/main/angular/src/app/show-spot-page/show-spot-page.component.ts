@@ -28,24 +28,24 @@ export class ShowSpotPageComponent implements OnInit {
   /** グリッド列定義 */
   columnDefs = [
     {
-      headerName: '', field: 'editButton', minWidth: '100', maxWidth: '100',
+      headerName: '', field: 'editButton', minWidth: '52', maxWidth: '52',
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '編集';
-        element.className = 'btn btn-outline-info'
+        element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
           this.router.navigate(['/add-spot-page', { id: params.data.id }]);
         });
         return element;
       },
-      cellStyle: { 'line-height': '30px', 'text-align': 'center' }
+      cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
     {
-      headerName: '', field: 'deleteButton', minWidth: '100', maxWidth: '100',
+      headerName: '', field: 'deleteButton', minWidth: '52', maxWidth: '52',
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '削除';
-        element.className = 'btn btn-outline-info'
+        element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
           this.modal.show('スポットを削除しますか？').then(result => {
             if (result) {
@@ -57,7 +57,7 @@ export class ShowSpotPageComponent implements OnInit {
         });
         return element;
       },
-      cellStyle: { 'line-height': '30px', 'text-align': 'center' }
+      cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
     { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
       editable: true, 
@@ -65,15 +65,12 @@ export class ShowSpotPageComponent implements OnInit {
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
     { headerName: 'id', field: 'id', hide: "true" },
-    { headerName: 'ルート番号', field: 'routetNumber', sortable: true, filter: true },
-    { headerName: 'スケジュール日時', field: 'scheduleDateTime', sortable: true, filter: true },
-    { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country' },
-    { headerName: '観光地名', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName' },
-    { headerName: '費用（予算）', field: 'costExpectation', sortable: true, filter: true, tooltipField: 'costExpectation' },
-    { headerName: '所要時間（予想）', field: 'requiredTimeExpectation', sortable: true, filter: true, tooltipField: 'requiredTimeExpectation' },
-    { headerName: '行きたい度', field: 'favoritePoint', sortable: true, filter: true, tooltipField: 'favoritePoint' },
-    { headerName: 'URL', field: 'url', sortable: true, filter: true, tooltipField: 'url' },
-    { headerName: '備考', field: 'remark', sortable: true, filter: true, tooltipField: 'remark' },
+    { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country', minWidth: '160' },
+    { headerName: '観光地名', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName', minWidth: '160' },
+    { headerName: '費用（予算）', field: 'costExpectation', sortable: true, filter: true, tooltipField: 'costExpectation', minWidth: '160' },
+    { headerName: '所要時間（予想）', field: 'requiredTimeExpectation', sortable: true, filter: true, tooltipField: 'requiredTimeExpectation', minWidth: '160' },
+    { headerName: 'URL', field: 'url', sortable: true, filter: true, tooltipField: 'url', minWidth: '160' },
+    { headerName: '備考', field: 'remark', sortable: true, filter: true, tooltipField: 'remark', minWidth: '160' },
   ];
 
   /** ag-gridに表示するチェックボックスのレンダラー */
