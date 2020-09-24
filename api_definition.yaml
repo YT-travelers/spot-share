@@ -15,12 +15,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SpotResponse'
+                $ref: '#/components/schemas/Spot'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SpotForm'
+              $ref: '#/components/schemas/Spot'
             examples: {}
         description: ''
     parameters: []
@@ -40,12 +40,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SpotResponse'
+                $ref: '#/components/schemas/Spot'
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SpotForm'
+              $ref: '#/components/schemas/Spot'
         description: ''
     get:
       summary: Get a spot
@@ -56,7 +56,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SpotResponse'
+                $ref: '#/components/schemas/Spot'
     delete:
       summary: Delete a spot
       operationId: delete-spots-id
@@ -141,7 +141,7 @@ paths:
                         id:
                           type: integer
                         spot:
-                          $ref: '#/components/schemas/SpotResponse'
+                          $ref: '#/components/schemas/Spot'
                         scheduledDateTime:
                           type:
                             - string
@@ -226,43 +226,13 @@ paths:
           description: OK
 components:
   schemas:
-    SpotForm:
-      title: SpotForm
-      type: object
-      properties:
-        countryCode:
-          type:
-            - string
-            - 'null'
-        name:
-          type: string
-        url:
-          type:
-            - string
-            - 'null'
-        memo:
-          type:
-            - string
-            - 'null'
-        file:
-          type:
-            - string
-            - 'null'
-        costExpectation:
-          type:
-            - integer
-            - 'null'
-        requiredTimeExpectation:
-          type:
-            - string
-            - 'null'
-    SpotResponse:
-      title: SpotResponse
+    Spot:
+      title: Spot
       type: object
       properties:
         id:
           type: integer
-        countryCode:
+        country:
           $ref: '#/components/schemas/Country'
         name:
           type: string
