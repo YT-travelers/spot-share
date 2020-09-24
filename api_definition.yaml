@@ -287,7 +287,7 @@ components:
             - string
             - 'null'
     RouteDetail:
-      title: SpotDetail
+      title: RouteDetail
       type: object
       properties:
         spotId:
@@ -296,15 +296,7 @@ components:
           type:
             - integer
             - 'null'
-        scheduledTimeExpectation:
-          type:
-            - string
-            - 'null'
-        costExpectation:
-          type:
-            - integer
-            - 'null'
-        requiredTimeExpectation:
+        scheduledDateTime:
           type:
             - string
             - 'null'
