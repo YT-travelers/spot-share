@@ -7,7 +7,7 @@ servers:
 paths:
   /spots:
     post:
-      summary: ''
+      summary: Post a spot
       operationId: post-spots
       responses:
         '200':
@@ -32,7 +32,7 @@ paths:
         in: path
         required: true
     patch:
-      summary: ''
+      summary: Patch a spot
       operationId: patch-spots-id
       responses:
         '200':
@@ -48,7 +48,7 @@ paths:
               $ref: '#/components/schemas/SpotForm'
         description: ''
     get:
-      summary: ''
+      summary: Get a spot
       operationId: get-spots-id
       responses:
         '200':
@@ -58,14 +58,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/SpotResponse'
     delete:
-      summary: ''
+      summary: Delete a spot
       operationId: delete-spots-id
       responses:
         '200':
           description: OK
   /routes:
     get:
-      summary: Your GET endpoint
+      summary: Get Routes
       tags: []
       responses:
         '200':
@@ -78,7 +78,7 @@ paths:
                   $ref: '#/components/schemas/SimpleRoute'
       operationId: get-routes
     post:
-      summary: ''
+      summary: Post a Route with details
       operationId: post-routes
       responses:
         '200':
@@ -117,7 +117,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get a Route with details
       tags: []
       responses:
         '200':
@@ -156,13 +156,13 @@ paths:
                           type: string
       operationId: get-routes-id
     delete:
-      summary: ''
+      summary: Delete a route with details
       operationId: delete-routes-id
       responses:
         '200':
           description: OK
     patch:
-      summary: ''
+      summary: Patch a Route with details
       operationId: patch-routes-id
       responses:
         '200':
@@ -181,7 +181,7 @@ paths:
                     $ref: '#/components/schemas/RouteDetail'
   /countries:
     get:
-      summary: Your GET endpoint
+      summary: Get Countries
       tags: []
       responses:
         '200':
@@ -201,7 +201,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Your GET endpoint
+      summary: Get a Country
       tags: []
       responses:
         '200':
@@ -219,7 +219,7 @@ paths:
         in: path
         required: true
     delete:
-      summary: ''
+      summary: Delete a route details
       operationId: delete-spot_details-id
       responses:
         '200':
