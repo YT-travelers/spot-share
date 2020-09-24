@@ -146,7 +146,7 @@ paths:
                           type:
                             - string
                             - 'null'
-                        order:
+                        order_number:
                           type:
                             - integer
                             - 'null'
@@ -288,7 +288,7 @@ components:
       properties:
         spotId:
           type: integer
-        order:
+        order_number:
           type:
             - integer
             - 'null'
