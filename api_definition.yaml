@@ -24,6 +24,18 @@ paths:
             examples: {}
         description: ''
     parameters: []
+    get:
+      summary: Get spots
+      operationId: get-spots
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Spot'
   '/spots/{id}':
     parameters:
       - schema:
