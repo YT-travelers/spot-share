@@ -252,9 +252,13 @@ components:
           type:
             - integer
             - 'null'
-        requiredTimeExpectation:
+        requiredHours:
           type:
-            - string
+            - integer
+            - 'null'
+        requiredMinutes:
+          type:
+            - integer
             - 'null'
       required:
         - id
