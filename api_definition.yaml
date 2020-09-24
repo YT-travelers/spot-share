@@ -88,9 +88,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  routeId:
                     type: integer
-                  name:
+                  routeName:
                     type:
                       - string
                       - 'null'
@@ -100,7 +100,7 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                routeName:
                   type:
                     - string
                     - 'null'
@@ -127,9 +127,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  id:
+                  routeId:
                     type: integer
-                  name:
+                  routeName:
                     type:
                       - string
                       - 'null'
@@ -138,7 +138,7 @@ paths:
                     items:
                       type: object
                       properties:
-                        id:
+                        routeDetailId:
                           type: integer
                         spot:
                           $ref: '#/components/schemas/Spot'
@@ -173,7 +173,7 @@ paths:
             schema:
               type: object
               properties:
-                name:
+                routeName:
                   type: string
                 details:
                   type: array
@@ -230,11 +230,11 @@ components:
       title: Spot
       type: object
       properties:
-        id:
+        spotId:
           type: integer
         country:
           $ref: '#/components/schemas/Country'
-        name:
+        spotName:
           type: string
         url:
           type:
@@ -261,14 +261,14 @@ components:
             - integer
             - 'null'
       required:
-        - id
+        - spotId
     SimpleRoute:
       title: RouteResponse
       type: object
       properties:
-        id:
+        routeId:
           type: integer
-        name:
+        routeName:
           type: string
     Country:
       title: Country
@@ -276,7 +276,7 @@ components:
       properties:
         code:
           type: string
-        name:
+        countryName:
           type: string
         currency:
           type:
@@ -306,7 +306,7 @@ components:
             - 'null'
         memo:
           type: string
-        id:
+        routeDetailId:
           type:
             - integer
             - 'null'
