@@ -196,6 +196,7 @@ export class AddSpotPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack() {
-    this.router.navigate(['/show-spot-page']);
+    // TODO スポット一覧タブが表示された状態で遷移させる
+    this.router.navigate(['/show-container-page']);
   }
 }

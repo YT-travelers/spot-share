@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <span class="modal-title">ルートの名前</span>
+  <button type="button" class="btn btn-outline-secondary" aria-label="Close" (click)="activeModal.dismiss('dissmiss')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <span>ルートの名前を入力してください。</span>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel')">キャンセル</button>
+  <button type="button" class="btn btn-success" (click)="activeModal.close('ok')">OK</button>
+</div>

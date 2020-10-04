@@ -10,7 +10,7 @@ import { debounceTime } from 'rxjs/operators';
 import { Spot } from '../entity/spot';
 import { SpotService } from '../shared/spot.service'
 import { RouteService } from '../shared/route.service';
-import { ModalService } from '../shared/modal/modal.service';
+import { SelectModalService } from '../shared/select-modal/select-modal.service';
 
 @Component({
   selector: 'app-show-spot-page',
@@ -47,7 +47,7 @@ export class ShowSpotPageComponent implements OnInit {
         element.innerHTML = '削除';
         element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
-          this.modal.show('スポットを削除しますか？').then(result => {
+          this.selectModal.show('スポットを削除しますか？').then(result => {
             if (result) {
               this.spotService.deleteSpot(params.data.id).subscribe(result => {
                 this.executeSearch();
@@ -106,7 +106,7 @@ export class ShowSpotPageComponent implements OnInit {
   constructor(
     private spotService: SpotService,
     private routeService: RouteService,
-    private modal: ModalService,
+    private selectModal: SelectModalService,
     private router: Router,
     private overlay: Overlay,
   ) {}
@@ -162,7 +162,7 @@ export class ShowSpotPageComponent implements OnInit {
         this.router.navigate(['/create-route-page', { routeId: result.id }]);
       });
     } else {
-      this.modal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {
+      this.selectModal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {
         // 何もしない
       });
     }

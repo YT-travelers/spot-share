@@ -8,7 +8,8 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs/operators';
-import { ModalService } from '../shared/modal/modal.service';
+import { SelectModalService } from '../shared/select-modal/select-modal.service';
+import { InputRouteTitleModalService } from '../shared/input-route-title-modal/input-route-title-modal.service';
 
 @Component({
   selector: 'app-show-route-page',
@@ -45,7 +46,7 @@ export class ShowRoutePageComponent implements OnInit {
         element.innerHTML = '削除';
         element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
-          this.modal.show('ルートを削除しますか？').then(result => {
+          this.selectModalSevice.show('ルートを削除しますか？').then(result => {
             if (result) {
               this.routeService.deleteRoute(params.data.id).subscribe(result => {
                 this.executeSearch();
@@ -98,7 +99,8 @@ export class ShowRoutePageComponent implements OnInit {
   routeList: Route[] = [];
 
   constructor(
-    private modal: ModalService,
+    private selectModalSevice: SelectModalService,
+    private inputRouteTitleModalService: InputRouteTitleModalService,
     private routeService: RouteService,
     private router: Router,
     private overlay: Overlay,
@@ -134,11 +136,18 @@ export class ShowRoutePageComponent implements OnInit {
    * ルート作成ボタン押下イベント
    */
   onClickCreateRoute() {
-    // ルート作成リクエスト
-    this.routeService.createRoute([]).subscribe(result => {
-      // ルート作成ページに遷移
-      this.router.navigate(['/create-route-page', { routeId: result.id }]);
-    });
+    // TODO ルートのタイトルをリクエストボディに設定
+    this.inputRouteTitleModalService.show().then(result => {
+      if (result) {
+        // ルート作成リクエスト
+        this.routeService.createRoute([]).subscribe(result => {
+          // ルート作成ページに遷移
+          this.router.navigate(['/create-route-page', { routeId: result.id }]);
+        });
+      }
+    });  
+
+
   }
 
   // -----------------------------------------------------------------------

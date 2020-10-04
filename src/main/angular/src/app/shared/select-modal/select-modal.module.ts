@@ -2,11 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { ModalContent } from './modal.component';
+import { SelectModalContent } from './select-modal.component';
 
 @NgModule({
   declarations: [
-    ModalContent
+    SelectModalContent
   ],
   imports: [
     BrowserModule,
@@ -16,4 +16,4 @@ import { ModalContent } from './modal.component';
   ],
   providers: [],
 })
-export class ModalModule { }
+export class SelectModalModule { }
