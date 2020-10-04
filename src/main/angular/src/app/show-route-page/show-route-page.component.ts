@@ -114,7 +114,7 @@ export class ShowRoutePageComponent implements OnInit {
     pipe(
       debounceTime(100)
     ).subscribe(() => {
-      this.gridOptions.api.sizeColumnsToFit();
+      this.adjustGridColumns();
     });
 
     // ローディング生成
@@ -147,18 +147,25 @@ export class ShowRoutePageComponent implements OnInit {
   /**
    * 検索処理を実行します。
    */
-  executeSearch() {
+  private executeSearch() {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
     this.routeService.searchRoutes().subscribe(result => {
       this.routeList = result;
-      this.gridOptions.api.sizeColumnsToFit();
+      this.adjustGridColumns();
       // ローディング終了
       this.overlayRef.detach();
     }, () => {
       // ローディング終了
       this.overlayRef.detach();
     });
+  }
+
+  /**
+   * グリッドの列幅を調整します。
+   */
+  adjustGridColumns() {
+    this.gridOptions.api.sizeColumnsToFit();
   }
 
 }
