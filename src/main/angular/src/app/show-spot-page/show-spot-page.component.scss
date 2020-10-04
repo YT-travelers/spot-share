@@ -7,14 +7,14 @@
 
   &-right {
     display: flex;
-    
+
     button {
-      width: 140px;
       height: 30px;
-      padding: 2px 10px;
+      padding: 0 20px;
       
-      span {
-        margin: auto;
+      .add-spot-button {
+        display: flex;
+        align-items: center;
       }
     }
   }

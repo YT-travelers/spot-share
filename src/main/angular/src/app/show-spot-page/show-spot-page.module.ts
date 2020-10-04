@@ -21,7 +21,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
     MatIconModule,
     MatProgressSpinnerModule,
     OverlayModule,
-  ],entryComponents: [
+  ],
+  exports: [
+    ShowSpotPageComponent,
+  ],
+  entryComponents: [
     MatSpinner,
   ],
   providers: [],

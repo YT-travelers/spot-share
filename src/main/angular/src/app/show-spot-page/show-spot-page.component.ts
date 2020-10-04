@@ -13,7 +13,7 @@ import { RouteService } from '../shared/route.service';
 import { ModalService } from '../shared/modal/modal.service';
 
 @Component({
-  selector: 'show-spot-page',
+  selector: 'app-show-spot-page',
   templateUrl: './show-spot-page.component.html',
   styleUrls: ['./show-spot-page.component.scss']
 })
@@ -136,13 +136,6 @@ export class ShowSpotPageComponent implements OnInit {
 
   // -----------------------------------------------------------------------
   // イベント
-
-  /**
-   * ルート一覧ページ押下イベント
-   */
-  onClickRoutePage() {
-    this.router.navigate(['/show-route-page']);
-  }
 
   /**
    * スポット登録ボタン押下イベント

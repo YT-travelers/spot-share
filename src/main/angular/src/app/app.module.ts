@@ -5,14 +5,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from './shared/modal/modal.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { AddSpotPageModule } from './add-spot-page/add-spot-page.module'
-import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
-import { ModalModule } from './shared/modal/modal.module';
+import { ShowContainerPageModule } from './show-container-page/show-container-page.module';
+import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
+import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import { ModalModule } from './shared/modal/modal.module';
     BrowserModule,
     AppRoutingModule,
     AddSpotPageModule,
-    ShowSpotPageModule,
     CreateRoutePageModule,
+    ShowContainerPageModule,
     ShowSpotPageModule,
+    ShowRoutePageModule,
     ModalModule,
     HttpClientModule,
     NgbModule.forRoot(),

@@ -131,13 +131,6 @@ export class ShowRoutePageComponent implements OnInit {
   // イベント
 
   /**
-   * ルート一覧ページ押下イベント
-   */
-  onClickSpotPage() {
-    this.router.navigate(['/show-spot-page']);
-  }
-
-  /**
    * ルート作成ボタン押下イベント
    */
   onClickCreateRoute() {

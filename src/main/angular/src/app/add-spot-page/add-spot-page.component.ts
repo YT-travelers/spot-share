@@ -17,7 +17,7 @@ export enum EditMode {
 }
 
 @Component({
-  selector: 'add-spot-page',
+  selector: 'app-add-spot-page',
   templateUrl: './add-spot-page.component.html',
   styleUrls: ['./add-spot-page.component.scss']
 })
