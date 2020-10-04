@@ -30,8 +30,10 @@ export class ShowContainerPageComponent implements OnInit {
   selectedIndexChangeEvent(event) {
     switch (event) {
       case tabIndex.route:
+        this.showRoutePageComponent.adjustGridColumns();
         break;
       case tabIndex.spot:
+        this.showSpotPageComponent.adjustGridColumns();
         break;
       default:
         // 何もしない
