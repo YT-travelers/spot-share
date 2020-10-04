@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,11 +25,15 @@ import { ModalModule } from './shared/modal/modal.module';
     ShowSpotPageModule,
     CreateRoutePageModule,
     ShowSpotPageModule,
+    ModalModule,
     HttpClientModule,
     NgbModule.forRoot(),
     MatIconModule,
     BrowserAnimationsModule,
-    ModalModule,
+    ToastrModule.forRoot({
+      timeOut: 1500,
+      positionClass: 'toast-top-center',
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

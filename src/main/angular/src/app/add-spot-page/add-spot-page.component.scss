@@ -140,3 +140,7 @@ input[type=file] {
 #show-spot-item {
   overflow-y: scroll;
 }
+
+::ng-deep .toast-top-center {
+  margin-top: 30px;
+}

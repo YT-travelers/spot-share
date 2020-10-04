@@ -4,6 +4,7 @@ import { Router, ParamMap, ActivatedRoute } from '@angular/router';
 import { NgbDateStruct, NgbDateParserFormatter, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Spot } from '../entity/spot';
 import { SpotService } from '../shared/spot.service';
+import { ToastrService } from 'ngx-toastr';
 
 // スポット編集モード列挙値
 export enum EditMode {
@@ -82,7 +83,8 @@ export class AddSpotPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service: SpotService,
-    private dateFormatter: NgbDateParserFormatter
+    private dateFormatter: NgbDateParserFormatter,
+    private toastr: ToastrService,
   ) {}
 
   // -----------------------------------------------------------------------
@@ -146,16 +148,18 @@ export class AddSpotPageComponent implements OnInit {
     switch (this.editMode) {
       case EditMode.new:
         this.service.createSpot(this.spot).subscribe(result => {
-          // TODO 登録完了の通知
-          console.log(result);
+          this.toastr.success('登録が完了しました。', '成功');
+        }, error => {
+          this.toastr.error('登録に失敗しました。' + error, 'エラー');
         });
       break;
       
       case EditMode.edit:
       case EditMode.createRoute:
         this.service.updateSpot(this.spot, this.spotId).subscribe(result => {
-          // TODO 更新完了の通知
-          console.log(result);
+          this.toastr.success('更新が完了しました。', '成功');
+        }, error => {
+          this.toastr.error('更新に失敗しました。' + error, 'エラー');
         });
       break;
     }
