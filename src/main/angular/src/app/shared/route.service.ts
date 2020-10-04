@@ -9,7 +9,7 @@ import { Route } from '../entity/route';
 @Injectable({ providedIn: 'root' })
 export class RouteService {
 
-  private url = 'api/route'
+  private url = 'api/routes'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
