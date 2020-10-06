@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Spot } from '../entity/spot';
+import { ISpot } from '../model/spot';
 
 @Injectable({ providedIn: 'root' })
 export class SpotService {
@@ -22,10 +22,10 @@ export class SpotService {
    * スポット新規作成
    * @param spot スポット情報
    */
-  createSpot(spot: Spot): Observable<Spot> {
-    return this.http.post<Spot>(this.url, spot)
+  createSpot(spot: ISpot): Observable<ISpot> {
+    return this.http.post<ISpot>(this.url, spot)
       .pipe(
-        catchError(this.handleError<Spot>(null))
+        catchError(this.handleError<ISpot>(null))
       );
   }
 
@@ -33,10 +33,10 @@ export class SpotService {
    * スポット更新
    * @param spot スポット情報
    */
-  updateSpot(spot: Spot, id: string): Observable<Spot> {
-    return this.http.patch<Spot>(this.url + '/' + id, spot)
+  updateSpot(spot: ISpot, id: string): Observable<ISpot> {
+    return this.http.patch<ISpot>(this.url + '/' + id, spot)
       .pipe(
-        catchError(this.handleError<Spot>(null))
+        catchError(this.handleError<ISpot>(null))
       );
   }
 
@@ -44,10 +44,10 @@ export class SpotService {
    * スポット削除
    * @param id スポット番号
    */
-  deleteSpot(id: string): Observable<Spot> {
-    return this.http.delete<Spot>(this.url + '/' + id)
+  deleteSpot(id: string): Observable<ISpot> {
+    return this.http.delete<ISpot>(this.url + '/' + id)
       .pipe(
-        catchError(this.handleError<Spot>(null))
+        catchError(this.handleError<ISpot>(null))
       );
   }
 
@@ -55,20 +55,20 @@ export class SpotService {
    * スポット１件取得
    * @param id スポット番号
    */
-  getSpot(id: string): Observable<Spot> {
-    return this.http.get<Spot>(this.url + '/' + id)
+  getSpot(id: string): Observable<ISpot> {
+    return this.http.get<ISpot>(this.url + '/' + id)
       .pipe(
-        catchError(this.handleError<Spot>(null))
+        catchError(this.handleError<ISpot>(null))
       );
   }
 
   /**
    * スポット検索処理
    */
-  searchSpots(): Observable<Spot[]> {
-    return this.http.get<Spot[]>(this.url)
+  searchSpots(): Observable<ISpot[]> {
+    return this.http.get<ISpot[]>(this.url)
       .pipe(
-        catchError(this.handleError<Spot[]>([]))
+        catchError(this.handleError<ISpot[]>([]))
       );
   }
 

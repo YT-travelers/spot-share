@@ -52,19 +52,6 @@
           </div>
         </div>
         <div class="panel-item">
-          <div class="panel-item-title">スケジュール日時</div>
-          <div class="panel-item-input schedule-date-time">
-            <input type="text" class="schedule-date" ngbDatepicker
-              #d="ngbDatepicker"
-              [(ngModel)]="scheduleDate"
-              [ngModelOptions]="{ standalone: true }"
-              (focus)="d.toggle()"/>
-            <ngb-timepicker size="small" 
-              [(ngModel)]="scheduleTime"
-              [ngModelOptions]="{ standalone: true }"></ngb-timepicker>
-          </div>
-        </div>
-        <div class="panel-item">
           <div class="panel-item-title">費用（予算）</div>
           <div class="panel-item-input">
             <input formControlName="costExpectation">
@@ -72,14 +59,9 @@
         </div>
         <div class="panel-item">
           <div class="panel-item-title">所要時間（予想）</div>
-          <div class="panel-item-input">
-            <input formControlName="requiredTimeExpectation">
-          </div>
-        </div>
-        <div class="panel-item">
-          <div class="panel-item-title">行きたい度</div>
-          <div class="panel-item-input">
-            <ngb-rating [(rate)]="favoritePoint" [max]="5"></ngb-rating>
+          <div class="panel-item-input d-flex">
+            <input formControlName="requiredHours">
+            <input formControlName="requiredMinutes">
           </div>
         </div>
         <div class="panel-item">
@@ -89,9 +71,9 @@
           </div>
         </div>
         <div class="panel-item">
-          <div class="panel-item-title">備考</div>
+          <div class="panel-item-title">メモ</div>
           <div class="panel-item-input">
-            <textarea formControlName="remark"></textarea>
+            <textarea formControlName="memo"></textarea>
           </div>
         </div>
       </form>

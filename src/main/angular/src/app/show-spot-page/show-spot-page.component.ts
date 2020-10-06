@@ -7,8 +7,8 @@ import { GridOptions } from 'ag-grid-community';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
-import { Spot } from '../entity/spot';
-import { Route } from '../entity/route';
+import { ISpot } from '../model/spot';
+import { IRoute } from '../model/route';
 import { SpotService } from '../shared/spot.service'
 import { RouteService } from '../shared/route.service';
 import { SelectModalService } from '../shared/select-modal/select-modal.service';
@@ -102,7 +102,7 @@ export class ShowSpotPageComponent implements OnInit {
   overlayRef;
 
   /** スポット一覧（グリッド表示用データ） */
-  spotList: Spot[] = [];
+  spotList: ISpot[] = [];
 
   constructor(
     private spotService: SpotService,
@@ -149,12 +149,12 @@ export class ShowSpotPageComponent implements OnInit {
    * ルート追加ボタン押下イベント
    */
   onClickCreateRoute() {
-    const route: Route = {};
+    const route: IRoute = {};
     route.routeDetail = [];
 
     this.spotList.forEach(e => {
       if (e['select'] === 'Y') {
-        route.routeDetail.push({ routeDetailId: null, spot: e });
+        route.routeDetail.push({ routeDetailId: null, spotId: e.spotId });
       }
     });
 

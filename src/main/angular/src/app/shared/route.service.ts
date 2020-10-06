@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Route } from '../entity/route';
+import { IRoute } from '../model/route';
 
 @Injectable({ providedIn: 'root' })
 export class RouteService {
@@ -22,10 +22,10 @@ export class RouteService {
    * ルート新規作成
    * @param route ルート情報
    */
-  createRoute(route: Route): Observable<Route> {
-    return this.http.post<Route>(this.url, route)
+  createRoute(route: IRoute): Observable<IRoute> {
+    return this.http.post<IRoute>(this.url, route)
       .pipe(
-        catchError(this.handleError<Route>(null))
+        catchError(this.handleError<IRoute>(null))
       );
   }
 
@@ -33,10 +33,10 @@ export class RouteService {
    * ルート更新
    * @param route ルート情報
    */
-  updateRoute(route: Route, id: number): Observable<Route> {
-    return this.http.patch<Route>(this.url + '/' + id, route)
+  updateRoute(route: IRoute, id: number): Observable<IRoute> {
+    return this.http.patch<IRoute>(this.url + '/' + id, route)
       .pipe(
-        catchError(this.handleError<Route>(null))
+        catchError(this.handleError<IRoute>(null))
       );
   }
 
@@ -44,10 +44,10 @@ export class RouteService {
    * ルート削除
    * @param id ルート番号
    */
-  deleteRoute(id: number): Observable<Route> {
-    return this.http.delete<Route>(this.url + '/' + id)
+  deleteRoute(id: number): Observable<IRoute> {
+    return this.http.delete<IRoute>(this.url + '/' + id)
       .pipe(
-        catchError(this.handleError<Route>(null))
+        catchError(this.handleError<IRoute>(null))
       );
   }
 
@@ -55,20 +55,20 @@ export class RouteService {
    * ルート取得
    * @param id ルート番号
    */
-  getRoute(id: number): Observable<Route> {
-    return this.http.get<Route>(this.url + '/' + id)
+  getRoute(id: number): Observable<IRoute> {
+    return this.http.get<IRoute>(this.url + '/' + id)
       .pipe(
-        catchError(this.handleError<Route>(null))
+        catchError(this.handleError<IRoute>(null))
       );
   }
 
   /**
    * ルート検索処理
    */
-  searchRoutes(): Observable<Route[]> {
-    return this.http.get<Route[]>(this.url)
+  searchRoutes(): Observable<IRoute[]> {
+    return this.http.get<IRoute[]>(this.url)
       .pipe(
-        catchError(this.handleError<Route[]>([]))
+        catchError(this.handleError<IRoute[]>([]))
       );
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Spot } from '../entity/spot';
+import { ISpot } from '../model/spot';
 import { GridOptions } from 'ag-grid-community';
 
 @Component({
@@ -22,7 +22,7 @@ export class CreateRoutePageComponent implements OnInit {
   };
 
   /** スポット一覧（グリッド表示用データ） */
-  spotList: Spot[] = [];
+  spotList: ISpot[] = [];
 
   constructor() { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { GridOptions } from 'ag-grid-community';
-import { Route } from '../entity/route';
+import { IRoute } from '../model/route';
 import { RouteService } from '../shared/route.service';
 import { Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
@@ -96,7 +96,7 @@ export class ShowRoutePageComponent implements OnInit {
   overlayRef;
 
   /** スポット一覧（グリッド表示用データ） */
-  routeList: Route[] = [];
+  routeList: IRoute[] = [];
 
   constructor(
     private selectModalSevice: SelectModalService,
@@ -140,7 +140,7 @@ export class ShowRoutePageComponent implements OnInit {
     this.inputrouteNameModalService.show().then(routeName => {
       if (routeName) {
 
-        const route: Route = {};
+        const route: IRoute = {};
         route.routeName = routeName;
 
         // ルート作成リクエスト
