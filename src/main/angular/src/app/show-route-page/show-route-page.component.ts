@@ -9,7 +9,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs/operators';
 import { SelectModalService } from '../shared/select-modal/select-modal.service';
-import { InputRouteTitleModalService } from '../shared/input-route-title-modal/input-route-title-modal.service';
+import { InputRouteNameModalService } from '../shared/input-route-name-modal/input-route-name-modal.service';
 
 @Component({
   selector: 'app-show-route-page',
@@ -64,7 +64,7 @@ export class ShowRoutePageComponent implements OnInit {
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
     { headerName: 'id', field: 'id', hide: "true" },
-    { headerName: 'ルート名', field: 'routeTitle', sortable: true, filter: true },
+    { headerName: 'ルート名', field: 'routeName', sortable: true, filter: true },
   ];
 
 
@@ -100,7 +100,7 @@ export class ShowRoutePageComponent implements OnInit {
 
   constructor(
     private selectModalSevice: SelectModalService,
-    private inputRouteTitleModalService: InputRouteTitleModalService,
+    private inputrouteNameModalService: InputRouteNameModalService,
     private routeService: RouteService,
     private router: Router,
     private overlay: Overlay,
@@ -137,12 +137,16 @@ export class ShowRoutePageComponent implements OnInit {
    */
   onClickCreateRoute() {
     // TODO ルートのタイトルをリクエストボディに設定
-    this.inputRouteTitleModalService.show().then(result => {
-      if (result) {
+    this.inputrouteNameModalService.show().then(routeName => {
+      if (routeName) {
+
+        const route: Route = {};
+        route.routeName = routeName;
+
         // ルート作成リクエスト
-        this.routeService.createRoute([]).subscribe(result => {
+        this.routeService.createRoute(route).subscribe(response => {
           // ルート作成ページに遷移
-          this.router.navigate(['/create-route-page', { routeId: result.id }]);
+          this.router.navigate(['/create-route-page', { routeId: response.routeId }]);
         });
       }
     });  

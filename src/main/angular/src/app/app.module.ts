@@ -15,7 +15,7 @@ import { CreateRoutePageModule } from './create-route-page/create-route-page.mod
 import { ShowContainerPageModule } from './show-container-page/show-container-page.module';
 import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
-import { InputRouteTitleModalModule } from './shared/input-route-title-modal/input-route-title-modal.module';
+import { InputRouteNameModalModule } from './shared/input-route-name-modal/input-route-name-modal.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +30,7 @@ import { InputRouteTitleModalModule } from './shared/input-route-title-modal/inp
     ShowSpotPageModule,
     ShowRoutePageModule,
     SelectModalModule,
-    InputRouteTitleModalModule,
+    InputRouteNameModalModule,
     HttpClientModule,
     NgbModule.forRoot(),
     MatIconModule,

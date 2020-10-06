@@ -8,6 +8,7 @@ import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import { Spot } from '../entity/spot';
+import { Route } from '../entity/route';
 import { SpotService } from '../shared/spot.service'
 import { RouteService } from '../shared/route.service';
 import { SelectModalService } from '../shared/select-modal/select-modal.service';
@@ -148,18 +149,20 @@ export class ShowSpotPageComponent implements OnInit {
    * ルート追加ボタン押下イベント
    */
   onClickCreateRoute() {
-    const route = [];
+    const route: Route = {};
+    route.routeDetail = [];
+
     this.spotList.forEach(e => {
       if (e['select'] === 'Y') {
-        route.push(e.id);
+        route.routeDetail.push({ routeDetailId: null, spot: e });
       }
     });
 
-    if (route.length > 0) {
+    if (route.routeDetail.length > 0) {
       // ルート作成リクエスト
       this.routeService.createRoute(route).subscribe(result => {
         // ルート作成ページに遷移
-        this.router.navigate(['/create-route-page', { routeId: result.id }]);
+        this.router.navigate(['/create-route-page', { routeId: route.routeId }]);
       });
     } else {
       this.selectModal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {

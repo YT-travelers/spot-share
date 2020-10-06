@@ -5,9 +5,10 @@
   </button>
 </div>
 <div class="modal-body">
-  <span>ルートの名前を入力してください。</span>
+  <div>ルートの名前を入力してください。</div>
+  <input class="w-100" type="text" [(ngModel)]="routeName">
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel')">キャンセル</button>
-  <button type="button" class="btn btn-success" (click)="activeModal.close('ok')">OK</button>
+  <button type="button" class="btn btn-success" (click)="onClickDone()" [disabled]=!routeName>OK</button>
 </div>

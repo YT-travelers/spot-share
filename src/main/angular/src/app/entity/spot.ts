@@ -1,6 +1,6 @@
 export interface Spot {
-  /** id */
-  id: number;
+  /** スポットID */
+  spotId: number;
   /** 画像パス */
   imagePath: string;
   /** ルート番号 */

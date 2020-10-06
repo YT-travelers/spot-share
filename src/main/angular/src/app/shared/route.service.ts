@@ -22,8 +22,8 @@ export class RouteService {
    * ルート新規作成
    * @param route ルート情報
    */
-  createRoute(spots: number[]): Observable<Route> {
-    return this.http.post<Route>(this.url, spots)
+  createRoute(route: Route): Observable<Route> {
+    return this.http.post<Route>(this.url, route)
       .pipe(
         catchError(this.handleError<Route>(null))
       );
@@ -33,8 +33,8 @@ export class RouteService {
    * ルート更新
    * @param route ルート情報
    */
-  updateRoute(spots: number[], id: number): Observable<Route> {
-    return this.http.patch<Route>(this.url + '/' + id, spots)
+  updateRoute(route: Route, id: number): Observable<Route> {
+    return this.http.patch<Route>(this.url + '/' + id, route)
       .pipe(
         catchError(this.handleError<Route>(null))
       );

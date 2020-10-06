@@ -1,19 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
-import { InputRouteTitleModalContent } from './input-route-title-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputRouteNameModalContent } from './input-route-name-modal.component';
 
 @NgModule({
   declarations: [
-    InputRouteTitleModalContent
+    InputRouteNameModalContent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     NgbModule.forRoot(),
+    ReactiveFormsModule,
   ],entryComponents: [
   ],
   providers: [],
 })
-export class InputRouteTitleModalModule { }
+export class InputRouteNameModalModule { }

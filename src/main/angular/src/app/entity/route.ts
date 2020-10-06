@@ -1,8 +1,10 @@
+import { RouteDetail } from './route-detail';
+
 export interface Route {
-  /** id */
-  id: number;
-  /** ルートタイトル */
-  routeTitle: string;
-  /** スポット番号 */
-  spotid: number;
+  /** ルートID */
+  routeId?: number;
+  /** ルート名 */
+  routeName?: string;
+  /** ルート詳細 */
+  routeDetail?: RouteDetail[];
 }
