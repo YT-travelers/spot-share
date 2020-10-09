@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddSpotPageComponent } from './add-spot-page.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
     ReactiveFormsModule,
     NgbModule.forRoot(),
     MatIconModule,
+    MatAutocompleteModule,
   ],
   exports: [
     AddSpotPageComponent,

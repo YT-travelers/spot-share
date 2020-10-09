@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 
 import { IRoute } from '../model/route';
 
@@ -23,10 +21,7 @@ export class RouteService {
    * @param route ルート情報
    */
   createRoute(route: IRoute): Observable<IRoute> {
-    return this.http.post<IRoute>(this.url, route)
-      .pipe(
-        catchError(this.handleError<IRoute>(null))
-      );
+    return this.http.post<IRoute>(this.url, route);
   }
 
   /**
@@ -34,10 +29,7 @@ export class RouteService {
    * @param route ルート情報
    */
   updateRoute(route: IRoute, id: number): Observable<IRoute> {
-    return this.http.patch<IRoute>(this.url + '/' + id, route)
-      .pipe(
-        catchError(this.handleError<IRoute>(null))
-      );
+    return this.http.patch<IRoute>(this.url + '/' + id, route);
   }
 
   /**
@@ -45,10 +37,7 @@ export class RouteService {
    * @param id ルート番号
    */
   deleteRoute(id: number): Observable<IRoute> {
-    return this.http.delete<IRoute>(this.url + '/' + id)
-      .pipe(
-        catchError(this.handleError<IRoute>(null))
-      );
+    return this.http.delete<IRoute>(this.url + '/' + id);
   }
 
   /**
@@ -56,31 +45,14 @@ export class RouteService {
    * @param id ルート番号
    */
   getRoute(id: number): Observable<IRoute> {
-    return this.http.get<IRoute>(this.url + '/' + id)
-      .pipe(
-        catchError(this.handleError<IRoute>(null))
-      );
+    return this.http.get<IRoute>(this.url + '/' + id);
   }
 
   /**
    * ルート検索処理
    */
   searchRoutes(): Observable<IRoute[]> {
-    return this.http.get<IRoute[]>(this.url)
-      .pipe(
-        catchError(this.handleError<IRoute[]>([]))
-      );
+    return this.http.get<IRoute[]>(this.url);
   }
 
-  /**
-   * エラーハンドリング
-   * @param operation - 失敗した操作の名前
-   * @param result - observableな結果として返す任意の値
-   */
-  private handleError<T>(result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
-  }
 }

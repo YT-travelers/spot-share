@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
 
 import { ISpot } from '../model/spot';
 
@@ -23,10 +21,7 @@ export class SpotService {
    * @param spot スポット情報
    */
   createSpot(spot: ISpot): Observable<ISpot> {
-    return this.http.post<ISpot>(this.url, spot)
-      .pipe(
-        catchError(this.handleError<ISpot>(null))
-      );
+    return this.http.post<ISpot>(this.url, spot);
   }
 
   /**
@@ -34,10 +29,7 @@ export class SpotService {
    * @param spot スポット情報
    */
   updateSpot(spot: ISpot, id: string): Observable<ISpot> {
-    return this.http.patch<ISpot>(this.url + '/' + id, spot)
-      .pipe(
-        catchError(this.handleError<ISpot>(null))
-      );
+    return this.http.patch<ISpot>(this.url + '/' + id, spot);
   }
 
   /**
@@ -45,10 +37,7 @@ export class SpotService {
    * @param id スポット番号
    */
   deleteSpot(id: string): Observable<ISpot> {
-    return this.http.delete<ISpot>(this.url + '/' + id)
-      .pipe(
-        catchError(this.handleError<ISpot>(null))
-      );
+    return this.http.delete<ISpot>(this.url + '/' + id);
   }
 
   /**
@@ -56,31 +45,13 @@ export class SpotService {
    * @param id スポット番号
    */
   getSpot(id: string): Observable<ISpot> {
-    return this.http.get<ISpot>(this.url + '/' + id)
-      .pipe(
-        catchError(this.handleError<ISpot>(null))
-      );
+    return this.http.get<ISpot>(this.url + '/' + id);
   }
 
   /**
    * スポット検索処理
    */
   searchSpots(): Observable<ISpot[]> {
-    return this.http.get<ISpot[]>(this.url)
-      .pipe(
-        catchError(this.handleError<ISpot[]>([]))
-      );
-  }
-
-  /**
-   * エラーハンドリング
-   * @param operation - 失敗した操作の名前
-   * @param result - observableな結果として返す任意の値
-   */
-  private handleError<T>(result?: T) {
-    return (error: any): Observable<T> => {
-      console.error(error);
-      return of(result as T);
-    };
+    return this.http.get<ISpot[]>(this.url);
   }
 }

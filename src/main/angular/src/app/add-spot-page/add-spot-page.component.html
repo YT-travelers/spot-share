@@ -48,7 +48,16 @@
         <div class="panel-item">
           <div class="panel-item-title">国</div>
           <div class="panel-item-input">
-            <input formControlName="country">
+            <input type="text" matInput
+              formControlName="country"
+              [matAutocomplete]="auto"
+              [formControl]="addSpotFormGroup.controls.country"
+            >
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
+                {{country}}
+              </mat-option>
+            </mat-autocomplete>
           </div>
         </div>
         <div class="panel-item">

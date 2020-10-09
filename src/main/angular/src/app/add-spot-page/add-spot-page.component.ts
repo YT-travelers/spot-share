@@ -5,6 +5,8 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ISpot } from '../model/spot';
 import { SpotService } from '../shared/spot.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { startWith, map, debounceTime } from 'rxjs/operators';
 
 // スポット編集モード列挙値
 export enum EditMode {
@@ -38,11 +40,14 @@ export class AddSpotPageComponent implements OnInit {
   /** 画面上に表示するスポット情報のID */
   spotId = '';
 
-  /** 行きたい度 */
-  favoritePoint = 3;
-
   /** 画像タイトル */
   imageTitle = '';
+
+  /** 国のマスタ情報 */
+  allCountries: string[] = ['One', 'Two', 'Three']; // TODO 国のマスタ情報は初期表示時にバックから取得する
+
+  /** 国のインクリメンタルサーチ抽出結果 */
+  filteredCountries: Observable<string[]>;
 
   addSpotFormGroup = new FormGroup({
     /** スポットID */
@@ -76,6 +81,14 @@ export class AddSpotPageComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit() {
+
+    // 国インプットのインクリメンタルサーチ購読
+    this.filteredCountries = this.addSpotFormGroup.controls.country.valueChanges
+    .pipe(
+      debounceTime(100),
+      startWith(''),
+      map(value => this._filter(value))
+    );
 
     // スポット編集モードの判定
     this.spotId = this.route.snapshot.paramMap.get('id');
@@ -116,10 +129,10 @@ export class AddSpotPageComponent implements OnInit {
 
     switch (this.editMode) {
       case EditMode.new:
-        this.service.createSpot(this.spot).subscribe(result => {
+        this.service.createSpot(this.spot).subscribe(() => {
           this.toastr.success('登録が完了しました。', '成功');
         }, error => {
-          this.toastr.error('登録に失敗しました。' + error, 'エラー');
+          this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
       break;
       
@@ -128,7 +141,7 @@ export class AddSpotPageComponent implements OnInit {
         this.service.updateSpot(this.spot, this.spotId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
-          this.toastr.error('更新に失敗しました。' + error, 'エラー');
+          this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
         });
       break;
     }
@@ -168,4 +181,17 @@ export class AddSpotPageComponent implements OnInit {
     // TODO スポット一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
+
+  // -----------------------------------------------------------------------
+  // 処理
+
+  /**
+   * 国インプットのインクリメンタルサーチの絞り込み処理
+   * @param value 国インプットの入力値
+   */
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.allCountries.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
 }
