@@ -1,0 +1,28 @@
+<div class="carousel-area" *ngIf="images.length > 0">
+  <ngb-carousel #carousel
+    [interval]="0"
+    [showNavigationArrows]="images.length >= 2"
+    [showNavigationIndicators]="images.length >= 2"
+  >
+    <ng-template ngbSlide *ngFor="let image of images">
+      <div class="picsum-img-wrapper">
+        <img class="carousel" [src]="image">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div class="image-info">
+    <span>
+      {{dispImageTitle}}
+      <button class="btn btn-outline-secondary" *ngIf="imageTitles.length > 0" (click)="onClickDeleteImage()">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
+    </span>
+  </div>
+</div>
+
+<input id="file-reader" type="file" class="hide"> 
+<div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (click)="onClickDropZone()">
+  <div>こちらをクリック</div>
+  <div>または</div>
+  <div>画像をドラッグ＆ドロップ</div>
+</div>

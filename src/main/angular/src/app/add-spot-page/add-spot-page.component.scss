@@ -3,54 +3,6 @@
   overflow-y: scroll;
 }
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
-input[type=file] {
-  line-height: normal;
-  border-radius: initial;
-  width: auto !important;
-}
-
-.drop-zone {
-  width: 100%;
-  height: 300px;
-  line-height: 50px;
-  border: 5px dashed #999;
-  color: #999;
-  font-size: 100%;
-  font-weight: bold;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.drop-zone:hover {
-  border-color: blue;
-}
-
-.thumbnail {
-  width: 100%;
-  max-width: 500px;
-  object-fit: contain;
-}
-
-.image-info {
-  display: flex;
-  margin-top: 2px;
-  span {
-    margin: 0 auto;
-  }
-  button {
-    height: 30px;
-    padding: 3px;
-    margin-left: auto;
-    border-radius: 100px;
-  }
-}
-
 .schedule-date-time {
   display: flex;
   align-items: center;

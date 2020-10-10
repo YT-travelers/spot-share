@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ISpot } from '../model/spot';
 import { SpotService } from '../shared/spot.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,8 +13,6 @@ export enum EditMode {
   new,
   // 編集モード（URL例：add-spot-page;id=1）
   edit,
-  // ルート作成モード（URL例：create-route-page）
-  createRoute
 }
 
 @Component({
@@ -137,7 +134,6 @@ export class AddSpotPageComponent implements OnInit {
       break;
       
       case EditMode.edit:
-      case EditMode.createRoute:
         this.service.updateSpot(this.spot, this.spotId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
@@ -145,33 +141,6 @@ export class AddSpotPageComponent implements OnInit {
         });
       break;
     }
-  }
-
-  /**
-   * ファイルドロップイベント
-   */
-  onDrop(event) {  
-    const reader = new FileReader();
-    const file = event.dataTransfer.files[0];
-    const thumbnail = this.thumbnail.nativeElement;
-
-    reader.addEventListener("load", function () {;
-      thumbnail.src = reader.result;
-    }, false);
-
-    if(file) {
-      this.imageTitle = file.name;
-      reader.readAsDataURL(file) ;
-    }
-  }
-
-  /**
-   * 画像削除ボタン
-   */
-  onClickDeleteImage() {
-    const thumbnail = this.thumbnail.nativeElement;
-    thumbnail.src = '';
-    this.imageTitle = '';
   }
 
   /**

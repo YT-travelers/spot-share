@@ -20,25 +20,10 @@
       </div>
       <form id="add-spot-item" class="panel-body" [formGroup]="addSpotFormGroup">
         <div class="panel-item">
-          <div class="panel-item-title">画像</div>
-          <div class="panel-item-input">
-            <div class="drop-zone">
-              <img #thumbnail class="thumbnail" src="">
-              <div class="cursor-pointer">画像をドラッグ＆ドロップ</div>
-              <div class="cursor-pointer">または</div>
-              <input type="file" class="cursor-pointer" (drop)="onDrop($event)"> 
-            </div>
-            <div class="image-info">
-              <span>
-                {{imageTitle}}
-                <button class="btn btn-outline-secondary" *ngIf="imageTitle" (click)="onClickDeleteImage()">
-                  <mat-icon>delete_forever</mat-icon>
-                </button>
-              </span>
-            </div>
-            <hr>
-          </div>
+          <share-image-input class="w-100">
+          </share-image-input>
         </div>
+        <hr>
         <div class="panel-item">
           <div class="panel-item-title">スポット名称</div>
           <div class="panel-item-input">
