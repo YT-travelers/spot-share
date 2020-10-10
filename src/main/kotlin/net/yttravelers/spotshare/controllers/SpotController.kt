@@ -17,7 +17,9 @@ class SpotForm() {
 
     var costExpectation: Int? = null
 
-    var requiredTimeExpectation: String? = null
+    var requiredHours: Int? = null
+
+    var requiredMinutes: Int? = null
 }
 
 @RestController
