@@ -15,7 +15,7 @@ class Spot {
 
     var costExpectation: Int? = null
 
-    var requiredTimeExpectation: String? = null
+    var requiredMinutes: Int? = null
 
     var memo: String? = null
 

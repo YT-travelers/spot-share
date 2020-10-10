@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 import javax.persistence.EntityNotFoundException
 
+const val HOUR = 60
+
 @Service
 @Transactional
 class SpotService {
@@ -38,7 +40,10 @@ class SpotService {
     private fun setPropertiesInSpot(spot: Spot, spotForm: SpotForm): Spot {
         if (spotForm.name !== null) spot.name = spotForm.name
         if (spotForm.costExpectation !== null) spot.costExpectation = spotForm.costExpectation
-        if (spotForm.requiredTimeExpectation !== null) spot.requiredTimeExpectation = spotForm.requiredTimeExpectation
+        if (spotForm.requiredHours !== null || spotForm.requiredMinutes !== null) {
+            val minutes = spotForm.requiredHours?.times(HOUR) ?: 0
+            spot.requiredMinutes = spotForm.requiredMinutes?.plus(minutes)
+        }
         if (spotForm.url !== null) spot.url = spotForm.url
         if (spotForm.memo !== null) spot.memo = spotForm.memo
 
