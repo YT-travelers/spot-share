@@ -26,28 +26,27 @@ class SpotService {
 
     fun addSpot(spotForm: SpotForm): Spot {
         val spot = Spot()
-        return saveSpot(spot, spotForm)
+        return setPropertiesInSpot(spot, spotForm)
     }
 
     fun updateSpot(id: Int, spotForm: SpotForm): Spot {
         val spot = this.findSpotOrException(id)
-        return saveSpot(spot, spotForm)
+        return setPropertiesInSpot(spot, spotForm)
     }
 
     //TODO: メソッド名を考える
-    fun saveSpot(spot: Spot, spotForm: SpotForm): Spot {
-        spot.routeNumber = spotForm.routeNumber
-        spot.scheduleDateTime = LocalDateTime.parse(spotForm.scheduleDateTime)
-        spot.country = spotForm.country
-        spot.spotName = spotForm.spotName
-        spot.costExpectation = spotForm.costExpectation
-        spot.requiredTimeExpectation = spotForm.requiredTimeExpectation
-        spot.favoritePoint = spotForm.favoritePoint
-        spot.url = spotForm.url
-        spot.remark = spotForm.remark
+    private fun setPropertiesInSpot(spot: Spot, spotForm: SpotForm): Spot {
+        if (spotForm.name !== null) spot.name = spotForm.name
+        if (spotForm.costExpectation !== null) spot.costExpectation = spotForm.costExpectation
+        if (spotForm.requiredTimeExpectation !== null) spot.requiredTimeExpectation = spotForm.requiredTimeExpectation
+        if (spotForm.url !== null) spot.url = spotForm.url
+        if (spotForm.memo !== null) spot.memo = spotForm.memo
 
         //TODO: 画像の保存
-        //TODO: 座標の保存
         return spotRepository.save(spot)
+    }
+
+    fun deleteSpot(id: Int) {
+        spotRepository.deleteById(id)
     }
 }
