@@ -3,7 +3,9 @@ info:
   title: spot-share
   version: '1.0'
 servers:
-  - url: 'http://spot-share.nolit.net:8080/'
+  - url: 'http://spot-share.nolit.net'
+  - url: 'http://localhost'
+    description: ''
 paths:
   /spots:
     post:
