@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 class SpotForm() {
-    var name: String? = null
+    var spotName: String? = null
 
     var url: String? = null
 

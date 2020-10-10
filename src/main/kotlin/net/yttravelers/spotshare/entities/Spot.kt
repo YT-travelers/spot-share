@@ -7,9 +7,11 @@ import javax.persistence.*
 class Spot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    @Column(name = "id")
+    var spotId: Int? = null
 
-    var name: String? = null
+    @Column(name = "name")
+    var spotName: String? = null
 
     var url: String? = null
 

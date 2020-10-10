@@ -38,7 +38,7 @@ class SpotService {
 
     //TODO: メソッド名を考える
     private fun setPropertiesInSpot(spot: Spot, spotForm: SpotForm): Spot {
-        if (spotForm.name !== null) spot.name = spotForm.name
+        if (spotForm.spotName !== null) spot.spotName = spotForm.spotName
         if (spotForm.costExpectation !== null) spot.costExpectation = spotForm.costExpectation
         if (spotForm.requiredHours !== null || spotForm.requiredMinutes !== null) {
             val minutes = spotForm.requiredHours?.times(HOUR) ?: 0
