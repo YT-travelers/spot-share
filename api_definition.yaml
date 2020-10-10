@@ -1,0 +1,324 @@
+openapi: 3.0.0
+info:
+  title: spot-share
+  version: '1.0'
+servers:
+  - url: 'http://spot-share.nolit.net:8080/'
+paths:
+  /spots:
+    post:
+      summary: Post a spot
+      operationId: post-spots
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spot'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Spot'
+            examples: {}
+        description: ''
+    parameters: []
+    get:
+      summary: Get spots
+      operationId: get-spots
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Spot'
+  '/spots/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: Patch a spot
+      operationId: patch-spots-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spot'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Spot'
+        description: ''
+    get:
+      summary: Get a spot
+      operationId: get-spots-id
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Spot'
+    delete:
+      summary: Delete a spot
+      operationId: delete-spots-id
+      responses:
+        '200':
+          description: OK
+  /routes:
+    get:
+      summary: Get Routes
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimpleRoute'
+      operationId: get-routes
+    post:
+      summary: Post a Route with details
+      operationId: post-routes
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  routeId:
+                    type: integer
+                  routeName:
+                    type:
+                      - string
+                      - 'null'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                routeName:
+                  type:
+                    - string
+                    - 'null'
+                details:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RouteDetail'
+        description: ''
+  '/routes/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get a Route with details
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  routeId:
+                    type: integer
+                  routeName:
+                    type:
+                      - string
+                      - 'null'
+                  details:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        routeDetailId:
+                          type: integer
+                        spot:
+                          $ref: '#/components/schemas/Spot'
+                        scheduledDateTime:
+                          type:
+                            - string
+                            - 'null'
+                        orderNumber:
+                          type:
+                            - integer
+                            - 'null'
+                        favoritePoint:
+                          type: integer
+                        memo:
+                          type: string
+      operationId: get-routes-id
+    delete:
+      summary: Delete a route with details
+      operationId: delete-routes-id
+      responses:
+        '200':
+          description: OK
+    patch:
+      summary: Patch a Route with details
+      operationId: patch-routes-id
+      responses:
+        '200':
+          description: OK
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                routeName:
+                  type: string
+                details:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RouteDetail'
+  /countries:
+    get:
+      summary: Get Countries
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+      operationId: get-countries
+  '/countries/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get a Country
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+      operationId: get-countries-id
+  '/routeDetails/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    delete:
+      summary: Delete a route details
+      operationId: delete-spot_details-id
+      responses:
+        '200':
+          description: OK
+components:
+  schemas:
+    Spot:
+      title: Spot
+      type: object
+      properties:
+        spotId:
+          type: integer
+        country:
+          $ref: '#/components/schemas/Country'
+        spotName:
+          type: string
+        url:
+          type:
+            - string
+            - 'null'
+        memo:
+          type:
+            - string
+            - 'null'
+        imagePaths:
+          type: array
+          items:
+            type: string
+        costExpectation:
+          type:
+            - integer
+            - 'null'
+        requiredHours:
+          type:
+            - integer
+            - 'null'
+        requiredMinutes:
+          type:
+            - integer
+            - 'null'
+      required:
+        - spotId
+    SimpleRoute:
+      title: RouteResponse
+      type: object
+      properties:
+        routeId:
+          type: integer
+        routeName:
+          type: string
+    Country:
+      title: Country
+      type: object
+      properties:
+        code:
+          type: string
+        countryName:
+          type: string
+        currency:
+          type:
+            - string
+            - 'null'
+        timezone:
+          type:
+            - string
+            - 'null'
+    RouteDetail:
+      title: RouteDetail
+      type: object
+      properties:
+        spotId:
+          type: integer
+        orderNumber:
+          type:
+            - integer
+            - 'null'
+        scheduledDateTime:
+          type:
+            - string
+            - 'null'
+        favoritePoint:
+          type:
+            - string
+            - 'null'
+        memo:
+          type: string
+        routeDetailId:
+          type:
+            - integer
+            - 'null'
