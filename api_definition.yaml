@@ -236,6 +236,30 @@ paths:
       responses:
         '200':
           description: OK
+  /files:
+    post:
+      summary: Post files
+      operationId: post-files
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      description: |-
+        複数のファイルを保存するAPIです
+        レスポンスに保存したファイルパスが含まれます
+        ファイル名にはファイルのハッシュ値が使用されます
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: array
+              items: {}
+        description: ''
 components:
   schemas:
     Spot:
