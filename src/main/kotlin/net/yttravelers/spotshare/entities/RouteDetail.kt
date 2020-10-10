@@ -9,8 +9,7 @@ class RouteDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
 
-    @Column(name = "order_number")
-    var order: Int? = null
+    var orderNumber: Int? = null
 
     var scheduledDateTime: LocalDateTime? = null
 

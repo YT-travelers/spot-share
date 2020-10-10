@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 class RouteForm {
-    var name: String? = null
+    var routeName: String? = null
     var details: MutableList<RouteDetailForm> = mutableListOf()
 }
 
 class RouteDetailForm {
-    var id: Int? = null
+    var routeDetailId: Int? = null
     var spotId: Int? = null
-    var order: Int? = null
+    var orderNumber: Int? = null
     var scheduledDateTime: String? = null
     var favoritePoint: Int? = null
     var memo: String? = null

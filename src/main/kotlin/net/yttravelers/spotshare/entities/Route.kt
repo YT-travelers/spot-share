@@ -6,9 +6,11 @@ import javax.persistence.*
 class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    @Column(name = "id")
+    var routeId: Int? = null
 
-    var name: String? = null
+    @Column(name = "name")
+    var routeName: String? = null
 
     @OneToMany(fetch = FetchType.EAGER, cascade= [CascadeType.ALL])
     @JoinColumn(name = "routeId")
