@@ -2,6 +2,15 @@ import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
 import { forEach as _forEach} from 'lodash';
 
+export interface ICarousel {
+  /** NgbCarouselが自動で付与するid */
+  id?: string;
+  /** 画像バイナリデータ */
+  image?: string | ArrayBuffer;
+  /** 画像タイトル */
+  imageTitle?: string;
+}
+
 @Component({
   selector: 'share-image-input',
   templateUrl: './image-input.component.html',
@@ -15,13 +24,10 @@ export class ImageInputComponent {
   @Output() readFileEvent: EventEmitter<string> = new EventEmitter();
 
   /** 画面表示用　画像タイトル */
-  dispImageTitle = '';
+  imageTitle = '';
 
-  /** 画像タイトル */
-  imageTitles = [];
-
-  /** 画像のバイナリファイル */
-  images = [];
+  /** NgbCarouselに表示している画像データを管理する */
+  carouselInfos: ICarousel[] = [];
 
   constructor() { }
 
@@ -79,9 +85,36 @@ export class ImageInputComponent {
     }
 
     // アクティブなスライドを削除する
-    this.imageTitles.splice(i, 1);
-    this.images.splice(i, 1);
+    this.carouselInfos.splice(i, 1);
 
+  }
+
+  /**
+   * carouselスライド変更イベント
+   * @param event NgbSlideEvent
+   */
+  onSlide(event) {
+    _forEach(this.carouselInfos, (e: ICarousel) => {
+      if (e.id === event.current) {
+        this.imageTitle = e.imageTitle;
+      }
+    });
+  }
+
+  /**
+   * 画像のタイトル変更イベント
+   * @param event 入力値
+   */
+  onChangeImageTitle(event) {
+
+    const currentId = this.getCurrentSlideId();
+
+    _forEach(this.carouselInfos, (e: ICarousel) => {
+      if (e.id === currentId) {
+        this.imageTitle = event.target.value;
+        e.imageTitle = event.target.value;
+      }
+    });
   }
 
   // -----------------------------------------------------------------------
@@ -94,36 +127,44 @@ export class ImageInputComponent {
    */
   private readFile(event, isDropEvent) {
 
-    let file = null;
+    let files = null;
 
     if (isDropEvent) {
-      file = event.dataTransfer.files[0];
+      files = event.dataTransfer.files;
     } else {
-      file = event.target.files[0];
+      files = event.target.files;
     }
-    
-    const reader = new FileReader();
-    const images = this.images;
 
-    reader.addEventListener("load", function () {
-      // carouselに画像を追加する
-      images.push(reader.result);
-    }, false);
+    if(files) {
+      // ファイル読み込み
+      _forEach(files, e => {
+        // readerを毎回初期化しないとエラーになる
+        let reader = new FileReader();
+        reader.onload = (() => {
+          const item: ICarousel = {
+            image: reader.result,
+            imageTitle: e.name,
+          }
+          this.carouselInfos.push(item);
+          this.imageTitle = e.name;
+        });
+        reader.readAsDataURL(e);
+      });
 
-    if(file) {
-      reader.readAsDataURL(file);
-      this.imageTitles.push(file.name);
-      this.dispImageTitle = file.name;
-      this.readFileEvent.emit();
-
-      // bootstrapのcarouselに一番最後（右側）に追加した画像のslideIdを取得するメソッドが無いため、
-      // carouselへの読み込みが完了するまでsetTimeout()した後、querySelectorAll()で取得しselect()で表示する。
+      // carouselへの読み込みが完了するまでsetTimeout()
       setTimeout(() => {
-        const element = this.getSlideElements();
-        if (element.length > 0) {
-          this.carousel.select(element[element.length - 1].id);
-        }
+          // carouselInfosのidを最新化
+          const slides = this.getSlideElements();
+          _forEach(slides, (e, i) => {
+            this.carouselInfos[i].id = e.id;
+          });
+
+          // 追加した画像を表示
+          const id = this.getCurrentSlideId();
+          this.carousel.select(id);
       }, 100);
+
+      this.readFileEvent.emit();
     }
 
   }
@@ -133,6 +174,21 @@ export class ImageInputComponent {
    */
   private getSlideElements() {
     return document.querySelectorAll('ngb-carousel > ol > li');
+  }
+
+  /**
+   * NgbCarouselのアクティブなIDを返却します。
+   * 
+   * bootstrapのcarouselに一番最後（右側）に追加した画像のslideIdを取得するメソッドが無いため、
+   * querySelectorAll()で取得したエレメントから判断。
+   */
+  private getCurrentSlideId() {
+    const element = this.getSlideElements();
+    if (element.length > 0) {
+      return element[element.length - 1].id;
+    } else {
+      return '';
+    }
   }
 
 }

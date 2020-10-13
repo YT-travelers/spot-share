@@ -1,26 +1,25 @@
-<div class="carousel-area" *ngIf="images.length > 0">
+<div class="carousel-area" *ngIf="carouselInfos.length > 0">
   <ngb-carousel #carousel
     [interval]="0"
-    [showNavigationArrows]="images.length >= 2"
-    [showNavigationIndicators]="images.length >= 2"
+    [showNavigationArrows]="carouselInfos.length >= 2"
+    [showNavigationIndicators]="carouselInfos.length >= 2"
+    (slide)="onSlide($event)"
   >
-    <ng-template ngbSlide *ngFor="let image of images">
+    <ng-template ngbSlide *ngFor="let info of carouselInfos">
       <div class="picsum-img-wrapper">
-        <img class="carousel" [src]="image">
+        <img class="carousel" [src]="info.image">
       </div>
     </ng-template>
   </ngb-carousel>
   <div class="image-info">
-    <span>
-      {{dispImageTitle}}
-      <button class="btn btn-outline-secondary" *ngIf="imageTitles.length > 0" (click)="onClickDeleteImage()">
-        <mat-icon>delete_forever</mat-icon>
-      </button>
-    </span>
+    <input class="form-control" [value]="imageTitle" (change)="onChangeImageTitle($event)">
+    <button class="btn btn-outline-secondary" *ngIf="carouselInfos.length > 0" (click)="onClickDeleteImage()">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
   </div>
 </div>
 
-<input id="file-reader" type="file" class="hide"> 
+<input id="file-reader" type="file" class="hide" multiple="multiple" accept="image/*"> 
 <div class="drop-zone" (dragover)="onDragOver($event)" (drop)="onDrop($event)" (click)="onClickDropZone()">
   <div>こちらをクリック</div>
   <div>または</div>

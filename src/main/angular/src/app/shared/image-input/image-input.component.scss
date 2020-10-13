@@ -52,14 +52,15 @@
 
 .image-info {
   display: flex;
+  align-items: center;
   margin-top: 10px;
-  span {
-    margin: 0 auto;
+  input {
+    width: 100%;
   }
   button {
     height: 30px;
     padding: 3px;
-    margin-left: auto;
+    margin-left: 5px;
     border-radius: 100px;
   }
 }
