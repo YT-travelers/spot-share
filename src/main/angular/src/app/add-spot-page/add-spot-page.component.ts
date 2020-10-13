@@ -1,11 +1,12 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ISpot } from '../model/spot';
 import { SpotService } from '../shared/spot.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
+import { filter as _filter } from 'lodash';
 
 // スポット編集モード列挙値
 export enum EditMode {
@@ -32,7 +33,7 @@ export class AddSpotPageComponent implements OnInit {
   editMode
 
   /** 編集対象 */
-  spot: ISpot;
+  spot: ISpot = {};
 
   /** 画面上に表示するスポット情報のID */
   spotId = '';
@@ -48,23 +49,23 @@ export class AddSpotPageComponent implements OnInit {
 
   addSpotFormGroup = new FormGroup({
     /** スポットID */
-    spotId: new FormControl(''),
+    spotId: new FormControl(this.spot.spotId),
     /**  スポット名称 */
-    spotName: new FormControl(''),
+    spotName: new FormControl(this.spot.spotName, [Validators.required]),
     /** 国 */
-    country: new FormControl(''),
+    country: new FormControl(this.spot.country),
     /** 画像パス */
-    imagePaths: new FormControl(''),
+    imagePaths: new FormControl(this.spot.imagePaths),
     /** url */
-    url: new FormControl(''),
+    url: new FormControl(this.spot.url),
     /** メモ */
-    memo: new FormControl(''),
+    memo: new FormControl(this.spot.memo),
     /** 費用（予算） */
-    costExpectation: new FormControl(''),
+    costExpectation: new FormControl(this.spot.costExpectation, [Validators.pattern('^[0-9]*$')]),
     /** 所要時間（時） */
-    requiredHours: new FormControl(''),
+    requiredHours: new FormControl(this.spot.requiredHours),
     /** 所要時間（分） */
-    requiredMinutes: new FormControl(''),
+    requiredMinutes: new FormControl(this.spot.requiredMinutes, [ Validators.min(0), Validators.max(60)]),
   });
 
   constructor(
@@ -78,6 +79,13 @@ export class AddSpotPageComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit() {
+
+    // 所要時間はデフォルトで１時間とする
+    this.addSpotFormGroup.patchValue({
+      costExpectation: 0,
+      requiredHours: 1,
+      requiredMinutes: 0
+    })
 
     // 国インプットのインクリメンタルサーチ購読
     this.filteredCountries = this.addSpotFormGroup.controls.country.valueChanges
@@ -122,6 +130,12 @@ export class AddSpotPageComponent implements OnInit {
    * 保存ボタン押下イベント
    */
   onClickSave() {
+
+    // 入力チェック（エラーが存在する場合は、後続の処理を中断）
+    if (this.validate()) {
+      return;
+    }
+
     this.spot = this.addSpotFormGroup.value;
 
     switch (this.editMode) {
@@ -151,6 +165,81 @@ export class AddSpotPageComponent implements OnInit {
     this.router.navigate(['/show-container-page']);
   }
 
+
+
+  /**
+   * 国のBlurイベント
+   * 国のマスタのリストに存在しない値が入力されていた場合、値をクリアする
+   */
+  onBlurCountry() {
+    const isExist = _filter(this.allCountries, e => {
+      return e === this.addSpotFormGroup.controls.country.value;    
+    }).length === 1;
+
+    if (!isExist) {
+      this.addSpotFormGroup.controls.country.setValue('');
+    }
+  }
+
+  /**
+   * 費用（予算）の変更イベント
+   * 入力チェック ＋ 変換
+   */
+  onChangeCostExpectation() {
+    // 数字のみチェック
+    let value = this.addSpotFormGroup.controls.costExpectation.value;
+    const pattern = /[0-9０-９]/;
+    if (!pattern.test(value)) {
+      this.addSpotFormGroup.controls.costExpectation.setValue(0);
+      return;
+    }
+
+    // 全角を半角に変換
+    this.addSpotFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
+  }
+
+  /**
+   * 時間の変更イベント
+   * 入力チェック ＋ 変換
+   */
+  onChangeHours() {
+    // 数字のみチェック
+    let value = this.addSpotFormGroup.controls.requiredHours.value;
+    const pattern = /[0-9０-９]/;
+    if (!pattern.test(value)) {
+      this.addSpotFormGroup.controls.requiredHours.setValue(0);
+      return;
+    }
+
+    // 全角を半角に変換
+    this.addSpotFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+  }
+
+  /**
+   * 時間（分）の変更イベント
+   * 入力チェック ＋ 変換
+   */
+  onChangeMinutes() {
+    // 数字のみチェック
+    let value = this.addSpotFormGroup.controls.requiredMinutes.value;
+    const pattern = /[0-9０-９]/;
+    if (!pattern.test(value)) {
+      this.addSpotFormGroup.controls.requiredMinutes.setValue(0);
+      return;
+    }
+
+    // 全角を半角に変換
+    value = this.toHalfWidth(value);
+
+    // 60(分)より高い値の場合は 60(分)に変換
+    const maxMinutes = 60;
+    if (Number(value) > maxMinutes ) {
+      this.addSpotFormGroup.controls.requiredMinutes.setValue(maxMinutes);
+    } else {
+      this.addSpotFormGroup.controls.requiredMinutes.setValue(value);
+    }
+  }
+
   // -----------------------------------------------------------------------
   // 処理
 
@@ -161,6 +250,31 @@ export class AddSpotPageComponent implements OnInit {
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     return this.allCountries.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  /**
+   * 入力値検証
+   * @return true → エラー有り
+   */
+  validate(): boolean {
+    this.addSpotFormGroup.controls.spotName.markAsDirty();
+    this.addSpotFormGroup.controls.country.markAsDirty();
+
+    let valid = false;
+
+    // formGroupでのエラー検証
+    valid = this.addSpotFormGroup.invalid;
+
+    return valid; 
+  }
+
+  /**
+   * 半角を全角に変換します。
+   */
+  toHalfWidth(value) {
+    return value.replace(/[０-９]/g, s => {
+      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
   }
 
 }

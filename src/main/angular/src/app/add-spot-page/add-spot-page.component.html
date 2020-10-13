@@ -16,7 +16,7 @@
         <button type="button" (click)="onClickBack()" class="btn btn-outline-info back-button">
           <mat-icon>arrow_back</mat-icon>
         </button>
-        <span class="ml-3 text-info">スポットを追加</span>
+        <span class="ml-3">スポットを追加</span>
       </div>
       <form id="add-spot-item" class="panel-body" [formGroup]="addSpotFormGroup">
         <div class="panel-item">
@@ -27,16 +27,22 @@
         <div class="panel-item">
           <div class="panel-item-title">スポット名称</div>
           <div class="panel-item-input">
-            <input formControlName="spotName">
+            <div class="w-100">
+              <div *ngIf="this.addSpotFormGroup.controls.spotName.invalid && this.addSpotFormGroup.controls.spotName.dirty" class="validator-error">
+                未入力です
+              </div>
+              <input class="form-control" formControlName="spotName" placeholder="必須">
+            </div>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">国</div>
           <div class="panel-item-input">
-            <input type="text" matInput
+            <input class="form-control" type="text" matInput
               formControlName="country"
               [matAutocomplete]="auto"
               [formControl]="addSpotFormGroup.controls.country"
+              (blur)="onBlurCountry()"
             >
             <mat-autocomplete #auto="matAutocomplete">
               <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
@@ -48,31 +54,34 @@
         <div class="panel-item">
           <div class="panel-item-title">費用（予算）</div>
           <div class="panel-item-input">
-            <input formControlName="costExpectation">
+            <input class="form-control" formControlName="costExpectation" (change)="onChangeCostExpectation()">
+            <span class="spacer">円</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">所要時間（予想）</div>
-          <div class="panel-item-input d-flex">
-            <input formControlName="requiredHours">
-            <input formControlName="requiredMinutes">
+          <div class="panel-item-input">
+            <input class="form-control time-picker" formControlName="requiredHours" (change)="onChangeHours()">
+            <span class="spacer">時間</span>
+            <input class="form-control time-picker" formControlName="requiredMinutes" (change)="onChangeMinutes()">
+            <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">URL</div>
           <div class="panel-item-input">
-            <input formControlName="url">
+            <input class="form-control" formControlName="url">
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">メモ</div>
           <div class="panel-item-input">
-            <textarea formControlName="memo"></textarea>
+            <textarea class="form-control" formControlName="memo"></textarea>
           </div>
         </div>
       </form>
       <div class="panel-footer">
-        <button type="button" (click)="onClickSave()" class="btn btn-outline-primary">
+        <button type="button" class="btn btn-primary" (click)="onClickSave()">
           <span>保存</span>
         </button>
       </div>

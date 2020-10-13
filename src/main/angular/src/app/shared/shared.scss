@@ -23,6 +23,23 @@ textarea {
   border-radius: 6px;
 }
 
+.spacer {
+  margin: 0 5px;
+  text-align: center;
+}
+
 ag-grid-angular {
   height: 100%;
+}
+
+// -----------------------------------------------------------------------
+// validator
+
+.validator-error {
+  color: red;
+}
+
+input.ng-dirty.ng-invalid {
+  border-color: red;
+  background-color: pink;
 }

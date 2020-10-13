@@ -66,8 +66,14 @@
       width: 100%;
       min-width: 300px;
       max-width: 500px;
+      display: flex;
+      align-items: center;
       input {
         width: 100%;
+      }
+      .time-picker {
+        width: 4em;
+        text-align: center;
       }
     }
     textarea {
