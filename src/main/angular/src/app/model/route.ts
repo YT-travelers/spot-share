@@ -9,5 +9,5 @@ export interface IRoute {
   /** ルート名 */
   routeName?: string;
   /** ルート詳細 */
-  routeDetail?: IRouteDetail[];
+  routeDetails?: IRouteDetail[];
 }

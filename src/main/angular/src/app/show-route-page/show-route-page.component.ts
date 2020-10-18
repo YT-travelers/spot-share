@@ -33,7 +33,7 @@ export class ShowRoutePageComponent implements OnInit {
         element.innerHTML = '編集';
         element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
-          this.router.navigate(['/create-route-page', { id: params.data.id }]);
+          this.router.navigate(['/create-route-page', { routeId: params.data.routeId }]);
         });
         return element;
       },
@@ -63,7 +63,6 @@ export class ShowRoutePageComponent implements OnInit {
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
-    { headerName: 'id', field: 'id', hide: "true" },
     { headerName: 'ルート名', field: 'routeName', sortable: true, filter: true },
   ];
 
@@ -150,7 +149,6 @@ export class ShowRoutePageComponent implements OnInit {
         });
       }
     });  
-
 
   }
 

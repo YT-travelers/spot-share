@@ -35,7 +35,7 @@ export class ShowSpotPageComponent implements OnInit {
         element.innerHTML = '編集';
         element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
-          this.router.navigate(['/add-spot-page', { id: params.data.id }]);
+          this.router.navigate(['/add-spot-page', { spotId: params.data.spotId }]);
         });
         return element;
       },
@@ -65,7 +65,6 @@ export class ShowSpotPageComponent implements OnInit {
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
-    { headerName: 'id', field: 'id', hide: "true" },
     { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country', minWidth: '160' },
     { headerName: '観光地名', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName', minWidth: '160' },
     { headerName: '費用（予算）', field: 'costExpectation', sortable: true, filter: true, tooltipField: 'costExpectation', minWidth: '160' },
@@ -150,15 +149,15 @@ export class ShowSpotPageComponent implements OnInit {
    */
   onClickCreateRoute() {
     const route: IRoute = {};
-    route.routeDetail = [];
+    route.routeDetails = [];
 
     this.spotList.forEach(e => {
       if (e['select'] === 'Y') {
-        route.routeDetail.push({ routeDetailId: null, spotId: e.spotId });
+        route.routeDetails.push({ routeDetailId: null, spotId: e.spotId });
       }
     });
 
-    if (route.routeDetail.length > 0) {
+    if (route.routeDetails.length > 0) {
       // ルート作成リクエスト
       this.routeService.createRoute(route).subscribe(result => {
         // ルート作成ページに遷移

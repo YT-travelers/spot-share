@@ -1,12 +1,13 @@
 import { Component, ViewChild, ElementRef, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ISpot } from '../model/spot';
-import { SpotService } from '../shared/spot.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { filter as _filter } from 'lodash';
+
+import { ISpot } from '../model/spot';
+import { SpotService } from '../shared/spot.service';
 
 // スポット編集モード列挙値
 export enum EditMode {
@@ -14,6 +15,8 @@ export enum EditMode {
   new,
   // 編集モード（URL例：add-spot-page;id=1）
   edit,
+  // ルート作成モード
+  routeCreate,
 }
 
 @Component({
@@ -96,14 +99,14 @@ export class AddSpotPageComponent implements OnInit {
     );
 
     // スポット編集モードの判定
-    this.spotId = this.route.snapshot.paramMap.get('id');
+    this.spotId = this.route.snapshot.paramMap.get('spotId');
     if (this.spotId) {
       // 既存スポット編集モード
       this.editMode = EditMode.edit;
       this.service.getSpot(this.spotId).subscribe(result => {
         if (result) {
           this.spot = result;
-          this.addSpotFormGroup.setValue(this.spot);
+          this.addSpotFormGroup.patchValue(this.spot);
         } else {
           // IDによるGET処理に失敗した場合は、新規モードで画面を開く
           this.editMode = EditMode.new;
@@ -115,7 +118,7 @@ export class AddSpotPageComponent implements OnInit {
 
     } else if (this.selectedSpot) {
       // ルート作成モード
-      this.editMode = EditMode.edit;
+      this.editMode = EditMode.routeCreate;
 
     } else {
       // 新規モード
@@ -164,8 +167,6 @@ export class AddSpotPageComponent implements OnInit {
     // TODO スポット一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
-
-
 
   /**
    * 国のBlurイベント

@@ -52,6 +52,12 @@
           </div>
         </div>
         <div class="panel-item">
+          <div class="panel-item-title">概要</div>
+          <div class="panel-item-input">
+            <textarea class="form-control" formControlName="memo"></textarea>
+          </div>
+        </div>
+        <div class="panel-item">
           <div class="panel-item-title">費用（予算）</div>
           <div class="panel-item-input">
             <input class="form-control" formControlName="costExpectation" (change)="onChangeCostExpectation()">
@@ -71,12 +77,6 @@
           <div class="panel-item-title">URL</div>
           <div class="panel-item-input">
             <input class="form-control" formControlName="url">
-          </div>
-        </div>
-        <div class="panel-item">
-          <div class="panel-item-title">メモ</div>
-          <div class="panel-item-input">
-            <textarea class="form-control" formControlName="memo"></textarea>
           </div>
         </div>
       </form>
