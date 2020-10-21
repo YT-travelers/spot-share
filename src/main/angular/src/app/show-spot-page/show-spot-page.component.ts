@@ -50,7 +50,7 @@ export class ShowSpotPageComponent implements OnInit {
         element.addEventListener('click', () => {
           this.selectModal.show('スポットを削除しますか？').then(result => {
             if (result) {
-              this.spotService.deleteSpot(params.data.id).subscribe(result => {
+              this.spotService.deleteSpot(params.data.spotId).subscribe(() => {
                 this.executeSearch();
               });
             }

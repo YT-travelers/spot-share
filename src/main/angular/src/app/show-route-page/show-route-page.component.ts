@@ -48,7 +48,7 @@ export class ShowRoutePageComponent implements OnInit {
         element.addEventListener('click', () => {
           this.selectModalSevice.show('ルートを削除しますか？').then(result => {
             if (result) {
-              this.routeService.deleteRoute(params.data.id).subscribe(result => {
+              this.routeService.deleteRoute(params.data.routeId).subscribe(() => {
                 this.executeSearch();
               });
             }
