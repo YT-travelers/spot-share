@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AddSpotPageComponent } from './add-spot-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ImageInputModule } from '../shared/image-input/image-input.module';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ImageInputModule } from '../shared/image-input/image-input.module';
     NgbModule.forRoot(),
     MatIconModule,
     MatAutocompleteModule,
+    MatSlideToggleModule,
     ImageInputModule,
   ],
   exports: [

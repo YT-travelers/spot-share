@@ -35,6 +35,9 @@ export class AddSpotPageComponent implements OnInit {
   /** スポット編集モード */
   editMode
 
+  /** スポット編集モード（HTML用） */
+  EditMode = EditMode;
+
   /** 編集対象 */
   spot: ISpot = {};
 
@@ -50,6 +53,13 @@ export class AddSpotPageComponent implements OnInit {
   /** 国のインクリメンタルサーチ抽出結果 */
   filteredCountries: Observable<string[]>;
 
+  /** 連続作成フラグ */
+  continueCreateFlg = true;
+
+  /** 正規表現　全角数字 or 半角数字のみ */
+  patternNumber = /[0-9０-９]/;
+
+  /** スポット情報 フォームグループ */
   addSpotFormGroup = new FormGroup({
     /** スポットID */
     spotId: new FormControl(this.spot.spotId),
@@ -145,11 +155,15 @@ export class AddSpotPageComponent implements OnInit {
       case EditMode.new:
         this.service.createSpot(this.spot).subscribe(() => {
           this.toastr.success('登録が完了しました。', '成功');
+          if (this.continueCreateFlg) {
+            // 連続作成フラグがONの場合、編集対象をクリアする
+            this.spot = {};
+            this.addSpotFormGroup.reset();
+          }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
       break;
-      
       case EditMode.edit:
         this.service.updateSpot(this.spot, this.spotId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
@@ -206,8 +220,7 @@ export class AddSpotPageComponent implements OnInit {
   onChangeHours() {
     // 数字のみチェック
     let value = this.addSpotFormGroup.controls.requiredHours.value;
-    const pattern = /[0-9０-９]/;
-    if (!pattern.test(value)) {
+    if (!this.patternNumber.test(value)) {
       this.addSpotFormGroup.controls.requiredHours.setValue(0);
       return;
     }
@@ -223,8 +236,7 @@ export class AddSpotPageComponent implements OnInit {
   onChangeMinutes() {
     // 数字のみチェック
     let value = this.addSpotFormGroup.controls.requiredMinutes.value;
-    const pattern = /[0-9０-９]/;
-    if (!pattern.test(value)) {
+    if (!this.patternNumber.test(value)) {
       this.addSpotFormGroup.controls.requiredMinutes.setValue(0);
       return;
     }
@@ -249,7 +261,10 @@ export class AddSpotPageComponent implements OnInit {
    * @param value 国インプットの入力値
    */
   private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+    let filterValue = '';
+    if (value) {
+      filterValue = value.toLowerCase();
+    }
     return this.allCountries.filter(option => option.toLowerCase().includes(filterValue));
   }
 

@@ -16,7 +16,7 @@
         <button type="button" (click)="onClickBack()" class="btn btn-outline-info back-button">
           <mat-icon>arrow_back</mat-icon>
         </button>
-        <span class="ml-3">スポットを追加</span>
+        <span class="title">スポットを追加</span>
       </div>
       <form id="add-spot-item" class="panel-body" [formGroup]="addSpotFormGroup">
         <div class="panel-item">
@@ -77,6 +77,12 @@
           <div class="panel-item-title">URL</div>
           <div class="panel-item-input">
             <input class="form-control" formControlName="url">
+          </div>
+        </div>
+        <div class="panel-item mt-5" *ngIf="editMode !== EditMode.routeCreate">
+          <div class="panel-item-title">連続で作成する</div>
+          <div class="panel-item-input">
+            <mat-slide-toggle [color]="'primary'" [(ngModel)]="continueCreateFlg" [ngModelOptions]="{standalone: true}"></mat-slide-toggle>
           </div>
         </div>
       </form>
