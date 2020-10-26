@@ -35,12 +35,12 @@ class SpotController {
     }
 
     @PostMapping
-    fun addSpot(@ModelAttribute spot: SpotForm): Spot {
+    fun addSpot(@RequestBody spot: SpotForm): Spot {
         return this.spotService.addSpot(spot)
     }
 
     @PatchMapping("/{id}")
-    fun updateSpot(@PathVariable("id") id: Int, @ModelAttribute spot: SpotForm): Spot {
+    fun updateSpot(@PathVariable("id") id: Int, @RequestBody spot: SpotForm): Spot {
         return this.spotService.updateSpot(id, spot)
     }
 
