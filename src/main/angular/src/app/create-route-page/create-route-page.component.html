@@ -3,32 +3,106 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>スポット登録</title>
+  <title>ルート作成</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta name="description" content="">
   <meta name="keywords" content="">
 </head>
 
 <body>
-  <div class="container-fulid m-content">
+  <div class="container-fulid route-page">
+    
+    <div class="route-title-area">
+      <span class="route-title">{{route.routeName}}</span>
+      <mat-icon class="title-edit-btn" (click)="onClickSave()">edit</mat-icon>
+    </div>
+
+    <!-- TODO Google Map Api 実装
     <div class="maps">
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.747975468369!2d139.74324421568767!3d35.65858048019959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bbd9009ec09%3A0x481a93f0d2a409dd!2z5p2x5Lqs44K_44Ov44O8!5e0!3m2!1sja!2sjp!4v1599501073361!5m2!1sja!2sjp" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.747975468369!2d139.74324421568767!3d35.65858048019959!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bbd9009ec09%3A0x481a93f0d2a409dd!2z5p2x5Lqs44K_44Ov44O8!5e0!3m2!1sja!2sjp!4v1599501073361!5m2!1sja!2sjp" height="250" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
-    <div class="tabs">
-      <mat-tab-group animationDuration="0ms">
-        <mat-tab label="リスト">
-          <ag-grid-angular 
-            class="ag-theme-alpine spot-grid"
-            [rowData]="spotList"
-            [columnDefs]="columnDefs"
-            [gridOptions]="gridOptions"
-          ></ag-grid-angular>
-        </mat-tab>
+    -->
+
+    <!-- TODO １日目、２日目、、、のタブをいつか実装する
+    <mat-tab-group animationDuration="0ms">
+      <mat-tab label="リスト">
+      </mat-tab>
         <mat-tab label="スポット">
-          <app-add-spot-page></app-add-spot-page>
         </mat-tab>
-      </mat-tab-group>
+      </mat-tab-group>-->
+
+    <div class="no-spot" *ngIf="routeDetails.length === 0">
+      <span>スポットが一つも登録されていません。</span>
     </div>
+    <div cdkDropListGroup *ngIf="routeDetails.length > 0">
+      <div cdkDropList
+        [cdkDropListData]="routeDetails"
+        (cdkDropListDropped)="onDropList($event)">
+        <div class="list-bean" cdkDrag *ngFor="let detail of routeDetails">
+          
+          <!-- スポット -->
+          <div class="list-bean-spot panel">
+            <div class="thumbnail-area">
+              <img class="thumbnail" src="./favicon.ico">
+            </div>
+            <div class="w-100">
+              <div class="spot-title">
+                <span>{{detail.spot.spotName}}</span>
+                <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteButton(detail)">
+                  ✗
+                </button>
+              </div>
+              <div class="div-border-line"></div>
+              <div class="spot-info">
+                <div>{{detail.spot.costExpectation}} 円</div>
+                <ngb-rating
+                  [rate]="detail.favoritePoint"
+                  [max]="5"
+                ></ngb-rating>
+              </div>
+            </div>
+          </div>
+          <!-- 移動 -->
+          <div class="list-bean-move">
+            <mat-icon >more_vert</mat-icon>
+            <div class="panel">TODO（移動手段）</div>
+            <mat-icon >more_vert</mat-icon>
+          </div>
+          <!-- アクティビティ -->
+          <!-- <div class="list-bean-activity">
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="route-footer">
+      <div class="option-item-area">
+        <strong>ルートに追加</strong>
+        <div class="option-items">
+          <!-- スポット追加 -->
+          <div class="icon-btn">
+            <mat-icon class="add-btn-spot" placement="top" ngbTooltip="観光地/スポット" (click)="onClickAddSpotButon()">add_location_alt</mat-icon>
+          </div>
+          <!-- 移動手段追加 -->
+          <div class="icon-btn">
+            <mat-icon class="add-btn-move" placement="top" ngbTooltip="移動手段/時間" (click)="onClickAddMoveButon()">directions_walk</mat-icon>
+          </div>
+          <!-- 食事追加 -->
+          <div class="icon-btn">
+            <mat-icon class="add-btn-meal" placement="top" ngbTooltip="食事/グルメ" (click)="onClickAddMealButon()">restaurant</mat-icon>
+          </div>
+          <!-- ホテル追加 -->
+          <div class="icon-btn">
+            <mat-icon class="add-btn-hotel" placement="top" ngbTooltip="ホテル/宿" (click)="onClickAddHotelButon()">hotel</mat-icon>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-primary save-btn" (click)="onClickSave()">
+        <span>保存</span>
+      </button>
+    </div>
+
   </div>
 </body>
 

@@ -1,35 +1,173 @@
+.route-page {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  text-align: center; 
+  width: 60px;
+  height: 50px;
+  padding: 0 12px;
+}
+
+.route-title-area {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  .route-title {
+    margin-bottom: 5px ;
+    font-size: 40px;
+    line-height: 1.2;
+  }
+  .title-edit-btn {
+    color: #d3d3d3;
+    height: 50px;
+    padding: 12px 12px;
+    &:hover {
+      font-size: 27px;
+    }
+  }
+}
+
 .maps {
   text-align: center;
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-
+  margin-bottom: 5px;
   iframe {
     width: 100%;
   }
 }
 
-::ng-deep .mat-tab-labels > div {
-    width: 100%;
+.no-spot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
 }
 
-.tabs {
+.panel {
   width: 100%;
-  max-width: 700px;
-  margin: 0 auto;
-  height: 100%;
+  padding: 10px 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
 
-  mat-tab-group {
-    height: 100%;
+.list-bean {
+  .delete-btn {
+    border: none;
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+    vertical-align: middle;
+    align-items: center;
+    padding: 8px;
+    margin: -5px 0 0 0;
+    line-height: 0;
   }
 
-  ag-grid-angular {
-    height: calc(100% - 80px);
-    min-height: 300px;
+  .div-border-line {
+    width: calc(100% - 40px);
+    margin: 3px 0;
+    padding-bottom: 1px;
+    border-bottom: dashed 1px #ddd;
+  }
+
+  &-spot {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    margin-top: 5px;
+    .thumbnail-area {
+      display: flex;
+      align-items: center;
+      width: 120px;
+      margin-right: 5px;
+      .thumbnail {
+        width: 100px;
+        height: 90px;
+        object-fit: contain;
+        margin: 0 auto;
+      }
+    }
+    .spot-title {
+      height: 20px;
+      width: 100%;
+      font-size: 18px;
+      display: flex;
+      button {
+        margin-left: auto;
+      }
+    }
+
+    ::ng-deep ngb-rating {
+      span {
+        color: #FFFF66;
+        text-shadow: 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 4px #777;
+      }
+    }
+  }
+
+  &-move {
+    width: 95%;
+    margin-left: auto;
+    margin-top: 5px;
+    div {
+      margin-bottom: 3px;
+    }
   }
 }
 
-::ng-deep add-spot-page .m-content { 
-  padding: 5px 0 20px 0;
-  height: auto;
+.route-footer {
+  width: 100%;
+  margin-top: 20px;
+
+  .option-item-area {
+    display: flex;
+    align-items: center;
+    height: 40px;
+
+    .option-items {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+
+      mat-icon {
+        width: 40px;
+        height: 35px;
+        font-size: 35px;
+        cursor: default;
+        &:hover {
+          font-size: 40px;
+          margin-bottom: 5px;
+        }
+      }
+
+      .add-btn {
+        &-spot {
+          color: blue;
+        }
+        &-move {
+          color: orange;
+        }
+        &-meal {
+          color: green;
+        }
+        &-hotel {
+          color: red;
+        }
+      }
+    }
+  }
+  .save-btn {
+    margin-top: 5px;
+    width: 100%;
+  }
 }

@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatIconModule } from '@angular/material/icon';
 import { CreateRoutePageComponent } from './create-route-page.component';
 import { AddSpotPageModule } from '../add-spot-page/add-spot-page.module';
-import {MatTabsModule} from '@angular/material/tabs';
-import { AgGridModule } from 'ag-grid-angular';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { AgGridModule } from 'ag-grid-angular';
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    AgGridModule.withComponents([]),
-    MatTabsModule,
+    DragDropModule,
+    MatIconModule,
     AddSpotPageModule,
   ],
   providers: [],

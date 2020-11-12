@@ -44,7 +44,7 @@ export class RouteService {
    * ルート取得
    * @param id ルート番号
    */
-  getRoute(id: number): Observable<IRoute> {
+  getRoute(id: string): Observable<IRoute> {
     return this.http.get<IRoute>(this.url + '/' + id);
   }
 
