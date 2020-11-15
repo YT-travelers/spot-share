@@ -47,15 +47,15 @@ class RouteService {
 
     private fun setPropertiesInRoute(route: Route, routeForm: RouteForm): Route {
         if (routeForm.routeName !== null) route.routeName = routeForm.routeName
-        routeForm.details.forEach {
+        routeForm.routeDetails.forEach {
             val routeDetailId = it.routeDetailId
             val entity = if (routeDetailId == null) {
                 val routeDetail = RouteDetail()
                 routeDetail.spot = spotService.findSpotOrException(it.spotId!!)
-                route.details.add(routeDetail)
+                route.routeDetails.add(routeDetail)
                 routeDetail
             } else {
-                route.details.find { it.id === routeDetailId }!!
+                route.routeDetails.find { it.id === routeDetailId }!!
             }
             if (it.orderNumber !== null) entity.orderNumber = it.orderNumber
             if (it.scheduledDateTime !== null) entity.scheduledDateTime = LocalDateTime.parse(it.scheduledDateTime)

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 
 class RouteForm {
     var routeName: String? = null
-    var details: MutableList<RouteDetailForm> = mutableListOf()
+    var routeDetails: MutableList<RouteDetailForm> = mutableListOf()
 }
 
 class RouteDetailForm {

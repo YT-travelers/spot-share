@@ -14,5 +14,5 @@ class Route {
 
     @OneToMany(fetch = FetchType.EAGER, cascade= [CascadeType.ALL])
     @JoinColumn(name = "routeId")
-    var details: MutableList<RouteDetail> = mutableListOf()
+    var routeDetails: MutableList<RouteDetail> = mutableListOf()
 }
