@@ -13,8 +13,12 @@
   <div class="container-fulid route-page">
     
     <div class="route-title-area">
-      <span class="route-title">{{route.routeName}}</span>
-      <mat-icon class="title-edit-btn" (click)="onClickSave()">edit</mat-icon>
+      <input *ngIf="editRouteName" class="form-control" type="text" #routeNameInput
+        [formControl]="routeName"
+        (blur)="onBlurRouteName(event)"
+      >
+      <span *ngIf="!editRouteName" class="route-title">{{route.routeName}}</span>
+      <mat-icon *ngIf="!editRouteName" class="title-edit-btn" (click)="onClickRouteNameEditButton()">edit</mat-icon>
     </div>
 
     <!-- TODO Google Map Api 実装

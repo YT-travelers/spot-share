@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { GridOptions } from 'ag-grid-community';
 import { IRoute } from '../model/route';
@@ -16,7 +16,7 @@ import { InputRouteNameModalService } from '../shared/input-route-name-modal/inp
   templateUrl: './show-route-page.component.html',
   styleUrls: ['./show-route-page.component.scss']
 })
-export class ShowRoutePageComponent implements OnInit {
+export class ShowRoutePageComponent implements OnInit, OnDestroy {
 
   /** リサイズイベント　オブザーバー */
   resizeObservable$: Observable<Event>
@@ -126,6 +126,10 @@ export class ShowRoutePageComponent implements OnInit {
 
     // 検索実行
     this.executeSearch();
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription$.unsubscribe();
   }
 
   // -----------------------------------------------------------------------

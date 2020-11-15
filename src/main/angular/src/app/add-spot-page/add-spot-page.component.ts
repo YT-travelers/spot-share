@@ -26,9 +26,6 @@ export enum EditMode {
 })
 export class AddSpotPageComponent implements OnInit {
 
-  /** 画像アップロード&表示エリア */
-  @ViewChild('thumbnail') thumbnail: ElementRef;
-
   /** ルート作成画面で選択されたスポット情報が格納される */
   @Input() selectedSpot: ISpot;
 

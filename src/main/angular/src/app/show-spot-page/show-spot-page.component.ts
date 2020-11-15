@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, HostListener, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -6,7 +6,7 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 import { GridOptions } from 'ag-grid-community';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { forEach as _forEach } from 'lodash';
+import { forEach as _forEach, filter as _filter } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 
 import { ISpot } from '../model/spot';
@@ -31,7 +31,7 @@ enum PageMode {
   templateUrl: './show-spot-page.component.html',
   styleUrls: ['./show-spot-page.component.scss']
 })
-export class ShowSpotPageComponent implements OnInit {
+export class ShowSpotPageComponent implements OnInit, OnDestroy {
 
   /** スポット一覧ページ 表示モード */
   @Input ('pageMode') pageMode;
@@ -157,6 +157,14 @@ export class ShowSpotPageComponent implements OnInit {
     // スポット選択モードの場合
     if (this.pageMode === PageMode.SpotSelect) {
 
+      // グリッドから編集ボタンと削除ボタンを削除
+      this.columnDefs = _filter(this.columnDefs, e => {
+        if (e.field === 'editButton' || e.field === 'deleteButton') {
+          return false;
+        }
+        return true;
+      });
+
       // URLからスポットを追加するルートIDを取得
       const routeId = this.activateRoute.snapshot.paramMap.get('routeId');
 
@@ -171,6 +179,10 @@ export class ShowSpotPageComponent implements OnInit {
         this.router.navigate(['/show-container-page']);
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.resizeSubscription$.unsubscribe();
   }
 
   // -----------------------------------------------------------------------
