@@ -17,10 +17,10 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 export class CreateRoutePageComponent implements OnInit {
 
   /** 編集対象 */
-  route: IRoute;
+  route: IRoute = {};
 
   /** ルート詳細一覧 */
-  routeDetails;
+  routeDetails = [];
 
   /** 画面上に表示するルート情報のID */
   routeId = '';
@@ -61,9 +61,7 @@ export class CreateRoutePageComponent implements OnInit {
     this.routeService.getRoute(this.routeId).subscribe(result => {
       if (result) {
         this.route = result;
-        // TODO 水薮対応待ち
-        // this.routeDetails = this.route.routeDetails;
-        this.routeDetails = this.route.details;
+        this.routeDetails = this.route.routeDetails;
       } else {
         this.navigateToShowPage('データの取得に失敗しました。');
       }
@@ -96,10 +94,8 @@ export class CreateRoutePageComponent implements OnInit {
    * スポット追加ボタン押下イベント
    */
   onClickAddSpotButon() {
-    this.route.routeId;
-
-    // TODO 実装する
-    console.log("onClickAddSpotButon");
+    // スポット一覧ページに遷移
+    this.router.navigate(['/show-container-page', { routeId: this.route.routeId }]);
   }
 
   /**
@@ -139,6 +135,7 @@ export class CreateRoutePageComponent implements OnInit {
    * @param event ルート詳細
    */
   onClickDeleteButton(event) {
+    // TODO 実装する
     console.log(event);
   }
 

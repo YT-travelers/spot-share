@@ -1,17 +1,30 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, HostListener, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { GridOptions } from 'ag-grid-community';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { forEach as _forEach } from 'lodash';
+import { ToastrService } from 'ngx-toastr';
 
 import { ISpot } from '../model/spot';
 import { IRoute } from '../model/route';
 import { SpotService } from '../shared/spot.service'
 import { RouteService } from '../shared/route.service';
 import { SelectModalService } from '../shared/select-modal/select-modal.service';
+import { IRouteDetail } from '../model/route-detail';
+
+/**
+ * スポット一覧ページ 表示モードを表す列挙値
+ */
+enum PageMode {
+  // 通常モード
+  Normal = 0,
+  // スポット選択モード
+  SpotSelect,
+}
 
 @Component({
   selector: 'app-show-spot-page',
@@ -19,6 +32,9 @@ import { SelectModalService } from '../shared/select-modal/select-modal.service'
   styleUrls: ['./show-spot-page.component.scss']
 })
 export class ShowSpotPageComponent implements OnInit {
+
+  /** スポット一覧ページ 表示モード */
+  @Input ('pageMode') pageMode;
 
   /** リサイズイベント　オブザーバー */
   resizeObservable$: Observable<Event>
@@ -103,12 +119,17 @@ export class ShowSpotPageComponent implements OnInit {
   /** スポット一覧（グリッド表示用データ） */
   spotList: ISpot[] = [];
 
+  /** スポット追加対象（ルート作成ページから遷移した場合に使用） */
+  route: IRoute = {};
+
   constructor(
     private spotService: SpotService,
     private routeService: RouteService,
     private selectModal: SelectModalService,
     private router: Router,
     private overlay: Overlay,
+    private activateRoute: ActivatedRoute,
+    private toastr: ToastrService,
   ) {}
 
   // -----------------------------------------------------------------------
@@ -132,6 +153,24 @@ export class ShowSpotPageComponent implements OnInit {
 
     // 検索実行
     this.executeSearch();
+
+    // スポット選択モードの場合
+    if (this.pageMode === PageMode.SpotSelect) {
+
+      // URLからスポットを追加するルートIDを取得
+      const routeId = this.activateRoute.snapshot.paramMap.get('routeId');
+
+      // スポット追加対象のルートを取得する
+      this.routeService.getRoute(routeId).subscribe(result => {
+        if (result) {
+          this.route = result;
+        }
+      }, error => {
+        // エラーの場合はルート作成ページに返す
+        this.toastr.error('ルートの取得に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
+        this.router.navigate(['/show-container-page']);
+      });
+    }
   }
 
   // -----------------------------------------------------------------------
@@ -153,19 +192,47 @@ export class ShowSpotPageComponent implements OnInit {
 
     this.spotList.forEach(e => {
       if (e['select'] === 'Y') {
+        // TODO issue #33
+        // route.routeDetails.push({ routeDetailId: null, spot: { spotId: e.spotId } });
         route.routeDetails.push({ routeDetailId: null, spotId: e.spotId });
       }
     });
 
-    if (route.routeDetails.length > 0) {
-      // ルート作成リクエスト
-      this.routeService.createRoute(route).subscribe(result => {
-        // ルート作成ページに遷移
-        this.router.navigate(['/create-route-page', { routeId: route.routeId }]);
-      });
-    } else {
+    // チェックボックスが一つも選択されていない場合
+    if (route.routeDetails.length === 0) {
       this.selectModal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {
         // 何もしない
+      });
+
+      // 後続の処理は行わない
+      return;
+    }
+
+    // 新規作成、または更新
+    if (this.pageMode == PageMode.SpotSelect) {
+      // スポット選択モードの場合
+      _forEach(route.routeDetails, (addSpot: IRouteDetail) => {
+        let add = true;
+        _forEach(this.route.routeDetails, (existItem: IRouteDetail) => {
+          if (existItem.spot.spotId === addSpot.spotId) {
+            add = false;
+          }
+        });
+        if (add) {
+          this.route.routeDetails.push(addSpot);
+        }
+      });
+
+      // 更新
+      this.routeService.updateRoute(this.route, this.route.routeId).subscribe(result => {
+        // ルート作成ページに遷移
+        this.router.navigate(['/create-route-page', { routeId: result.routeId }]);
+      });
+    } else {
+      // 通常モードの場合、新規作成
+      this.routeService.createRoute(route).subscribe(result => {
+        // ルート作成ページに遷移
+        this.router.navigate(['/create-route-page', { routeId: result.routeId }]);
       });
     }
 
