@@ -278,7 +278,7 @@ components:
           type:
             - string
             - 'null'
-        memo:
+        summary:
           type:
             - string
             - 'null'

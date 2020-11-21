@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.time.LocalDateTime
 import javax.persistence.EntityNotFoundException
 
 const val HOUR = 60
@@ -45,7 +44,7 @@ class SpotService {
             spot.requiredMinutes = spotForm.requiredMinutes?.plus(minutes)
         }
         if (spotForm.url !== null) spot.url = spotForm.url
-        if (spotForm.memo !== null) spot.memo = spotForm.memo
+        if (spotForm.summary !== null) spot.summary = spotForm.summary
 
         //TODO: 画像の保存
         return spotRepository.save(spot)

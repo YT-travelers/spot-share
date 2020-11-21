@@ -11,7 +11,7 @@ class SpotForm() {
 
     var url: String? = null
 
-    var memo: String? = null
+    var summary: String? = null
 
     var file: MultipartFile? = null
 
