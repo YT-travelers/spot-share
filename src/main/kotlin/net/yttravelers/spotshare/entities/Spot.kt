@@ -19,7 +19,7 @@ class Spot {
 
     var requiredMinutes: Int? = null
 
-    var memo: String? = null
+    var summary: String? = null
 
     @ElementCollection(fetch=FetchType.EAGER)
     @CollectionTable(
