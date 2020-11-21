@@ -1,0 +1,40 @@
+.title-area {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+
+  &-right {
+    display: flex;
+
+    button {
+      height: 30px;
+      padding: 0 20px;
+      
+      .add-spot-button {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .page-title {
+    font-size: x-large;
+  }
+
+  input {
+    width: 100%;
+    max-width: 700px;
+  }
+
+}
+
+.footer-button {
+  margin-top: 10px;
+  width: 100%;
+}
+
+ag-grid-angular {
+  height: calc(100% - 100px);
+}

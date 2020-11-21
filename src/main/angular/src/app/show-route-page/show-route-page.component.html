@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ルート一覧</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+</head>
+
+<body>
+  <div class="container-fulid m-content">
+    <div class="title-area">
+      <span class="page-title">ルート一覧</span>
+    </div>
+    <ag-grid-angular
+      class="ag-theme-alpine"
+      [rowData]="routeList"
+      [columnDefs]="columnDefs"
+      [gridOptions]="gridOptions"
+    ></ag-grid-angular>
+    <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary footer-button">
+      <span>ルートを作成</span>
+    </button>
+  </div>
+</body>
+
+</html>

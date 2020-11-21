@@ -1,0 +1,16 @@
+
+::ng-deep .mat-tab-labels > div {
+  width: 100%;
+}
+
+.tabs {
+  height: 100%;
+
+  > mat-tab-group {
+    height: 100%;
+
+    > ::ng-deep .mat-tab-body-wrapper {
+      height: 100%;
+    }
+  }
+}
