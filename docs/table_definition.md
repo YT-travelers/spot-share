@@ -9,7 +9,7 @@
 
 |カラム名|概要|
 |---|---|
-|id|主キー|
+|routeDetailId|主キー|
 |routeId|ルートID（外部キー）|
 |spotId|スポットID（外部キー）|
 |order|周る順番|
