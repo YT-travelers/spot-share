@@ -13,6 +13,6 @@ class Route {
     var routeName: String? = null
 
     @OneToMany(fetch = FetchType.EAGER, cascade= [CascadeType.ALL])
-    @JoinColumn(name = "routeId")
+    @JoinColumn(name = "routeId", table = "routeDetail")
     var routeDetails: MutableList<RouteDetail> = mutableListOf()
 }
