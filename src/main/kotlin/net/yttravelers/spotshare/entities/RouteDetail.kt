@@ -1,5 +1,6 @@
 package net.yttravelers.spotshare.entities
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import javax.persistence.*
 
 @Entity
@@ -11,6 +12,11 @@ class RouteDetail {
 
     @Column(name = "`order`")
     var order: Int? = null
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "routeId")
+    var route: Route? = null
 
     //TODO: 区分の設計
 //    var beanKindDiv:
