@@ -21,6 +21,6 @@ class RouteDetail {
     //TODO: 区分の設計
 //    var beanKindDiv:
 
-//    @OneToOne
-//    var routeDetailTourism: RouteDetailTourism? = null
+    @OneToOne(mappedBy = "routeDetail")
+    var routeDetailTourism: RouteDetailTourism? = null
 }
