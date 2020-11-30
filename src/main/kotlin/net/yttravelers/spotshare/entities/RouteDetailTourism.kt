@@ -10,13 +10,14 @@ class RouteDetailTourism {
     @Id
     var routeDetailId: Int? = null
 
-//    @JsonIgnore
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "routeDetailId")
     @MapsId
     lateinit var routeDetail: RouteDetail
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tourismId")
     lateinit var tourism: Tourism
 
     var tourismRate: Int? = null
