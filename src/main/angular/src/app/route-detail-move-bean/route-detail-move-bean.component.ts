@@ -37,7 +37,7 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   routeDetailMoveFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
-    /** 移動時間 */
+    /** 所要時間 */
     moveMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
     /** 移動手段区分 */
     moveKindDiv: new FormControl(0),

@@ -57,7 +57,7 @@
               <div class="spot-title">
                 <mat-icon class="spot-bean-icon">location_on</mat-icon>
                 <a href="add-spot-page;spotId={{detail.spot.spotId}}" target="_blank">{{detail.spot.spotName}}</a>
-                <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteButton(detail)">
+                <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteTourismButton(detail)">
                   ✗
                 </button>
               </div>
@@ -92,19 +92,28 @@
             </div>
           </div>
 
+          <!-- TODO 飲食店 -->
+          <!-- TODO ホテル -->
+          <!-- TODO アクティビティ -->
+
+          <!-- TODO 食事-->
+          <app-route-detail-meal-bean
+            (deleteRouteDetailMealEvent)="onDeleteRouteDetailMoveEvent($event)"
+          >
+          </app-route-detail-meal-bean>
+
           <!-- TODO 移動 -->
           <app-route-detail-move-bean
-            (deleteRouteDetailMoveEvent)="onDeleteRouteDetailMoveEvent($event)"
+            (deleteRouteDetailMealEvent)="onDeleteRouteDetailMealEvent($event)"
           >
           </app-route-detail-move-bean>
-          <!-- <div class="list-bean-move">
-            <mat-icon >more_vert</mat-icon>
-            <div class="panel">TODO（移動手段）</div>
-            <mat-icon >more_vert</mat-icon>
-          </div> -->
-          <!-- アクティビティ -->
-          <!-- <div class="list-bean-activity">
-          </div> -->
+
+          <!-- TODO 時間-->
+
+          <!-- TODO チェックリスト-->
+
+          <!-- TODO メモ-->
+
 
         </div>
       </div>

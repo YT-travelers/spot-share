@@ -151,10 +151,28 @@ export class CreateRoutePageComponent implements OnInit {
   // }
 
   /**
+   * 観光地ビーンの削除ボタン押下イベント
+   * @param event ルート詳細
+   */
+  onClickDeleteTourismButton(event) {
+    // TODO 実装する
+    console.log(event);
+  }
+
+  /**
    * ルート詳細移動ビーンの削除イベント
    * @param event 削除する移動ビーンのルート詳細ID
    */
   onDeleteRouteDetailMoveEvent(event) {
+    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
+    console.log(event);
+  }
+
+  /**
+   * ルート詳細食事ビーンの削除イベント
+   * @param event 削除する食事ビーンのルート詳細ID
+   */
+  onDeleteRouteDetailMealEvent(event) {
     // TODO 編集対象のリストから該当のIDを持つビーンを削除する
     console.log(event);
   }
@@ -172,15 +190,6 @@ export class CreateRoutePageComponent implements OnInit {
       this.toastr.error('保存が出来ませんでした。', 'エラー');
       this.overlayRef.detach();
     });
-  }
-
-  /**
-   * リストアイテムの削除ボタン押下イベント
-   * @param event ルート詳細
-   */
-  onClickDeleteButton(event) {
-    // TODO 実装する
-    console.log(event);
   }
 
   // -----------------------------------------------------------------------

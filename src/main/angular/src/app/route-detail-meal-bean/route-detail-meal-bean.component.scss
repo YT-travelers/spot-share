@@ -1,21 +1,17 @@
-.list-bean-move {
+.list-bean-meal {
   width: 95%;
   margin-left: auto;
   margin-top: 5px;
-}
-
-.more-vert {
-  margin: 5px 0;
 }
 
 .bean {
   display: flex;
   align-items: center;
 
-  .move-kind-icon {
+  .meal-kind-icon {
     display: flex;
     margin-left: 15px;
-    color: cornflowerblue;
+    color: lightgreen;
   }
 
   select {
@@ -23,12 +19,12 @@
     margin-left: 10px;
   }
 
-  .move-minutes-input {
+  .meal-minutes-input {
     width: 60px;
     text-align: right;
   }
 
-  .move-cost-input {
+  .meal-cost-input {
     width: 100px;
     text-align: right;
   }

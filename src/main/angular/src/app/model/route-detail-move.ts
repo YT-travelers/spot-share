@@ -4,7 +4,7 @@
 export interface IRouteDetailMove {
   /** ルート詳細ID */
   routeDetailId?
-  /** 移動時間 */				
+  /** 所要時間 */				
   moveMinutes?
   /** 移動種類区分 */
   moveKindDiv?
