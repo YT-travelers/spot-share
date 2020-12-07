@@ -18,6 +18,8 @@ class RouteDetailMeal {
 
     var mealMinutes: Int? = null
 
+    var mealCost: Int? = null
+
     //TODO: 区分の設計
 //    var mealKindDiv:
     //必要？
