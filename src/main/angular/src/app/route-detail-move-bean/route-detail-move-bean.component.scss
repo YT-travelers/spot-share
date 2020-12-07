@@ -1,0 +1,34 @@
+.list-bean-move {
+  width: 95%;
+  margin-left: auto;
+  margin-top: 5px;
+  div {
+    margin-bottom: 3px;
+  }
+}
+
+.bean {
+  display: flex;
+  align-items: center;
+
+  .move-kind-icon {
+    display: flex;
+    margin-left: 15px;
+    color: cornflowerblue;
+  }
+
+  select {
+    width: auto;
+    margin-left: 10px;
+  }
+
+  .move-minutes-input {
+    width: 60px;
+    text-align: right;
+  }
+
+  .move-cost-input {
+    width: 100px;
+    text-align: right;
+  }
+}

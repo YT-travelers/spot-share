@@ -2,24 +2,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
-import { CreateRoutePageComponent } from './create-route-page.component';
-import { RouteDetailMoveBeanModule } from '../route-detail-move-bean/route-detail-move-bean.module';
+import { RouteDetailMoveBeanComponent } from './route-detail-move-bean.component';
 
 @NgModule({
   declarations: [
-    CreateRoutePageComponent
+    RouteDetailMoveBeanComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    DragDropModule,
     MatIconModule,
-    RouteDetailMoveBeanModule,
+  ],
+  exports: [
+    RouteDetailMoveBeanComponent,
   ],
   providers: [],
 })
-export class CreateRoutePageModule { }
+export class RouteDetailMoveBeanModule { }

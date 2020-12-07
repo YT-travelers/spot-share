@@ -1,0 +1,39 @@
+<div class="list-bean-move">
+  <div>
+    <mat-icon >more_vert</mat-icon>
+  </div>
+  
+  <form [formGroup]="routeDetailMoveFormGroup">
+    <div class="bean panel">
+      <input class="form-control move-minutes-input" formControlName="moveMinutes">
+      <span class="spacer">分</span>
+      <div class="move-kind-icon"[ngSwitch]="routeDetailMoveFormGroup.value.moveKindDiv">
+        <mat-icon *ngSwitchCase="moveKindDivList[0].moveKindDiv">directions_walk</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[1].moveKindDiv">pedal_bike</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[2].moveKindDiv">two_wheeler</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[3].moveKindDiv">directions_car</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[4].moveKindDiv">local_taxi</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[5].moveKindDiv">directions_bus</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[6].moveKindDiv">train</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[7].moveKindDiv">directions_transit</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[8].moveKindDiv">directions_railway</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[9].moveKindDiv">flight</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[10].moveKindDiv">directions_boat</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[11].moveKindDiv">directions_boat</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDivList[12].moveKindDiv">navigation</mat-icon>
+      </div>
+      <select class="form-control" formControlName="moveKindDiv">
+        <option *ngFor="let item of moveKindDivList" value={{item.moveKindDiv}}>{{item.moveKindDivName}}</option>
+      </select>
+      <input class="form-control ml-auto move-cost-input" formControlName="moveCost">
+      <span class="spacer">円</span>
+      <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteButton()">
+        ✗
+      </button>
+    </div>
+  </form>
+
+    <div>
+      <mat-icon >more_vert</mat-icon>
+    </div>
+</div>

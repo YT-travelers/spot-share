@@ -35,6 +35,10 @@
         </mat-tab>
       </mat-tab-group>-->
 
+    <div class="start-date-bean panel">
+      9/20 ,2020AM 7:00
+    </div>
+
     <div class="no-spot" *ngIf="routeDetails.length === 0">
       <span>スポットが一つも登録されていません。</span>
     </div>
@@ -51,27 +55,53 @@
             </div>
             <div class="w-100">
               <div class="spot-title">
-                <span>{{detail.spot.spotName}}</span>
+                <mat-icon class="spot-bean-icon">location_on</mat-icon>
+                <a href="add-spot-page;spotId={{detail.spot.spotId}}" target="_blank">{{detail.spot.spotName}}</a>
                 <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteButton(detail)">
                   ✗
                 </button>
               </div>
               <div class="div-border-line"></div>
               <div class="spot-info">
-                <div>{{detail.spot.costExpectation}} 円</div>
-                <ngb-rating
-                  [rate]="detail.favoritePoint"
-                  [max]="5"
-                ></ngb-rating>
+                <div class="spot-info-left">
+                  <ngb-rating
+                    [rate]="detail.favoritePoint"
+                    [max]="5"
+                  ></ngb-rating>
+                </div>
+                <div class="spot-info-center">
+                </div>
+                <div class="spot-info-right">
+                  <div>
+                    <span class="info-label">費用</span>
+                    <span>：</span>
+                    <span>{{detail.spot.costExpectation}}</span>
+                    <span class="spacer">円</span>
+                  </div>
+                  <div>
+                    <span class="info-label">所要時間</span>
+                    <span>：</span>
+                    <span>{{detail.spot.requiredHours}}</span>
+                    <span *ngIf="detail.spot.requiredHours" class="spacer">時間</span>
+                    <span>{{detail.spot.requiredMinutes}}</span>
+                    <span *ngIf="detail.spot.requiredMinutes" class="spacer">分</span>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
+
           <!-- TODO 移動 -->
+          <app-route-detail-move-bean
+            (deleteRouteDetailMoveEvent)="onDeleteRouteDetailMoveEvent($event)"
+          >
+          </app-route-detail-move-bean>
           <!-- <div class="list-bean-move">
             <mat-icon >more_vert</mat-icon>
             <div class="panel">TODO（移動手段）</div>
             <mat-icon >more_vert</mat-icon>
-          </div>-->
+          </div> -->
           <!-- アクティビティ -->
           <!-- <div class="list-bean-activity">
           </div> -->

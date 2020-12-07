@@ -151,6 +151,15 @@ export class CreateRoutePageComponent implements OnInit {
   // }
 
   /**
+   * ルート詳細移動ビーンの削除イベント
+   * @param event 削除する移動ビーンのルート詳細ID
+   */
+  onDeleteRouteDetailMoveEvent(event) {
+    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
+    console.log(event);
+  }
+
+  /**
    * 保存ボタン押下イベン
    */
   onClickSave() {

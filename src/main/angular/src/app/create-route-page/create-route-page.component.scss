@@ -1,3 +1,18 @@
+// スポットアイコン
+$spot-icon-color: blue;
+
+::ng-deep .delete-btn {
+  border: none;
+  border-radius: 50px;
+  height: 30px;
+  width: 30px;
+  vertical-align: middle;
+  align-items: center;
+  padding: 8px;
+  margin: -5px 0 0 0;
+  line-height: 0;
+}
+
 .route-page {
   max-width: 700px;
   margin: 0 auto;
@@ -44,6 +59,12 @@
   }
 }
 
+.start-date-bean {
+  text-align: center;
+  width: fit-content !important;
+  padding: 5px 15px !important;
+}
+
 .no-spot {
   display: flex;
   align-items: center;
@@ -51,29 +72,7 @@
   height: 100px;
 }
 
-.panel {
-  width: 100%;
-  padding: 10px 5px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-
 .list-bean {
-  .delete-btn {
-    border: none;
-    border-radius: 50px;
-    height: 30px;
-    width: 30px;
-    vertical-align: middle;
-    align-items: center;
-    padding: 8px;
-    margin: -5px 0 0 0;
-    line-height: 0;
-  }
-
   .div-border-line {
     width: calc(100% - 40px);
     margin: 3px 0;
@@ -106,6 +105,25 @@
       button {
         margin-left: auto;
       }
+      .spot-bean-icon {
+        color: $spot-icon-color;
+      }
+    }
+    .spot-info {
+      display: flex;
+      .info-label {
+        width: 65px;
+        display: inline-block;
+      }
+      &-left {
+        width: 30%;
+      }
+      &-center {
+        width: 30%;
+      }
+      &-right {
+        width: 30%;
+      }
     }
 
     ::ng-deep ngb-rating {
@@ -113,15 +131,6 @@
         color: #FFFF66;
         text-shadow: 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 4px #777;
       }
-    }
-  }
-
-  &-move {
-    width: 95%;
-    margin-left: auto;
-    margin-top: 5px;
-    div {
-      margin-bottom: 3px;
     }
   }
 }
@@ -153,7 +162,7 @@
 
       .add-btn {
         &-spot {
-          color: blue;
+          color: $spot-icon-color;
         }
         &-move {
           color: orange;
