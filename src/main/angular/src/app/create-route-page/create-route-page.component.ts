@@ -178,6 +178,15 @@ export class CreateRoutePageComponent implements OnInit {
   }
 
   /**
+   * ルート詳細メモビーンの削除イベント
+   * @param event 削除するメモビーンのルート詳細ID
+   */
+  onDeleteRouteDetailMemoEvent(event) {
+    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
+    console.log(event);
+  }
+
+  /**
    * 保存ボタン押下イベン
    */
   onClickSave() {

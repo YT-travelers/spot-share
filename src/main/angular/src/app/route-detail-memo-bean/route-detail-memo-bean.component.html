@@ -1,0 +1,11 @@
+<div class="list-bean-memo">
+  <form [formGroup]="routeDetailMemoFormGroup">
+    <div class="bean">
+      <mat-icon class="info-icon">info</mat-icon>
+      <input class="form-control memo-content-input" formControlName="memoContent">
+      <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteButton()">
+        ✗
+      </button>
+    </div>
+  </form>
+</div>

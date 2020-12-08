@@ -1,0 +1,29 @@
+.list-bean-memo {
+  width: 95%;
+  margin-left: auto;
+  margin-top: 5px;
+}
+
+.bean {
+  display: flex;
+  align-items: center;
+
+  .info-icon {
+    color: cornflowerblue;
+  }
+
+  .memo-kind-icon {
+    display: flex;
+    margin-left: 15px;
+    color: lightgreen;
+  }
+
+  .memo-content-input {
+    width: 100%;
+    margin-left: 10px;
+  }
+
+  button {
+    text-align: right;
+  }
+}

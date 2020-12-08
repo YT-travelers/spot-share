@@ -6,6 +6,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { CreateRoutePageComponent } from './create-route-page.component';
 import { RouteDetailMealBeanModule } from '../route-detail-meal-bean/route-detail-meal-bean.module';
+import { RouteDetailMemoBeanModule } from '../route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from '../route-detail-move-bean/route-detail-move-bean.module';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RouteDetailMoveBeanModule } from '../route-detail-move-bean/route-detai
     DragDropModule,
     MatIconModule,
     RouteDetailMealBeanModule,
+    RouteDetailMemoBeanModule,
     RouteDetailMoveBeanModule,
   ],
   providers: [],
