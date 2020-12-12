@@ -1,4 +1,4 @@
-package net.yttravelers.spotshare.entities
+package net.yttravelers.spotshare.entities.codes
 
 import java.io.Serializable
 import javax.persistence.*
@@ -11,7 +11,8 @@ class CodeId: Serializable {
 
 @Entity
 @Table(name = "code")
-class Code {
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+open class Code {
     @EmbeddedId
     lateinit var codeId: CodeId
 

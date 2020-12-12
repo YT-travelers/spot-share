@@ -1,5 +1,6 @@
 package net.yttravelers.spotshare.entities
 
+import net.yttravelers.spotshare.entities.codes.HotelKindDiv
 import javax.persistence.*
 
 @Entity
@@ -13,7 +14,8 @@ class Hotel {
     var hotelName: String = ""
 
     //TODO: 区分の設計
-//    var hotelKindDiv:
+//    @ManyToOne
+//    var hotelKindDiv: HotelKindDiv? = null
 
     var hotelSummary: String = ""
 
