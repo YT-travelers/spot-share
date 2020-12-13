@@ -14,8 +14,12 @@ class Hotel {
     var hotelName: String = ""
 
     //TODO: 区分の設計
-//    @ManyToOne
-//    var hotelKindDiv: HotelKindDiv? = null
+    @ManyToOne
+    @JoinColumns(
+        JoinColumn(name="hotelDivision", referencedColumnName="division"),
+        JoinColumn(name="hotelDivKey", referencedColumnName="divKey")
+    )
+    var hotelKindDiv: HotelKindDiv? = null
 
     var hotelSummary: String = ""
 
