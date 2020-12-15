@@ -15,6 +15,7 @@ class Tourism {
 
     //TODO: 国マスタ
     @ManyToOne
+    @JoinColumn(name = "countryCode")
     var tourismCountry: Country? = null
 
     //TODO: 町マスタ
