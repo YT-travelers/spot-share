@@ -14,10 +14,7 @@ class Hotel {
     var hotelName: String = ""
 
     @ManyToOne
-    @JoinColumns(
-        JoinColumn(name="hotelDivision", referencedColumnName="division"),
-        JoinColumn(name="hotelDivKey", referencedColumnName="divKey")
-    )
+    @JoinColumn(name="hotelKindDiv", referencedColumnName="divKey")
     var hotelKindDiv: HotelKindDiv? = null
 
     var hotelSummary: String = ""
