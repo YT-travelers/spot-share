@@ -1,5 +1,6 @@
 package net.yttravelers.spotshare.entities
 
+import net.yttravelers.spotshare.entities.codes.CuisineGenreDiv
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -18,8 +19,9 @@ class Restaurant {
     @JoinColumn(name = "countryCode")
     var tourismCountry: Country? = null
 
-    //TODO: 区分の設計
-//    var cuisineGenreDiv:
+    @ManyToOne
+    @JoinColumn(name="cuisineGenreDiv", referencedColumnName="divKey")
+    var cuisineGenreDiv: CuisineGenreDiv? = null
 
     //TODO: 区分の設計
 //    var restaurantKindDiv:
