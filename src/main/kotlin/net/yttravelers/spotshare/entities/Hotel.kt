@@ -13,7 +13,6 @@ class Hotel {
     @Column(nullable = false)
     var hotelName: String = ""
 
-    //TODO: 区分の設計
     @ManyToOne
     @JoinColumns(
         JoinColumn(name="hotelDivision", referencedColumnName="division"),
