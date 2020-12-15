@@ -15,6 +15,7 @@ class Restaurant {
 
     //TODO: 国マスタ
     @ManyToOne
+    @JoinColumn(name = "countryCode")
     var tourismCountry: Country? = null
 
     //TODO: 区分の設計
