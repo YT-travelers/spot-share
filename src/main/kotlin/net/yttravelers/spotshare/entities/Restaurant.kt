@@ -14,7 +14,6 @@ class Restaurant {
     @Column(nullable = false)
     var restaurantName: String = ""
 
-    //TODO: 国マスタ
     @ManyToOne
     @JoinColumn(name = "countryCode")
     var tourismCountry: Country? = null
