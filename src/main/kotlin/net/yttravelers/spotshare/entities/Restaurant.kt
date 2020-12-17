@@ -1,6 +1,7 @@
 package net.yttravelers.spotshare.entities
 
 import net.yttravelers.spotshare.entities.codes.CuisineGenreDiv
+import net.yttravelers.spotshare.entities.codes.RestaurantKindDiv
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -25,8 +26,12 @@ class Restaurant {
     )
     var cuisineGenreDiv: CuisineGenreDiv? = null
 
-    //TODO: 区分の設計
-//    var restaurantKindDiv:
+    @ManyToOne
+    @JoinColumns(
+            JoinColumn(name="restaurantKindDiv", referencedColumnName="division"),
+            JoinColumn(name="restaurantKindDivKey", referencedColumnName="divKey")
+    )
+    var restaurantKindDiv: RestaurantKindDiv? = null
 
     var restaurantOpenTime: LocalDateTime? = null
 
