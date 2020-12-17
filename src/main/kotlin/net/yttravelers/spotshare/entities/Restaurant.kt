@@ -19,7 +19,10 @@ class Restaurant {
     var tourismCountry: Country? = null
 
     @ManyToOne
-    @JoinColumn(name="cuisineGenreDiv", referencedColumnName="divKey")
+    @JoinColumns(
+            JoinColumn(name="cuisineGenreDiv", referencedColumnName="division"),
+            JoinColumn(name="cuisineGenreDivKey", referencedColumnName="divKey")
+    )
     var cuisineGenreDiv: CuisineGenreDiv? = null
 
     //TODO: 区分の設計
