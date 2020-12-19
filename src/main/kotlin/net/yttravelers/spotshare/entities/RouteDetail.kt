@@ -1,6 +1,7 @@
 package net.yttravelers.spotshare.entities
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import net.yttravelers.spotshare.entities.codes.BeanKindDiv
 import javax.persistence.*
 
 @Entity
@@ -18,8 +19,12 @@ class RouteDetail {
     @JoinColumn(name = "routeId")
     var route: Route? = null
 
-    //TODO: 区分の設計
-//    var beanKindDiv:
+    @ManyToOne
+    @JoinColumns(
+            JoinColumn(name="beanKindDiv", referencedColumnName="division"),
+            JoinColumn(name="beanKindDivKey", referencedColumnName="divKey")
+    )
+    var beanKindDiv: BeanKindDiv? = null
 
     @OneToOne(mappedBy = "routeDetail")
     var routeDetailTourism: RouteDetailTourism? = null
