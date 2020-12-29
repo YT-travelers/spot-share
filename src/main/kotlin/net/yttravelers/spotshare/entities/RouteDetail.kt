@@ -1,22 +1,31 @@
 package net.yttravelers.spotshare.entities
 
-import java.time.LocalDateTime
+import com.fasterxml.jackson.annotation.JsonIgnore
+import net.yttravelers.spotshare.entities.codes.BeanKindDiv
 import javax.persistence.*
 
 @Entity
+@Table(name = "routeDetail")
 class RouteDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Int? = null
+    var routeDetailId: Int? = null
 
-    var orderNumber: Int? = null
+    @Column(name = "`order`")
+    var order: Int? = null
 
-    var scheduledDateTime: LocalDateTime? = null
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "routeId")
+    var route: Route? = null
 
-    var favoritePoint: Int? = null
+    @ManyToOne
+    @JoinColumns(
+            JoinColumn(name="beanKindDiv", referencedColumnName="division"),
+            JoinColumn(name="beanKindDivKey", referencedColumnName="divKey")
+    )
+    var beanKindDiv: BeanKindDiv? = null
 
-    var memo: String? = null
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    var spot: Spot? = null
+    @OneToOne(mappedBy = "routeDetail")
+    var routeDetailTourism: RouteDetailTourism? = null
 }
