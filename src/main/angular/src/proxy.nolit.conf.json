@@ -1,0 +1,8 @@
+{  
+  "/api": {
+    "target": "http://spot-share.nolit.net",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {"^/api" : "http://spot-share.nolit.net"}
+  }
+}

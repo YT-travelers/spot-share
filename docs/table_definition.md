@@ -25,7 +25,7 @@
 |spotName|スポット名称|
 |countryCode|国コード（外部キー）|
 |costExpectation|予想費用|
-|requiredTimeExpectation|所要時間|
+|requiredMinutes|所要時間|
 |summary|スポット概要|
 |url|参考URL|
 
