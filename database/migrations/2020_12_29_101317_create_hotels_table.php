@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateHotelsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('hotels', function (Blueprint $table) {
+            $table->id('hotel_id');
+            $table->string('hotel_name');
+            $table->string('hotel_kind_div_key')->nullable();
+            $table->foreign('hotel_kind_div_key')->references('div_key')->on('codes');
+            $table->string('hotel_summary')->default('');
+            $table->string('hotel_address')->default('');
+            $table->string('hotel_url')->default('');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('hotels');
+    }
+}
