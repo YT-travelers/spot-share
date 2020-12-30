@@ -13,6 +13,9 @@ services:
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
+            DB_DATABASE: '${SPOT_SHARE_DB_DATABASE}'
+            DB_USERNAME: '${SPOT_SHARE_DB_USERNAME}'
+            DB_PASSWORD: '${SPOT_SHARE_DB_PASSWORD}'
         volumes:
             - '.:/var/www/html'
         networks:
@@ -34,10 +37,10 @@ services:
         ports:
             - '${FORWARD_DB_PORT:-3306}:3306'
         environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_ROOT_PASSWORD: '${SPOT_SHARE_DB_PASSWORD}'
+            MYSQL_DATABASE: '${SPOT_SHARE_DB_DATABASE}'
+            MYSQL_USER: '${SPOT_SHARE_DB_USERNAME}'
+            MYSQL_PASSWORD: '${SPOT_SHARE_DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         volumes:
             - 'sailmysql:/var/lib/mysql'
