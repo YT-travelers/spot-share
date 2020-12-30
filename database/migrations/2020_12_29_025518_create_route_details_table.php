@@ -17,8 +17,7 @@ class CreateRouteDetailsTable extends Migration
             $table->id('route_detail_id');
             $table->unsignedBigInteger('route_id');
             $table->foreign('route_id')->references('route_id')->on('routes');
-            $table->string('bean_kind_div_key');
-            $table->foreign('bean_kind_div_key')->references('div_key')->on('codes');
+            $table->integer('bean_kind_div');
             $table->integer('order');
             $table->timestamps();
         });

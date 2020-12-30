@@ -16,8 +16,7 @@ class CreateHotelsTable extends Migration
         Schema::create('hotels', function (Blueprint $table) {
             $table->id('hotel_id');
             $table->string('hotel_name');
-            $table->string('hotel_kind_div_key')->nullable();
-            $table->foreign('hotel_kind_div_key')->references('div_key')->on('codes');
+            $table->integer('hotel_kind_div')->nullable();
             $table->string('hotel_summary')->default('');
             $table->string('hotel_address')->default('');
             $table->string('hotel_url')->default('');

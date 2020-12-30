@@ -14,8 +14,9 @@ class CreateCodesTable extends Migration
     public function up()
     {
         Schema::create('codes', function (Blueprint $table) {
-            $table->string('div_key')->primary();
             $table->string('division');
+            $table->string('div_key');
+            $table->primary(['division', 'div_key']);
             $table->string('div_name');
             $table->string('div_key_name');
             $table->integer('div_value');

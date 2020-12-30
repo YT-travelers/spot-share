@@ -18,10 +18,8 @@ class CreateRestaurantsTable extends Migration
             $table->string('restaurant_name');
             $table->string('country_code')->nullable();
             $table->foreign('country_code')->references('country_code')->on('countries');
-            $table->string('cuisine_genre_div_key')->nullable();
-            $table->foreign('cuisine_genre_div_key')->references('div_key')->on('codes');
-            $table->string('restaurant_kind_div_key')->nullable();
-            $table->foreign('restaurant_kind_div_key')->references('div_key')->on('codes');
+            $table->integer('cuisine_genre_div')->nullable();
+            $table->integer('restaurant_kind_div')->nullable();
             $table->dateTime('restaurant_open_time')->nullable();
             $table->dateTime('restaurant_close_time')->nullable();
             $table->string('restaurant_summary')->default('');
