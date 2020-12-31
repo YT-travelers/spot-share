@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTourismTable extends Migration
+class CreateTourismsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTourismTable extends Migration
      */
     public function up()
     {
-        Schema::create('tourism', function (Blueprint $table) {
+        Schema::create('tourisms', function (Blueprint $table) {
             $table->id('tourism_id');
             $table->string('tourism_name');
             $table->string('country_code')->nullable();
