@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Code\CheckDiv;
-use App\Models\RouteDetailChecklist;
+use App\Models\Code\MealKindDiv;
+use App\Models\RouteDetailRestaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class RouteDetailChecklistFactory extends Factory
+class RouteDetailRestaurantFactory extends Factory
 {
     use SetRouteDetailId;
 
@@ -15,20 +15,25 @@ class RouteDetailChecklistFactory extends Factory
      *
      * @var string
      */
-    protected $model = RouteDetailChecklist::class;
+    protected $model = RouteDetailRestaurant::class;
 
     /**
+     * codesテーブルが存在することを前提にしています
      * Define the model's default state.
      *
      * @return array
      */
     public function definition()
     {
-        $checkStatusList = CheckDiv::pluck('div_value');
-        $checkStatusIndex = rand(0, $checkStatusList->count() - 1);
+        $mealKindDivList = MealKindDiv::pluck('div_value');
+        $mealKindDivIndex = rand(0, $mealKindDivList->count() - 1);
         return [
-            'check_status' => $checkStatusList->get($checkStatusIndex),
-            'check_content' => $this->faker->sentence
+            'restaurant_meal_kind_div' => $mealKindDivList->get($mealKindDivIndex),
+            'restaurant_rate' => rand(1, 5),
+            'restaurant_minutes' => rand(0, 600),
+            'restaurant_start_time' => $this->faker->dateTime,
+            'restaurant_end_time' => $this->faker->dateTime,
+            'restaurant_cost' => rand(0, 30000),
         ];
     }
 }
