@@ -17,8 +17,8 @@ class CreateRouteDetailMealsTable extends Migration
             $table->unsignedBigInteger('route_detail_id')->primary();
             $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
             $table->integer('meal_kind_div')->nullable();
-            $table->integer('hotel_minutes')->nullable();
-            $table->integer('hotel_cost')->nullable();
+            $table->integer('meal_minutes')->nullable();
+            $table->integer('meal_cost')->nullable();
             $table->timestamps();
         });
     }
