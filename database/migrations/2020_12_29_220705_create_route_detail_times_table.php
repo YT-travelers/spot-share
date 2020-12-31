@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRouteDetailTimeTable extends Migration
+class CreateRouteDetailTimesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRouteDetailTimeTable extends Migration
      */
     public function up()
     {
-        Schema::create('route_detail_time', function (Blueprint $table) {
+        Schema::create('route_detail_times', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
             $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
             $table->dateTime('schedule_date_time');
@@ -28,6 +28,6 @@ class CreateRouteDetailTimeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('route_detail_time');
+        Schema::dropIfExists('route_detail_times');
     }
 }
