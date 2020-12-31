@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRouteDetailMoveTable extends Migration
+class CreateRouteDetailMovesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRouteDetailMoveTable extends Migration
      */
     public function up()
     {
-        Schema::create('route_detail_move', function (Blueprint $table) {
+        Schema::create('route_detail_moves', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
             $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
             $table->integer('move_kind_div')->nullable();
@@ -30,6 +30,6 @@ class CreateRouteDetailMoveTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('route_detail_move');
+        Schema::dropIfExists('route_detail_moves');
     }
 }
