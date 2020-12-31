@@ -18,7 +18,6 @@ class CreateRouteDetailHotelsTable extends Migration
             $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
             $table->unsignedBigInteger('hotel_id');
             $table->foreign('hotel_id')->references('hotel_id')->on('hotels');
-            $table->integer('hotel_kind_div')->nullable();
             $table->integer('hotel_breakfast_yes_no')->nullable();
             $table->integer('hotel_dinner_yes_no')->nullable();
             $table->integer('hotel_rate')->nullable();
