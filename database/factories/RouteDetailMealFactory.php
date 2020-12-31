@@ -2,11 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Activity;
 use App\Models\Code\MealKindDiv;
-use App\Models\Code\YesNoDiv;
-use App\Models\Hotel;
-use App\Models\RouteDetailHotel;
 use App\Models\RouteDetailMeal;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

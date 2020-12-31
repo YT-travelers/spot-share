@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Activity;
 use App\Models\Code\YesNoDiv;
 use App\Models\Hotel;
 use App\Models\RouteDetailHotel;

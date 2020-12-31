@@ -3,9 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Activity;
-use App\Models\Code\CheckDiv;
-use App\Models\RouteDetailActivity;
-use App\Models\RouteDetailChecklist;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ActivityFactory extends Factory
