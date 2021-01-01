@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Code\BeanKindDiv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RouteDetail extends Model
 {
@@ -15,6 +16,51 @@ class RouteDetail extends Model
     public function route()
     {
         return $this->belongsTo(Route::class, 'route_id', 'route_id');
+    }
+
+    public function routeDetailTourism(): HasOne
+    {
+        return $this->hasOne(RouteDetailTourism::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailRestaurant(): HasOne
+    {
+        return $this->hasOne(RouteDetailRestaurant::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailHotel(): HasOne
+    {
+        return $this->hasOne(RouteDetailHotel::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailActivity(): HasOne
+    {
+        return $this->hasOne(RouteDetailActivity::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailMeal(): HasOne
+    {
+        return $this->hasOne(RouteDetailMeal::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailMove(): HasOne
+    {
+        return $this->hasOne(RouteDetailMove::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailTime(): HasOne
+    {
+        return $this->hasOne(RouteDetailTime::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailChecklist(): HasOne
+    {
+        return $this->hasOne(RouteDetailChecklist::class, 'route_detail_id', 'route_detail_id');
+    }
+
+    public function routeDetailMemo(): HasOne
+    {
+        return $this->hasOne(RouteDetailMemo::class, 'route_detail_id', 'route_detail_id');
     }
 
     /**
