@@ -87,17 +87,22 @@ class RouteDetail extends Model
      */
     public function newRelevantModel(): Model
     {
+        return $this->relevantModel()->newModelInstance();
+    }
+
+    public function relevantModel(): HasOne
+    {
         return match ($this->bean_kind_div) {
-            BeanKindDiv::Tourism_DIV_VALUE => new RouteDetailTourism(),
-            BeanKindDiv::Restaurant_DIV_VALUE => new RouteDetailRestaurant(),
-            BeanKindDiv::Hotel_DIV_VALUE => new RouteDetailHotel(),
-            BeanKindDiv::Activity_DIV_VALUE => new RouteDetailActivity(),
-            BeanKindDiv::Meal_DIV_VALUE => new RouteDetailMeal(),
-            BeanKindDiv::Move_DIV_VALUE => new RouteDetailMove(),
-            BeanKindDiv::Time_DIV_VALUE => new RouteDetailTime(),
-            BeanKindDiv::Checklist_DIV_VALUE => new RouteDetailChecklist(),
-            BeanKindDiv::Memo_DIV_VALUE => new RouteDetailMemo(),
-            default => new RouteDetailChecklist()
+            BeanKindDiv::Tourism_DIV_VALUE => $this->routeDetailTourism(),
+            BeanKindDiv::Restaurant_DIV_VALUE => $this->routeDetailRestaurant(),
+            BeanKindDiv::Hotel_DIV_VALUE => $this->routeDetailHotel(),
+            BeanKindDiv::Activity_DIV_VALUE => $this->routeDetailActivity(),
+            BeanKindDiv::Meal_DIV_VALUE => $this->routeDetailMeal(),
+            BeanKindDiv::Move_DIV_VALUE => $this->routeDetailMove(),
+            BeanKindDiv::Time_DIV_VALUE => $this->routeDetailTime(),
+            BeanKindDiv::Checklist_DIV_VALUE => $this->routeDetailChecklist(),
+            BeanKindDiv::Memo_DIV_VALUE => $this->routeDetailMemo(),
+            default => throw new \Exception("bean_kind_divの値が不正です")
         };
     }
 }

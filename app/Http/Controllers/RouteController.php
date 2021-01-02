@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RouteRequest;
 use App\Http\Services\RouteService;
 use App\Models\Route;
 
@@ -19,10 +20,14 @@ class RouteController extends Controller
         })->toArray();
     }
 
-    public function show(Route $route, ResponseConverter\ResponseFormatter $formatter): array
+    public function show(Route $route, ResponseConverter\RouteConverter $converter): array
     {
-        return $formatter->convertRoute($route);
+        return $converter->convertRoute($route);
     }
 
-
+    public function store(RouteRequest $request, RouteService $routeService, ResponseConverter\RouteConverter $converter): array
+    {
+        $route = $routeService->saveRoute($request->validated());
+        return $converter->convertRoute($route);
+    }
 }
