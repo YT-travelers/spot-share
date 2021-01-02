@@ -15,7 +15,7 @@ class CreateRouteDetailMealsTable extends Migration
     {
         Schema::create('route_detail_meals', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
-            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
+            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details')->cascadeOnDelete();
             $table->integer('meal_kind_div')->nullable();
             $table->integer('meal_minutes')->nullable();
             $table->integer('meal_cost')->nullable();

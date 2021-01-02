@@ -15,7 +15,7 @@ class CreateRouteDetailHotelsTable extends Migration
     {
         Schema::create('route_detail_hotels', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
-            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
+            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details')->cascadeOnDelete();
             $table->unsignedBigInteger('hotel_id');
             $table->foreign('hotel_id')->references('hotel_id')->on('hotels');
             $table->integer('hotel_breakfast_yes_no_div')->nullable();

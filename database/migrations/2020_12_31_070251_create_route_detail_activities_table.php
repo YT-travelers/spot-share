@@ -15,7 +15,7 @@ class CreateRouteDetailActivitiesTable extends Migration
     {
         Schema::create('route_detail_activities', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
-            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
+            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details')->cascadeOnDelete();
             $table->unsignedBigInteger('activity_id');
             $table->foreign('activity_id')->references('activity_id')->on('activities');
             $table->integer('activity_rate')->nullable();

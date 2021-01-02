@@ -16,7 +16,7 @@ class CreateRouteDetailsTable extends Migration
         Schema::create('route_details', function (Blueprint $table) {
             $table->id('route_detail_id');
             $table->unsignedBigInteger('route_id');
-            $table->foreign('route_id')->references('route_id')->on('routes');
+            $table->foreign('route_id')->references('route_id')->on('routes')->cascadeOnDelete();
             $table->integer('bean_kind_div');
             $table->integer('order');
             $table->timestamps();

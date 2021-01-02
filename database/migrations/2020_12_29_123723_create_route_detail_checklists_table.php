@@ -15,7 +15,7 @@ class CreateRouteDetailChecklistsTable extends Migration
     {
         Schema::create('route_detail_checklists', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
-            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
+            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details')->cascadeOnDelete();
             $table->integer('check_status');
             $table->string('check_content');
             $table->timestamps();
