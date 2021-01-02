@@ -11,6 +11,8 @@ class Hotel extends Model
 {
     protected $primaryKey = 'hotel_id';
 
+    protected $guarded = ['hotel_id'];
+
     use HasFactory;
 
     public function hotelKind(): BelongsTo

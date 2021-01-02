@@ -10,6 +10,8 @@ class Tourism extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['tourism_id'];
+
     public function country(): BelongsTo
     {
         return $this->belongsTo(Country::class, 'country_code', 'country_code');

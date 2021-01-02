@@ -13,6 +13,8 @@ class RouteDetailHotel extends Model
 
     protected $primaryKey = 'route_detail_id';
 
+    protected $guarded = ['route_detail_id'];
+
     public function hotelBreakfastYesNo(): BelongsTo
     {
         return $this->belongsTo(YesNoDiv::class, 'hotel_breakfast_yes_no_div', 'div_value');

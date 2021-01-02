@@ -13,6 +13,8 @@ class RouteDetailRestaurant extends Model
 
     protected $primaryKey = 'route_detail_id';
 
+    protected $guarded = ['route_detail_id'];
+
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class, 'restaurant_id', 'restaurant_id');

@@ -13,6 +13,8 @@ class RouteDetailMeal extends Model
 
     protected $primaryKey = 'route_detail_id';
 
+    protected $guarded = ['route_detail_id'];
+
     public function mealKind(): BelongsTo
     {
         return $this->belongsTo(MealKindDiv::class, 'meal_kind_div', 'div_value');

@@ -10,4 +10,6 @@ class RouteDetailMemo extends Model
     use HasFactory;
 
     protected $primaryKey = 'route_detail_id';
+
+    protected $guarded = ['route_detail_id'];
 }

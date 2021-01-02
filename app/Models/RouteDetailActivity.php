@@ -12,6 +12,8 @@ class RouteDetailActivity extends Model
 
     protected $primaryKey = 'route_detail_id';
 
+    protected $guarded = ['route_detail_id'];
+
     public function activity(): BelongsTo
     {
         return $this->belongsTo(Activity::class, 'activity_id', 'activity_id');

@@ -14,7 +14,7 @@ use App\Models\RouteDetailRestaurant;
 use App\Models\RouteDetailTime;
 use App\Models\RouteDetailTourism;
 
-class ResponseFormatter
+class RouteConverter
 {
     public function convertRoute(Route $route): array
     {

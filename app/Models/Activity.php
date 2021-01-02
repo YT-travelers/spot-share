@@ -10,4 +10,6 @@ class Activity extends Model
     use HasFactory;
 
     protected $primaryKey = 'activity_id';
+
+    protected $guarded = ['activity_id'];
 }

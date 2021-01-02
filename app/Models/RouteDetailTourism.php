@@ -12,6 +12,8 @@ class RouteDetailTourism extends Model
 
     protected $primaryKey = 'route_detail_id';
 
+    protected $guarded = ['route_detail_id'];
+
     public function tourism(): BelongsTo
     {
         return $this->belongsTo(Tourism::class, 'tourism_id', 'tourism_id');

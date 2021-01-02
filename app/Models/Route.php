@@ -12,6 +12,8 @@ class Route extends Model
 
     protected $primaryKey = 'route_id';
 
+    protected $guarded = ['route_id'];
+
     public function routeDetails(): HasMany
     {
         return $this->hasMany(RouteDetail::class, 'route_id', 'route_id');

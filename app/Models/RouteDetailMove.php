@@ -13,6 +13,8 @@ class RouteDetailMove extends Model
 
     protected $primaryKey = 'route_detail_id';
 
+    protected $guarded = ['route_detail_id'];
+
     public function moveWay(): BelongsTo
     {
         return $this->belongsTo(MoveWayDiv::class, 'move_way_div', 'div_value');
