@@ -16,7 +16,7 @@ class CreateRouteDetailMovesTable extends Migration
         Schema::create('route_detail_moves', function (Blueprint $table) {
             $table->unsignedBigInteger('route_detail_id')->primary();
             $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details');
-            $table->integer('move_kind_div')->nullable();
+            $table->integer('move_way_div')->nullable();
             $table->integer('move_minutes')->nullable();
             $table->integer('move_cost')->nullable();
             $table->timestamps();

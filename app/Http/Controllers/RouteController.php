@@ -18,4 +18,11 @@ class RouteController extends Controller
             ];
         })->toArray();
     }
+
+    public function show(Route $route, ResponseConverter\ResponseFormatter $formatter): array
+    {
+        return $formatter->convertRoute($route);
+    }
+
+
 }

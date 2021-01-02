@@ -28,7 +28,7 @@ class RouteDetailMoveFactory extends Factory
         $moveWayDivIndex = rand(0, $moveWayDivList->count() - 1);
 
         return [
-            'move_kind_div' => $moveWayDivList->get($moveWayDivIndex),
+            'move_way_div' => $moveWayDivList->get($moveWayDivIndex),
             'move_minutes' => rand(0, 600),
             'move_cost' => rand(0, 200000),
         ];

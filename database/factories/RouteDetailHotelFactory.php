@@ -32,8 +32,8 @@ class RouteDetailHotelFactory extends Factory
         $yesNoIndex = rand(0, $yesNoList->count() - 1);
         return [
             'hotel_id' => $idList->get($idIndex),
-            'hotel_breakfast_yes_no' => $yesNoList->get($yesNoIndex),
-            'hotel_dinner_yes_no' => $yesNoList->get($yesNoIndex),
+            'hotel_breakfast_yes_no_div' => $yesNoList->get($yesNoIndex),
+            'hotel_dinner_yes_no_div' => $yesNoList->get($yesNoIndex),
             'hotel_rate' => rand(1, 5),
             'hotel_minutes' => rand(0, 600),
             'hotel_check_in_time' => $this->faker->dateTime,

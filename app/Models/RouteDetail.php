@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Code\BeanKindDiv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class RouteDetail extends Model
@@ -13,9 +14,14 @@ class RouteDetail extends Model
 
     protected $primaryKey = 'route_detail_id';
 
-    public function route()
+    public function route(): BelongsTo
     {
         return $this->belongsTo(Route::class, 'route_id', 'route_id');
+    }
+
+    public function beanKind(): BelongsTo
+    {
+        return $this->belongsTo(BeanKindDiv::class, 'bean_kind_div', 'div_value');
     }
 
     public function routeDetailTourism(): HasOne

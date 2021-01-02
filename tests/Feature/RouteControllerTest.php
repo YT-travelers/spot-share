@@ -19,4 +19,30 @@ class RouteControllerTest extends TestCase
 
         $response->assertJsonStructure([['routeId', 'routeName']]);
     }
+
+    public function testShow()
+    {
+        $response = $this->get('/routes/1');
+
+        $response->assertJsonStructure([
+            'routeId', 'routeName', 'routeDetails' => [
+                '*' => [
+                    'routeDetailId',
+                    'routeId',
+                    'beanKindDiv',
+                    'beanKindDivName',
+                    'order',
+                    'routeDetailTourism',
+                    'routeDetailRestaurant',
+                    'routeDetailHotel',
+                    'routeDetailActivity',
+                    'routeDetailMeal',
+                    'routeDetailMove',
+                    'routeDetailTime',
+                    'routeDetailChecklist',
+                    'routeDetailMemo',
+                ]
+            ]
+        ]);
+    }
 }
