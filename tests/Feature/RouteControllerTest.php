@@ -2,6 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Models\Activity;
+use App\Models\Hotel;
+use App\Models\Restaurant;
+use App\Models\Tourism;
 use Database\Factories\RouteDetailActivityFactory;
 use Database\Factories\RouteDetailChecklistFactory;
 use Database\Factories\RouteDetailHotelFactory;
@@ -68,22 +72,30 @@ class RouteControllerTest extends TestCase
                 [
                     'beanKindDiv' => 0,
                     'order' => 0,
-                    'routeDetailTourism' => RouteDetailTourismFactory::new()->definition()
+                    'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
+                        'tourism' => Tourism::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 1,
                     'order' => 1,
-                    'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition()
+                    'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
+                        'restaurant' => Restaurant::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 2,
                     'order' => 2,
-                    'routeDetailHotel' => RouteDetailHotelFactory::new()->definition()
+                    'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
+                        'hotel' => Hotel::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 3,
                     'order' => 3,
-                    'routeDetailActivity' => RouteDetailActivityFactory::new()->definition()
+                    'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
+                        'activity' => Activity::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 4,

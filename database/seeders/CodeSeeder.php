@@ -26,7 +26,7 @@ class CodeSeeder extends Seeder
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Tourism',            'div_key_name' => '観光地',       'div_value' => 0],
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Restaurant',         'div_key_name' => '飲食店',       'div_value' => 1],
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Hotel',              'div_key_name' => 'ホテル',       'div_value' => 2],
-            ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Activity',           'div_key_name' => 'ホテル',       'div_value' => 3],
+            ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Activity',           'div_key_name' => 'アクティビティ','div_value' => 3],
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Meal',               'div_key_name' => '食事',        'div_value' => 4],
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Move',               'div_key_name' => '移動',        'div_value' => 5],
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Time',               'div_key_name' => '時間',        'div_value' => 6],
