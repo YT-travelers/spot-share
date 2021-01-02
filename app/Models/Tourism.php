@@ -10,6 +10,8 @@ class Tourism extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'tourism_id';
+
     protected $guarded = ['tourism_id'];
 
     public function country(): BelongsTo
