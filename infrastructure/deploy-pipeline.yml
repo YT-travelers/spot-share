@@ -96,7 +96,7 @@ Resources:
               Configuration:
                 Owner: !Ref GitHubAccountName
                 Repo: !Ref GitHubRepositoryName
-                PollForSourceChanges: false
+                PollForSourceChanges: true
                 Branch: develop
                 OAuthToken: !Ref GitHubOAuthToken
               RunOrder: 1
