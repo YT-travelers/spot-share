@@ -18,3 +18,14 @@
   - マイページ
   - タイムライン
   - 思い出の投稿
+
+### パイプライン更新
+infrastructureディレクトリにparameters.jsonを作成して以下のコマンドを実行  
+※parameters.jsonについては管理者に確認
+
+```
+aws cloudformation update-stack --stack-name deploy-spot-share \
+--template-body file://`pwd`/infrastructure/deploy-pipeline.yml \
+--parameters file://`pwd`/infrastructure/parameters.json \
+--capabilities CAPABILITY_NAMED_IAM
+```
