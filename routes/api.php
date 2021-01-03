@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CountryController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RouteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('routes', RouteController::class);
+Route::apiResource('restaurants', RestaurantController::class);
 Route::get('countries', 'App\Http\Controllers\CountryController@index');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
