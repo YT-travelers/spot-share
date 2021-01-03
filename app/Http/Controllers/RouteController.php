@@ -30,4 +30,10 @@ class RouteController extends Controller
         $route = $routeService->saveRoute($request->validated());
         return $converter->convertRoute($route);
     }
+
+    public function update(int $routeId, RouteRequest $request, RouteService $routeService, ResponseConverter\RouteConverter $converter): array
+    {
+        $route = $routeService->saveRoute($request->validated(), $routeId);
+        return $converter->convertRoute($route);
+    }
 }

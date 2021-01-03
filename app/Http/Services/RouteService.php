@@ -7,6 +7,9 @@ use App\Models\Hotel;
 use App\Models\Restaurant;
 use App\Models\Route;
 use App\Models\RouteDetail;
+use App\Models\RouteDetailActivity;
+use App\Models\RouteDetailHotel;
+use App\Models\RouteDetailTourism;
 use App\Models\Tourism;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -27,14 +30,28 @@ class RouteService
         return $this->routeModel->all('route_id', 'route_name');
     }
 
+    /**
+     * ルート情報の保存処理を行う
+     * $routeIdがnullの場合は新規作成、nullで無かった場合は更新処理となる
+     * 更新処理では元のデータを全て削除して新規作成を行う
+     * ルート詳細を削除した後で参照が無い各マスタデータも削除を行う
+     *
+     * @param array $_routeData
+     * @param int|null $routeId
+     * @return Route
+     * @throws \Throwable
+     */
     public function saveRoute(array $_routeData, ?int $routeId = null): Route
     {
-        $routeData = makeArraySnakeRecursively($_routeData);
+        $route = $this->routeModel->newInstance();
+        DB::transaction(function () use ($route, $_routeData, $routeId) {
+            if ($routeId !== null) {
+                $this->deleteRoute($routeId);
+            }
+            $routeData = makeArraySnakeRecursively($_routeData);
 
-        $route = $this->routeModel->findOrNew($routeId);
-        $route->route_name= $routeData['route_name'];
-        $routeDetailDataList = $routeData['route_details'];
-        DB::transaction(function () use ($route, $routeDetailDataList) {
+            $route->route_name= $routeData['route_name'];
+            $routeDetailDataList = $routeData['route_details'];
             $route->save();
             if (isset($routeDetailDataList)) {
                 $route->routeDetails()->createMany($routeDetailDataList)->each(function (RouteDetail $routeDetail, int $index) use ($routeDetailDataList) {
@@ -102,5 +119,51 @@ class RouteService
             $data = $routeDetailData['route_detail_memo'];
             $routeDetail->routeDetailMemo()->create($data);
         }
+    }
+
+    public function deleteRoute(int $routeId)
+    {
+        $route = $this->routeModel->findOrFail($routeId);
+
+        //NOTE: この後の処理でroute_detailsテーブルを削除する為、先にメモリへロードしておく
+        $route->load(
+            'routeDetails',
+            'routeDetails.beanKind',
+            'routeDetails.routeDetailTourism',
+            'routeDetails.routeDetailHotel',
+            'routeDetails.routeDetailActivity',
+        );
+        $route->delete();
+
+        $route->routeDetails->each(function (RouteDetail $routeDetail) {
+            $beanKind = $routeDetail->beanKind;
+            if ($beanKind->isTourism()) {
+                $tourismId = $routeDetail->routeDetailTourism->tourism_id;
+                $tourismCount = RouteDetailTourism::where('tourism_id', $tourismId)
+                                                    ->count();
+                if ($tourismCount === 0) {
+                    Tourism::where('tourism_id', $tourismId)
+                            ->delete();
+                }
+            }
+            if ($beanKind->isHotel()) {
+                $hotelId = $routeDetail->routeDetailHotel->hotel_id;
+                $hotelCount = RouteDetailHotel::where('hotel_id', $hotelId)
+                                                ->count();
+                if ($hotelCount === 0) {
+                    Hotel::where('hotel_id', $hotelId)
+                        ->delete();
+                }
+            }
+            if ($beanKind->isActivity()) {
+                $activityId = $routeDetail->routeDetailActivity->activity_id;
+                $activityCount = RouteDetailActivity::where('activity_id', $activityId)
+                    ->count();
+                if ($activityCount === 0) {
+                    Activity::where('activity_id', $activityId)
+                        ->delete();
+                }
+            }
+        });
     }
 }
