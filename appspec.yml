@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/spot-share
+hooks:
+  BeforeInstall:
+    - location: scripts/deploy/stop-containers.sh
+  AfterInstall:
+    - location: scripts/deploy/prepare-application.sh
+  ApplicationStart:
+    - location: scripts/deploy/start-containers.sh
