@@ -67,6 +67,21 @@ services:
             - 8025:8025
         networks:
             - sail
+    phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      environment:
+        - PMA_ARBITRARY=1
+        - PMA_HOST=mysql
+        - PMA_USER='${SPOT_SHARE_DB_USERNAME}'
+        - PMA_PASSWORD='${SPOT_SHARE_DB_PASSWORD}'
+      networks:
+        - sail
+      depends_on:
+        - mysql
+      ports:
+        - 8080:80
+      volumes:
+        - /sessions
 networks:
     sail:
         driver: bridge
