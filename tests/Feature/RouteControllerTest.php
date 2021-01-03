@@ -265,4 +265,12 @@ class RouteControllerTest extends TestCase
 
         $response->assertJsonStructure(self::ROUTE_STRUCTURE);
     }
+
+    public function testDestroy()
+    {
+        $routeId = Route::first()->route_id;
+        $response = $this->delete("routes/$routeId");
+
+        $response->assertJson(['result' => 'success']);
+    }
 }
