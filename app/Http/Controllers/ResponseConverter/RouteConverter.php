@@ -148,8 +148,8 @@ class RouteConverter
             'activity' => [
                 'activityId' => $activity->activity_id,
                 'activityName' => $activity->activity_name,
-                'activityStartTime' => $activity->activity_start_time,
-                'activityEndTime' => $activity->activity_end_time,
+                'activityOpenTime' => $activity->activity_open_time,
+                'activityCloseTime' => $activity->activity_close_time,
                 'activitySummary' => $activity->activity_summary,
                 'activityAddress' => $activity->activity_address,
                 'activityUrl' => $activity->activity_url,

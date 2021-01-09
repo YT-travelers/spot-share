@@ -16,8 +16,8 @@ class CreateActivitiesTable extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id('activity_id');
             $table->string('activity_name');
-            $table->dateTime('activity_start_time')->nullable();
-            $table->dateTime('activity_end_time')->nullable();
+            $table->dateTime('activity_open_time')->nullable();
+            $table->dateTime('activity_close_time')->nullable();
             $table->string('activity_summary')->nullable();
             $table->string('activity_address')->nullable();
             $table->string('activity_url')->nullable();

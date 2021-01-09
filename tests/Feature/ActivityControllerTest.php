@@ -18,8 +18,8 @@ class ActivityControllerTest extends TestCase
         $response->assertJsonStructure([[
             'activityId',
             'activityName',
-            'activityStartTime',
-            'activityEndTime',
+            'activityOpenTime',
+            'activityCloseTime',
             'activitySummary',
             'activityAddress',
             'activityUrl',
