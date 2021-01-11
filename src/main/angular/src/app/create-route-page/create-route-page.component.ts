@@ -178,6 +178,15 @@ export class CreateRoutePageComponent implements OnInit {
   }
 
   /**
+   * ルート詳細チェックリストビーンの削除イベント
+   * @param event 削除するチェックリストビーンのルート詳細ID
+   */
+  onDeleteRouteDetailChecklistEvent(event) {
+    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
+    console.log(event);
+  }
+
+  /**
    * ルート詳細メモビーンの削除イベント
    * @param event 削除するメモビーンのルート詳細ID
    */

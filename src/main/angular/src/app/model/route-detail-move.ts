@@ -7,9 +7,9 @@ export interface IRouteDetailMove {
   /** 所要時間 */				
   moveMinutes?
   /** 移動種類区分 */
-  moveKindDiv?
+  moveWayDiv?
   /** 移動種類名称 */
-  moveKindDivName?
+  moveWayDivName?
   /** 移動費用 */
   moveCost?
 }

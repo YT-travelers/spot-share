@@ -14,20 +14,20 @@ export class RouteDetailMoveBeanComponent implements OnInit {
 
   /** 移動手段リスト */
   // TODO バックエンドから取得する 
-  moveKindDivList = [
-    { moveKindDiv: 0, moveKindDivName: '徒歩'},
-    { moveKindDiv: 1, moveKindDivName: '自転車'},
-    { moveKindDiv: 2, moveKindDivName: 'バイク'},
-    { moveKindDiv: 3, moveKindDivName: '車'},
-    { moveKindDiv: 4, moveKindDivName: 'タクシー'},
-    { moveKindDiv: 5, moveKindDivName: 'バス'},
-    { moveKindDiv: 6, moveKindDivName: '電車'},
-    { moveKindDiv: 7, moveKindDivName: '寝台列車'},
-    { moveKindDiv: 8, moveKindDivName: '新幹線'},
-    { moveKindDiv: 9, moveKindDivName: '飛行機'},
-    { moveKindDiv: 10, moveKindDivName: '船'},
-    { moveKindDiv: 11, moveKindDivName: 'フェリー'},
-    { moveKindDiv: 12, moveKindDivName: 'その他'},
+  MoveWayDivList = [
+    { MoveWayDiv: 0, MoveWayDivName: '徒歩'},
+    { MoveWayDiv: 1, MoveWayDivName: '自転車'},
+    { MoveWayDiv: 2, MoveWayDivName: 'バイク'},
+    { MoveWayDiv: 3, MoveWayDivName: '車'},
+    { MoveWayDiv: 4, MoveWayDivName: 'タクシー'},
+    { MoveWayDiv: 5, MoveWayDivName: 'バス'},
+    { MoveWayDiv: 6, MoveWayDivName: '電車'},
+    { MoveWayDiv: 7, MoveWayDivName: '寝台列車'},
+    { MoveWayDiv: 8, MoveWayDivName: '新幹線'},
+    { MoveWayDiv: 9, MoveWayDivName: '飛行機'},
+    { MoveWayDiv: 10, MoveWayDivName: '船'},
+    { MoveWayDiv: 11, MoveWayDivName: 'フェリー'},
+    { MoveWayDiv: 12, MoveWayDivName: 'その他'},
   ];
 
   /** 編集対象 */
@@ -40,9 +40,9 @@ export class RouteDetailMoveBeanComponent implements OnInit {
     /** 所要時間 */
     moveMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
     /** 移動手段区分 */
-    moveKindDiv: new FormControl(0),
+    moveWayDiv: new FormControl(0),
     /** 移動手段区分名称 */
-    moveKindDivname: new FormControl(this.moveKindDivList[0].moveKindDivName),
+    moveWayDivName: new FormControl(this.MoveWayDivList[0].MoveWayDivName),
     /** 移動費用 */
     moveCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });

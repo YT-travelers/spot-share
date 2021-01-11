@@ -1,0 +1,12 @@
+<div class="list-bean-checklist">
+  <form [formGroup]="routeDetailChecklistFormGroup">
+    <div class="bean">
+          <input type="checkbox" id="checkbox" class="form-control checklist-content-input" formControlName="checklistContent"/>
+          <label for="checkbox"></label>
+      <input class="" >
+      <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteButton()">
+        ✗
+      </button>
+    </div>
+  </form>
+</div>

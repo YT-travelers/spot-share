@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 
 import { AddSpotPageModule } from './add-spot-page/add-spot-page.module'
 import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
+import { RouteDetailChecklistBeanModule } from './route-detail-checklist-bean/route-detail-checklist-bean.module';
 import { RouteDetailMealBeanModule } from './route-detail-meal-bean/route-detail-meal-bean.module';
 import { RouteDetailMemoBeanModule } from './route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from './route-detail-move-bean/route-detail-move-bean.module';
@@ -29,6 +30,7 @@ import { InputRouteNameModalModule } from './shared/input-route-name-modal/input
     AppRoutingModule,
     AddSpotPageModule,
     CreateRoutePageModule,
+    RouteDetailChecklistBeanModule,
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,
     RouteDetailMoveBeanModule,
