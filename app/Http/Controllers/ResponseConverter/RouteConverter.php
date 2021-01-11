@@ -75,6 +75,7 @@ class RouteConverter
                 'tourismName' => $tourism->tourism_name,
                 'country' => [
                     'countryCode' => $tourism->country->country_code,
+                    'countryName' => $tourism->country->country_name,
                     //TODO: cityCodeを入れる？
                     'currency' => $tourism->country->currency,
                     'timezone' => $tourism->country->timezone,
@@ -104,9 +105,10 @@ class RouteConverter
             'restaurant' => [
                 'restaurantId' => $restaurant->restaurant_id,
                 'restaurantName' => $restaurant->restaurant_name,
-                'countryCode' => $restaurant->country_code,
                 'cuisineGenreDiv' => $restaurant->cuisine_genre_div,
+                'cuisineGenreDivName' => $restaurant->cuisineGenre->div_key_name,
                 'restaurantKindDiv' => $restaurant->restaurant_kind_div,
+                'restaurantKindDivName' => $restaurant->restaurantKind->div_key_name,
                 'restaurantOpenTime' => $restaurant->restaurant_open_time,
                 'restaurantCloseTime' => $restaurant->restaurant_close_time,
                 'restaurantSummary' => $restaurant->restaurant_summary,

@@ -16,7 +16,7 @@ class CreateTourismsTable extends Migration
         Schema::create('tourisms', function (Blueprint $table) {
             $table->id('tourism_id');
             $table->string('tourism_name');
-            $table->string('country_code')->nullable();
+            $table->string('country_code');
             $table->foreign('country_code')->references('country_code')->on('countries');
             $table->dateTime('tourism_open_time')->nullable();
             $table->dateTime('tourism_close_time')->nullable();

@@ -23,20 +23,10 @@ class RestaurantControllerTest extends TestCase
             'restaurantSummary',
             'restaurantAddress',
             'restaurantUrl',
-            'country' => [
-                'countryCode',
-                'countryName',
-                'currency',
-                'timezone',
-            ],
-            'cuisineGenre' => [
-                'divKeyName',
-                'divValue'
-            ],
-            'restaurantKind' => [
-                'divKeyName',
-                'divValue'
-            ],
+            'cuisineGenreDiv',
+            'cuisineGenreDivName',
+            'restaurantKindDiv',
+            'restaurantKindDivName',
         ]]);
     }
 }

@@ -20,10 +20,8 @@ class HotelController extends Controller
             return [
                 'hotelId' => $hotel->hotel_id,
                 'hotelName' => $hotel->hotel_name,
-                'hotelKind' => [
-                    'divKeyName' => $hotel->hotelKind->div_key_name,
-                    'divValue' => $hotel->hotelKind->div_value,
-                ],
+                'hotelKindDiv' => $hotel->hotelKind->div_value,
+                'hotelKindDivName' => $hotel->hotelKind->div_key_name,
                 'hotelSummary' => $hotel->hotel_summary,
                 'hotelAddress' => $hotel->hotel_address,
                 'hotelUrl' => $hotel->hotel_url

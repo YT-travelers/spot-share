@@ -69,6 +69,7 @@ class RouteService
         $beanKind = $routeDetail->beanKind;
         if ($beanKind->isTourism()) {
             $data = $routeDetailData['route_detail_tourism'];
+            $data['tourism']['country_code'] = $data['tourism']['country']['country_code'] ?? null;
             $tourismId = $data['tourism']['tourism_id'] ?? null;
             $tourism = Tourism::findOrNew($tourismId);
             $tourism->fill($data['tourism'])->save();

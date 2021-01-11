@@ -21,20 +21,10 @@ class RestaurantController extends Controller
             return [
                 'restaurantId' => $restaurant->restaurant_id,
                 'restaurantName' => $restaurant->restaurant_name,
-                'country' => [
-                    'countryCode' => $restaurant->country->country_code,
-                    'countryName' => $restaurant->country->country_name,
-                    'currency' => $restaurant->country->currency,
-                    'timezone' => $restaurant->country->timezone
-                ],
-                'cuisineGenre' => [
-                    'divKeyName' => $restaurant->cuisineGenre->div_key_name,
-                    'divValue' => $restaurant->cuisineGenre->div_value
-                ],
-                'restaurantKind' => [
-                    'divKeyName' => $restaurant->restaurantKind->div_key_name,
-                    'divValue' => $restaurant->restaurantKind->div_value,
-                ],
+                'cuisineGenreDiv' => $restaurant->cuisineGenre->div_value,
+                'cuisineGenreDivName' => $restaurant->cuisineGenre->div_key_name,
+                'restaurantKindDiv' => $restaurant->restaurantKind->div_value,
+                'restaurantKindDivName' => $restaurant->restaurantKind->div_key_name,
                 'restaurantOpenTime' => $restaurant->restaurant_open_time,
                 'restaurantCloseTime' => $restaurant->restaurant_close_time,
                 'restaurantSummary' => $restaurant->restaurant_summary,

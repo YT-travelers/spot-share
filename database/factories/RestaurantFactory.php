@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Code\CuisineGenreDiv;
 use App\Models\Code\RestaurantKindDiv;
-use App\Models\Country;
 use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,8 +25,6 @@ class RestaurantFactory extends Factory
      */
     public function definition()
     {
-        $countryCodeList = Country::pluck('country_code');
-        $countryCodeIndex = rand(0, $countryCodeList->count() - 1);
         $cuisineGenreDivList = CuisineGenreDiv::pluck('div_value');
         $cuisineGenreDivIndex = rand(0, $cuisineGenreDivList->count() - 1);
         $restaurantKindDivList = RestaurantKindDiv::pluck('div_value');
@@ -35,7 +32,6 @@ class RestaurantFactory extends Factory
 
         return [
             'restaurant_name' => $this->faker->sentence,
-            'country_code' => $countryCodeList->get($countryCodeIndex),
             'cuisine_genre_div' => $cuisineGenreDivList->get($cuisineGenreDivIndex),
             'restaurant_kind_div' => $restaurantKindDivList->get($restaurantKindDivIndex),
             'restaurant_open_time' => $this->faker->dateTime,

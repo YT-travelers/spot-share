@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Activity;
+use App\Models\Country;
 use App\Models\Hotel;
 use App\Models\Restaurant;
 use App\Models\Route;
@@ -76,7 +77,11 @@ class RouteControllerTest extends TestCase
                     'beanKindDiv' => 0,
                     'order' => 0,
                     'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
-                        'tourism' => Tourism::factory()->definition()
+                        'tourism' => Tourism::factory()->definition() + [
+                            'country' => [
+                                'countryCode' => Country::first()->country_code
+                            ]
+                        ]
                     ]
                 ],
                 [
@@ -138,37 +143,40 @@ class RouteControllerTest extends TestCase
                     'beanKindDiv' => 0,
                     'order' => 0,
                     'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
-                            'tourism' => Tourism::factory()->definition() + [
-                                'tourism_id' => Tourism::first()->tourism_id
+                        'tourism' => Tourism::factory()->definition() + [
+                            'tourismId' => Tourism::first()->tourism_id,
+                            'country' => [
+                                'countryCode' => Country::first()->country_code,
                             ]
                         ]
+                    ]
                 ],
                 [
                     'beanKindDiv' => 1,
                     'order' => 1,
                     'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
-                            'restaurant' => Restaurant::factory()->definition() + [
-                                'restaurant_id' => Restaurant::first()->restaurant_id
-                            ]
+                        'restaurant' => Restaurant::factory()->definition() + [
+                            'restaurantId' => Restaurant::first()->restaurant_id
                         ]
+                    ]
                 ],
                 [
                     'beanKindDiv' => 2,
                     'order' => 2,
                     'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
-                            'hotel' => Hotel::factory()->definition() + [
-                                'hotel_id' => Hotel::first()->hotel_id
-                            ]
+                        'hotel' => Hotel::factory()->definition() + [
+                            'hotelId' => Hotel::first()->hotel_id
                         ]
+                    ]
                 ],
                 [
                     'beanKindDiv' => 3,
                     'order' => 3,
                     'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
-                            'activity' => Activity::factory()->definition() + [
-                                'activity_id' => Activity::first()->activity_id
-                            ]
+                        'activity' => Activity::factory()->definition() + [
+                            'activityId' => Activity::first()->activity_id
                         ]
+                    ]
                 ],
                 [
                     'beanKindDiv' => 4,
@@ -211,29 +219,33 @@ class RouteControllerTest extends TestCase
                     'beanKindDiv' => 0,
                     'order' => 0,
                     'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
-                            'tourism' => Tourism::factory()->definition()
+                        'tourism' => Tourism::factory()->definition() + [
+                            'country' => [
+                                'countryCode' => Country::first()->country_code
+                            ]
                         ]
+                    ]
                 ],
                 [
                     'beanKindDiv' => 1,
                     'order' => 1,
                     'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
-                            'restaurant' => Restaurant::factory()->definition()
-                        ]
+                        'restaurant' => Restaurant::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 2,
                     'order' => 2,
                     'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
-                            'hotel' => Hotel::factory()->definition()
-                        ]
+                        'hotel' => Hotel::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 3,
                     'order' => 3,
                     'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
-                            'activity' => Activity::factory()->definition()
-                        ]
+                        'activity' => Activity::factory()->definition()
+                    ]
                 ],
                 [
                     'beanKindDiv' => 4,

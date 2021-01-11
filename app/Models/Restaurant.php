@@ -16,11 +16,6 @@ class Restaurant extends Model
 
     protected $guarded = ['restaurant_id'];
 
-    public function country(): BelongsTo
-    {
-        return $this->belongsTo(Country::class, 'country_code', 'country_code');
-    }
-
     public function cuisineGenre(): BelongsTo
     {
         return $this->belongsTo(CuisineGenreDiv::class, 'cuisine_genre_div', 'div_value');

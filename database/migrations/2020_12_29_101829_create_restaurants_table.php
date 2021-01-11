@@ -16,8 +16,6 @@ class CreateRestaurantsTable extends Migration
         Schema::create('restaurants', function (Blueprint $table) {
             $table->id('restaurant_id');
             $table->string('restaurant_name');
-            $table->string('country_code')->nullable();
-            $table->foreign('country_code')->references('country_code')->on('countries');
             $table->integer('cuisine_genre_div')->nullable();
             $table->integer('restaurant_kind_div')->nullable();
             $table->dateTime('restaurant_open_time')->nullable();

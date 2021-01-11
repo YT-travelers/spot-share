@@ -21,10 +21,8 @@ class HotelControllerTest extends TestCase
             'hotelSummary',
             'hotelAddress',
             'hotelUrl',
-            'hotelKind' => [
-                'divKeyName',
-                'divValue'
-            ],
+            'hotelKindDiv',
+            'hotelKindDivName',
         ]]);
     }
 }
