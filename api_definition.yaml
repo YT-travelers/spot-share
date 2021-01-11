@@ -7,76 +7,6 @@ servers:
   - url: 'http://localhost'
     description: ''
 paths:
-  /spots:
-    post:
-      summary: Post a spot
-      operationId: post-spots
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Spot'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Spot'
-            examples: {}
-        description: ''
-    parameters: []
-    get:
-      summary: Get spots
-      operationId: get-spots
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Spot'
-  '/spots/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    patch:
-      summary: Patch a spot
-      operationId: patch-spots-id
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Spot'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Spot'
-        description: ''
-    get:
-      summary: Get a spot
-      operationId: get-spots-id
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Spot'
-    delete:
-      summary: Delete a spot
-      operationId: delete-spots-id
-      responses:
-        '200':
-          description: OK
   /routes:
     get:
       summary: Get Routes
@@ -100,34 +30,18 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  routeId:
-                    type: integer
-                  routeName:
-                    type:
-                      - string
-                      - 'null'
+                $ref: '#/components/schemas/Route'
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                routeName:
-                  type:
-                    - string
-                    - 'null'
-                routeDetails:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/RouteDetail'
+              $ref: '#/components/schemas/Route'
         description: ''
-  '/routes/{id}':
+  '/routes/{routeId}':
     parameters:
       - schema:
           type: string
-        name: id
+        name: routeId
         in: path
         required: true
     get:
@@ -139,35 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  routeId:
-                    type: integer
-                  routeName:
-                    type:
-                      - string
-                      - 'null'
-                  routeDetails:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        routeDetailId:
-                          type: integer
-                        spot:
-                          $ref: '#/components/schemas/Spot'
-                        scheduledDateTime:
-                          type:
-                            - string
-                            - 'null'
-                        orderNumber:
-                          type:
-                            - integer
-                            - 'null'
-                        favoritePoint:
-                          type: integer
-                        memo:
-                          type: string
+                $ref: '#/components/schemas/Route'
       operationId: get-routes-id
     delete:
       summary: Delete a route with routeDetails
@@ -175,24 +61,28 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: string
     patch:
       summary: Patch a Route with routeDetails
       operationId: patch-routes-id
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                routeName:
-                  type: string
-                routeDetails:
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/RouteDetail'
+              $ref: '#/components/schemas/Route'
   /countries:
     get:
       summary: Get Countries
@@ -206,42 +96,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Country'
+              examples: {}
       operationId: get-countries
-  '/countries/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
+  /restaurants:
     get:
-      summary: Get a Country
+      summary: Your GET endpoint
       tags: []
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Country'
-      operationId: get-countries-id
-  '/routeDetails/{id}':
-    parameters:
-      - schema:
-          type: string
-        name: id
-        in: path
-        required: true
-    delete:
-      summary: Delete a routeDetails
-      operationId: delete-routeDetails-id
-      responses:
-        '200':
-          description: OK
-  /files:
-    post:
-      summary: Post files
-      operationId: post-files
       responses:
         '200':
           description: OK
@@ -250,18 +110,50 @@ paths:
               schema:
                 type: array
                 items:
-                  type: string
-      description: |-
-        複数のファイルを保存するAPIです
-        レスポンスに保存したファイルパスが含まれます
-        ファイル名にはファイルのハッシュ値が使用されます
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: array
-              items: {}
-        description: ''
+                  $ref: '#/components/schemas/Restaurant'
+      operationId: get-restaurants
+  /hotels:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Hotel'
+      operationId: get-hotels
+  /tourisms:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tourism'
+      operationId: get-tourisms
+  /activities:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Activity'
+      operationId: get-activities
 components:
   schemas:
     Spot:
@@ -303,16 +195,24 @@ components:
     SimpleRoute:
       title: RouteResponse
       type: object
+      x-examples:
+        スイス:
+          routeId: 1
+          routeName: スイス鉄道周遊ルート
       properties:
         routeId:
           type: integer
         routeName:
-          type: string
+          type:
+            - string
+            - 'null'
+      required:
+        - routeId
     Country:
       title: Country
       type: object
       properties:
-        code:
+        countryCode:
           type: string
         countryName:
           type: string
@@ -324,27 +224,431 @@ components:
           type:
             - string
             - 'null'
+      required:
+        - countryCode
+        - countryName
+      x-examples:
+        日本:
+          countryCode: JP
+          countryName: 日本
+          currency: 円
+          timezone: '+09:00'
     RouteDetail:
       title: RouteDetail
       type: object
       properties:
-        spotId:
+        beanKindDiv:
           type: integer
-        orderNumber:
+        order:
           type:
             - integer
             - 'null'
-        scheduledDateTime:
-          type:
-            - string
-            - 'null'
-        favoritePoint:
-          type:
-            - string
-            - 'null'
-        memo:
-          type: string
+        routeDetailTourism:
+          $ref: '#/components/schemas/RouteDetailTourism'
+        routeDetailRestaurant:
+          $ref: '#/components/schemas/RouteDetailRestaurant'
+        routeDetailHotel:
+          $ref: '#/components/schemas/RouteDetailHotel'
+        routeDetailActivity:
+          $ref: '#/components/schemas/RouteDetailActivity'
+        routeDetailMeal:
+          $ref: '#/components/schemas/RouteDetailMeal'
+        routeDetailMove:
+          $ref: '#/components/schemas/RouteDetailMove'
+        routeDetailTime:
+          $ref: '#/components/schemas/RouteDetailTime'
+        routeDetailChecklist:
+          $ref: '#/components/schemas/RouteDetailChecklist'
+        routeDetailMemo:
+          $ref: '#/components/schemas/RouteDetailMemo'
         routeDetailId:
+          type: integer
+      required:
+        - beanKindDiv
+        - order
+    RouteDetailTourism:
+      title: RouteDetailTourism
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        tourismId:
+          type: integer
+        tourismRate:
           type:
             - integer
             - 'null'
+        tourismMinutes:
+          type:
+            - integer
+            - 'null'
+        tourismCost:
+          type:
+            - integer
+            - 'null'
+        tourism:
+          $ref: '#/components/schemas/Tourism'
+      required:
+        - routeDetailId
+    Tourism:
+      title: Tourism
+      type: object
+      properties:
+        tourismId:
+          type: integer
+        tourismName:
+          type: string
+        country:
+          $ref: '#/components/schemas/Country'
+        tourismOpenTime:
+          type:
+            - string
+            - 'null'
+        tourismCloseTime:
+          type:
+            - string
+            - 'null'
+        tourismSummary:
+          type:
+            - string
+            - 'null'
+        tourismAddress:
+          type:
+            - string
+            - 'null'
+        tourismUrl:
+          type:
+            - string
+            - 'null'
+      required:
+        - tourismId
+        - tourismName
+    RouteDetailRestaurant:
+      title: RouteDetailRestaurant
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        restaurantId:
+          type: integer
+        restaurantMealKindDiv:
+          type:
+            - integer
+            - 'null'
+        restaurantMealKindDivName:
+          type:
+            - string
+            - 'null'
+        restaurantRate:
+          type:
+            - integer
+            - 'null'
+        restaurantMinutes:
+          type:
+            - integer
+            - 'null'
+        restaurantStartTime:
+          type:
+            - string
+            - 'null'
+        restaurantEndTime:
+          type:
+            - string
+            - 'null'
+        restaurantCost:
+          type:
+            - integer
+            - 'null'
+        restaurant:
+          $ref: '#/components/schemas/Restaurant'
+      required:
+        - routeDetailId
+        - restaurantId
+    RouteDetailHotel:
+      title: RouteDetailHotel
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        hotelId:
+          type: integer
+        hotelRate:
+          type:
+            - integer
+            - 'null'
+        hotelMinutes:
+          type:
+            - integer
+            - 'null'
+        hotelCheckInTime:
+          type:
+            - string
+            - 'null'
+        hotelCheckOutTime:
+          type:
+            - string
+            - 'null'
+        hotelBreakfastYesNoDiv:
+          type:
+            - integer
+            - 'null'
+        hotelBreakfastYesNoDivName:
+          type:
+            - string
+            - 'null'
+        hotelDinnerYesNoDiv:
+          type:
+            - integer
+            - 'null'
+        hotelDinnerYesNoDivName:
+          type:
+            - string
+            - 'null'
+        hotelCost:
+          type:
+            - integer
+            - 'null'
+        hotel:
+          $ref: '#/components/schemas/Hotel'
+      required:
+        - routeDetailId
+        - hotelId
+    RouteDetailActivity:
+      title: RouteDetailActivity
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        activityId:
+          type: integer
+        activityRate:
+          type:
+            - integer
+            - 'null'
+        activityMinutes:
+          type:
+            - integer
+            - 'null'
+        activityStartTime:
+          type:
+            - string
+            - 'null'
+        activityEndTime:
+          type:
+            - string
+            - 'null'
+        activityCost:
+          type:
+            - integer
+            - 'null'
+        activity:
+          $ref: '#/components/schemas/Activity'
+      required:
+        - routeDetailId
+        - activityId
+    RouteDetailMeal:
+      title: RouteDetailMeal
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        mealMinutes:
+          type:
+            - integer
+            - 'null'
+        mealKindDiv:
+          type:
+            - integer
+            - 'null'
+        mealKindDivName:
+          type:
+            - string
+            - 'null'
+        mealCost:
+          type: integer
+      required:
+        - routeDetailId
+    RouteDetailMove:
+      title: RouteDetailMove
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        moveMinutes:
+          type:
+            - integer
+            - 'null'
+        moveKindDiv:
+          type:
+            - integer
+            - 'null'
+        moveKindDivName:
+          type:
+            - string
+            - 'null'
+        moveCost:
+          type:
+            - integer
+            - 'null'
+      required:
+        - routeDetailId
+    RouteDetailTime:
+      title: RouteDetailTime
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        scheduleDateTime:
+          type: string
+      required:
+        - routeDetailId
+        - scheduleDateTime
+    RouteDetailChecklist:
+      title: RouteDetailChecklist
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        checkStatus:
+          type: string
+        checkContent:
+          type: string
+      required:
+        - routeDetailId
+        - checkStatus
+        - checkContent
+    RouteDetailMemo:
+      title: RouteDetailMemo
+      type: object
+      properties:
+        routeDetailId:
+          type: integer
+        memoContent:
+          type: string
+      required:
+        - routeDetailId
+        - memoContent
+    Restaurant:
+      title: Restaurant
+      type: object
+      properties:
+        restaurantId:
+          type: integer
+        restaurantName:
+          type: string
+        cuisineGenreDiv:
+          type:
+            - integer
+            - 'null'
+        restaurantKindDiv:
+          type:
+            - integer
+            - 'null'
+        restaurantOpenTime:
+          type:
+            - string
+            - 'null'
+        restaurantCloseTime:
+          type:
+            - string
+            - 'null'
+        restaurantSummary:
+          type:
+            - string
+            - 'null'
+        restaurantAddress:
+          type:
+            - string
+            - 'null'
+        restaurantUrl:
+          type:
+            - string
+            - 'null'
+        cuisineGenreDivName:
+          type:
+            - string
+            - 'null'
+        restaurantKindDivName:
+          type:
+            - string
+            - 'null'
+      required:
+        - restaurantId
+        - restaurantName
+    Hotel:
+      title: Hotel
+      type: object
+      properties:
+        hotelId:
+          type: string
+        hotelName:
+          type: string
+        hotelKindDiv:
+          type:
+            - string
+            - 'null'
+        hotelKindDivName:
+          type:
+            - string
+            - 'null'
+        hotelSummary:
+          type:
+            - string
+            - 'null'
+        hotelAddress:
+          type:
+            - string
+            - 'null'
+        hotelUrl:
+          type:
+            - string
+            - 'null'
+      required:
+        - hotelId
+        - hotelName
+    Activity:
+      title: Activity
+      type: object
+      properties:
+        activityId:
+          type: integer
+        activityName:
+          type: string
+        activityOpenTime:
+          type:
+            - string
+            - 'null'
+        activityCloseTime:
+          type:
+            - string
+            - 'null'
+        activitySummary:
+          type:
+            - string
+            - 'null'
+        activityAddress:
+          type:
+            - string
+            - 'null'
+        activityUrl:
+          type:
+            - string
+            - 'null'
+      required:
+        - activityId
+        - activityName
+    Route:
+      title: Route
+      type: object
+      properties:
+        routeId:
+          type: integer
+        routeName:
+          type:
+            - string
+            - 'null'
+        routeDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/RouteDetail'
+  responses: {}
