@@ -90,7 +90,7 @@ class RouteConverter
 
     public function convertRouteDetailRestaurant(RouteDetailRestaurant $routeDetailRestaurant): array
     {
-        $restaurant = $routeDetailRestaurant;
+        $restaurant = $routeDetailRestaurant->restaurant;
         return [
             'routeDetailId' => $routeDetailRestaurant->route_detail_id,
             'restaurantId' => $routeDetailRestaurant->restaurant_id,
@@ -101,7 +101,18 @@ class RouteConverter
             'restaurantStartTime' => $routeDetailRestaurant->restaurant_start_time,
             'restaurantEndTime' => $routeDetailRestaurant->restaurant_end_time,
             'restaurantCost' => $routeDetailRestaurant->restaurant_cost,
-            'restaurant' => $routeDetailRestaurant->$restaurant,
+            'restaurant' => [
+                'restaurantId' => $restaurant->restaurant_id,
+                'restaurantName' => $restaurant->restaurant_name,
+                'countryCode' => $restaurant->country_code,
+                'cuisineGenreDiv' => $restaurant->cuisine_genre_div,
+                'restaurantKindDiv' => $restaurant->restaurant_kind_div,
+                'restaurantOpenTime' => $restaurant->restaurant_open_time,
+                'restaurantCloseTime' => $restaurant->restaurant_close_time,
+                'restaurantSummary' => $restaurant->restaurant_summary,
+                'restaurantAddress' => $restaurant->restaurant_address,
+                'restaurantUrl' => $restaurant->restaurant_url,
+            ],
         ];
     }
 
