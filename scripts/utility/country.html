@@ -1,0 +1,30 @@
+<html>
+
+<head>
+    <title>country</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="contents">
+
+    </div>
+</body>
+
+<script>
+    function appendCountry(country) {
+        var div = document.createElement('div');
+        div.textContent = `[ 'country_code' => '${country.alpha3Code}', 'country_name' => '${country.translations.ja}', 'timezone' => '+09:00' ],`;
+
+        document.body.appendChild(div);
+    }
+
+    axios
+        .get("https://restcountries.eu/rest/v2/all")
+        .then(res => {
+            res.data.forEach(country => {
+                appendCountry(country)
+            })
+        })
+</script>
+</html>
