@@ -226,28 +226,46 @@ components:
     Country:
       title: Country
       type: object
+      x-examples:
+        日本:
+          - countryCode: JPN
+            countryName: 日本
+            timezone: '+09:00'
+            currencies:
+              - countryCurrencyId: 126
+                currencyCode: JPY
+                currencySymbol: ¥
       properties:
         countryCode:
           type: string
         countryName:
           type: string
-        currency:
-          type:
-            - string
-            - 'null'
         timezone:
           type:
             - string
             - 'null'
+        currencies:
+          type: array
+          items:
+            type: object
+            properties:
+              countryCurrencyId:
+                type: integer
+              currencyCode:
+                type:
+                  - string
+                  - 'null'
+              currencySymbol:
+                type:
+                  - string
+                  - 'null'
+              test:
+                type:
+                  - string
+                  - number
       required:
         - countryCode
         - countryName
-      x-examples:
-        日本:
-          countryCode: JP
-          countryName: 日本
-          currency: 円
-          timezone: '+09:00'
     RouteDetail:
       title: RouteDetail
       type: object

@@ -15,6 +15,17 @@ class CountryControllerTest extends TestCase
     {
         $response = $this->get('/countries');
 
-        $response->assertJsonStructure([['countryCode', 'countryName', 'currency', 'timezone']]);
+        $response->assertJsonStructure([[
+            'countryCode',
+            'countryName',
+            'timezone',
+            'currencies' => [
+                '*' => [
+                    'countryCurrencyId',
+                    'currencyCode',
+                    'currencySymbol'
+                ]
+            ]
+        ]]);
     }
 }
