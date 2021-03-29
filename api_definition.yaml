@@ -270,10 +270,6 @@ components:
                 type:
                   - string
                   - 'null'
-              test:
-                type:
-                  - string
-                  - number
       required:
         - countryCode
         - countryName
