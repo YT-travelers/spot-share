@@ -9,7 +9,7 @@ servers:
 paths:
   /routes:
     get:
-      summary: Get Routes
+      summary: ルートの取得
       tags: []
       responses:
         '200':
@@ -23,7 +23,7 @@ paths:
       operationId: get-routes
       description: ルートの取得
     post:
-      summary: Post a Route with routeDetails
+      summary: ルートの新規作成
       operationId: post-routes
       responses:
         '200':
@@ -39,7 +39,7 @@ paths:
               $ref: '#/components/schemas/Route'
         description: ''
       parameters: []
-      description: ルートの保存
+      description: ルートの新規作成
   '/routes/{routeId}':
     parameters:
       - schema:
@@ -48,7 +48,7 @@ paths:
         in: path
         required: true
     get:
-      summary: Get a Route with routeDetails
+      summary: 特定ルートの取得
       tags: []
       responses:
         '200':
@@ -60,7 +60,7 @@ paths:
       operationId: get-routes-id
       description: 特定ルートの取得
     delete:
-      summary: Delete a route with routeDetails
+      summary: 特定ルートの削除
       operationId: delete-routes-id
       responses:
         '200':
@@ -74,7 +74,7 @@ paths:
                     type: string
       description: 特定ルートの削除
     patch:
-      summary: Patch a Route with routeDetails
+      summary: 特定ルートの更新
       operationId: patch-routes-id
       responses:
         '200':
@@ -91,7 +91,7 @@ paths:
       description: 特定ルートの更新
   /countries:
     get:
-      summary: Get Countries
+      summary: 国マスタの取得
       tags: []
       responses:
         '200':
@@ -107,7 +107,7 @@ paths:
       description: 国マスタの取得
   /restaurants:
     get:
-      summary: Your GET endpoint
+      summary: レストランマスタの取得
       tags: []
       responses:
         '200':
@@ -122,7 +122,7 @@ paths:
       description: レストランマスタの取得
   /hotels:
     get:
-      summary: Your GET endpoint
+      summary: ホテルマスタの取得
       tags: []
       responses:
         '200':
@@ -137,7 +137,7 @@ paths:
       description: ホテルマスタの取得
   /tourisms:
     get:
-      summary: Your GET endpoint
+      summary: ツーリズムマスタの取得
       tags: []
       responses:
         '200':
@@ -152,7 +152,7 @@ paths:
       description: ツーリズムマスタの取得
   /activities:
     get:
-      summary: Your GET endpoint
+      summary: アクティビティマスタの取得
       tags: []
       responses:
         '200':
@@ -167,7 +167,7 @@ paths:
       description: アクティビティマスタの取得
   /codes:
     get:
-      summary: Your GET endpoint
+      summary: コードマスタの取得
       tags: []
       responses:
         '200':
