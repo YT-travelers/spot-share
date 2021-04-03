@@ -182,42 +182,6 @@ paths:
       description: コードマスタの取得
 components:
   schemas:
-    Spot:
-      title: Spot
-      type: object
-      properties:
-        spotId:
-          type: integer
-        country:
-          $ref: '#/components/schemas/Country'
-        spotName:
-          type: string
-        url:
-          type:
-            - string
-            - 'null'
-        summary:
-          type:
-            - string
-            - 'null'
-        imagePaths:
-          type: array
-          items:
-            type: string
-        costExpectation:
-          type:
-            - integer
-            - 'null'
-        requiredHours:
-          type:
-            - integer
-            - 'null'
-        requiredMinutes:
-          type:
-            - integer
-            - 'null'
-      required:
-        - spotId
     SimpleRoute:
       title: RouteResponse
       type: object
