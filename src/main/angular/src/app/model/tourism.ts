@@ -1,25 +1,23 @@
 import { ICountry } from "./country";
 
 /**
- * スポット
+ * 観光地
  */
 export interface ITourism {
-  /** スポットID */
+  /** 観光地ID */
   tourismId?: number;
-  /**  スポット名称 */
+  /**  観光地名称 */
   tourismName?: string;
   /** 国 */
   country?: ICountry;
-  /** 画像パス */
-  imagePaths?: string[];
-  /** url */
-  url?: string;
-  /** メモ */
-  memo?: string;
-  /** 費用（予算） */
-  costExpectation?: number;
-  /** 所要時間（時） */
-  requiredHours?: number;
-  /** 所要時間（分） */
-  requiredMinutes?: number;
+  /** 営業開始時間 */
+  tourismOpenTime?: string;
+  /** 営業終了時間 */
+  tourismCloseTime?: string;
+  /** 観光地概要 */
+  tourismSummary?: string;
+  /** 住所 */
+  tourismAddress?: string;
+  /** URL */
+  tourismUrl?: string;
 }

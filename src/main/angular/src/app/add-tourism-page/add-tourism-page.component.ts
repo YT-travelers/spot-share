@@ -9,7 +9,7 @@ import { filter as _filter } from 'lodash';
 import { ITourism } from '../model/tourism';
 import { TourismService } from '../shared/tourism.service';
 
-// スポット編集モード列挙値
+// 観光地編集モード列挙値
 export enum EditMode {
   // 新規モード（URL例：add-tourism-page）
   new,
@@ -26,19 +26,19 @@ export enum EditMode {
 })
 export class AddTourismPageComponent implements OnInit {
 
-  /** ルート作成画面で選択されたスポット情報が格納される */
+  /** ルート作成画面で選択された観光地情報が格納される */
   @Input() selectedTourism: ITourism;
 
-  /** スポット編集モード */
+  /** 観光地編集モード */
   editMode
 
-  /** スポット編集モード（HTML用） */
+  /** 観光地編集モード（HTML用） */
   EditMode = EditMode;
 
   /** 編集対象 */
   tourism: ITourism = {};
 
-  /** 画面上に表示するスポット情報のID */
+  /** 画面上に表示する観光地情報のID */
   tourismId = '';
 
   /** 画像タイトル */
@@ -56,26 +56,24 @@ export class AddTourismPageComponent implements OnInit {
   /** 正規表現　全角数字 or 半角数字のみ */
   patternNumber = /[0-9０-９]/;
 
-  /** スポット情報 フォームグループ */
+  /** 観光地情報 フォームグループ */
   addTourismFormGroup = new FormGroup({
-    /** スポットID */
+    /** 観光地ID */
     tourismId: new FormControl(this.tourism.tourismId),
-    /**  スポット名称 */
+    /**  観光地名称 */
     tourismName: new FormControl(this.tourism.tourismName, [Validators.required]),
     /** 国 */
     country: new FormControl(this.tourism.country),
-    /** 画像パス */
-    imagePaths: new FormControl(this.tourism.imagePaths),
+    /** 営業開始時間 */
+    tourismOpenTime: new FormControl(this.tourism.tourismOpenTime),
+    /** 営業終了時間 */
+    tourismCloseTime: new FormControl(this.tourism.tourismCloseTime, [ Validators.min(0), Validators.max(60)]),
+    /** 概要 */
+    tourismSummary: new FormControl(this.tourism.tourismSummary),
+    /** 住所 */
+    tourismAddress: new FormControl(this.tourism.tourismAddress, [Validators.pattern('^[0-9]*$')]),
     /** url */
-    url: new FormControl(this.tourism.url),
-    /** メモ */
-    memo: new FormControl(this.tourism.memo),
-    /** 費用（予算） */
-    costExpectation: new FormControl(this.tourism.costExpectation, [Validators.pattern('^[0-9]*$')]),
-    /** 所要時間（時） */
-    requiredHours: new FormControl(this.tourism.requiredHours),
-    /** 所要時間（分） */
-    requiredMinutes: new FormControl(this.tourism.requiredMinutes, [ Validators.min(0), Validators.max(60)]),
+    tourismUrl: new FormControl(this.tourism.tourismUrl),
   });
 
   constructor(
@@ -105,10 +103,10 @@ export class AddTourismPageComponent implements OnInit {
       map(value => this._filter(value))
     );
 
-    // スポット編集モードの判定
+    // 観光地編集モードの判定
     this.tourismId = this.route.snapshot.paramMap.get('tourismId');
     if (this.tourismId) {
-      // 既存スポット編集モード
+      // 既存観光地編集モード
       this.editMode = EditMode.edit;
       this.service.getTourism(this.tourismId).subscribe(result => {
         if (result) {
@@ -175,7 +173,7 @@ export class AddTourismPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack() {
-    // TODO スポット一覧タブが表示された状態で遷移させる
+    // TODO 観光地一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
 

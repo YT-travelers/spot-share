@@ -81,12 +81,12 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
-    { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country', minWidth: '160' },
+    { headerName: '国', field: 'country.countryName', sortable: true, filter: true, tooltipField: 'country', minWidth: '160' },
     { headerName: '観光地名', field: 'tourismName', sortable: true, filter: true, tooltipField: 'tourismName', minWidth: '160' },
-    { headerName: '費用（予算）', field: 'costExpectation', sortable: true, filter: true, tooltipField: 'costExpectation', minWidth: '160' },
-    { headerName: '所要時間（予想）', field: 'requiredTimeExpectation', sortable: true, filter: true, tooltipField: 'requiredTimeExpectation', minWidth: '160' },
-    { headerName: 'URL', field: 'url', sortable: true, filter: true, tooltipField: 'url', minWidth: '160' },
-    { headerName: '備考', field: 'remark', sortable: true, filter: true, tooltipField: 'remark', minWidth: '160' },
+    { headerName: '営業開始時間', field: 'tourismOpenTime', sortable: true, filter: true, tooltipField: 'tourismOpenTime', minWidth: '160' },
+    { headerName: '営業終了時間', field: 'tourismCloseTime', sortable: true, filter: true, tooltipField: 'tourismCloseTime', minWidth: '160' },
+    { headerName: 'URL', field: 'tourismUrl', sortable: true, filter: true, tooltipField: 'tourismUrl', minWidth: '160' },
+    { headerName: '概要', field: 'tourismSummary', sortable: true, filter: true, tooltipField: 'tourismSummary', minWidth: '160' },
   ];
 
   /** ag-gridに表示するチェックボックスのレンダラー */

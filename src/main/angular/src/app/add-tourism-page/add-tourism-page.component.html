@@ -54,7 +54,7 @@
         <div class="panel-item">
           <div class="panel-item-title">概要</div>
           <div class="panel-item-input">
-            <textarea class="form-control" formControlName="memo"></textarea>
+            <textarea class="form-control" formControlName="tourismSummary"></textarea>
           </div>
         </div>
         <div class="panel-item">
@@ -65,18 +65,33 @@
           </div>
         </div>
         <div class="panel-item">
-          <div class="panel-item-title">所要時間（予想）</div>
+          <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="requiredHours" (change)="onChangeHours()">
-            <span class="spacer">時間</span>
-            <input class="form-control time-picker" formControlName="requiredMinutes" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" formControlName="tourismOpenTime" (change)="onChangeHours()">
+            <span class="spacer">時</span>
+            <input class="form-control time-picker" formControlName="tourismCloseTime" (change)="onChangeMinutes()">
             <span class="spacer">分</span>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">営業終了時間</div>
+          <div class="panel-item-input">
+            <input class="form-control time-picker" formControlName="tourismOpenTime" (change)="onChangeHours()">
+            <span class="spacer">時</span>
+            <input class="form-control time-picker" formControlName="tourismCloseTime" (change)="onChangeMinutes()">
+            <span class="spacer">分</span>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">住所</div>
+          <div class="panel-item-input">
+            <input class="form-control" formControlName="tourismUrl">
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">URL</div>
           <div class="panel-item-input">
-            <input class="form-control" formControlName="url">
+            <input class="form-control" formControlName="tourismUrl">
           </div>
         </div>
         <div class="panel-item mt-5" *ngIf="editMode !== EditMode.routeCreate">
