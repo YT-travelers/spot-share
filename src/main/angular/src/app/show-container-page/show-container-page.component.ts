@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShowRoutePageComponent } from '../show-route-page/show-route-page.component';
-import { ShowSpotPageComponent } from '../show-spot-page/show-spot-page.component';
+import { ShowTourismPageComponent } from '../show-tourism-page/show-tourism-page.component';
 
 /**
  * 一覧ページ タブのインデックスを表す列挙値
@@ -10,7 +10,7 @@ enum TabIndex {
   // ルート一覧
   Route = 0,
   // タブ一覧
-  Spot,
+  Tourism,
 }
 
 /**
@@ -20,7 +20,7 @@ enum PageMode {
   // 通常モード
   Normal = 0,
   // スポット選択モード
-  SpotSelect,
+  TourismSelect,
 }
 
 @Component({
@@ -34,7 +34,7 @@ export class ShowContainerPageComponent implements OnInit {
   @ViewChild('route') showRoutePageComponent: ShowRoutePageComponent;
 
   /** スポット一覧ページコンポーネント */
-  @ViewChild('spot') showSpotPageComponent: ShowSpotPageComponent;
+  @ViewChild('tourism') showTourismPageComponent: ShowTourismPageComponent;
 
   /** タブの初期選択インデックス */
   selectedIndex
@@ -57,7 +57,7 @@ export class ShowContainerPageComponent implements OnInit {
         this.pageMode = PageMode.Normal;
       } else {
         // URLパラメータに routeId が設定されている場合「スポット選択モード」で画面を表示
-        this.pageMode = PageMode.SpotSelect;
+        this.pageMode = PageMode.TourismSelect;
       }
     })
   }
@@ -67,8 +67,8 @@ export class ShowContainerPageComponent implements OnInit {
       case TabIndex.Route:
         this.showRoutePageComponent.adjustGridColumns();
         break;
-      case TabIndex.Spot:
-        this.showSpotPageComponent.adjustGridColumns();
+      case TabIndex.Tourism:
+        this.showTourismPageComponent.adjustGridColumns();
         break;
       default:
         // 何もしない

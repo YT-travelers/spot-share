@@ -9,9 +9,9 @@ import { debounceTime } from 'rxjs/operators';
 import { forEach as _forEach, filter as _filter } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 
-import { ISpot } from '../model/spot';
+import { ITourism } from '../model/tourism';
 import { IRoute } from '../model/route';
-import { SpotService } from '../shared/spot.service'
+import { TourismService } from '../shared/tourism.service'
 import { RouteService } from '../shared/route.service';
 import { SelectModalService } from '../shared/select-modal/select-modal.service';
 import { IRouteDetail } from '../model/route-detail';
@@ -23,15 +23,15 @@ enum PageMode {
   // 通常モード
   Normal = 0,
   // スポット選択モード
-  SpotSelect,
+  TourismSelect,
 }
 
 @Component({
-  selector: 'app-show-spot-page',
-  templateUrl: './show-spot-page.component.html',
-  styleUrls: ['./show-spot-page.component.scss']
+  selector: 'app-show-tourism-page',
+  templateUrl: './show-tourism-page.component.html',
+  styleUrls: ['./show-tourism-page.component.scss']
 })
-export class ShowSpotPageComponent implements OnInit, OnDestroy {
+export class ShowTourismPageComponent implements OnInit, OnDestroy {
 
   /** スポット一覧ページ 表示モード */
   @Input ('pageMode') pageMode;
@@ -51,7 +51,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
         element.innerHTML = '編集';
         element.className = 'btn btn-outline-info btn-sm'
         element.addEventListener('click', () => {
-          this.router.navigate(['/add-spot-page', { spotId: params.data.spotId }]);
+          this.router.navigate(['/add-tourism-page', { tourismId: params.data.tourismId }]);
         });
         return element;
       },
@@ -66,7 +66,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
         element.addEventListener('click', () => {
           this.selectModal.show('スポットを削除しますか？').then(result => {
             if (result) {
-              this.spotService.deleteSpot(params.data.spotId).subscribe(() => {
+              this.tourismService.deleteTourism(params.data.tourismId).subscribe(() => {
                 this.executeSearch();
               });
             }
@@ -82,7 +82,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
     { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country', minWidth: '160' },
-    { headerName: '観光地名', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName', minWidth: '160' },
+    { headerName: '観光地名', field: 'tourismName', sortable: true, filter: true, tooltipField: 'tourismName', minWidth: '160' },
     { headerName: '費用（予算）', field: 'costExpectation', sortable: true, filter: true, tooltipField: 'costExpectation', minWidth: '160' },
     { headerName: '所要時間（予想）', field: 'requiredTimeExpectation', sortable: true, filter: true, tooltipField: 'requiredTimeExpectation', minWidth: '160' },
     { headerName: 'URL', field: 'url', sortable: true, filter: true, tooltipField: 'url', minWidth: '160' },
@@ -117,13 +117,13 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   overlayRef;
 
   /** スポット一覧（グリッド表示用データ） */
-  spotList: ISpot[] = [];
+  tourismList: ITourism[] = [];
 
   /** スポット追加対象（ルート作成ページから遷移した場合に使用） */
   route: IRoute = {};
 
   constructor(
-    private spotService: SpotService,
+    private tourismService: TourismService,
     private routeService: RouteService,
     private selectModal: SelectModalService,
     private router: Router,
@@ -155,7 +155,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     this.executeSearch();
 
     // スポット選択モードの場合
-    if (this.pageMode === PageMode.SpotSelect) {
+    if (this.pageMode === PageMode.TourismSelect) {
 
       // グリッドから編集ボタンと削除ボタンを削除
       this.columnDefs = _filter(this.columnDefs, e => {
@@ -191,8 +191,8 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   /**
    * スポット登録ボタン押下イベント
    */
-  onClickAddSpot() {
-    this.router.navigate(['/add-spot-page']);
+  onClickAddTourism() {
+    this.router.navigate(['/add-tourism-page']);
   }
 
   /**
@@ -202,11 +202,11 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     const route: IRoute = {};
     route.routeDetails = [];
 
-    this.spotList.forEach(e => {
+    this.tourismList.forEach(e => {
       if (e['select'] === 'Y') {
         // TODO issue #33
-        // route.routeDetails.push({ routeDetailId: null, spot: { spotId: e.spotId } });
-        route.routeDetails.push({ routeDetailId: null, spotId: e.spotId });
+        // route.routeDetails.push({ routeDetailId: null, tourism: { tourismId: e.tourismId } });
+        route.routeDetails.push({ routeDetailId: null, tourismId: e.tourismId });
       }
     });
 
@@ -221,17 +221,17 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     }
 
     // 新規作成、または更新
-    if (this.pageMode == PageMode.SpotSelect) {
+    if (this.pageMode == PageMode.TourismSelect) {
       // スポット選択モードの場合
-      _forEach(route.routeDetails, (addSpot: IRouteDetail) => {
+      _forEach(route.routeDetails, (addTourism: IRouteDetail) => {
         let add = true;
         _forEach(this.route.routeDetails, (existItem: IRouteDetail) => {
-          if (existItem.spot.spotId === addSpot.spotId) {
+          if (existItem.tourism.tourismId === addTourism.tourismId) {
             add = false;
           }
         });
         if (add) {
-          this.route.routeDetails.push(addSpot);
+          this.route.routeDetails.push(addTourism);
         }
       });
 
@@ -259,8 +259,8 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   private executeSearch() {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
-    this.spotService.searchSpots().subscribe(result => {
-      this.spotList = result;
+    this.tourismService.searchTourisms().subscribe(result => {
+      this.tourismList = result;
       this.adjustGridColumns();
       // ローディング終了
       this.overlayRef.detach();

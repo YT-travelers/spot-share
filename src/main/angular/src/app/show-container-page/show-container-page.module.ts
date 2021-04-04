@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ShowContainerPageComponent } from './show-container-page.component';
 import { ShowRoutePageModule } from '../show-route-page/show-route-page.module';
-import { ShowSpotPageModule } from '../show-spot-page/show-spot-page.module';
+import { ShowTourismPageModule } from '../show-tourism-page/show-tourism-page.module';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     NgbModule.forRoot(),
     MatTabsModule,
     ShowRoutePageModule,
-    ShowSpotPageModule,
+    ShowTourismPageModule,
   ],
   exports: [
     ShowContainerPageComponent,

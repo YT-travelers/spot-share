@@ -135,5 +135,8 @@
       }
     }
   },
-  "defaultProject": "spot-share"
+  "defaultProject": "spot-share",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,4 +1,4 @@
-import { ISpot } from './spot';
+import { ITourism } from './tourism';
 
 /**
  * ルート詳細
@@ -7,9 +7,9 @@ export interface IRouteDetail {
   /** ルート詳細ID */
   routeDetailId?: number;
   /** スポットID */
-  spotId?: number;
+  tourismId?: number;
   /** スポット */
-  spot?: ISpot;
+  tourism?: ITourism;
   /** ルート番号 */
   orderNumber?: number;
   /** スケジュール日時 */

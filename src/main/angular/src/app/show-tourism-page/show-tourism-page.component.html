@@ -14,8 +14,8 @@
     <div class="title-area">
       <span class="page-title">スポット一覧</span>
       <div class="title-area-right">
-        <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary ml-2">
-            <div class="add-spot-button">
+        <button type="button" (click)="onClickAddTourism()" class="btn btn-outline-primary ml-2">
+            <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
               <span class="ml-2">スポット追加</span>
             </div>
@@ -24,7 +24,7 @@
     </div>
     <ag-grid-angular
       class="ag-theme-alpine"
-      [rowData]="spotList"
+      [rowData]="tourismList"
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
     ></ag-grid-angular>

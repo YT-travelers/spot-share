@@ -10,14 +10,14 @@ import { SelectModalModule } from './shared/select-modal/select-modal.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { AddSpotPageModule } from './add-spot-page/add-spot-page.module'
+import { AddTourismPageModule } from './add-tourism-page/add-tourism-page.module'
 import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
 import { RouteDetailChecklistBeanModule } from './route-detail-checklist-bean/route-detail-checklist-bean.module';
 import { RouteDetailMealBeanModule } from './route-detail-meal-bean/route-detail-meal-bean.module';
 import { RouteDetailMemoBeanModule } from './route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from './route-detail-move-bean/route-detail-move-bean.module';
 import { ShowContainerPageModule } from './show-container-page/show-container-page.module';
-import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
+import { ShowTourismPageModule } from './show-tourism-page/show-tourism-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
 import { InputRouteNameModalModule } from './shared/input-route-name-modal/input-route-name-modal.module';
 
@@ -28,14 +28,14 @@ import { InputRouteNameModalModule } from './shared/input-route-name-modal/input
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AddSpotPageModule,
+    AddTourismPageModule,
     CreateRoutePageModule,
     RouteDetailChecklistBeanModule,
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,
     RouteDetailMoveBeanModule,
     ShowContainerPageModule,
-    ShowSpotPageModule,
+    ShowTourismPageModule,
     ShowRoutePageModule,
     SelectModalModule,
     InputRouteNameModalModule,

@@ -3,11 +3,11 @@ import { ICountry } from "./country";
 /**
  * スポット
  */
-export interface ISpot {
+export interface ITourism {
   /** スポットID */
-  spotId?: number;
+  tourismId?: number;
   /**  スポット名称 */
-  spotName?: string;
+  tourismName?: string;
   /** 国 */
   country?: ICountry;
   /** 画像パス */

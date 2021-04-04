@@ -121,7 +121,7 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * スポット追加ボタン押下イベント
    */
-  onClickAddSpotButon() {
+  onClickAddTourismButon() {
     // スポット一覧ページに遷移
     this.router.navigate(['/show-container-page', { routeId: this.route.routeId }]);
   }

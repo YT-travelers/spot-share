@@ -18,7 +18,7 @@
         </button>
         <span class="title">スポットを追加</span>
       </div>
-      <form id="add-spot-item" class="panel-body" [formGroup]="addSpotFormGroup">
+      <form id="add-touris-item" class="panel-body" [formGroup]="addTourismFormGroup">
         <div class="panel-item">
           <share-image-input class="w-100">
           </share-image-input>
@@ -28,10 +28,10 @@
           <div class="panel-item-title">スポット名称</div>
           <div class="panel-item-input">
             <div class="w-100">
-              <div *ngIf="this.addSpotFormGroup.controls.spotName.invalid && this.addSpotFormGroup.controls.spotName.dirty" class="validator-error">
+              <div *ngIf="this.addTourismFormGroup.controls.tourismName.invalid && this.addTourismFormGroup.controls.tourismName.dirty" class="validator-error">
                 未入力です
               </div>
-              <input class="form-control" formControlName="spotName" placeholder="必須">
+              <input class="form-control" formControlName="tourismName" placeholder="必須">
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
             <input class="form-control" type="text" matInput
               formControlName="country"
               [matAutocomplete]="auto"
-              [formControl]="addSpotFormGroup.controls.country"
+              [formControl]="addTourismFormGroup.controls.country"
               (blur)="onBlurCountry()"
             >
             <mat-autocomplete #auto="matAutocomplete">

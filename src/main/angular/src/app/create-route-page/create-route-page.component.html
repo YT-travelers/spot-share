@@ -39,7 +39,7 @@
       9/20 ,2020AM 7:00
     </div>
 
-    <div class="no-spot" *ngIf="routeDetails.length === 0">
+    <div class="no-tourism" *ngIf="routeDetails.length === 0">
       <span>スポットが一つも登録されていません。</span>
     </div>
     <div cdkDropListGroup *ngIf="routeDetails.length > 0">
@@ -49,42 +49,42 @@
         <div class="list-bean" cdkDrag *ngFor="let detail of routeDetails">
           
           <!-- スポット -->
-          <div class="list-bean-spot panel">
+          <div class="list-bean-tourism panel">
             <div class="thumbnail-area">
               <img class="thumbnail" src="./favicon.ico">
             </div>
             <div class="w-100">
-              <div class="spot-title">
-                <mat-icon class="spot-bean-icon">location_on</mat-icon>
-                <a href="add-spot-page;spotId={{detail.spot.spotId}}" target="_blank">{{detail.spot.spotName}}</a>
+              <div class="tourism-title">
+                <mat-icon class="tourism-bean-icon">location_on</mat-icon>
+                <a href="add-tourism-page;tourismId={{detail.tourism.tourismId}}" target="_blank">{{detail.tourism.tourismName}}</a>
                 <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteTourismButton(detail)">
                   ✗
                 </button>
               </div>
               <div class="div-border-line"></div>
-              <div class="spot-info">
-                <div class="spot-info-left">
+              <div class="tourism-info">
+                <div class="tourism-info-left">
                   <ngb-rating
                     [rate]="detail.favoritePoint"
                     [max]="5"
                   ></ngb-rating>
                 </div>
-                <div class="spot-info-center">
+                <div class="tourism-info-center">
                 </div>
-                <div class="spot-info-right">
+                <div class="tourism-info-right">
                   <div>
                     <span class="info-label">費用</span>
                     <span>：</span>
-                    <span>{{detail.spot.costExpectation}}</span>
+                    <span>{{detail.tourism.costExpectation}}</span>
                     <span class="spacer">円</span>
                   </div>
                   <div>
                     <span class="info-label">所要時間</span>
                     <span>：</span>
-                    <span>{{detail.spot.requiredHours}}</span>
-                    <span *ngIf="detail.spot.requiredHours" class="spacer">時間</span>
-                    <span>{{detail.spot.requiredMinutes}}</span>
-                    <span *ngIf="detail.spot.requiredMinutes" class="spacer">分</span>
+                    <span>{{detail.tourism.requiredHours}}</span>
+                    <span *ngIf="detail.tourism.requiredHours" class="spacer">時間</span>
+                    <span>{{detail.tourism.requiredMinutes}}</span>
+                    <span *ngIf="detail.tourism.requiredMinutes" class="spacer">分</span>
                   </div>
                 </div>
 
@@ -133,7 +133,7 @@
         <div class="option-items">
           <!-- スポット追加 -->
           <div class="icon-btn">
-            <mat-icon class="add-btn-spot" placement="top" ngbTooltip="観光地/スポット" (click)="onClickAddSpotButon()">add_location_alt</mat-icon>
+            <mat-icon class="add-btn-tourism" placement="top" ngbTooltip="観光地/スポット" (click)="onClickAddTourismButon()">add_location_alt</mat-icon>
           </div>
           <!-- TODO 移動手段追加 -->
           <!-- <div class="icon-btn">

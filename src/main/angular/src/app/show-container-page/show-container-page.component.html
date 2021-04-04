@@ -3,11 +3,11 @@
     [selectedIndex]="selectedIndex"
     (selectedIndexChange)="selectedIndexChangeEvent($event)"
   >
-    <mat-tab label="ルート一覧" *ngIf="pageMode !== _pageMode.SpotSelect">
+    <mat-tab label="ルート一覧" *ngIf="pageMode !== _pageMode.TourismSelect">
       <app-show-route-page #route></app-show-route-page>
     </mat-tab>
     <mat-tab label="スポット一覧">
-      <app-show-spot-page #spot [pageMode]="pageMode"></app-show-spot-page>
+      <app-show-tourism-page #tourism [pageMode]="pageMode"></app-show-tourism-page>
     </mat-tab>
   </mat-tab-group>
 </div>

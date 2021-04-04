@@ -6,28 +6,28 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { filter as _filter } from 'lodash';
 
-import { ISpot } from '../model/spot';
-import { SpotService } from '../shared/spot.service';
+import { ITourism } from '../model/tourism';
+import { TourismService } from '../shared/tourism.service';
 
 // スポット編集モード列挙値
 export enum EditMode {
-  // 新規モード（URL例：add-spot-page）
+  // 新規モード（URL例：add-tourism-page）
   new,
-  // 編集モード（URL例：add-spot-page;id=1）
+  // 編集モード（URL例：add-tourism-page;id=1）
   edit,
   // ルート作成モード
   routeCreate,
 }
 
 @Component({
-  selector: 'app-add-spot-page',
-  templateUrl: './add-spot-page.component.html',
-  styleUrls: ['./add-spot-page.component.scss']
+  selector: 'app-add-tourism-page',
+  templateUrl: './add-tourism-page.component.html',
+  styleUrls: ['./add-tourism-page.component.scss']
 })
-export class AddSpotPageComponent implements OnInit {
+export class AddTourismPageComponent implements OnInit {
 
   /** ルート作成画面で選択されたスポット情報が格納される */
-  @Input() selectedSpot: ISpot;
+  @Input() selectedTourism: ITourism;
 
   /** スポット編集モード */
   editMode
@@ -36,10 +36,10 @@ export class AddSpotPageComponent implements OnInit {
   EditMode = EditMode;
 
   /** 編集対象 */
-  spot: ISpot = {};
+  tourism: ITourism = {};
 
   /** 画面上に表示するスポット情報のID */
-  spotId = '';
+  tourismId = '';
 
   /** 画像タイトル */
   imageTitle = '';
@@ -57,31 +57,31 @@ export class AddSpotPageComponent implements OnInit {
   patternNumber = /[0-9０-９]/;
 
   /** スポット情報 フォームグループ */
-  addSpotFormGroup = new FormGroup({
+  addTourismFormGroup = new FormGroup({
     /** スポットID */
-    spotId: new FormControl(this.spot.spotId),
+    tourismId: new FormControl(this.tourism.tourismId),
     /**  スポット名称 */
-    spotName: new FormControl(this.spot.spotName, [Validators.required]),
+    tourismName: new FormControl(this.tourism.tourismName, [Validators.required]),
     /** 国 */
-    country: new FormControl(this.spot.country),
+    country: new FormControl(this.tourism.country),
     /** 画像パス */
-    imagePaths: new FormControl(this.spot.imagePaths),
+    imagePaths: new FormControl(this.tourism.imagePaths),
     /** url */
-    url: new FormControl(this.spot.url),
+    url: new FormControl(this.tourism.url),
     /** メモ */
-    memo: new FormControl(this.spot.memo),
+    memo: new FormControl(this.tourism.memo),
     /** 費用（予算） */
-    costExpectation: new FormControl(this.spot.costExpectation, [Validators.pattern('^[0-9]*$')]),
+    costExpectation: new FormControl(this.tourism.costExpectation, [Validators.pattern('^[0-9]*$')]),
     /** 所要時間（時） */
-    requiredHours: new FormControl(this.spot.requiredHours),
+    requiredHours: new FormControl(this.tourism.requiredHours),
     /** 所要時間（分） */
-    requiredMinutes: new FormControl(this.spot.requiredMinutes, [ Validators.min(0), Validators.max(60)]),
+    requiredMinutes: new FormControl(this.tourism.requiredMinutes, [ Validators.min(0), Validators.max(60)]),
   });
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: SpotService,
+    private service: TourismService,
     private toastr: ToastrService,
   ) {}
 
@@ -91,14 +91,14 @@ export class AddSpotPageComponent implements OnInit {
   ngOnInit() {
 
     // 所要時間はデフォルトで１時間とする
-    this.addSpotFormGroup.patchValue({
+    this.addTourismFormGroup.patchValue({
       costExpectation: 0,
       requiredHours: 1,
       requiredMinutes: 0
     })
 
     // 国インプットのインクリメンタルサーチ購読
-    this.filteredCountries = this.addSpotFormGroup.controls.country.valueChanges
+    this.filteredCountries = this.addTourismFormGroup.controls.country.valueChanges
     .pipe(
       debounceTime(100),
       startWith(''),
@@ -106,14 +106,14 @@ export class AddSpotPageComponent implements OnInit {
     );
 
     // スポット編集モードの判定
-    this.spotId = this.route.snapshot.paramMap.get('spotId');
-    if (this.spotId) {
+    this.tourismId = this.route.snapshot.paramMap.get('tourismId');
+    if (this.tourismId) {
       // 既存スポット編集モード
       this.editMode = EditMode.edit;
-      this.service.getSpot(this.spotId).subscribe(result => {
+      this.service.getTourism(this.tourismId).subscribe(result => {
         if (result) {
-          this.spot = result;
-          this.addSpotFormGroup.patchValue(this.spot);
+          this.tourism = result;
+          this.addTourismFormGroup.patchValue(this.tourism);
         } else {
           // IDによるGET処理に失敗した場合は、新規モードで画面を開く
           this.editMode = EditMode.new;
@@ -123,7 +123,7 @@ export class AddSpotPageComponent implements OnInit {
         this.editMode = EditMode.new;
       });
 
-    } else if (this.selectedSpot) {
+    } else if (this.selectedTourism) {
       // ルート作成モード
       this.editMode = EditMode.routeCreate;
 
@@ -146,23 +146,23 @@ export class AddSpotPageComponent implements OnInit {
       return;
     }
 
-    this.spot = this.addSpotFormGroup.value;
+    this.tourism = this.addTourismFormGroup.value;
 
     switch (this.editMode) {
       case EditMode.new:
-        this.service.createSpot(this.spot).subscribe(() => {
+        this.service.createTourism(this.tourism).subscribe(() => {
           this.toastr.success('登録が完了しました。', '成功');
           if (this.continueCreateFlg) {
             // 連続作成フラグがONの場合、編集対象をクリアする
-            this.spot = {};
-            this.addSpotFormGroup.reset();
+            this.tourism = {};
+            this.addTourismFormGroup.reset();
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
       break;
       case EditMode.edit:
-        this.service.updateSpot(this.spot, this.spotId).subscribe(result => {
+        this.service.updateTourism(this.tourism, this.tourismId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
@@ -185,11 +185,11 @@ export class AddSpotPageComponent implements OnInit {
    */
   onBlurCountry() {
     const isExist = _filter(this.allCountries, e => {
-      return e === this.addSpotFormGroup.controls.country.value;    
+      return e === this.addTourismFormGroup.controls.country.value;    
     }).length === 1;
 
     if (!isExist) {
-      this.addSpotFormGroup.controls.country.setValue('');
+      this.addTourismFormGroup.controls.country.setValue('');
     }
   }
 
@@ -199,15 +199,15 @@ export class AddSpotPageComponent implements OnInit {
    */
   onChangeCostExpectation() {
     // 数字のみチェック
-    let value = this.addSpotFormGroup.controls.costExpectation.value;
+    let value = this.addTourismFormGroup.controls.costExpectation.value;
     const pattern = /[0-9０-９]/;
     if (!pattern.test(value)) {
-      this.addSpotFormGroup.controls.costExpectation.setValue(0);
+      this.addTourismFormGroup.controls.costExpectation.setValue(0);
       return;
     }
 
     // 全角を半角に変換
-    this.addSpotFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
+    this.addTourismFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
   }
 
   /**
@@ -216,14 +216,14 @@ export class AddSpotPageComponent implements OnInit {
    */
   onChangeHours() {
     // 数字のみチェック
-    let value = this.addSpotFormGroup.controls.requiredHours.value;
+    let value = this.addTourismFormGroup.controls.requiredHours.value;
     if (!this.patternNumber.test(value)) {
-      this.addSpotFormGroup.controls.requiredHours.setValue(0);
+      this.addTourismFormGroup.controls.requiredHours.setValue(0);
       return;
     }
 
     // 全角を半角に変換
-    this.addSpotFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+    this.addTourismFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
   }
 
   /**
@@ -232,9 +232,9 @@ export class AddSpotPageComponent implements OnInit {
    */
   onChangeMinutes() {
     // 数字のみチェック
-    let value = this.addSpotFormGroup.controls.requiredMinutes.value;
+    let value = this.addTourismFormGroup.controls.requiredMinutes.value;
     if (!this.patternNumber.test(value)) {
-      this.addSpotFormGroup.controls.requiredMinutes.setValue(0);
+      this.addTourismFormGroup.controls.requiredMinutes.setValue(0);
       return;
     }
 
@@ -244,9 +244,9 @@ export class AddSpotPageComponent implements OnInit {
     // 60(分)より高い値の場合は 60(分)に変換
     const maxMinutes = 60;
     if (Number(value) > maxMinutes ) {
-      this.addSpotFormGroup.controls.requiredMinutes.setValue(maxMinutes);
+      this.addTourismFormGroup.controls.requiredMinutes.setValue(maxMinutes);
     } else {
-      this.addSpotFormGroup.controls.requiredMinutes.setValue(value);
+      this.addTourismFormGroup.controls.requiredMinutes.setValue(value);
     }
   }
 
@@ -270,13 +270,13 @@ export class AddSpotPageComponent implements OnInit {
    * @return true → エラー有り
    */
   validate(): boolean {
-    this.addSpotFormGroup.controls.spotName.markAsDirty();
-    this.addSpotFormGroup.controls.country.markAsDirty();
+    this.addTourismFormGroup.controls.tourismName.markAsDirty();
+    this.addTourismFormGroup.controls.country.markAsDirty();
 
     let valid = false;
 
     // formGroupでのエラー検証
-    valid = this.addSpotFormGroup.invalid;
+    valid = this.addTourismFormGroup.invalid;
 
     return valid; 
   }

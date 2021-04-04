@@ -1,5 +1,5 @@
 // スポットアイコン
-$spot-icon-color: blue;
+$tourism-icon-color: blue;
 
 ::ng-deep .delete-btn {
   border: none;
@@ -65,7 +65,7 @@ $spot-icon-color: blue;
   padding: 5px 15px !important;
 }
 
-.no-spot {
+.no-tourism {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,7 +80,7 @@ $spot-icon-color: blue;
     border-bottom: dashed 1px #ddd;
   }
 
-  &-spot {
+  &-tourism {
     display: flex;
     width: 100%;
     height: 100px;
@@ -97,7 +97,7 @@ $spot-icon-color: blue;
         margin: 0 auto;
       }
     }
-    .spot-title {
+    .tourism-title {
       height: 20px;
       width: 100%;
       font-size: 18px;
@@ -105,11 +105,11 @@ $spot-icon-color: blue;
       button {
         margin-left: auto;
       }
-      .spot-bean-icon {
-        color: $spot-icon-color;
+      .tourism-bean-icon {
+        color: $tourism-icon-color;
       }
     }
-    .spot-info {
+    .tourism-info {
       display: flex;
       .info-label {
         width: 65px;
@@ -161,8 +161,8 @@ $spot-icon-color: blue;
       }
 
       .add-btn {
-        &-spot {
-          color: $spot-icon-color;
+        &-tourism {
+          color: $tourism-icon-color;
         }
         &-move {
           color: orange;
