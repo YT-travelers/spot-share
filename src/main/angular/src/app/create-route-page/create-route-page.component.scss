@@ -1,16 +1,11 @@
 // 観光地アイコン
 $tourism-icon-color: blue;
 
-::ng-deep .delete-btn {
-  border: none;
-  border-radius: 50px;
-  height: 30px;
-  width: 30px;
-  vertical-align: middle;
-  align-items: center;
-  padding: 8px;
-  margin: -5px 0 0 0;
-  line-height: 0;
+.close {
+  font-size: 15px;
+  cursor: default;
+  margin: 0 5px;
+  margin-left: auto;
 }
 
 .route-page {
@@ -74,7 +69,6 @@ $tourism-icon-color: blue;
 
 .list-bean {
   .div-border-line {
-    width: calc(100% - 40px);
     margin: 3px 0;
     padding-bottom: 1px;
     border-bottom: dashed 1px #ddd;

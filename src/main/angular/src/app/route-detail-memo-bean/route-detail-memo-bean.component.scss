@@ -4,13 +4,24 @@
   margin-top: 5px;
 }
 
+.more-vert {
+  margin: 5px 0;
+}
+
+.close {
+  font-size: 15px;
+  cursor: default;
+  margin: 0 5px;
+}
+
+.info {
+  color: cornflowerblue;
+  cursor: default;
+}
+
 .bean {
   display: flex;
   align-items: center;
-
-  .info-icon {
-    color: cornflowerblue;
-  }
 
   .memo-kind-icon {
     display: flex;
@@ -22,10 +33,6 @@
     width: 100%;
     margin-left: 10px;
     margin-right: 5px;
-  }
-
-  .delete-btn {
-    margin-right: 7px;
   }
 
   button {

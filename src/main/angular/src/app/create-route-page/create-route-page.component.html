@@ -57,9 +57,7 @@
               <div class="tourism-title">
                 <mat-icon class="tourism-bean-icon">location_on</mat-icon>
                 <a href="add-tourism-page;tourismId={{detail.tourism.tourismId}}" target="_blank">{{detail.tourism.tourismName}}</a>
-                <button type="button" class="btn btn-outline-secondary delete-btn" aria-label="Close" (click)="onClickDeleteTourismButton(detail)">
-                  ✗
-                </button>
+                  <span class="material-icons close" (click)="onClickDeleteTourismButton(detail)">close</span>
               </div>
               <div class="div-border-line"></div>
               <div class="tourism-info">
