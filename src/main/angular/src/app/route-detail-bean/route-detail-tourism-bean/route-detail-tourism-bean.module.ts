@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { RouteDetailMealBeanComponent } from './route-detail-meal-bean.component';
+import { RouteDetailTourismBeanComponent } from './route-detail-tourism-bean.component';
 
 @NgModule({
   declarations: [
-    RouteDetailMealBeanComponent
+    RouteDetailTourismBeanComponent
   ],
   imports: [
     BrowserModule,
@@ -17,8 +17,8 @@ import { RouteDetailMealBeanComponent } from './route-detail-meal-bean.component
     MatIconModule,
   ],
   exports: [
-    RouteDetailMealBeanComponent,
+    RouteDetailTourismBeanComponent,
   ],
   providers: [],
 })
-export class RouteDetailMealBeanModule { }
+export class RouteDetailTourismBeanModule { }

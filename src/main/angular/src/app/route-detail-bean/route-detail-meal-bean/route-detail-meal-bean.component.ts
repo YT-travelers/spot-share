@@ -7,7 +7,7 @@ import { IRouteDetailMeal } from '../../model/route-detail-meal';
   templateUrl: './route-detail-meal-bean.component.html',
   styleUrls: ['./route-detail-meal-bean.component.scss']
 })
-export class RouteDetailMealComponent implements OnInit {
+export class RouteDetailMealBeanComponent implements OnInit {
 
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailMealEvent: EventEmitter<string> = new EventEmitter();

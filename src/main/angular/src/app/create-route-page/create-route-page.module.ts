@@ -9,6 +9,7 @@ import { RouteDetailChecklistBeanModule } from '../route-detail-bean/route-detai
 import { RouteDetailMealBeanModule } from '../route-detail-bean/route-detail-meal-bean/route-detail-meal-bean.module';
 import { RouteDetailMemoBeanModule } from '../route-detail-bean/route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from '../route-detail-bean/route-detail-move-bean/route-detail-move-bean.module';
+import { RouteDetailTourismBeanModule } from '../route-detail-bean/route-detail-tourism-bean/route-detail-tourism-bean.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RouteDetailMoveBeanModule } from '../route-detail-bean/route-detail-mov
     NgbModule.forRoot(),
     DragDropModule,
     MatIconModule,
+    RouteDetailTourismBeanModule,
     RouteDetailChecklistBeanModule,
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,

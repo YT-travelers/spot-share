@@ -20,6 +20,7 @@ import { ShowContainerPageModule } from './show-container-page/show-container-pa
 import { ShowTourismPageModule } from './show-tourism-page/show-tourism-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
 import { InputRouteNameModalModule } from './shared/input-route-name-modal/input-route-name-modal.module';
+import { RouteDetailTourismBeanModule } from './route-detail-bean/route-detail-tourism-bean/route-detail-tourism-bean.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { InputRouteNameModalModule } from './shared/input-route-name-modal/input
     AppRoutingModule,
     AddTourismPageModule,
     CreateRoutePageModule,
+    RouteDetailTourismBeanModule,
     RouteDetailChecklistBeanModule,
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,

@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { RouteDetailMemoComponent } from './route-detail-memo-bean.component';
+import { RouteDetailMemoBeanComponent } from './route-detail-memo-bean.component';
 
 @NgModule({
   declarations: [
-    RouteDetailMemoComponent
+    RouteDetailMemoBeanComponent
   ],
   imports: [
     BrowserModule,
@@ -17,7 +17,7 @@ import { RouteDetailMemoComponent } from './route-detail-memo-bean.component';
     MatIconModule,
   ],
   exports: [
-    RouteDetailMemoComponent,
+    RouteDetailMemoBeanComponent,
   ],
   providers: [],
 })

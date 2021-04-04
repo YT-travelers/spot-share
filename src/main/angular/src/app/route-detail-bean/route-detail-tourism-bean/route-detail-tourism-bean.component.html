@@ -1,0 +1,38 @@
+<div class="list-bean-tourism panel">
+    <div class="thumbnail-area">
+      <img class="thumbnail" src="./favicon.ico">
+    </div>
+    <div class="w-100">
+      <div class="tourism-title">
+        <mat-icon class="tourism-bean-icon">location_on</mat-icon>
+        <a href="add-tourism-page;tourismId={{detail.tourismId}}" target="_blank">{{detail.tourism.tourismName}}</a>
+          <span class="material-icons close" (click)="onClickDeleteTourismButton()">close</span>
+      </div>
+      <div class="div-border-line"></div>
+      <div class="tourism-info">
+        <div class="tourism-info-left">
+          <ngb-rating
+            [rate]="detail.tourismRate"
+            [max]="5"
+          ></ngb-rating>
+        </div>
+        <div class="tourism-info-center">
+        </div>
+        <div class="tourism-info-right">
+          <div>
+            <span class="info-label">観光費用</span>
+            <span>：</span>
+            <span>{{detail.tourismCost}}</span>
+            <span class="spacer">円</span>
+          </div>
+          <div>
+            <span class="info-label">観光時間</span>
+            <span>：</span>
+            <span>{{detail.tourismMinutes}}</span>
+            <span *ngIf="detail.tourismMinutes" class="spacer">時間</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

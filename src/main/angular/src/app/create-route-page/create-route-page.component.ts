@@ -154,7 +154,7 @@ export class CreateRoutePageComponent implements OnInit {
    * 観光地ビーンの削除ボタン押下イベント
    * @param event ルート詳細
    */
-  onClickDeleteTourismButton(event) {
+  onDeleteRouteDetailTouristEvent(event) {
     // TODO 実装する
     console.log(event);
   }

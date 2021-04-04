@@ -7,7 +7,7 @@ import { IRouteDetailMemo } from '../../model/route-detail-memo';
   templateUrl: './route-detail-memo-bean.component.html',
   styleUrls: ['./route-detail-memo-bean.component.scss']
 })
-export class RouteDetailMemoComponent implements OnInit {
+export class RouteDetailMemoBeanComponent implements OnInit {
 
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailMemoEvent: EventEmitter<string> = new EventEmitter();
