@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IRouteDetailMove } from '../model/route-detail-move';
+import { IRouteDetailMove } from '../../model/route-detail-move';
 
 @Component({
   selector: 'app-route-detail-move-bean',

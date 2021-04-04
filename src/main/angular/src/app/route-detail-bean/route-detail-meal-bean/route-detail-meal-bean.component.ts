@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IRouteDetailMeal } from '../model/route-detail-meal';
+import { IRouteDetailMeal } from '../../model/route-detail-meal';
 
 @Component({
   selector: 'app-route-detail-meal-bean',

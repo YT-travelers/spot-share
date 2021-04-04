@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IRouteDetailChecklist } from '../model/route-detail-checklist';
+import { IRouteDetailChecklist } from '../../model/route-detail-checklist';
 
 @Component({
   selector: 'app-route-detail-checklist-bean',
