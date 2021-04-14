@@ -2,9 +2,9 @@
 
 namespace App\Models\Code;
 
+use App\Models\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Code extends Model
 {

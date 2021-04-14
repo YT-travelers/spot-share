@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::middleware('web')
 Route::apiResource('routes', RouteController::class);
 Route::apiResource('restaurants', RestaurantController::class);
 Route::apiResource('hotels', HotelController::class);
