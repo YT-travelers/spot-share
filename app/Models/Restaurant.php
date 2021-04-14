@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Models\Code\CuisineGenreDiv;
 use App\Models\Code\RestaurantKindDiv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Restaurant extends Model
@@ -24,5 +23,16 @@ class Restaurant extends Model
     public function restaurantKind(): BelongsTo
     {
         return $this->belongsTo(RestaurantKindDiv::class, 'restaurant_kind_div', 'div_value');
+    }
+
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+        $array['cuisineGenreDiv'] = $this->cuisineGenre->div_value;
+        $array['cuisineGenreDivName'] = $this->cuisineGenre->div_key_name;
+        $array['restaurantKindDiv'] = $this->restaurantKind->div_value;
+        $array['restaurantKindDivName'] = $this->restaurantKind->div_key_name;
+
+        return $array;
     }
 }

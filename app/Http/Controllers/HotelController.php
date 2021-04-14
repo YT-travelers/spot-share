@@ -3,95 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hotel;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use JetBrains\PhpStorm\Pure;
 
-class HotelController extends Controller
+class HotelController extends CrudController
 {
-    public function __construct(private Hotel $hotel)
+    #[Pure] public function __construct(protected Hotel $hotel)
     {
+        parent::__construct($this->hotel);
     }
 
     /**
-     * @return array
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function index(): array
+    public function store(Request $request): JsonResponse
     {
-        return $this->hotel->get()->map(function (Hotel $hotel) {
-            return [
-                'hotelId' => $hotel->hotel_id,
-                'hotelName' => $hotel->hotel_name,
-                'hotelKindDiv' => $hotel->hotelKind->div_value,
-                'hotelKindDivName' => $hotel->hotelKind->div_key_name,
-                'hotelSummary' => $hotel->hotel_summary,
-                'hotelAddress' => $hotel->hotel_address,
-                'hotelUrl' => $hotel->hotel_url
-            ];
-        })->toArray();
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $data = $request->except(['hotelKindDivName']);
+        return parent::store($request->replace($data));
     }
 }
