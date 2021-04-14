@@ -9,7 +9,7 @@ servers:
 paths:
   /routes:
     get:
-      summary: ルートの取得
+      summary: ルートの一覧取得
       tags: []
       responses:
         '200':
@@ -21,7 +21,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/SimpleRoute'
       operationId: get-routes
-      description: ルートの取得
+      description: ルートの一覧取得
     post:
       summary: ルートの新規作成
       operationId: post-routes
@@ -91,7 +91,7 @@ paths:
       description: 特定ルートの更新
   /countries:
     get:
-      summary: 国マスタの取得
+      summary: 国の一覧取得
       tags: []
       responses:
         '200':
@@ -104,10 +104,10 @@ paths:
                   $ref: '#/components/schemas/Country'
               examples: {}
       operationId: get-countries
-      description: 国マスタの取得
+      description: 国の一覧取得
   /restaurants:
     get:
-      summary: レストランマスタの取得
+      summary: レストランの一覧取得
       tags: []
       responses:
         '200':
@@ -119,10 +119,26 @@ paths:
                 items:
                   $ref: '#/components/schemas/Restaurant'
       operationId: get-restaurants
-      description: レストランマスタの取得
+      description: レストランの一覧取得
+    post:
+      summary: レストランの登録
+      operationId: post-restaurants
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+      description: レストランの登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Restaurant'
   /hotels:
     get:
-      summary: ホテルマスタの取得
+      summary: ホテルの一覧取得
       tags: []
       responses:
         '200':
@@ -134,10 +150,26 @@ paths:
                 items:
                   $ref: '#/components/schemas/Hotel'
       operationId: get-hotels
-      description: ホテルマスタの取得
+      description: ホテルの一覧取得
+    post:
+      summary: ホテルの登録
+      operationId: post-hotels
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+      description: ホテルの登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hotel'
   /tourisms:
     get:
-      summary: ツーリズムマスタの取得
+      summary: 観光地の一覧取得
       tags: []
       responses:
         '200':
@@ -149,10 +181,26 @@ paths:
                 items:
                   $ref: '#/components/schemas/Tourism'
       operationId: get-tourisms
-      description: ツーリズムマスタの取得
+      description: 観光地の一覧取得
+    post:
+      summary: 観光地の登録
+      operationId: post-tourisms
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tourism'
+      description: 観光地の登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tourism'
   /activities:
     get:
-      summary: アクティビティマスタの取得
+      summary: アクティビティの一覧取得
       tags: []
       responses:
         '200':
@@ -164,10 +212,26 @@ paths:
                 items:
                   $ref: '#/components/schemas/Activity'
       operationId: get-activities
-      description: アクティビティマスタの取得
+      description: アクティビティの一覧取得
+    post:
+      summary: アクティビティの登録
+      operationId: post-activities
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+      description: アクティビティの登録
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
   /codes:
     get:
-      summary: コードマスタの取得
+      summary: コードの一覧取得
       tags: []
       responses:
         '200':
@@ -179,7 +243,191 @@ paths:
                 items:
                   $ref: '#/components/schemas/Code'
       operationId: get-codes
-      description: コードマスタの取得
+      description: コードの一覧取得
+  '/activities/{activityId}':
+    parameters:
+      - schema:
+          type: string
+        name: activityId
+        in: path
+        required: true
+    get:
+      summary: 特定アクティビティの取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+      operationId: get-activities-activityId
+      description: 特定アクティビティの取得
+    put:
+      summary: ''
+      operationId: put-activities-activityId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+      description: アクティビティの更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Activity'
+    delete:
+      summary: 特定アクティビティの削除
+      operationId: delete-activities-activityId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Activity'
+      description: 特定アクティビティの削除
+  '/hotels/{hotelId}':
+    parameters:
+      - schema:
+          type: string
+        name: hotelId
+        in: path
+        required: true
+    get:
+      summary: 特定ホテルの取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+      operationId: get-hotels-hotelId
+      description: 特定ホテルの取得
+    put:
+      summary: 特定ホテルの更新
+      operationId: put-hotels-hotelId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+      description: 特定ホテルの更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Hotel'
+    delete:
+      summary: 特定ホテルの削除
+      operationId: delete-hotels-hotelId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotel'
+      description: 特定ホテルの削除
+  '/restaurants/{restaurantId}':
+    parameters:
+      - schema:
+          type: string
+        name: restaurantId
+        in: path
+        required: true
+    get:
+      summary: 特定レストランの取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+      operationId: get-restaurants-restaurantId
+      description: 特定レストランの取得
+    put:
+      summary: 特定レストランの更新
+      operationId: put-restaurants-restaurantId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+      description: 特定レストランの更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Restaurant'
+    delete:
+      summary: 特定レストランの削除
+      operationId: delete-restaurants-restaurantId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Restaurant'
+      description: 特定レストランの削除
+  '/tourisms/{tourismId}':
+    parameters:
+      - schema:
+          type: string
+        name: tourismId
+        in: path
+        required: true
+    get:
+      summary: 特定観光地の取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tourism'
+      operationId: get-tourisms-tourismId
+      description: 特定観光地の取得
+    put:
+      summary: 特定観光地の更新
+      operationId: put-tourisms-tourismId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tourism'
+      description: 特定観光地の更新
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tourism'
+    delete:
+      summary: 特定観光地の削除
+      operationId: delete-tourisms-tourismId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tourism'
+      description: 特定観光地の削除
 components:
   schemas:
     SimpleRoute:
@@ -327,6 +575,7 @@ components:
       required:
         - tourismId
         - tourismName
+      x-examples: {}
     RouteDetailRestaurant:
       title: RouteDetailRestaurant
       type: object
