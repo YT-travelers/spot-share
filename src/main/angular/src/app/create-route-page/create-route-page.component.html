@@ -48,7 +48,7 @@
         (cdkDropListDropped)="onDropList($event)">
         <div class="list-bean" cdkDrag *ngFor="let detail of routeDetails">
           
-          <!-- スポット -->
+          <!-- 観光地 -->
           <app-route-detail-tourism-bean
             [detail]="detail.routeDetailTourism"
             (deleteRouteDetailTourismEvent)="onDeleteRouteDetailTouristEvent($event)"

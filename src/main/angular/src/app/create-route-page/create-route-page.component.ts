@@ -196,7 +196,7 @@ export class CreateRoutePageComponent implements OnInit {
   }
 
   /**
-   * 保存ボタン押下イベン
+   * 保存ボタン押下イベント
    */
   onClickSave() {
     // ローディング開始

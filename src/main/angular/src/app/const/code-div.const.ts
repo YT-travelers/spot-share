@@ -3,7 +3,7 @@ import { ICodeList } from '../model/code-list';
 /**
  * 食事種類区分
  */
- export namespace Code.MealKindDiv {
+export namespace Code.MealKindDiv {
     /** 朝食 */
     export const BreakFast = 0;
     /** 昼食 */
