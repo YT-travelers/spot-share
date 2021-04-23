@@ -61,14 +61,15 @@
           <!-- TODO ホテル（マスタ有り） -->
           <!-- TODO アクティビティ（マスタ有り） -->
 
-          <!-- TODO 食事 -->
+          <!-- 食事 -->
           <app-route-detail-meal-bean *ngIf="detail.beanKindDiv === beanKindDiv.Meal"
             [detail]="detail.routeDetailMeal"
+            (updateRouteDetailMealEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailMealEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-meal-bean>
 
-          <!-- TODO 移動 -->
+          <!-- 移動 -->
           <app-route-detail-move-bean *ngIf="detail.beanKindDiv === beanKindDiv.Move"
             [detail]="detail.routeDetailMove"
             (updateRouteDetailMoveEvent)="onUpdateRouteDetailEvent($event)"
@@ -76,21 +77,23 @@
           >
           </app-route-detail-move-bean>
 
-          <!-- TODO 時間-->
-
-          <!-- TODO チェックリスト-->
+          <!-- チェックリスト -->
           <app-route-detail-checklist-bean *ngIf="detail.beanKindDiv === beanKindDiv.Checklist"
             [detail]="detail.routeDetailChecklist"
+            (updateRouteDetailChecklistEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailChecklistEvent)="onDeleteRouteDetailEvent($event)"
           >          
           </app-route-detail-checklist-bean>
 
-          <!-- TODO メモ-->
+          <!-- メモ -->
           <app-route-detail-memo-bean *ngIf="detail.beanKindDiv === beanKindDiv.Memo"
             [detail]="detail.routeDetailMemo"
+            (updateRouteDetailMemoEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailMemoEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-memo-bean>
+          
+          <!-- TODO 時間-->
 
 
         </div>
@@ -105,18 +108,18 @@
           <div class="icon-btn">
             <mat-icon class="add-btn-tourism" placement="top" ngbTooltip="観光地/スポット" (click)="onClickAddTourismButon()">add_location_alt</mat-icon>
           </div>
-          <!-- TODO 移動手段追加 -->
-          <!-- <div class="icon-btn">
+          <!-- 移動手段追加 -->
+          <div class="icon-btn">
             <mat-icon class="add-btn-move" placement="top" ngbTooltip="移動手段/時間" (click)="onClickAddMoveButon()">directions_walk</mat-icon>
-          </div>-->
+          </div>
           <!-- 食事追加 -->
-          <!-- <div class="icon-btn">
+          <div class="icon-btn">
             <mat-icon class="add-btn-meal" placement="top" ngbTooltip="食事/グルメ" (click)="onClickAddMealButon()">restaurant</mat-icon>
-          </div>-->
+          </div>
           <!-- ホテル追加 -->
-          <!-- <div class="icon-btn">
+          <div class="icon-btn">
             <mat-icon class="add-btn-hotel" placement="top" ngbTooltip="ホテル/宿" (click)="onClickAddHotelButon()">hotel</mat-icon>
-          </div>-->
+          </div>
         </div>
       </div>
       <button type="button" class="btn btn-primary save-btn" (click)="onClickSave()">

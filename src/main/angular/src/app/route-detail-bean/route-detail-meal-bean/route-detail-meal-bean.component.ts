@@ -1,7 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ICodeList } from 'src/app/model/code-list';
+
 import { Code } from '../../const/code-div.const';
+import { ICodeList } from 'src/app/model/code-list';
 import { IRouteDetailMeal } from '../../model/route-detail-meal';
 
 @Component({
@@ -11,6 +12,12 @@ import { IRouteDetailMeal } from '../../model/route-detail-meal';
 })
 export class RouteDetailMealBeanComponent implements OnInit {
 
+  /** ルート詳細移動 */
+  @Input() detail: IRouteDetailMeal;
+
+  /** ルート詳細更新イベント通知 */
+  @Output() updateRouteDetailMealEvent: EventEmitter<IRouteDetailMeal> = new EventEmitter();
+
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailMealEvent: EventEmitter<string> = new EventEmitter();
 
@@ -19,9 +26,6 @@ export class RouteDetailMealBeanComponent implements OnInit {
 
   /** 食事種類区分リスト */
   mealKindDivList: ICodeList[] = Code.MealKindDiv.List;
-
-  /** 編集対象 */
-  routeDetailMeal: IRouteDetailMeal = {};
 
   /** ルート詳細食事情報 フォームグループ */
   routeDetailMealFormGroup = new FormGroup({
@@ -44,11 +48,15 @@ export class RouteDetailMealBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
-    // TODO バックから取得した ルート詳細.食事 を代入
-    this.routeDetailMealFormGroup.patchValue(this.routeDetailMeal);
-    
+    // 入力項目 初期値設定
+    this.routeDetailMealFormGroup.patchValue(this.detail);
+
+    // 入力値変更検知
     this.routeDetailMealFormGroup.valueChanges.subscribe(() => {
-      this.routeDetailMeal = this.routeDetailMealFormGroup.value;
+      this.detail = this.routeDetailMealFormGroup.value;
+
+      /** ルート詳細更新イベント通知 */
+      this.updateRouteDetailMealEvent.emit(this.detail);
     });
   }
 
@@ -59,7 +67,7 @@ export class RouteDetailMealBeanComponent implements OnInit {
    * 削除ボタン押下イベント
    */
   onClickDeleteButton() {
-    this.deleteRouteDetailMealEvent.emit(this.routeDetailMeal.routeDetailId);
+    this.deleteRouteDetailMealEvent.emit(this.detail.routeDetailId);
   }
 
 }

@@ -16,7 +16,7 @@ export class RouteDetailTourismBeanComponent {
   @Output() updateRouteDetailTourismEvent: EventEmitter<IRouteDetailTourism> = new EventEmitter();
 
   /** ビーン削除イベント通知 */
-  @Output() deleteRouteDetailTourismEvent: EventEmitter<string> = new EventEmitter();
+  @Output() deleteRouteDetailTourismEvent: EventEmitter<number> = new EventEmitter();
 
   /**
    * Input値変更検知

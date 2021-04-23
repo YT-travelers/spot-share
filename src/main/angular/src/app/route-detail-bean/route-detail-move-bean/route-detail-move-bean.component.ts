@@ -45,8 +45,10 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
+    // 入力項目 初期値設定
     this.routeDetailMoveFormGroup.patchValue(this.detail);
     
+    // 入力値変更検知
     this.routeDetailMoveFormGroup.valueChanges.subscribe(() => {
       this.detail = this.routeDetailMoveFormGroup.value;
 
