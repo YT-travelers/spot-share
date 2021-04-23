@@ -20,5 +20,10 @@ class Code extends Model
                 $builder->where('division', static::$division);
             }
         });
+        static::addGlobalScope('sort', function (Builder $builder) {
+            $builder
+                ->orderBy('division')
+                ->orderBy('div_value');
+        });
     }
 }
