@@ -1,19 +1,19 @@
 import { ITourism } from "./tourism";
 
 /**
- * ルート詳細チェックリスト
+ * ルート詳細観光地
  */
 export interface IRouteDetailTourism {
   /** ルート詳細ID */
-  routeDetailId: string;
+  routeDetailId?: number;
   /** 観光地ID */
-  tourismId: string;
+  tourismId?: number;
   /** 行きたい度 */
-  tourismRate: string;
+  tourismRate?: number;
   /** 観光時間 */
-  tourismMinutes: string;
+  tourismMinutes?: number;
   /** 観光費用 */
-  tourismCost: string;
+  tourismCost?: number;
   /** 観光地 */
-  tourism: ITourism;
+  tourism?: ITourism;
 }

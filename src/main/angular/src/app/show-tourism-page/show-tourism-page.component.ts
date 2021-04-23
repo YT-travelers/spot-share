@@ -204,9 +204,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
 
     this.tourismList.forEach(e => {
       if (e['select'] === 'Y') {
-        // TODO issue #33
-        // route.routeDetails.push({ routeDetailId: null, tourism: { tourismId: e.tourismId } });
-        route.routeDetails.push({ routeDetailId: null, tourismId: e.tourismId });
+        route.routeDetails.push({ routeDetailId: null, routeDetailToursim: { routeDetailId: e.tourismId } });
       }
     });
 
@@ -226,7 +224,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
       _forEach(route.routeDetails, (addTourism: IRouteDetail) => {
         let add = true;
         _forEach(this.route.routeDetails, (existItem: IRouteDetail) => {
-          if (existItem.tourism.tourismId === addTourism.tourismId) {
+          if (existItem.routeDetailToursim.tourismId === addTourism.routeDetailToursim.tourismId) {
             add = false;
           }
         });
