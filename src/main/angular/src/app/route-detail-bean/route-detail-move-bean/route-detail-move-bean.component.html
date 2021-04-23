@@ -4,23 +4,23 @@
     <div class="bean panel">
       <input class="form-control move-minutes-input" formControlName="moveMinutes">
       <span class="spacer">分</span>
-      <div class="move-kind-icon"[ngSwitch]="routeDetailMoveFormGroup.value.moveWayDiv">
-        <mat-icon *ngSwitchCase="MoveWayDivList[0].MoveWayDiv">directions_walk</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[1].MoveWayDiv">pedal_bike</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[2].MoveWayDiv">two_wheeler</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[3].MoveWayDiv">directions_car</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[4].MoveWayDiv">local_taxi</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[5].MoveWayDiv">directions_bus</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[6].MoveWayDiv">train</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[7].MoveWayDiv">directions_transit</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[8].MoveWayDiv">directions_railway</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[9].MoveWayDiv">flight</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[10].MoveWayDiv">directions_boat</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[11].MoveWayDiv">directions_boat</mat-icon>
-        <mat-icon *ngSwitchCase="MoveWayDivList[12].MoveWayDiv">navigation</mat-icon>
+      <div class="move-kind-icon"[ngSwitch]="routeDetailMoveFormGroup.value.moveKindDiv">
+        <mat-icon *ngSwitchCase="moveKindDiv.OnFoot">directions_walk</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Bycycle">pedal_bike</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Bike">two_wheeler</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Car">directions_car</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Taxi">local_taxi</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Bus">directions_bus</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Train">train</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.SleeperTrain">directions_transit</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Shinkansen">directions_railway</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.AirPlane">flight</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Ship">directions_boat</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Ferry">directions_boat</mat-icon>
+        <mat-icon *ngSwitchCase="moveKindDiv.Other">navigation</mat-icon>
       </div>
-      <select class="form-control" formControlName="moveWayDiv">
-        <option *ngFor="let item of MoveWayDivList" value={{item.moveWayDiv}}>{{item.moveWayDivName}}</option>
+      <select class="form-control" formControlName="moveKindDiv">
+        <option *ngFor="let item of moveKindDivList" value={{item.div}}>{{item.name}}</option>
       </select>
       <input class="form-control ml-auto move-cost-input" formControlName="moveCost">
       <span class="spacer">円</span>

@@ -15,6 +15,12 @@
             [rate]="detail.tourismRate"
             [max]="5"
           ></ngb-rating>
+          <div>
+            <span class="info-label">観光時間</span>
+            <span>：</span>
+            <span>{{detail.tourismMinutes}}</span>
+            <span *ngIf="detail.tourismMinutes" class="spacer">時間</span>
+          </div>
         </div>
         <div class="tourism-info-center">
         </div>
@@ -25,14 +31,7 @@
             <span>{{detail.tourismCost}}</span>
             <span class="spacer">円</span>
           </div>
-          <div>
-            <span class="info-label">観光時間</span>
-            <span>：</span>
-            <span>{{detail.tourismMinutes}}</span>
-            <span *ngIf="detail.tourismMinutes" class="spacer">時間</span>
-          </div>
         </div>
-
       </div>
     </div>
   </div>

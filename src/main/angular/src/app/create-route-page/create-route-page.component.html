@@ -48,41 +48,47 @@
         (cdkDropListDropped)="onDropList($event)">
         <div class="list-bean" cdkDrag *ngFor="let detail of routeDetails">
           
-          <!-- 観光地 -->
-          <app-route-detail-tourism-bean
+          <!-- 観光地（マスタ有り） -->
+          <app-route-detail-tourism-bean *ngIf="detail.beanKindDiv === beanKindDiv.Tourism"
             [detail]="detail.routeDetailTourism"
-            (deleteRouteDetailTourismEvent)="onDeleteRouteDetailTouristEvent($event)"
+            (updateRouteDetailtourismEvent)="onUpdateRouteDetailEvent($event)"
+            (deleteRouteDetailTourismEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-tourism-bean>
 
 
-          <!-- TODO 飲食店 -->
-          <!-- TODO ホテル -->
-          <!-- TODO アクティビティ -->
+          <!-- TODO 飲食店（マスタ有り） -->
+          <!-- TODO ホテル（マスタ有り） -->
+          <!-- TODO アクティビティ（マスタ有り） -->
 
-          <!-- TODO 食事-->
-          <app-route-detail-meal-bean
-            (deleteRouteDetailMealEvent)="onDeleteRouteDetailMoveEvent($event)"
+          <!-- TODO 食事 -->
+          <app-route-detail-meal-bean *ngIf="detail.beanKindDiv === beanKindDiv.Meal"
+            [detail]="detail.routeDetailMeal"
+            (deleteRouteDetailMealEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-meal-bean>
 
           <!-- TODO 移動 -->
-          <app-route-detail-move-bean
-            (deleteRouteDetailMealEvent)="onDeleteRouteDetailMealEvent($event)"
+          <app-route-detail-move-bean *ngIf="detail.beanKindDiv === beanKindDiv.Move"
+            [detail]="detail.routeDetailMove"
+            (updateRouteDetailMoveEvent)="onUpdateRouteDetailEvent($event)"
+            (deleteRouteDetailMoveEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-move-bean>
 
           <!-- TODO 時間-->
 
           <!-- TODO チェックリスト-->
-          <app-route-detail-checklist-bean
-           (deleteRouteDetailChecklistEvent)="onDeleteRouteDetailChecklistEvent($event)"
+          <app-route-detail-checklist-bean *ngIf="detail.beanKindDiv === beanKindDiv.Checklist"
+            [detail]="detail.routeDetailChecklist"
+            (deleteRouteDetailChecklistEvent)="onDeleteRouteDetailEvent($event)"
           >          
           </app-route-detail-checklist-bean>
 
           <!-- TODO メモ-->
-          <app-route-detail-memo-bean
-            (deleteRouteDetailMemoEvent)="onDeleteRouteDetailMemoEvent($event)"
+          <app-route-detail-memo-bean *ngIf="detail.beanKindDiv === beanKindDiv.Memo"
+            [detail]="detail.routeDetailMemo"
+            (deleteRouteDetailMemoEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-memo-bean>
 

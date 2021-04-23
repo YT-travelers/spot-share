@@ -6,10 +6,11 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { FormControl } from '@angular/forms';
-import { defer as _defer } from 'lodash';
+import { defer as _defer, remove as _remove, each as _each } from 'lodash';
 
 import { IRoute } from '../model/route';
 import { RouteService } from '../shared/route.service';
+import { Code } from '../const/code-div.const';
 
 @Component({
   selector: 'app-create-route-page',
@@ -37,6 +38,9 @@ export class CreateRoutePageComponent implements OnInit {
 
   /** ローディングオーバーレイ */
   overlayRef;
+
+  /** ビーン種類区分 */
+  beanKindDiv = Code.BeanKindDiv;
 
   constructor(
     private router: Router,
@@ -149,50 +153,30 @@ export class CreateRoutePageComponent implements OnInit {
   //   // TODO 実装する
   //   console.log("onClickAddHotelButon");
   // }
-
+  
   /**
-   * 観光地ビーンの削除ボタン押下イベント
+   * ビーン更新イベント
    * @param event ルート詳細
    */
-  onDeleteRouteDetailTouristEvent(event) {
-    // TODO 実装する
-    console.log(event);
+  onUpdateRouteDetailEvent(event) {
+    // 引数のrouteDetailIdの要素を、引数で更新する
+     const idx = _each(this.routeDetails, e => {
+      if (e.routeDetailId = event.routeDetailId) {
+        // TODO 動作未確認。breakもできているか確認する。
+        e = event;
+        return false;
+      }
+    });
   }
 
   /**
-   * ルート詳細移動ビーンの削除イベント
-   * @param event 削除する移動ビーンのルート詳細ID
+   * ビーン削除ボタン押下イベント
+   * @param event ルート詳細ID
    */
-  onDeleteRouteDetailMoveEvent(event) {
-    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
-    console.log(event);
-  }
-
-  /**
-   * ルート詳細食事ビーンの削除イベント
-   * @param event 削除する食事ビーンのルート詳細ID
-   */
-  onDeleteRouteDetailMealEvent(event) {
-    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
-    console.log(event);
-  }
-
-  /**
-   * ルート詳細チェックリストビーンの削除イベント
-   * @param event 削除するチェックリストビーンのルート詳細ID
-   */
-  onDeleteRouteDetailChecklistEvent(event) {
-    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
-    console.log(event);
-  }
-
-  /**
-   * ルート詳細メモビーンの削除イベント
-   * @param event 削除するメモビーンのルート詳細ID
-   */
-  onDeleteRouteDetailMemoEvent(event) {
-    // TODO 編集対象のリストから該当のIDを持つビーンを削除する
-    console.log(event);
+  onDeleteRouteDetailEvent(event) {
+    _remove(this.routeDetails, (e) => {
+      return e.routeDetailId === event;
+    });
   }
 
   /**

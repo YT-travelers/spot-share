@@ -14,7 +14,10 @@ export class RouteDetailMealBeanComponent implements OnInit {
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailMealEvent: EventEmitter<string> = new EventEmitter();
 
-  /** 食事種類リスト */
+  /** 食事種類区分 */
+  mealKindDiv = Code.MealKindDiv;
+
+  /** 食事種類区分リスト */
   mealKindDivList: ICodeList[] = Code.MealKindDiv.List;
 
   /** 編集対象 */
@@ -41,7 +44,6 @@ export class RouteDetailMealBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
-
     // TODO バックから取得した ルート詳細.食事 を代入
     this.routeDetailMealFormGroup.patchValue(this.routeDetailMeal);
     

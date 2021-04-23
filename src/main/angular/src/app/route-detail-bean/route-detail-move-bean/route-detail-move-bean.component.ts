@@ -1,5 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Code } from 'src/app/const/code-div.const';
+import { ICodeList } from 'src/app/model/code-list';
 import { IRouteDetailMove } from '../../model/route-detail-move';
 
 @Component({
@@ -9,29 +11,20 @@ import { IRouteDetailMove } from '../../model/route-detail-move';
 })
 export class RouteDetailMoveBeanComponent implements OnInit {
 
+  /** ルート詳細移動 */
+  @Input() detail: IRouteDetailMove;
+
+  /** ルート詳細更新イベント通知 */
+  @Output() updateRouteDetailMoveEvent: EventEmitter<IRouteDetailMove> = new EventEmitter();
+
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailMoveEvent: EventEmitter<string> = new EventEmitter();
 
-  /** 移動手段リスト */
-  // TODO バックエンドから取得する 
-  MoveWayDivList = [
-    { MoveWayDiv: 0, MoveWayDivName: '徒歩'},
-    { MoveWayDiv: 1, MoveWayDivName: '自転車'},
-    { MoveWayDiv: 2, MoveWayDivName: 'バイク'},
-    { MoveWayDiv: 3, MoveWayDivName: '車'},
-    { MoveWayDiv: 4, MoveWayDivName: 'タクシー'},
-    { MoveWayDiv: 5, MoveWayDivName: 'バス'},
-    { MoveWayDiv: 6, MoveWayDivName: '電車'},
-    { MoveWayDiv: 7, MoveWayDivName: '寝台列車'},
-    { MoveWayDiv: 8, MoveWayDivName: '新幹線'},
-    { MoveWayDiv: 9, MoveWayDivName: '飛行機'},
-    { MoveWayDiv: 10, MoveWayDivName: '船'},
-    { MoveWayDiv: 11, MoveWayDivName: 'フェリー'},
-    { MoveWayDiv: 12, MoveWayDivName: 'その他'},
-  ];
+  /** 移動手段区分 */
+  moveKindDiv = Code.MoveWayDiv;
 
-  /** 編集対象 */
-  routeDetailMove: IRouteDetailMove = {};
+  /** 移動手段区分リスト */
+  moveKindDivList: ICodeList[] = Code.MoveWayDiv.List;
 
   /** ルート詳細移動情報 フォームグループ */
   routeDetailMoveFormGroup = new FormGroup({
@@ -40,9 +33,7 @@ export class RouteDetailMoveBeanComponent implements OnInit {
     /** 所要時間 */
     moveMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
     /** 移動手段区分 */
-    moveWayDiv: new FormControl(0),
-    /** 移動手段区分名称 */
-    moveWayDivName: new FormControl(this.MoveWayDivList[0].MoveWayDivName),
+    moveKindDiv: new FormControl(0),
     /** 移動費用 */
     moveCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });
@@ -54,13 +45,13 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
-    // TODO 移動手段区分の取得
-
-    // TODO バックから取得した ルート詳細.移動 を代入
-    this.routeDetailMoveFormGroup.patchValue(this.routeDetailMove);
+    this.routeDetailMoveFormGroup.patchValue(this.detail);
     
     this.routeDetailMoveFormGroup.valueChanges.subscribe(() => {
-      this.routeDetailMove = this.routeDetailMoveFormGroup.value;
+      this.detail = this.routeDetailMoveFormGroup.value;
+
+      /** ルート詳細更新イベント通知 */
+      this.updateRouteDetailMoveEvent.emit(this.detail);
     });
   }
 
@@ -71,7 +62,7 @@ export class RouteDetailMoveBeanComponent implements OnInit {
    * 削除ボタン押下イベント
    */
   onClickDeleteButton() {
-    this.deleteRouteDetailMoveEvent.emit(this.routeDetailMove.routeDetailId);
+    this.deleteRouteDetailMoveEvent.emit(this.detail.routeDetailId);
   }
 
 }
