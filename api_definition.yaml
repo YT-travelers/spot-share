@@ -833,7 +833,7 @@ components:
       type: object
       properties:
         hotelId:
-          type: string
+          type: integer
         hotelName:
           type: string
         hotelKindDiv:
