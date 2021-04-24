@@ -43,7 +43,9 @@ class RouteService
      */
     public function saveRoute(array $_routeData, ?int $routeId = null): Route
     {
-        $route = $this->routeModel->newInstance();
+        $route = $routeId === null
+                ? $this->routeModel->newInstance()
+                : $this->routeModel->findOrFail($routeId);
         DB::transaction(function () use ($route, $_routeData, $routeId) {
             if ($routeId !== null) {
                 $this->deleteRoute($routeId);

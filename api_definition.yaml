@@ -731,11 +731,11 @@ components:
           type:
             - integer
             - 'null'
-        moveKindDiv:
+        moveWayDiv:
           type:
             - integer
             - 'null'
-        moveKindDivName:
+        moveWayDivName:
           type:
             - string
             - 'null'

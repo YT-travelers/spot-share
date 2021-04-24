@@ -186,8 +186,8 @@ class RouteConverter
         return [
             'routeDetailId' => $routeDetailMove->route_detail_id,
             'moveMinutes' => $routeDetailMove->move_minutes,
-            'moveKindDiv' => $routeDetailMove->move_way_div,
-            'moveKindDivName' => $routeDetailMove->moveWay->div_key_name,
+            'moveWayDiv' => $routeDetailMove->move_way_div,
+            'moveWayDivName' => $routeDetailMove->moveWay->div_key_name,
             'moveCost' => $routeDetailMove->move_cost,
         ];
     }
