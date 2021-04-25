@@ -17,8 +17,6 @@ export interface IRouteDetail {
   routeId?: number;
   /** ビーン種類区分 */
   beanKindDiv?: number;
-  /** 順番 */
-  order?: number;
   /** 削除リクエストフラグ */
   deleteRequestFlg?: string;
   /** ルート詳細 観光地 */
