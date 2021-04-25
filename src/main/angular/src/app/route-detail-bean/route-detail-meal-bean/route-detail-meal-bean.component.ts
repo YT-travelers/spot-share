@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { Code } from '../../const/code-div.const';
+import { Code } from 'src/app/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
-import { IRouteDetailMeal } from '../../model/route-detail-meal';
+import { IRouteDetailMeal } from 'src/app/model/route-detail-meal';
 
 @Component({
   selector: 'app-route-detail-meal-bean',
