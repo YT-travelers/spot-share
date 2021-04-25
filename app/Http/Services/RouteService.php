@@ -43,10 +43,18 @@ class RouteService
      */
     public function saveRoute(array $_routeData, ?int $routeId = null): Route
     {
-        $route = $this->routeModel->newInstance();
-        DB::transaction(function () use ($route, $_routeData, $routeId) {
-            if ($routeId !== null) {
-                $this->deleteRoute($routeId);
+        return DB::transaction(function () use ($_routeData, $routeId) {
+            $route = $this->routeModel->firstOrNew(['route_id' => $routeId]);
+            if ($route->routeDetails->isNotEmpty()) {
+                //NOTE: この後の処理でroute_detailsテーブルを使用する為、先にメモリへロードしておく
+                $route->load(
+                    'routeDetails',
+                    'routeDetails.beanKind',
+                    'routeDetails.routeDetailTourism',
+                    'routeDetails.routeDetailHotel',
+                    'routeDetails.routeDetailActivity',
+                );
+                $this->deleteRouteDetails($route->routeDetails);
             }
             $routeData = makeArraySnakeRecursively($_routeData);
 
@@ -59,9 +67,10 @@ class RouteService
                     $this->saveRouteDetailBean($routeDetail, $routeDetailData);
                 });
             }
+
+            return $route;
         });
 
-        return $route;
     }
 
     private function saveRouteDetailBean(RouteDetail $routeDetail, array $routeDetailData)
@@ -125,8 +134,6 @@ class RouteService
     public function deleteRoute(int $routeId)
     {
         $route = $this->routeModel->findOrFail($routeId);
-
-        //NOTE: この後の処理でroute_detailsテーブルを削除する為、先にメモリへロードしておく
         $route->load(
             'routeDetails',
             'routeDetails.beanKind',
@@ -135,8 +142,13 @@ class RouteService
             'routeDetails.routeDetailActivity',
         );
         $route->delete();
+        $this->deleteRouteDetails($route->routeDetails);
+    }
 
-        $route->routeDetails->each(function (RouteDetail $routeDetail) {
+    public function deleteRouteDetails(Collection $routeDetails)
+    {
+
+        $routeDetails->each(function (RouteDetail $routeDetail) {
             $beanKind = $routeDetail->beanKind;
             if ($beanKind->isTourism()) {
                 $tourismId = $routeDetail->routeDetailTourism->tourism_id;
