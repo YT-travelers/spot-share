@@ -18,9 +18,6 @@ export class RouteDetailMemoBeanComponent implements OnInit {
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailMemoEvent: EventEmitter<number> = new EventEmitter();
 
-  /** 編集対象 */
-  routeDetailMemo: IRouteDetailMemo = {};
-
   /** ルート詳細メモ情報 フォームグループ */
   routeDetailMemoFormGroup = new FormGroup({
     /** ルート詳細ID */
@@ -37,11 +34,11 @@ export class RouteDetailMemoBeanComponent implements OnInit {
 
   ngOnInit(): void {
     // 入力項目 初期値設定
-    this.routeDetailMemoFormGroup.patchValue(this.routeDetailMemo);
+    this.routeDetailMemoFormGroup.patchValue(this.detail);
 
     // 入力値変更検知
     this.routeDetailMemoFormGroup.valueChanges.subscribe(() => {
-      this.routeDetailMemo = this.routeDetailMemoFormGroup.value;
+      this.detail = this.routeDetailMemoFormGroup.value;
 
       /** ルート詳細更新イベント通知 */
       this.updateRouteDetailMemoEvent.emit(this.detail);
@@ -55,7 +52,7 @@ export class RouteDetailMemoBeanComponent implements OnInit {
    * 削除ボタン押下イベント
    */
   onClickDeleteButton() {
-    this.deleteRouteDetailMemoEvent.emit(this.routeDetailMemo.routeDetailId);
+    this.deleteRouteDetailMemoEvent.emit(this.detail.routeDetailId);
   }
 
 }

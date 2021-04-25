@@ -6,11 +6,12 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { FormControl } from '@angular/forms';
-import { defer as _defer, remove as _remove, each as _each } from 'lodash';
+import { defer as _defer, remove as _remove, each as _each, forEach as _forEach } from 'lodash';
 
 import { IRoute } from '../model/route';
 import { RouteService } from '../shared/route.service';
 import { Code } from '../const/code-div.const';
+import { IRouteDetail } from '../model/route-detail';
 
 @Component({
   selector: 'app-create-route-page',
@@ -25,7 +26,7 @@ export class CreateRoutePageComponent implements OnInit {
   route: IRoute = {};
 
   /** ルート詳細一覧 */
-  routeDetails = [];
+  routeDetails: IRouteDetail[] = [];
 
   /** 画面上に表示するルート情報のID */
   routeId = '';
@@ -123,36 +124,40 @@ export class CreateRoutePageComponent implements OnInit {
   }
 
   /**
-   * スポット追加ボタン押下イベント
+   * 観光地追加ボタン押下イベント
    */
   onClickAddTourismButon() {
-    // スポット一覧ページに遷移
+    // 観光地一覧ページに遷移
     this.router.navigate(['/show-container-page', { routeId: this.route.routeId }]);
   }
 
-  // /**
-  //  * 移動手段追加ボタン押下イベント
-  //  */
-  // onClickAddMoveButon() {
-  //   // TODO 実装する
-  //   console.log("onClickAddMoveButon");
-  // }
+  /**
+   * 移動手段追加ボタン押下イベント
+   */
+  onClickAddMoveButon() {
+    this.addRouteBean(Code.BeanKindDiv.Move);
+  }
 
-  // /**
-  //  * 移動手段追加ボタン押下イベント
-  //  */
-  // onClickAddMealButon() {
-  //   // TODO 実装する
-  //   console.log("onClickAddMealButon");
-  // }
+  /**
+   * 食事追加ボタン押下イベント
+   */
+  onClickAddMealButon() {
+    this.addRouteBean(Code.BeanKindDiv.Meal);
+  }
 
-  // /**
-  //  * 移動手段追加ボタン押下イベント
-  //  */
-  // onClickAddHotelButon() {
-  //   // TODO 実装する
-  //   console.log("onClickAddHotelButon");
-  // }
+  /**
+   * チェックリスト追加ボタン押下イベント
+   */
+  onClickAddChcklistButon() {
+    this.addRouteBean(Code.BeanKindDiv.Checklist);
+  }
+
+  /**
+   * メモ追加ボタン押下イベント
+   */
+  onClickAddMemoButon() {
+    this.addRouteBean(Code.BeanKindDiv.Memo);
+  }
   
   /**
    * ビーン更新イベント
@@ -160,9 +165,8 @@ export class CreateRoutePageComponent implements OnInit {
    */
   onUpdateRouteDetailEvent(event) {
     // 引数のrouteDetailIdの要素を、引数で更新する
-     const idx = _each(this.routeDetails, e => {
+    _each(this.routeDetails, e => {
       if (e.routeDetailId = event.routeDetailId) {
-        // TODO 動作未確認。breakもできているか確認する。
         e = event;
         return false;
       }
@@ -174,7 +178,7 @@ export class CreateRoutePageComponent implements OnInit {
    * @param event ルート詳細ID
    */
   onDeleteRouteDetailEvent(event) {
-    _remove(this.routeDetails, (e) => {
+    _remove(this.routeDetails, e => {
       return e.routeDetailId === event;
     });
   }
@@ -208,4 +212,32 @@ export class CreateRoutePageComponent implements OnInit {
     this.router.navigate(['/show-container-page']);
   }
 
+  /**
+   * ルートにビーンを追加します。
+   */
+  addRouteBean(beanKindDiv) {
+    // ルート詳細IDを仮採番（正式にはバック側で採番される）
+    const roudeDetailId = this.getMaxRouteDetailId();
+
+    const routeBean: IRouteDetail = {
+      routeDetailId: roudeDetailId,
+      beanKindDiv: beanKindDiv
+    }
+
+    this.routeDetails.push(routeBean);
+  }
+
+  /**
+   * this.routeDetails配列の中で一番大きいrouteDetailIdを返却します。
+   */
+  getMaxRouteDetailId() {
+    let routeDetailId = 1;
+    _forEach(this.routeDetails, e => {
+      if (e.routeDetailId > routeDetailId) {
+        routeDetailId = e.routeDetailId;
+      }
+    });
+
+    return routeDetailId;
+  }
 }

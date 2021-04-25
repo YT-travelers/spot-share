@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IRouteDetailChecklist } from '../../model/route-detail-checklist';
 
@@ -9,11 +9,14 @@ import { IRouteDetailChecklist } from '../../model/route-detail-checklist';
 })
 export class RouteDetailChecklistBeanComponent implements OnInit {
 
+  /** ルート詳細移動 */
+  @Input() detail: IRouteDetailChecklist;
+
+  /** ルート詳細更新イベント通知 */
+  @Output() updateRouteDetailChecklistEvent: EventEmitter<IRouteDetailChecklist> = new EventEmitter();
+
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailChecklistEvent: EventEmitter<number> = new EventEmitter();
-
-  /** 編集対象 */
-  routeDetailChecklist: IRouteDetailChecklist = {};
 
   /** ルート詳細チェックリスト情報 フォームグループ */
   routeDetailChecklistFormGroup = new FormGroup({
@@ -32,12 +35,13 @@ export class RouteDetailChecklistBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
-
-    // TODO バックから取得した ルート詳細.チェックリスト を代入
-    this.routeDetailChecklistFormGroup.patchValue(this.routeDetailChecklist);
+    this.routeDetailChecklistFormGroup.patchValue(this.detail);
     
     this.routeDetailChecklistFormGroup.valueChanges.subscribe(() => {
-      this.routeDetailChecklist = this.routeDetailChecklistFormGroup.value;
+      this.detail = this.routeDetailChecklistFormGroup.value;
+
+      /** ルート詳細更新イベント通知 */
+      this.updateRouteDetailChecklistEvent.emit(this.detail);
     });
   }
 
@@ -48,7 +52,7 @@ export class RouteDetailChecklistBeanComponent implements OnInit {
    * 削除ボタン押下イベント
    */
   onClickDeleteButton() {
-    this.deleteRouteDetailChecklistEvent.emit(this.routeDetailChecklist.routeDetailId);
+    this.deleteRouteDetailChecklistEvent.emit(this.detail.routeDetailId);
   }
 
 }

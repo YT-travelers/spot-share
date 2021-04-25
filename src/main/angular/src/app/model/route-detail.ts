@@ -32,7 +32,7 @@ export interface IRouteDetail {
   /** ルート詳細 移動 */
   routeDetailMove?: IRouteDetailMove;
   /** ルート詳細 時間 */
-  routeDetailTime?: string // TODO
+  routeDetailTime?: string; // TODO
   /** ルート詳細 チェックリスト */
   routeDetailChecklist?: IRouteDetailChecklist;
   /** ルート詳細 メモ */

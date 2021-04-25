@@ -107,10 +107,13 @@ $tourism-icon-color: blue;
           color: orange;
         }
         &-meal {
-          color: green;
-        }
-        &-hotel {
           color: red;
+        }
+        &-checklist {
+          color: limegreen;
+        }
+        &-memo {
+          color: cornflowerblue;
         }
       }
     }
