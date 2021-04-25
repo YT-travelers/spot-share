@@ -3,7 +3,9 @@ var fs = require('fs');
 
 var api = '/api';
 
-var tourisms = require('./tourisms.json');
+var tourisms = require('./tourism.json');
+var routes = require('./route.json');
+var routedetails = require('./route-detail.json');
 
 mocky.createServer([
   // 作成API
@@ -28,6 +30,30 @@ mocky.createServer([
         callback(null, {
           status: 200,
           body: JSON.stringify(tourisms)
+        });
+      }, 1000);
+    }
+  },
+  {
+    url: api+'/routes',
+    method: 'get',
+    res: function(req, res, callback) {
+      setTimeout(function() {
+        callback(null, {
+          status: 200,
+          body: JSON.stringify(routes)
+        });
+      }, 1000);
+    }
+  },
+  {
+    url: api+'/routes/1',
+    method: 'get',
+    res: function(req, res, callback) {
+      setTimeout(function() {
+        callback(null, {
+          status: 200,
+          body: JSON.stringify(routedetails)
         });
       }, 1000);
     }
