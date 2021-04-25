@@ -1,0 +1,46 @@
+.list-bean-restaurant {
+  width: 95%;
+  margin-left: auto;
+  margin-top: 5px;
+}
+
+.more-vert {
+  margin: 5px 0;
+  cursor: default;
+}
+
+.close {
+  font-size: 15px;
+  cursor: default;
+  margin: 0 5px;
+}
+
+.mat-icon {
+  cursor: default;
+}
+
+.bean {
+  display: flex;
+  align-items: center;
+
+  .meal-kind-icon {
+    display: flex;
+    margin-left: 15px;
+    color: navy;
+  }
+
+  select {
+    width: auto;
+    margin-left: 10px;
+  }
+
+  .restaurant-minutes-input {
+    width: 60px;
+    text-align: right;
+  }
+
+  .restaurant-cost-input {
+    width: 100px;
+    text-align: right;
+  }
+}
