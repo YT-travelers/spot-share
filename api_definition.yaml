@@ -515,6 +515,8 @@ components:
           $ref: '#/components/schemas/RouteDetailMemo'
         routeDetailId:
           type: integer
+        routeId:
+          type: integer
       required:
         - beanKindDiv
         - order
