@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { IRouteDetailTourism } from '../../model/route-detail-tourism';
+import { IRouteDetailTourism } from 'src/app/model/route-detail-tourism';
 
 @Component({
   selector: 'app-route-detail-tourism-bean',

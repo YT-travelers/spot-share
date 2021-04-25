@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Code } from 'src/app/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
-import { IRouteDetailHotel } from '../../model/route-detail-hotel';
+import { IRouteDetailHotel } from 'src/app/model/route-detail-hotel';
 
 @Component({
   selector: 'app-route-detail-hotel-bean',
