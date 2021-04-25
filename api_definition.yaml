@@ -840,7 +840,7 @@ components:
           type: string
         hotelKindDiv:
           type:
-            - string
+            - integer
             - 'null'
         hotelKindDivName:
           type:
