@@ -51,15 +51,34 @@
           <!-- 観光地（マスタ有り） -->
           <app-route-detail-tourism-bean *ngIf="detail.beanKindDiv === beanKindDiv.Tourism"
             [detail]="detail.routeDetailTourism"
-            (updateRouteDetailtourismEvent)="onUpdateRouteDetailEvent($event)"
+            (updateRouteDetailTourismEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailTourismEvent)="onDeleteRouteDetailEvent($event)"
           >
           </app-route-detail-tourism-bean>
 
+          <!-- 飲食店（マスタ有り） -->
+          <app-route-detail-restaurant-bean *ngIf="detail.beanKindDiv === beanKindDiv.Restaurant"
+            [detail]="detail.routeDetailRestaurant"
+            (updateRouteDetailRestaurantEvent)="onUpdateRouteDetailEvent($event)"
+            (deleteRouteDetailRestaurantEvent)="onDeleteRouteDetailEvent($event)"
+          >
+          </app-route-detail-restaurant-bean>
 
-          <!-- TODO 飲食店（マスタ有り） -->
-          <!-- TODO ホテル（マスタ有り） -->
-          <!-- TODO アクティビティ（マスタ有り） -->
+          <!-- ホテル（マスタ有り） -->
+          <app-route-detail-hotel-bean *ngIf="detail.beanKindDiv === beanKindDiv.Hotel"
+            [detail]="detail.routeDetailHotel"
+            (updateRouteDetailHotelEvent)="onUpdateRouteDetailEvent($event)"
+            (deleteRouteDetailHotelEvent)="onDeleteRouteDetailEvent($event)"
+          >
+          </app-route-detail-hotel-bean>
+
+          <!-- アクティビティ（マスタ有り） -->
+          <app-route-detail-activity-bean *ngIf="detail.beanKindDiv === beanKindDiv.Activity"
+            [detail]="detail.routeDetailActivity"
+            (updateRouteDetailActivityEvent)="onUpdateRouteDetailEvent($event)"
+            (deleteRouteDetailActivityEvent)="onDeleteRouteDetailEvent($event)"
+          >
+          </app-route-detail-activity-bean>
 
           <!-- 食事 -->
           <app-route-detail-meal-bean *ngIf="detail.beanKindDiv === beanKindDiv.Meal"

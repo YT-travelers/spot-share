@@ -12,6 +12,10 @@ import { AppComponent } from './app.component';
 
 import { AddTourismPageModule } from './add-tourism-page/add-tourism-page.module'
 import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
+import { RouteDetailTourismBeanModule } from './route-detail-bean/route-detail-tourism-bean/route-detail-tourism-bean.module';
+import { RouteDetailRestaurantBeanModule } from './route-detail-bean/route-detail-restaurant-bean/route-detail-restaurant-bean.module';
+import { RouteDetailHotelBeanModule } from './route-detail-bean/route-detail-hotel-bean/route-detail-hotel-bean.module';
+import { RouteDetailActivityBeanModule } from './route-detail-bean/route-detail-activity-bean/route-detail-activity-bean.module';
 import { RouteDetailChecklistBeanModule } from './route-detail-bean/route-detail-checklist-bean/route-detail-checklist-bean.module';
 import { RouteDetailMealBeanModule } from './route-detail-bean/route-detail-meal-bean/route-detail-meal-bean.module';
 import { RouteDetailMemoBeanModule } from './route-detail-bean/route-detail-memo-bean/route-detail-memo-bean.module';
@@ -20,7 +24,6 @@ import { ShowContainerPageModule } from './show-container-page/show-container-pa
 import { ShowTourismPageModule } from './show-tourism-page/show-tourism-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
 import { InputRouteNameModalModule } from './shared/input-route-name-modal/input-route-name-modal.module';
-import { RouteDetailTourismBeanModule } from './route-detail-bean/route-detail-tourism-bean/route-detail-tourism-bean.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { RouteDetailTourismBeanModule } from './route-detail-bean/route-detail-t
     AddTourismPageModule,
     CreateRoutePageModule,
     RouteDetailTourismBeanModule,
+    RouteDetailRestaurantBeanModule,
+    RouteDetailHotelBeanModule,
+    RouteDetailActivityBeanModule,
     RouteDetailChecklistBeanModule,
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,
