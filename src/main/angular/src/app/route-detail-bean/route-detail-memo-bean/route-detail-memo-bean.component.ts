@@ -16,7 +16,7 @@ export class RouteDetailMemoBeanComponent implements OnInit {
   @Output() updateRouteDetailMemoEvent: EventEmitter<IRouteDetailMemo> = new EventEmitter();
 
   /** ビーン削除イベント通知 */
-  @Output() deleteRouteDetailMemoEvent: EventEmitter<string> = new EventEmitter();
+  @Output() deleteRouteDetailMemoEvent: EventEmitter<number> = new EventEmitter();
 
   /** 編集対象 */
   routeDetailMemo: IRouteDetailMemo = {};

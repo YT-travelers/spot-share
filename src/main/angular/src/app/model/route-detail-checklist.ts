@@ -3,9 +3,9 @@
  */
 export interface IRouteDetailChecklist {
   /** ルート詳細ID */
-  routeDetailId?
+  routeDetailId?: number;
   /** チェック状態 */
-  checkStatus?
+  checkStatus?: string;
   /** チェック内容 */
-  checkContent?
+  checkContent?: string;
 }

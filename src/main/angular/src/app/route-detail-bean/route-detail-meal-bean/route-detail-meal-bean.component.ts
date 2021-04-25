@@ -19,7 +19,7 @@ export class RouteDetailMealBeanComponent implements OnInit {
   @Output() updateRouteDetailMealEvent: EventEmitter<IRouteDetailMeal> = new EventEmitter();
 
   /** ビーン削除イベント通知 */
-  @Output() deleteRouteDetailMealEvent: EventEmitter<string> = new EventEmitter();
+  @Output() deleteRouteDetailMealEvent: EventEmitter<number> = new EventEmitter();
 
   /** 食事種類区分 */
   mealKindDiv = Code.MealKindDiv;

@@ -3,11 +3,11 @@
  */
 export interface IHotel {
   /** ホテルID */
-  hotelId?: string;
+  hotelId?: number;
   /** ホテル名称 */
   hotelName?: string;
   /** ホテル種類区分 */
-  hotelKindDiv?: string;
+  hotelKindDiv?: number;
   /** ホテル種類区分名称 */
   hotelKindDivName?: string;
   /** 概要 */

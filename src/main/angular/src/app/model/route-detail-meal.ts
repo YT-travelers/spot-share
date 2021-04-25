@@ -3,13 +3,13 @@
  */
 export interface IRouteDetailMeal {
   /** ルート詳細ID */
-  routeDetailId?
-  /** 所要時間 */				
-  mealMinutes?
+  routeDetailId?: number;
+  /** 所要時間 */
+  mealMinutes?: number;
   /** 食事種類区分 */
-  mealKindDiv?
+  mealKindDiv?: number;
   /** 食事種類名称 */
-  mealKindDivName?
+  mealKindDivName?: string;
   /** 食事費用 */
-  mealCost?
+  mealCost?: number;
 }

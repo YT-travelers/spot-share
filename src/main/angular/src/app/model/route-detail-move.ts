@@ -3,13 +3,13 @@
  */
 export interface IRouteDetailMove {
   /** ルート詳細ID */
-  routeDetailId?
-  /** 所要時間 */				
-  moveMinutes?
+  routeDetailId?: number;
+  /** 所要時間 */
+  moveMinutes?: number;
   /** 移動種類区分 */
-  moveWayDiv?
+  moveWayDiv?: number;
   /** 移動種類名称 */
-  moveWayDivName?
+  moveWayDivName?: string;
   /** 移動費用 */
-  moveCost?
+  moveCost?: number;
 }

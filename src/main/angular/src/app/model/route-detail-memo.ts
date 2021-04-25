@@ -3,7 +3,7 @@
  */
 export interface IRouteDetailMemo {
   /** ルート詳細ID */
-  routeDetailId?
+  routeDetailId?: number;
   /** メモ内容 */
-  memoContent?
+  memoContent?: string;
 }

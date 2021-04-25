@@ -18,13 +18,13 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   @Output() updateRouteDetailMoveEvent: EventEmitter<IRouteDetailMove> = new EventEmitter();
 
   /** ビーン削除イベント通知 */
-  @Output() deleteRouteDetailMoveEvent: EventEmitter<string> = new EventEmitter();
+  @Output() deleteRouteDetailMoveEvent: EventEmitter<number> = new EventEmitter();
 
   /** 移動手段区分 */
-  moveKindDiv = Code.MoveWayDiv;
+  moveWayDiv = Code.MoveWayDiv;
 
   /** 移動手段区分リスト */
-  moveKindDivList: ICodeList[] = Code.MoveWayDiv.List;
+  moveWayDivList: ICodeList[] = Code.MoveWayDiv.List;
 
   /** ルート詳細移動情報 フォームグループ */
   routeDetailMoveFormGroup = new FormGroup({
@@ -33,7 +33,7 @@ export class RouteDetailMoveBeanComponent implements OnInit {
     /** 所要時間 */
     moveMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
     /** 移動手段区分 */
-    moveKindDiv: new FormControl(0),
+    moveWayDiv: new FormControl(0),
     /** 移動費用 */
     moveCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });

@@ -10,7 +10,7 @@ import { IRouteDetailChecklist } from '../../model/route-detail-checklist';
 export class RouteDetailChecklistBeanComponent implements OnInit {
 
   /** ビーン削除イベント通知 */
-  @Output() deleteRouteDetailChecklistEvent: EventEmitter<string> = new EventEmitter();
+  @Output() deleteRouteDetailChecklistEvent: EventEmitter<number> = new EventEmitter();
 
   /** 編集対象 */
   routeDetailChecklist: IRouteDetailChecklist = {};

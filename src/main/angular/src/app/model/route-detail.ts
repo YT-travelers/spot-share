@@ -17,16 +17,12 @@ export interface IRouteDetail {
   routeId?: number;
   /** ビーン種類区分 */
   beanKindDiv?: number;
-  /** ビーン種類区分名称 */
-  beanKindDivName?: number;
   /** 順番 */
   order?: number;
   /** 削除リクエストフラグ */
   deleteRequestFlg?: string;
-  /** メモ */
-  memo?: string;
   /** ルート詳細 観光地 */
-  routeDetailToursim?: IRouteDetailTourism;
+  routeDetailTourism?: IRouteDetailTourism;
   /** ルート詳細 飲食店 */
   routeDetailRestaurant?: IRouteDetailRestaurant;
   /** ルート詳細 ホテル */
