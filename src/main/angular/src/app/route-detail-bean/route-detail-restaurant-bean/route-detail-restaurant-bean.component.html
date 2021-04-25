@@ -1,0 +1,23 @@
+<div class="list-bean-restaurant">
+  <form [formGroup]="routeDetailRestaurantFormGroup">
+    <div class="bean panel">
+      TODO
+      <input class="form-control meal-minutes-input" formControlName="mealMinutes">
+      <span class="spacer">分</span>
+      <div class="meal-kind-icon"[ngSwitch]="routeDetailRestaurantFormGroup.value.mealKindDiv">
+        <mat-icon *ngSwitchCase="mealKindDiv.BreakFast">local_cafe</mat-icon>
+        <mat-icon *ngSwitchCase="mealKindDiv.Lunch">fastfood</mat-icon>
+        <mat-icon *ngSwitchCase="mealKindDiv.Dinner">restaurant</mat-icon>
+        <mat-icon *ngSwitchCase="mealKindDiv.Gourmet">restaurant_menu</mat-icon>
+        <mat-icon *ngSwitchCase="mealKindDiv.Snack">local_pizza</mat-icon>
+        <mat-icon *ngSwitchCase="mealKindDiv.Other">local_bar</mat-icon>
+      </div>
+      <select class="form-control" formControlName="mealKindDiv">
+        <option *ngFor="let item of mealKindDivList" value={{item.div}}>{{item.name}}</option>
+      </select>
+      <input class="form-control ml-auto meal-cost-input" formControlName="restaurantCost">
+      <span class="spacer">円</span>
+      <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
+    </div>
+  </form>
+</div>
