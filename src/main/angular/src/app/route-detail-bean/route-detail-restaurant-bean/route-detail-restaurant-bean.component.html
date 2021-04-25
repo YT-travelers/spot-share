@@ -1,8 +1,8 @@
 <div class="list-bean-restaurant">
   <form [formGroup]="routeDetailRestaurantFormGroup">
     <div class="bean panel">
-      TODO
-      <input class="form-control meal-minutes-input" formControlName="mealMinutes">
+      TODO（飲食店）
+      <input class="form-control meal-minutes-input" formControlName="restaurantMinutes">
       <span class="spacer">分</span>
       <div class="meal-kind-icon"[ngSwitch]="routeDetailRestaurantFormGroup.value.mealKindDiv">
         <mat-icon *ngSwitchCase="mealKindDiv.BreakFast">local_cafe</mat-icon>

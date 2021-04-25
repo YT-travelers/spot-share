@@ -30,8 +30,8 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
   routeDetailRestaurantFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
-    /** 所要時間 */
-    moveMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    /** 飲食時間 */
+    restaurantMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
     /** 食事種類区分 */
     mealKindDiv: new FormControl(0),
     /** 飲食費用 */
