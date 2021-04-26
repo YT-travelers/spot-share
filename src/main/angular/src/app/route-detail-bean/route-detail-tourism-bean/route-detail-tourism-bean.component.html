@@ -13,34 +13,37 @@
 
     <div class="div-border-line"></div>
    
-    <div class="bean-info">
+    <form [formGroup]="routeDetailTourismFormGroup">
+      <div class="bean-info">
 
-      <!-- ******** bean left ******** -->
-      <div class="bean-info-left">
-        <div>
-          <span class="bean-info-label">(所要)</span>
-          <span>{{detail.tourismMinutes}}</span>
-          <span *ngIf="detail.tourismMinutes" class="bean-info-label">時間</span>
+        <!-- ******** bean left ******** -->
+        <div class="bean-info-left">
+          <div class="bean-info-item">
+            <span class="bean-info-label">(所要)</span>
+            <input class="form-control text-right" formControlName="tourismMinutes">
+            <span *ngIf="detail.tourismMinutes" class="bean-info-label">時間</span>
+          </div>
+        </div>
+
+        <!-- ******** bean center ******** -->
+        <div class="bean-info-center">
+        </div>
+
+        <!-- ******** bean right ******** -->
+        <div class="bean-info-right">
+          <!-- TODO レートの更新できてるか？ -->
+          <ngb-rating
+            [rate]="detail.tourismRate"
+            [max]="5"
+          ></ngb-rating>
+          <div class="bean-info-item">
+            <span class="bean-info-label">観光費用</span>
+            <span>：</span>
+            <input class="form-control text-right" formControlName="tourismCost">
+            <span class="spacer">円</span>
+          </div>
         </div>
       </div>
-
-      <!-- ******** bean center ******** -->
-      <div class="bean-info-center">
-      </div>
-
-      <!-- ******** bean right ******** -->
-      <div class="bean-info-right">
-        <ngb-rating
-          [rate]="detail.tourismRate"
-          [max]="5"
-        ></ngb-rating>
-        <div>
-          <span class="bean-info-label">観光費用</span>
-          <span>：</span>
-          <span>{{detail.tourismCost}}</span>
-          <span class="spacer">円</span>
-        </div>
-      </div>
-    </div>
+    </form>
   </div>
 </div>

@@ -38,9 +38,6 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
     restaurantCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });
 
-  constructor(
-  ) { }
-
   // -----------------------------------------------------------------------
   // ライフサイクル
 

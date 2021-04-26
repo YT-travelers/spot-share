@@ -52,6 +52,7 @@
 
         <!-- ******** bean right ******** -->
         <div class="bean-info-right">
+          <!-- TODO レートの更新できてるか？ -->
           <ngb-rating
             [rate]="detail.restaurantRate"
             [max]="5"
@@ -59,7 +60,7 @@
           <div class="bean-info-item">
             <span class="bean-info-label">飲食費用</span>
             <span>：</span>
-            <span>{{detail.restaurantCost}}</span>
+            <input class="form-control text-right" formControlName="restaurantCost">
             <span class="spacer">円</span>
           </div>
         </div>
