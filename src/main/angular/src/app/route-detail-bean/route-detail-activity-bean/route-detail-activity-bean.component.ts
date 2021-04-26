@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Code } from 'src/app/const/code-div.const';
-import { ICodeList } from 'src/app/model/code-list';
 import { IRouteDetailActivity } from 'src/app/model/route-detail-activity';
 
 @Component({
@@ -11,7 +9,7 @@ import { IRouteDetailActivity } from 'src/app/model/route-detail-activity';
 })
 export class RouteDetailActivityBeanComponent implements OnInit {
 
-  /** ルート詳細飲食店 */
+  /** ルート詳細アクティビティ */
   @Input() detail: IRouteDetailActivity;
 
   /** ルート詳細更新イベント通知 */
@@ -20,21 +18,13 @@ export class RouteDetailActivityBeanComponent implements OnInit {
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailActivityEvent: EventEmitter<number> = new EventEmitter();
 
-  /** 食事種類区分 */
-  mealKindDiv = Code.MealKindDiv;
-
-  /**食事種類区分リスト */
-  mealKindDivList: ICodeList[] = Code.MealKindDiv.List;
-
-  /** ルート詳細飲食店 フォームグループ */
+  /** ルート詳細アクティビティ フォームグループ */
   routeDetailActivityFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
-    /** 飲食時間 */
+    /** アクティビティ時間 */
     activityMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
-    /** 食事種類区分 */
-    mealKindDiv: new FormControl(0),
-    /** 飲食費用 */
+    /** アクティビティ費用 */
     activityCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });
 
