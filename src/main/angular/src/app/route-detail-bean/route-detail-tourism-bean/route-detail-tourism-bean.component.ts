@@ -28,7 +28,7 @@ export class RouteDetailTourismBeanComponent {
   /**
    * 観光地ビーン削除ボタン押下イベント
    */
-  onClickDeleteTourismButton() {
+   onClickDeleteButton() {
     this.deleteRouteDetailTourismEvent.emit(this.detail.routeDetailId);
   }
 

@@ -1,11 +1,16 @@
 // 観光地アイコン
-$tourism-icon-color: blue;
+$icon-color: blue;
 
+/** -------- ここからビーン共通スタイル -------- */
 .close {
   font-size: 15px;
   cursor: default;
   margin: 0 5px;
   margin-left: auto;
+}
+
+.mat-icon {
+  cursor: default;
 }
 
 .div-border-line {
@@ -15,59 +20,73 @@ $tourism-icon-color: blue;
 }
 
 .list-bean {
-  
-    &-tourism {
-      display: flex;
-      width: 100%;
-      height: 100px;
-      margin-top: 5px;
-      .thumbnail-area {
-        display: flex;
-        align-items: center;
-        width: 120px;
-        margin-right: 5px;
-        .thumbnail {
-          width: 100px;
-          height: 90px;
-          object-fit: contain;
-          margin: 0 auto;
-        }
-      }
-      .tourism-title {
-        height: 20px;
-        width: 100%;
-        font-size: 18px;
-        display: flex;
-        button {
-          margin-left: auto;
-        }
-        .tourism-bean-icon {
-          color: $tourism-icon-color;
-          cursor: default;
-        }
-      }
-      .tourism-info {
-        display: flex;
-        .info-label {
-          width: 65px;
-          display: inline-block;
-        }
-        &-left {
-          width: 30%;
-        }
-        &-center {
-          width: 30%;
-        }
-        &-right {
-          width: 30%;
-        }
-      }
-  
-      ::ng-deep ngb-rating {
-        span {
-          color: #FFFF66;
-          text-shadow: 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 4px #777;
-        }
-      }
+  display: flex;
+  width: 100%;
+  height: 100px;
+  margin-top: 5px;
+  .thumbnail-area {
+    display: flex;
+    align-items: center;
+    width: 120px;
+    margin-right: 5px;
+    .thumbnail {
+      width: 100px;
+      height: 90px;
+      object-fit: contain;
+      margin: 0 auto;
     }
   }
+  .bean-title {
+    height: 20px;
+    width: 100%;
+    font-size: 18px;
+    display: flex;
+    button {
+      margin-left: auto;
+    }
+    .bean-icon {
+      color: $icon-color;
+      margin-right: 5px;
+    }
+  }
+  .bean-info {
+    display: flex;
+    &-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+    &-label {
+      width: auto;
+      display: inline-block;
+      font-size: 13px;
+      height: 20px;
+    }
+    &-left {
+      width: 33%;
+      margin-right: 5px;
+    }
+    &-center {
+      width: 33%;
+      margin-right: 5px;
+    }
+    &-right {
+      width: 33%;
+      margin-right: 5px;
+    }
+  }
+
+  ::ng-deep ngb-rating {
+    span {
+      color: #FFFF66;
+      text-shadow: 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 4px #777;
+    }
+  }
+}
+/** -------- ここまでビーン共通スタイル -------- */
+
+/** -------- ここからビーン専用スタイル -------- */
+
+
+/** -------- ここまでビーン専用スタイル -------- */
