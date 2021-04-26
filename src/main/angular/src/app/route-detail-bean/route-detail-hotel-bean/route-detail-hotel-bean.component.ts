@@ -21,18 +21,18 @@ export class RouteDetailHotelBeanComponent implements OnInit {
   @Output() deleteRouteDetailHotelEvent: EventEmitter<number> = new EventEmitter();
 
   /** 食事種類区分 */
-  mealKindDiv = Code.MealKindDiv;
+  yesNoDiv = Code.YesNoDiv;
 
   /**食事種類区分リスト */
-  mealKindDivList: ICodeList[] = Code.MealKindDiv.List;
+  yesNoDivList: ICodeList[] = Code.YesNoDiv.List;
 
   /** ルート詳細ホテル フォームグループ */
   routeDetailHotelFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
     /** 食事種類区分 */
-    mealKindDiv: new FormControl(0),
-    /** 飲食費用 */
+    yesNoDiv: new FormControl(0),
+    /** 宿泊費用 */
     hotelCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });
 

@@ -1,10 +1,68 @@
-<div class="list-bean-hotel">
-  <form [formGroup]="routeDetailHotelFormGroup">
-    <div class="bean panel">
-      TODO（ホテル）
-      <input class="form-control ml-auto meal-cost-input" formControlName="hotelCost">
-      <span class="spacer">円</span>
-      <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
+<div class="list-bean panel">
+  <div class="thumbnail-area">
+    <!-- TODO サムネイル -->
+    <img class="thumbnail" src="./favicon.ico">
+  </div>
+  <div class="w-100">
+    <div class="bean-title">
+    <mat-icon class="bean-icon">hotel</mat-icon>
+    <!-- TODO idとbeanDivを渡す-->
+    <a href="add-tourism-page;tourismId={{detail.hotelId}}" target="_blank">{{detail.hotel.hotelName}}</a>
+    <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
     </div>
-  </form>
+
+    <div class="div-border-line"></div>
+
+    <form [formGroup]="routeDetailHotelFormGroup">
+      <div class="bean-info">
+
+        <!-- ******** bean left ******** -->
+        <div class="bean-info-left">
+          <div class="bean-info-item">
+            <span class="bean-info-label">(所要)</span>
+            <input class="form-control text-right" formControlName="hotelMinutes">
+            <span *ngIf="detail.hotelMinutes" class="bean-info-label">時間</span>
+          </div>
+          <div class="bean-info-item">
+            <span>朝食</span>
+            <select class="form-control" formControlName="yesNoDiv">
+              <option *ngFor="let item of yesNoDivList" value={{item.div}}>{{item.name.substring(0,1)}}</option>
+            </select>
+            <span style="margin-left: 5px;">夜食</span>
+            <select class="form-control" formControlName="yesNoDiv">
+              <option *ngFor="let item of yesNoDivList" value={{item.div}}>{{item.name.substring(0,1)}}</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- ******** bean center ******** -->
+        <div class="bean-info-center">
+          <!-- TODO ﾁｪｯｸｲﾝとﾁｪｯｸｱｳﾄの半角カナは時間を正しく表示すれば全角にできそう-->
+          <div class="bean-info-item">
+            <span class="bean-info-label">(ﾁｪｯｸｲﾝ)</span>
+            <span class="bean-info-label">{{detail.hotelCheckInTime}}</span>
+          </div>
+          <div class="bean-info-item">
+            <span class="bean-info-label">(ﾁｪｯｸｱｳﾄ)</span>
+            <span class="bean-info-label">{{detail.hotelCheckOutTime}}</span>
+          </div>
+        </div>
+
+        <!-- ******** bean right ******** -->
+        <div class="bean-info-right">
+          <!-- TODO レートの更新できてるか？ -->
+          <ngb-rating
+            [rate]="detail.hotelRate"
+            [max]="5"
+          ></ngb-rating>
+          <div class="bean-info-item">
+            <span class="bean-info-label">費用</span>
+            <span>：</span>
+            <input class="form-control text-right" formControlName="hotelCost">
+            <span class="spacer">円</span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
