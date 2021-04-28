@@ -189,6 +189,10 @@ export class CreateRoutePageComponent implements OnInit {
   onClickSave() {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
+
+    // 編集内容を格納
+    this.route.routeDetails = this.routeDetails;
+
     this.routeService.updateRoute(this.route, this.route.routeId).subscribe(() => {
       this.toastr.success('保存が完了しました。', '成功');
       this.overlayRef.detach();

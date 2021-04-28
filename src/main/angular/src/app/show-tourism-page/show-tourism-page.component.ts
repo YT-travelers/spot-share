@@ -15,6 +15,7 @@ import { TourismService } from '../shared/tourism.service'
 import { RouteService } from '../shared/route.service';
 import { SelectModalService } from '../shared/select-modal/select-modal.service';
 import { IRouteDetail } from '../model/route-detail';
+import { Code } from '../const/code-div.const';
 
 /**
  * スポット一覧ページ 表示モードを表す列挙値
@@ -204,7 +205,13 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
 
     this.tourismList.forEach(e => {
       if (e['select'] === 'Y') {
-        route.routeDetails.push({ routeDetailId: null, routeDetailTourism: { routeDetailId: e.tourismId } });
+        route.routeDetails.push(
+          {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Tourism,
+            routeDetailTourism: { tourismId: e.tourismId }
+          }
+        );
       }
     });
 
@@ -222,15 +229,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
     if (this.pageMode == PageMode.TourismSelect) {
       // スポット選択モードの場合
       _forEach(route.routeDetails, (addTourism: IRouteDetail) => {
-        let add = true;
-        _forEach(this.route.routeDetails, (existItem: IRouteDetail) => {
-          if (existItem.routeDetailTourism.tourismId === addTourism.routeDetailTourism.tourismId) {
-            add = false;
-          }
-        });
-        if (add) {
-          this.route.routeDetails.push(addTourism);
-        }
+        this.route.routeDetails.push(addTourism);
       });
 
       // 更新

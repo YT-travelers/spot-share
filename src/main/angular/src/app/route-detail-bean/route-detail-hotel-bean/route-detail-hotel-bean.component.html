@@ -25,11 +25,11 @@
           </div>
           <div class="bean-info-item">
             <span>朝食</span>
-            <select class="form-control" formControlName="yesNoDiv">
+            <select class="form-control" formControlName="hotelBreakfastYesNoDiv">
               <option *ngFor="let item of yesNoDivList" value={{item.div}}>{{item.name.substring(0,1)}}</option>
             </select>
             <span style="margin-left: 5px;">夜食</span>
-            <select class="form-control" formControlName="yesNoDiv">
+            <select class="form-control" formControlName="hotelDinnerYesNoDiv">
               <option *ngFor="let item of yesNoDivList" value={{item.div}}>{{item.name.substring(0,1)}}</option>
             </select>
           </div>
