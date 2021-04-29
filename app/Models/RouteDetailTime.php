@@ -11,5 +11,9 @@ class RouteDetailTime extends Model
 
     protected $primaryKey = ['route_id', 'route_detail_id'];
     public $incrementing = false;
-    protected $guarded = [];
+    protected $fillable = [
+        'route_id',
+        'route_detail_id',
+        'schedule_date_time',
+    ];
 }

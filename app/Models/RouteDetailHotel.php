@@ -13,7 +13,18 @@ class RouteDetailHotel extends Model
 
     protected $primaryKey = ['route_id', 'route_detail_id'];
     public $incrementing = false;
-    protected $guarded = [];
+    protected $fillable = [
+        'route_id',
+        'route_detail_id',
+        'hotel_id',
+        'hotel_breakfast_yes_no_div',
+        'hotel_dinner_yes_no_div',
+        'hotel_rate',
+        'hotel_minutes',
+        'hotel_check_in_time',
+        'hotel_check_out_time',
+        'hotel_cost',
+    ];
 
     public function hotelBreakfastYesNo(): BelongsTo
     {
