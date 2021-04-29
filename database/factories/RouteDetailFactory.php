@@ -38,7 +38,6 @@ class RouteDetailFactory extends Factory
     {
         return [
             'route_id' => Route::factory(),
-            'order' => 0,
             'bean_kind_div' => 0,
         ];
     }
@@ -48,15 +47,6 @@ class RouteDetailFactory extends Factory
         return $this->state(function () use ($beanKindDiv) {
             return [
                 'bean_kind_div' => $beanKindDiv,
-            ];
-        });
-    }
-
-    public function setOrder(int $order): RouteDetailFactory
-    {
-        return $this->state(function () use ($order) {
-            return [
-                'order' => $order,
             ];
         });
     }

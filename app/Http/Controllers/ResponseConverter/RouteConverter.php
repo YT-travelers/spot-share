@@ -47,8 +47,6 @@ class RouteConverter
             'routeId' => $routeDetail->route_id,
             'beanKindDiv' => $routeDetail->beanKind->div_value,
             'beanKindDivName' => $routeDetail->beanKind->div_key_name,
-            'order' => $routeDetail->order,
-            //TODO: deleteRequestFlg
             'routeDetailTourism' => $routeDetailTourism,
             'routeDetailRestaurant' => $routeDetailRestaurant,
             'routeDetailHotel' => $routeDetailHotel,

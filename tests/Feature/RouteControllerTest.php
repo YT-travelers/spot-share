@@ -33,7 +33,6 @@ class RouteControllerTest extends TestCase
                 'routeId',
                 'beanKindDiv',
                 'beanKindDivName',
-                'order',
                 'routeDetailTourism',
                 'routeDetailRestaurant',
                 'routeDetailHotel',
