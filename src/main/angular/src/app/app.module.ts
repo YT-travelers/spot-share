@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { AddTourismPageModule } from 'src/app/add-spot-page/add-tourism-page/add-tourism-page.module'
 import { AddRestaurantPageModule } from 'src/app/add-spot-page/add-restaurant-page/add-restaurant-page.module'
 import { AddHotelPageModule } from 'src/app/add-spot-page/add-hotel-page/add-hotel-page.module'
-// import { AddActiityPageModule } from 'src/app/add-spot-page/add-actiity-page/add-actiity-page.module'
+import { AddActivityPageModule } from 'src/app/add-spot-page/add-activity-page/add-activity-page.module'
 import { CreateRoutePageModule } from './create-route-page/create-route-page.module';
 import { RouteDetailTourismBeanModule } from './route-detail-bean/route-detail-tourism-bean/route-detail-tourism-bean.module';
 import { RouteDetailRestaurantBeanModule } from './route-detail-bean/route-detail-restaurant-bean/route-detail-restaurant-bean.module';
@@ -38,7 +38,7 @@ import { InputRouteNameModalModule } from './shared/input-route-name-modal/input
     AddTourismPageModule,
     AddRestaurantPageModule,
     AddHotelPageModule,
-    // AddActiityPageModule,
+    AddActivityPageModule,
     CreateRoutePageModule,
     RouteDetailTourismBeanModule,
     RouteDetailRestaurantBeanModule,

@@ -4,40 +4,40 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
-import { IHotel } from 'src/app/model/hotel';
-import { HotelService } from 'src/app/shared/hotel.service';
+import { IActivity } from 'src/app/model/activity';
+import { ActivityService } from 'src/app/shared/activity.service';
 
-// ホテル編集モード列挙値
+// アクティビティ編集モード列挙値
 export enum EditMode {
-  // 新規モード（URL例：add-hotel-page）
+  // 新規モード（URL例：add-activity-page）
   new,
-  // 編集モード（URL例：add-hotel-page;id=1）
+  // 編集モード（URL例：add-activity-page;id=1）
   edit,
   // ルート作成モード
   routeCreate,
 }
 
 @Component({
-  selector: 'app-add-hotel-page',
-  templateUrl: './add-hotel-page.component.html',
-  styleUrls: ['./add-hotel-page.component.scss']
+  selector: 'app-add-activity-page',
+  templateUrl: './add-activity-page.component.html',
+  styleUrls: ['./add-activity-page.component.scss']
 })
-export class AddHotelPageComponent implements OnInit {
+export class AddActivityPageComponent implements OnInit {
 
-  /** ルート作成画面で選択されたホテル情報が格納される */
-  @Input() selectedHotel: IHotel;
+  /** ルート作成画面で選択されたアクティビティ情報が格納される */
+  @Input() selectedActivity: IActivity;
 
-  /** ホテル編集モード */
+  /** アクティビティ編集モード */
   editMode
 
-  /** ホテル編集モード（HTML用） */
+  /** アクティビティ編集モード（HTML用） */
   EditMode = EditMode;
 
   /** 編集対象 */
-  hotel: IHotel = {};
+  activity: IActivity = {};
 
-  /** 画面上に表示するホテル情報のID */
-  hotelId = '';
+  /** 画面上に表示するアクティビティ情報のID */
+  activityId = '';
 
   /** 画像タイトル */
   imageTitle = '';
@@ -48,22 +48,22 @@ export class AddHotelPageComponent implements OnInit {
   /** 正規表現　全角数字 or 半角数字のみ */
   patternNumber = /[0-9０-９]/;
 
-  /** ホテル情報 フォームグループ */
-  addHotelFormGroup = new FormGroup({
-    /** ホテルID */
-    hotelId: new FormControl(this.hotel.hotelId),
-    /**  ホテル名称 */
-    hotelName: new FormControl(this.hotel.hotelName, [Validators.required]),
+  /** アクティビティ情報 フォームグループ */
+  addActivityFormGroup = new FormGroup({
+    /** アクティビティID */
+    activityId: new FormControl(this.activity.activityId),
+    /**  アクティビティ名称 */
+    activityName: new FormControl(this.activity.activityName, [Validators.required]),
     /** 住所 */
-    hotelAddress: new FormControl(this.hotel.hotelAddress, [Validators.pattern('^[0-9]*$')]),
+    activityAddress: new FormControl(this.activity.activityAddress, [Validators.pattern('^[0-9]*$')]),
     /** url */
-    hotelUrl: new FormControl(this.hotel.hotelUrl),
+    activityUrl: new FormControl(this.activity.activityUrl),
   });
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: HotelService,
+    private service: ActivityService,
     private toastr: ToastrService,
   ) {}
 
@@ -73,21 +73,21 @@ export class AddHotelPageComponent implements OnInit {
   ngOnInit() {
 
     // 所要時間はデフォルトで１時間とする
-    this.addHotelFormGroup.patchValue({
+    this.addActivityFormGroup.patchValue({
       costExpectation: 0,
       requiredHours: 1,
       requiredMinutes: 0
     })
 
-    // ホテル編集モードの判定
-    this.hotelId = this.route.snapshot.paramMap.get('hotelId');
-    if (this.hotelId) {
-      // 既存ホテル編集モード
+    // アクティビティ編集モードの判定
+    this.activityId = this.route.snapshot.paramMap.get('activityId');
+    if (this.activityId) {
+      // 既存アクティビティ編集モード
       this.editMode = EditMode.edit;
-      this.service.getHotel(this.hotelId).subscribe(result => {
+      this.service.getActivity(this.activityId).subscribe(result => {
         if (result) {
-          this.hotel = result;
-          this.addHotelFormGroup.patchValue(this.hotel);
+          this.activity = result;
+          this.addActivityFormGroup.patchValue(this.activity);
         } else {
           // IDによるGET処理に失敗した場合は、新規モードで画面を開く
           this.editMode = EditMode.new;
@@ -97,7 +97,7 @@ export class AddHotelPageComponent implements OnInit {
         this.editMode = EditMode.new;
       });
 
-    } else if (this.selectedHotel) {
+    } else if (this.selectedActivity) {
       // ルート作成モード
       this.editMode = EditMode.routeCreate;
 
@@ -120,23 +120,23 @@ export class AddHotelPageComponent implements OnInit {
       return;
     }
 
-    this.hotel = this.addHotelFormGroup.value;
+    this.activity = this.addActivityFormGroup.value;
 
     switch (this.editMode) {
       case EditMode.new:
-        this.service.createHotel(this.hotel).subscribe(() => {
+        this.service.createActivity(this.activity).subscribe(() => {
           this.toastr.success('登録が完了しました。', '成功');
           if (this.continueCreateFlg) {
             // 連続作成フラグがONの場合、編集対象をクリアする
-            this.hotel = {};
-            this.addHotelFormGroup.reset();
+            this.activity = {};
+            this.addActivityFormGroup.reset();
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
       break;
       case EditMode.edit:
-        this.service.updateHotel(this.hotel, this.hotelId).subscribe(result => {
+        this.service.updateActivity(this.activity, this.activityId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
@@ -149,7 +149,7 @@ export class AddHotelPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack() {
-    // TODO ホテル一覧タブが表示された状態で遷移させる
+    // TODO アクティビティ一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
 
@@ -159,15 +159,15 @@ export class AddHotelPageComponent implements OnInit {
    */
   onChangeCostExpectation() {
     // 数字のみチェック
-    let value = this.addHotelFormGroup.controls.costExpectation.value;
+    let value = this.addActivityFormGroup.controls.costExpectation.value;
     const pattern = /[0-9０-９]/;
     if (!pattern.test(value)) {
-      this.addHotelFormGroup.controls.costExpectation.setValue(0);
+      this.addActivityFormGroup.controls.costExpectation.setValue(0);
       return;
     }
 
     // 全角を半角に変換
-    this.addHotelFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
+    this.addActivityFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
   }
 
   /**
@@ -176,14 +176,14 @@ export class AddHotelPageComponent implements OnInit {
    */
   onChangeHours() {
     // 数字のみチェック
-    let value = this.addHotelFormGroup.controls.requiredHours.value;
+    let value = this.addActivityFormGroup.controls.requiredHours.value;
     if (!this.patternNumber.test(value)) {
-      this.addHotelFormGroup.controls.requiredHours.setValue(0);
+      this.addActivityFormGroup.controls.requiredHours.setValue(0);
       return;
     }
 
     // 全角を半角に変換
-    this.addHotelFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+    this.addActivityFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
   }
 
   /**
@@ -192,9 +192,9 @@ export class AddHotelPageComponent implements OnInit {
    */
   onChangeMinutes() {
     // 数字のみチェック
-    let value = this.addHotelFormGroup.controls.requiredMinutes.value;
+    let value = this.addActivityFormGroup.controls.requiredMinutes.value;
     if (!this.patternNumber.test(value)) {
-      this.addHotelFormGroup.controls.requiredMinutes.setValue(0);
+      this.addActivityFormGroup.controls.requiredMinutes.setValue(0);
       return;
     }
 
@@ -204,9 +204,9 @@ export class AddHotelPageComponent implements OnInit {
     // 60(分)より高い値の場合は 60(分)に変換
     const maxMinutes = 60;
     if (Number(value) > maxMinutes ) {
-      this.addHotelFormGroup.controls.requiredMinutes.setValue(maxMinutes);
+      this.addActivityFormGroup.controls.requiredMinutes.setValue(maxMinutes);
     } else {
-      this.addHotelFormGroup.controls.requiredMinutes.setValue(value);
+      this.addActivityFormGroup.controls.requiredMinutes.setValue(value);
     }
   }
 
@@ -218,13 +218,13 @@ export class AddHotelPageComponent implements OnInit {
    * @return true → エラー有り
    */
   validate(): boolean {
-    this.addHotelFormGroup.controls.hotelName.markAsDirty();
-    this.addHotelFormGroup.controls.country.markAsDirty();
+    this.addActivityFormGroup.controls.activityName.markAsDirty();
+    this.addActivityFormGroup.controls.country.markAsDirty();
 
     let valid = false;
 
     // formGroupでのエラー検証
-    valid = this.addHotelFormGroup.invalid;
+    valid = this.addActivityFormGroup.invalid;
 
     return valid; 
   }
