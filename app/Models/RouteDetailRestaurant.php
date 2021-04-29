@@ -13,7 +13,17 @@ class RouteDetailRestaurant extends Model
 
     protected $primaryKey = ['route_id', 'route_detail_id'];
     public $incrementing = false;
-    protected $guarded = [];
+    protected $fillable = [
+        'route_id',
+        'route_detail_id',
+        'restaurant_id',
+        'restaurant_meal_kind_div',
+        'restaurant_rate',
+        'restaurant_minutes',
+        'restaurant_start_time',
+        'restaurant_end_time',
+        'restaurant_cost',
+    ];
 
     public function restaurant(): BelongsTo
     {

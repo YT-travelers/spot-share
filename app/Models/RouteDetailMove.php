@@ -13,7 +13,13 @@ class RouteDetailMove extends Model
 
     protected $primaryKey = ['route_id', 'route_detail_id'];
     public $incrementing = false;
-    protected $guarded = [];
+    protected $fillable = [
+        'route_id',
+        'route_detail_id',
+        'move_way_div',
+        'move_minutes',
+        'move_cost',
+    ];
 
     public function moveWay(): BelongsTo
     {

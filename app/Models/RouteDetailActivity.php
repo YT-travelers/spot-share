@@ -12,7 +12,16 @@ class RouteDetailActivity extends Model
 
     protected $primaryKey = ['route_id', 'route_detail_id'];
     public $incrementing = false;
-    protected $guarded = [];
+    protected $fillable = [
+        'route_id',
+        'route_detail_id',
+        'activity_id',
+        'activity_rate',
+        'activity_minutes',
+        'activity_start_time',
+        'activity_end_time',
+        'activity_cost',
+    ];
 
     public function activity(): BelongsTo
     {
