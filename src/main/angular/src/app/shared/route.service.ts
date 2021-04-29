@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { IRoute } from '../model/route';
+import { IRoute } from 'src/app/model/route';
 
 @Injectable({ providedIn: 'root' })
 export class RouteService {

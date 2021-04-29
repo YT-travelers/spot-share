@@ -4,28 +4,28 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
-import { IRestaurant } from 'src/app/model/restaurant';
-import { RestaurantService } from 'src/app/shared/restaurant.service';
+import { IHotel } from 'src/app/model/hotel';
+import { HotelService } from 'src/app/shared/hotel.service';
 
 // 飲食店編集モード列挙値
 export enum EditMode {
-  // 新規モード（URL例：add-restaurant-page）
+  // 新規モード（URL例：add-hotel-page）
   new,
-  // 編集モード（URL例：add-restaurant-page;id=1）
+  // 編集モード（URL例：add-hotel-page;id=1）
   edit,
   // ルート作成モード
   routeCreate,
 }
 
 @Component({
-  selector: 'app-add-restaurant-page',
-  templateUrl: './add-restaurant-page.component.html',
-  styleUrls: ['./add-restaurant-page.component.scss']
+  selector: 'app-add-hotel-page',
+  templateUrl: './add-hotel-page.component.html',
+  styleUrls: ['./add-hotel-page.component.scss']
 })
-export class AddRestaurantPageComponent implements OnInit {
+export class AddHotelPageComponent implements OnInit {
 
   /** ルート作成画面で選択された飲食店情報が格納される */
-  @Input() selectedRestaurant: IRestaurant;
+  @Input() selectedHotel: IHotel;
 
   /** 飲食店編集モード */
   editMode
@@ -34,10 +34,10 @@ export class AddRestaurantPageComponent implements OnInit {
   EditMode = EditMode;
 
   /** 編集対象 */
-  restaurant: IRestaurant = {};
+  hotel: IHotel = {};
 
   /** 画面上に表示する飲食店情報のID */
-  restaurantId = '';
+  hotelId = '';
 
   /** 画像タイトル */
   imageTitle = '';
@@ -49,25 +49,21 @@ export class AddRestaurantPageComponent implements OnInit {
   patternNumber = /[0-9０-９]/;
 
   /** 飲食店情報 フォームグループ */
-  addRestaurantFormGroup = new FormGroup({
+  addHotelFormGroup = new FormGroup({
     /** 飲食店ID */
-    restaurantId: new FormControl(this.restaurant.restaurantId),
+    hotelId: new FormControl(this.hotel.hotelId),
     /**  飲食店名称 */
-    restaurantName: new FormControl(this.restaurant.restaurantName, [Validators.required]),
-    /** 営業開始時間 */
-    restaurantOpenTime: new FormControl(this.restaurant.restaurantOpenTime),
-    /** 営業終了時間 */
-    restaurantCloseTime: new FormControl(this.restaurant.restaurantCloseTime, [ Validators.min(0), Validators.max(60)]),
+    hotelName: new FormControl(this.hotel.hotelName, [Validators.required]),
     /** 住所 */
-    restaurantAddress: new FormControl(this.restaurant.restaurantAddress, [Validators.pattern('^[0-9]*$')]),
+    hotelAddress: new FormControl(this.hotel.hotelAddress, [Validators.pattern('^[0-9]*$')]),
     /** url */
-    restaurantUrl: new FormControl(this.restaurant.restaurantUrl),
+    hotelUrl: new FormControl(this.hotel.hotelUrl),
   });
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private service: RestaurantService,
+    private service: HotelService,
     private toastr: ToastrService,
   ) {}
 
@@ -77,21 +73,21 @@ export class AddRestaurantPageComponent implements OnInit {
   ngOnInit() {
 
     // 所要時間はデフォルトで１時間とする
-    this.addRestaurantFormGroup.patchValue({
+    this.addHotelFormGroup.patchValue({
       costExpectation: 0,
       requiredHours: 1,
       requiredMinutes: 0
     })
 
     // 飲食店編集モードの判定
-    this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
-    if (this.restaurantId) {
+    this.hotelId = this.route.snapshot.paramMap.get('hotelId');
+    if (this.hotelId) {
       // 既存飲食店編集モード
       this.editMode = EditMode.edit;
-      this.service.getRestaurant(this.restaurantId).subscribe(result => {
+      this.service.getHotel(this.hotelId).subscribe(result => {
         if (result) {
-          this.restaurant = result;
-          this.addRestaurantFormGroup.patchValue(this.restaurant);
+          this.hotel = result;
+          this.addHotelFormGroup.patchValue(this.hotel);
         } else {
           // IDによるGET処理に失敗した場合は、新規モードで画面を開く
           this.editMode = EditMode.new;
@@ -101,7 +97,7 @@ export class AddRestaurantPageComponent implements OnInit {
         this.editMode = EditMode.new;
       });
 
-    } else if (this.selectedRestaurant) {
+    } else if (this.selectedHotel) {
       // ルート作成モード
       this.editMode = EditMode.routeCreate;
 
@@ -124,23 +120,23 @@ export class AddRestaurantPageComponent implements OnInit {
       return;
     }
 
-    this.restaurant = this.addRestaurantFormGroup.value;
+    this.hotel = this.addHotelFormGroup.value;
 
     switch (this.editMode) {
       case EditMode.new:
-        this.service.createRestaurant(this.restaurant).subscribe(() => {
+        this.service.createHotel(this.hotel).subscribe(() => {
           this.toastr.success('登録が完了しました。', '成功');
           if (this.continueCreateFlg) {
             // 連続作成フラグがONの場合、編集対象をクリアする
-            this.restaurant = {};
-            this.addRestaurantFormGroup.reset();
+            this.hotel = {};
+            this.addHotelFormGroup.reset();
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
       break;
       case EditMode.edit:
-        this.service.updateRestaurant(this.restaurant, this.restaurantId).subscribe(result => {
+        this.service.updateHotel(this.hotel, this.hotelId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
@@ -163,15 +159,15 @@ export class AddRestaurantPageComponent implements OnInit {
    */
   onChangeCostExpectation() {
     // 数字のみチェック
-    let value = this.addRestaurantFormGroup.controls.costExpectation.value;
+    let value = this.addHotelFormGroup.controls.costExpectation.value;
     const pattern = /[0-9０-９]/;
     if (!pattern.test(value)) {
-      this.addRestaurantFormGroup.controls.costExpectation.setValue(0);
+      this.addHotelFormGroup.controls.costExpectation.setValue(0);
       return;
     }
 
     // 全角を半角に変換
-    this.addRestaurantFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
+    this.addHotelFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
   }
 
   /**
@@ -180,14 +176,14 @@ export class AddRestaurantPageComponent implements OnInit {
    */
   onChangeHours() {
     // 数字のみチェック
-    let value = this.addRestaurantFormGroup.controls.requiredHours.value;
+    let value = this.addHotelFormGroup.controls.requiredHours.value;
     if (!this.patternNumber.test(value)) {
-      this.addRestaurantFormGroup.controls.requiredHours.setValue(0);
+      this.addHotelFormGroup.controls.requiredHours.setValue(0);
       return;
     }
 
     // 全角を半角に変換
-    this.addRestaurantFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+    this.addHotelFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
   }
 
   /**
@@ -196,9 +192,9 @@ export class AddRestaurantPageComponent implements OnInit {
    */
   onChangeMinutes() {
     // 数字のみチェック
-    let value = this.addRestaurantFormGroup.controls.requiredMinutes.value;
+    let value = this.addHotelFormGroup.controls.requiredMinutes.value;
     if (!this.patternNumber.test(value)) {
-      this.addRestaurantFormGroup.controls.requiredMinutes.setValue(0);
+      this.addHotelFormGroup.controls.requiredMinutes.setValue(0);
       return;
     }
 
@@ -208,9 +204,9 @@ export class AddRestaurantPageComponent implements OnInit {
     // 60(分)より高い値の場合は 60(分)に変換
     const maxMinutes = 60;
     if (Number(value) > maxMinutes ) {
-      this.addRestaurantFormGroup.controls.requiredMinutes.setValue(maxMinutes);
+      this.addHotelFormGroup.controls.requiredMinutes.setValue(maxMinutes);
     } else {
-      this.addRestaurantFormGroup.controls.requiredMinutes.setValue(value);
+      this.addHotelFormGroup.controls.requiredMinutes.setValue(value);
     }
   }
 
@@ -222,13 +218,13 @@ export class AddRestaurantPageComponent implements OnInit {
    * @return true → エラー有り
    */
   validate(): boolean {
-    this.addRestaurantFormGroup.controls.restaurantName.markAsDirty();
-    this.addRestaurantFormGroup.controls.country.markAsDirty();
+    this.addHotelFormGroup.controls.hotelName.markAsDirty();
+    this.addHotelFormGroup.controls.country.markAsDirty();
 
     let valid = false;
 
     // formGroupでのエラー検証
-    valid = this.addRestaurantFormGroup.invalid;
+    valid = this.addHotelFormGroup.invalid;
 
     return valid; 
   }

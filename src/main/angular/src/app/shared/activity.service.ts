@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { IActivity } from '../model/activity';
+import { IActivity } from 'src/app/model/activity';
 
 @Injectable({ providedIn: 'root' })
 export class ActivityService {

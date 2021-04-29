@@ -9,13 +9,13 @@ import { debounceTime } from 'rxjs/operators';
 import { forEach as _forEach, filter as _filter } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 
-import { ITourism } from '../model/tourism';
-import { IRoute } from '../model/route';
-import { TourismService } from '../shared/tourism.service'
-import { RouteService } from '../shared/route.service';
-import { SelectModalService } from '../shared/select-modal/select-modal.service';
-import { IRouteDetail } from '../model/route-detail';
-import { Code } from '../const/code-div.const';
+import { ITourism } from 'src/app/model/tourism';
+import { IRoute } from 'src/app/model/route';
+import { TourismService } from 'src/app/shared/tourism.service'
+import { RouteService } from 'src/app/shared/route.service';
+import { SelectModalService } from 'src/app/shared/select-modal/select-modal.service';
+import { IRouteDetail } from 'src/app/model/route-detail';
+import { Code } from 'src/app/const/code-div.const';
 
 /**
  * スポット一覧ページ 表示モードを表す列挙値
@@ -201,6 +201,20 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
    */
   onClickAddRestaurant() {
     this.router.navigate(['/add-restaurant-page']);
+  }
+
+  /**
+   * ホテル登録ボタン押下イベント
+   */
+  onClickAddHotel() {
+    this.router.navigate(['/add-hotel-page']);
+  }
+
+  /**
+   * アクティビティ登録ボタン押下イベント
+   */
+  onClickAddActivity() {
+    this.router.navigate(['/add-activity-page']);
   }
 
   /**

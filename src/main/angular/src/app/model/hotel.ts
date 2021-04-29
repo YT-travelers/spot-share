@@ -15,5 +15,5 @@ export interface IHotel {
   /** 住所 */
   hotelAddress?: string;
   /** URL */
-  tourismUrl?: string;
+  hotelUrl?: string;
 }
