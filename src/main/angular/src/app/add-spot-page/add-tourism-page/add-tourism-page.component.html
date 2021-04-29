@@ -37,9 +37,9 @@
         </div>
         <div class="panel-item">
           <div class="panel-item-title">国</div>
-          <div class="panel-item-input" [formGroup]="countryFormGroup">
+          <div class="panel-item-input" [formGroup]="country">
             <div class="w-100">
-              <div *ngIf="countryFormGroup.controls.countryName.invalid && countryFormGroup.controls.countryName.dirty" class="validator-error">
+              <div *ngIf="country.controls.countryName.invalid && country.controls.countryName.dirty" class="validator-error">
                 未入力です
               </div>
               <input class="form-control" type="text" matInput
@@ -65,18 +65,18 @@
         <div class="panel-item">
           <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="tourismOpenTime" (change)="onChangeHours()">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTime" (change)="onChangeHours($event)">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" formControlName="tourismCloseTime" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTime" (change)="onChangeMinutes($event)">
             <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">営業終了時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="tourismOpenTime" (change)="onChangeHours()">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTime" (change)="onChangeHours($event)">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" formControlName="tourismCloseTime" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTime" (change)="onChangeMinutes($event)">
             <span class="spacer">分</span>
           </div>
         </div>

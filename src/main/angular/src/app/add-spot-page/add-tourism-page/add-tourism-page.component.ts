@@ -65,20 +65,20 @@ export class AddTourismPageComponent implements OnInit {
     /**  観光地名称 */
     tourismName: new FormControl(this.tourism.tourismName, [Validators.required]),
     /** 国 */
-    countryFormGroup: new FormGroup({
+    country: new FormGroup({
       /** 国コード（画面非表示） */
       countryCode: new FormControl(this.tourism.country.countryCode),
       /** 国名称 */
       countryName: new FormControl(this.tourism.country.countryName, [Validators.required]),
     }),
     /** 営業開始時間 */
-    tourismOpenTime: new FormControl(this.tourism.tourismOpenTime),
+    tourismOpenTime: new FormControl(this.tourism.tourismOpenTime, [ Validators.min(0), Validators.max(24)]),
     /** 営業終了時間 */
     tourismCloseTime: new FormControl(this.tourism.tourismCloseTime, [ Validators.min(0), Validators.max(60)]),
     /** 概要 */
     tourismSummary: new FormControl(this.tourism.tourismSummary),
     /** 住所 */
-    tourismAddress: new FormControl(this.tourism.tourismAddress, [Validators.pattern('^[0-9]*$')]),
+    tourismAddress: new FormControl(this.tourism.tourismAddress),
     /** url */
     tourismUrl: new FormControl(this.tourism.tourismUrl),
   });
@@ -96,18 +96,12 @@ export class AddTourismPageComponent implements OnInit {
 
   ngOnInit() {
 
-    // 所要時間はデフォルトで１時間とする
-    this.addTourismFormGroup.patchValue({
-      costExpectation: 0,
-      requiredHours: 1,
-      requiredMinutes: 0
-    })
-
+    // 国マスタ取得
     this.countryService.searchCountries().subscribe(result => {
       this.allCountries = result;
 
       // 国インプットのインクリメンタルサーチ購読
-      this.filteredCountries = this.countryFormGroup.valueChanges
+      this.filteredCountries = this.country.valueChanges
       .pipe(
         debounceTime(100),
         startWith(''),
@@ -172,7 +166,7 @@ export class AddTourismPageComponent implements OnInit {
         });
       break;
       case EditMode.edit:
-        this.service.updateTourism(this.tourism, this.tourismId).subscribe(result => {
+        this.service.updateTourism(this.tourism, this.tourismId).subscribe(() => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
@@ -197,74 +191,39 @@ export class AddTourismPageComponent implements OnInit {
   onBlurCountry() {
     setTimeout(() => {
       const country: ICountry[] = _filter(this.allCountries, e => {
-        return e.countryName === this.countryFormGroup.value.countryName;    
+        return e.countryName === this.country.value.countryName;    
       });
   
       if (country.length === 1) {
         // 存在チェックOK  国コードを設定
-        this.countryFormGroup.controls.countryCode.setValue(country[0].countryCode);
+        this.country.controls.countryCode.setValue(country[0].countryCode);
       } else {
         // 存在チェックNG  国名称をクリア
-        this.countryFormGroup.controls.countryName.setValue('');
+        this.country.controls.countryName.setValue('');
       }      
     }, 100)
   }
 
   /**
-   * 費用（予算）の変更イベント
-   * 入力チェック ＋ 変換
-   */
-  onChangeCostExpectation() {
-    // 数字のみチェック
-    let value = this.addTourismFormGroup.controls.costExpectation.value;
-    const pattern = /[0-9０-９]/;
-    if (!pattern.test(value)) {
-      this.addTourismFormGroup.controls.costExpectation.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addTourismFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
-  }
-
-  /**
    * 時間の変更イベント
    * 入力チェック ＋ 変換
+   * @param 入力値（時間）
    */
-  onChangeHours() {
-    // 数字のみチェック
-    let value = this.addTourismFormGroup.controls.requiredHours.value;
-    if (!this.patternNumber.test(value)) {
-      this.addTourismFormGroup.controls.requiredHours.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addTourismFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+  onChangeHours(event) {
+    // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
+    // TODO 時間と分を結合した値を、設定する必要がある
+    this.complementHour(event);
   }
 
   /**
    * 時間（分）の変更イベント
    * 入力チェック ＋ 変換
+   * @param 入力値（分）
    */
-  onChangeMinutes() {
-    // 数字のみチェック
-    let value = this.addTourismFormGroup.controls.requiredMinutes.value;
-    if (!this.patternNumber.test(value)) {
-      this.addTourismFormGroup.controls.requiredMinutes.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    value = this.toHalfWidth(value);
-
-    // 60(分)より高い値の場合は 60(分)に変換
-    const maxMinutes = 60;
-    if (Number(value) > maxMinutes ) {
-      this.addTourismFormGroup.controls.requiredMinutes.setValue(maxMinutes);
-    } else {
-      this.addTourismFormGroup.controls.requiredMinutes.setValue(value);
-    }
+  onChangeMinutes(event) {
+    // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
+    // TODO 時間と分を結合した値を、設定する必要がある
+    this.complementMinutes(event);
   }
 
   // -----------------------------------------------------------------------
@@ -286,9 +245,9 @@ export class AddTourismPageComponent implements OnInit {
    * 入力値検証
    * @return true → エラー有り
    */
-  validate(): boolean {
+  private validate(): boolean {
     this.addTourismFormGroup.controls.tourismName.markAsDirty();
-    this.countryFormGroup.controls.countryName.markAsDirty();
+    this.country.controls.countryName.markAsDirty();
 
     let valid = false;
 
@@ -296,7 +255,7 @@ export class AddTourismPageComponent implements OnInit {
     if (this.addTourismFormGroup.invalid) {
       valid = true;
     }
-    if (this.countryFormGroup.invalid) {
+    if (this.country.invalid) {
       valid = true;
     }    
 
@@ -304,9 +263,60 @@ export class AddTourismPageComponent implements OnInit {
   }
 
   /**
-   * 半角を全角に変換します。
+   * 「時間」の入力値を補完します。
+   * ・数字以外の場合、"0"を返却
+   * ・全角の場合、半角に変換
+   * ・23より大きい数字の場合は、23に変換
+   * @param value 入力値（時間）
+   * @returns 変換後の値
    */
-  toHalfWidth(value) {
+   private complementHour(value: string) {
+    // 「数字」以外の場合、"0"を返却
+    if (!this.patternNumber.test(value)) {
+      return "0";
+    }
+    // 全角を半角に変換
+    value = this.toHalfWidth(value);
+
+    // 23(時)より高い値の場合は 23(時)に変換
+    const maxMinutes = 23;
+    if (Number(value) > maxMinutes ) {
+      return maxMinutes.toString();
+    } else {
+      return value;
+    }
+  }
+
+  /**
+   * 「分」の入力値を補完します。
+   * ・数字以外の場合、"0"を返却
+   * ・全角の場合、半角に変換
+   * ・59より大きい数字の場合は、59に変換
+   * @param value 入力値（分）
+   * @returns 変換後の値
+   */
+   private complementMinutes(value: string) {
+    // 「数字」以外の場合、"0"を返却
+    if (!this.patternNumber.test(value)) {
+      return "0";
+    }
+
+    // 全角を半角に変換
+    value = this.toHalfWidth(value);
+
+    // 59(分)より高い値の場合は 59(分)に変換
+    const maxMinutes = 59;
+    if (Number(value) > maxMinutes ) {
+      return maxMinutes.toString();
+    } else {
+      return value;
+    }
+  }
+
+  /**
+   * 半角数字を全角数字に変換します。
+   */
+   private toHalfWidth(value) {
     return value.replace(/[０-９]/g, s => {
       return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
     });
@@ -316,8 +326,8 @@ export class AddTourismPageComponent implements OnInit {
   // getter
 
   /** 国 */
-  get countryFormGroup(): FormGroup {
-    return this.addTourismFormGroup.get('countryFormGroup') as FormGroup
+  get country(): FormGroup {
+    return this.addTourismFormGroup.get('country') as FormGroup
   }
 
 }
