@@ -35,6 +35,7 @@ class RouteSeeder extends Seeder
                 $routeFactory = $routeFactory->has(
                     RouteDetail::factory()
                                 ->setBeanKindDiv($beanKindValue)
+                                ->setRouteDetailId($index + 1)
                 );
             }
             $routeFactory->create();

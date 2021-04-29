@@ -12,8 +12,9 @@ class RouteDetail extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'route_detail_id';
-    protected $guarded = ['route_detail_id'];
+    protected $primaryKey = ['route_id', 'route_detail_id'];
+    public $incrementing = false;
+    protected $fillable = ['route_id', 'route_detail_id', 'bean_kind_div'];
 
     public function route(): BelongsTo
     {
@@ -27,47 +28,57 @@ class RouteDetail extends Model
 
     public function routeDetailTourism(): HasOne
     {
-        return $this->hasOne(RouteDetailTourism::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailTourism::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailRestaurant(): HasOne
     {
-        return $this->hasOne(RouteDetailRestaurant::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailRestaurant::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailHotel(): HasOne
     {
-        return $this->hasOne(RouteDetailHotel::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailHotel::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailActivity(): HasOne
     {
-        return $this->hasOne(RouteDetailActivity::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailActivity::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailMeal(): HasOne
     {
-        return $this->hasOne(RouteDetailMeal::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailMeal::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailMove(): HasOne
     {
-        return $this->hasOne(RouteDetailMove::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailMove::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailTime(): HasOne
     {
-        return $this->hasOne(RouteDetailTime::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailTime::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailChecklist(): HasOne
     {
-        return $this->hasOne(RouteDetailChecklist::class, 'route_detail_id', 'route_detail_id');
+        return $this->hasOne(RouteDetailChecklist::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     public function routeDetailMemo(): HasOne
     {
-        return $this->hasOne(RouteDetailMemo::class, 'route_detail_id', 'route_detail_id');
+        return $this
+            ->hasOne(RouteDetailMemo::class, 'route_detail_id', 'route_detail_id')
+            ->where('route_id', $this->route_id);
     }
 
     /**

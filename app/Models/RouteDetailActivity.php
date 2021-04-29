@@ -10,9 +10,9 @@ class RouteDetailActivity extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'route_detail_id';
-
-    protected $guarded = ['route_detail_id'];
+    protected $primaryKey = ['route_id', 'route_detail_id'];
+    public $incrementing = false;
+    protected $guarded = [];
 
     public function activity(): BelongsTo
     {

@@ -25,7 +25,7 @@ class RouteDetailFactory extends Factory
             $className = get_class($relevantModel);
             /** @var Factory $factory */
             $factory = $className::factory();
-            $factory->setRouteDetailId($routeDetail->route_detail_id)->create();
+            $factory->setRouteDetailId($routeDetail->route_detail_id, $routeDetail->route_id)->create();
         });
     }
 
@@ -38,6 +38,7 @@ class RouteDetailFactory extends Factory
     {
         return [
             'route_id' => Route::factory(),
+            'route_detail_id' => null,
             'bean_kind_div' => 0,
         ];
     }
@@ -47,6 +48,15 @@ class RouteDetailFactory extends Factory
         return $this->state(function () use ($beanKindDiv) {
             return [
                 'bean_kind_div' => $beanKindDiv,
+            ];
+        });
+    }
+
+    public function setRouteDetailId(int $routeDetailId): RouteDetailFactory
+    {
+        return $this->state(function () use ($routeDetailId) {
+            return [
+                'route_detail_id' => $routeDetailId,
             ];
         });
     }

@@ -48,8 +48,15 @@ class RouteService
 
             $route->route_name= $routeData['route_name'];
             $route->save();
-            $routeDetailDataList = $routeData['route_details'];
-            if (isset($routeDetailDataList)) {
+            //route_detail_idを配列の順番に採番
+            if (isset($routeData['route_details'])) {
+                $routeDetailDataList = Collection
+                    ::make($routeData['route_details'])
+                    ->map(function (array $routeDetailData, int $index) {
+                        $routeDetailData['route_detail_id'] = $index + 1;
+                        return $routeDetailData;
+                    })->toArray();
+                info($routeDetailDataList);
                 $route->routeDetails()->createMany($routeDetailDataList)->each(function (RouteDetail $routeDetail, int $index) use ($routeDetailDataList) {
                     $routeDetailData = $routeDetailDataList[$index];
                     $this->saveRouteDetailBean($routeDetail, $routeDetailData);
@@ -58,46 +65,46 @@ class RouteService
 
             return $route;
         });
-
     }
 
     private function saveRouteDetailBean(RouteDetail $routeDetail, array $routeDetailData)
     {
+        $data['route_id'] = $routeDetail->route_id;
         $beanKind = $routeDetail->beanKind;
         if ($beanKind->isTourism()) {
-            $data = $routeDetailData['route_detail_tourism'];
+            $data += $routeDetailData['route_detail_tourism'];
             $routeDetail->routeDetailTourism()->create($data);
         }
         if ($beanKind->isRestaurant()) {
-            $data = $routeDetailData['route_detail_restaurant'];
+            $data += $routeDetailData['route_detail_restaurant'];
             $routeDetail->routeDetailRestaurant()->create($data);
         }
         if ($beanKind->isHotel()) {
-            $data = $routeDetailData['route_detail_hotel'];
+            $data += $routeDetailData['route_detail_hotel'];
             $routeDetail->routeDetailHotel()->create($data);
         }
         if ($beanKind->isActivity()) {
-            $data = $routeDetailData['route_detail_activity'];
+            $data += $routeDetailData['route_detail_activity'];
             $routeDetail->routeDetailActivity()->create($data);
         }
         if ($beanKind->isMeal()) {
-            $data = $routeDetailData['route_detail_meal'];
+            $data += $routeDetailData['route_detail_meal'];
             $routeDetail->routeDetailMeal()->create($data);
         }
         if ($beanKind->isMove()) {
-            $data = $routeDetailData['route_detail_move'];
+            $data += $routeDetailData['route_detail_move'];
             $routeDetail->routeDetailMove()->create($data);
         }
         if ($beanKind->isTime()) {
-            $data = $routeDetailData['route_detail_time'];
+            $data += $routeDetailData['route_detail_time'];
             $routeDetail->routeDetailTime()->create($data);
         }
         if ($beanKind->isChecklist()) {
-            $data = $routeDetailData['route_detail_checklist'];
+            $data += $routeDetailData['route_detail_checklist'];
             $routeDetail->routeDetailChecklist()->create($data);
         }
         if ($beanKind->isMemo()) {
-            $data = $routeDetailData['route_detail_memo'];
+            $data += $routeDetailData['route_detail_memo'];
             $routeDetail->routeDetailMemo()->create($data);
         }
     }

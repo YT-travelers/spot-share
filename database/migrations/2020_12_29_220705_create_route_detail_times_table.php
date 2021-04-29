@@ -14,8 +14,10 @@ class CreateRouteDetailTimesTable extends Migration
     public function up()
     {
         Schema::create('route_detail_times', function (Blueprint $table) {
-            $table->unsignedBigInteger('route_detail_id')->primary();
-            $table->foreign('route_detail_id')->references('route_detail_id')->on('route_details')->cascadeOnDelete();
+            $table->unsignedBigInteger('route_detail_id');
+            $table->unsignedBigInteger('route_id');
+            $table->primary(['route_id', 'route_detail_id']);
+            $table->foreign(['route_id', 'route_detail_id'])->references(['route_id', 'route_detail_id'])->on('route_details')->cascadeOnDelete();
             $table->dateTime('schedule_date_time');
             $table->timestamps();
         });
