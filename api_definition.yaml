@@ -491,10 +491,6 @@ components:
       properties:
         beanKindDiv:
           type: integer
-        order:
-          type:
-            - integer
-            - 'null'
         routeDetailTourism:
           $ref: '#/components/schemas/RouteDetailTourism'
         routeDetailRestaurant:
@@ -519,7 +515,6 @@ components:
           type: integer
       required:
         - beanKindDiv
-        - order
     RouteDetailTourism:
       title: RouteDetailTourism
       type: object
@@ -542,6 +537,8 @@ components:
             - 'null'
         tourism:
           $ref: '#/components/schemas/Tourism'
+        routeId:
+          type: integer
       required:
         - routeDetailId
     Tourism:
@@ -616,6 +613,8 @@ components:
             - 'null'
         restaurant:
           $ref: '#/components/schemas/Restaurant'
+        routeId:
+          type: integer
       required:
         - routeDetailId
         - restaurantId
@@ -665,6 +664,8 @@ components:
             - 'null'
         hotel:
           $ref: '#/components/schemas/Hotel'
+        routeId:
+          type: integer
       required:
         - routeDetailId
         - hotelId
@@ -698,6 +699,8 @@ components:
             - 'null'
         activity:
           $ref: '#/components/schemas/Activity'
+        routeId:
+          type: integer
       required:
         - routeDetailId
         - activityId
@@ -720,6 +723,8 @@ components:
             - string
             - 'null'
         mealCost:
+          type: integer
+        routeId:
           type: integer
       required:
         - routeDetailId
@@ -745,6 +750,8 @@ components:
           type:
             - integer
             - 'null'
+        routeId:
+          type: integer
       required:
         - routeDetailId
     RouteDetailTime:
@@ -755,6 +762,8 @@ components:
           type: integer
         scheduleDateTime:
           type: string
+        routeId:
+          type: integer
       required:
         - routeDetailId
         - scheduleDateTime
@@ -768,6 +777,8 @@ components:
           type: string
         checkContent:
           type: string
+        routeId:
+          type: integer
       required:
         - routeDetailId
         - checkStatus
@@ -780,6 +791,8 @@ components:
           type: integer
         memoContent:
           type: string
+        routeId:
+          type: integer
       required:
         - routeDetailId
         - memoContent
