@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { filter as _filter } from 'lodash';
 
-import { ITourism } from '../model/tourism';
-import { TourismService } from '../shared/tourism.service';
+import { ITourism } from 'src/app//model/tourism';
+import { TourismService } from 'src/app/shared/tourism.service';
 
 // 観光地編集モード列挙値
 export enum EditMode {

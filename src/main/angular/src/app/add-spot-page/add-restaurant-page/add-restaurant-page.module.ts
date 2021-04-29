@@ -2,15 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { AddTourismPageComponent } from './add-tourism-page.component';
+import { AddRestaurantPageComponent } from './add-restaurant-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ImageInputModule } from '../shared/image-input/image-input.module';
+import { ImageInputModule } from 'src/app/shared/image-input/image-input.module';
 
 @NgModule({
   declarations: [
-    AddTourismPageComponent
+    AddRestaurantPageComponent
   ],
   imports: [
     BrowserModule,
@@ -23,8 +23,8 @@ import { ImageInputModule } from '../shared/image-input/image-input.module';
     ImageInputModule,
   ],
   exports: [
-    AddTourismPageComponent,
+    AddRestaurantPageComponent,
   ],
   providers: [],
 })
-export class AddTourismPageModule { }
+export class AddRestaurantPageModule { }

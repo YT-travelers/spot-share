@@ -197,6 +197,13 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * 飲食店登録ボタン押下イベント
+   */
+  onClickAddRestaurant() {
+    this.router.navigate(['/add-restaurant-page']);
+  }
+
+  /**
    * ルート追加ボタン押下イベント
    */
   onClickCreateRoute() {

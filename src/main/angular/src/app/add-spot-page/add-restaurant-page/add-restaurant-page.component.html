@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>スポット登録</title>
+  <title>飲食店登録</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta name="description" content="">
   <meta name="keywords" content="">
@@ -16,9 +16,9 @@
         <button type="button" (click)="onClickBack()" class="btn btn-outline-info back-button">
           <mat-icon>arrow_back</mat-icon>
         </button>
-        <span class="title">スポットを追加</span>
+        <span class="title">飲食店を追加</span>
       </div>
-      <form id="add-touris-item" class="panel-body" [formGroup]="addTourismFormGroup">
+      <form id="add-touris-item" class="panel-body" [formGroup]="addRestaurantFormGroup">
         <div class="panel-item">
           <share-image-input class="w-100">
           </share-image-input>
@@ -28,70 +28,41 @@
           <div class="panel-item-title">スポット名称</div>
           <div class="panel-item-input">
             <div class="w-100">
-              <div *ngIf="this.addTourismFormGroup.controls.tourismName.invalid && this.addTourismFormGroup.controls.tourismName.dirty" class="validator-error">
+              <div *ngIf="this.addRestaurantFormGroup.controls.restaurantName.invalid && this.addRestaurantFormGroup.controls.restaurantName.dirty" class="validator-error">
                 未入力です
               </div>
-              <input class="form-control" formControlName="tourismName" placeholder="必須">
+              <input class="form-control" formControlName="restaurantName" placeholder="必須">
             </div>
-          </div>
-        </div>
-        <div class="panel-item">
-          <div class="panel-item-title">国</div>
-          <div class="panel-item-input">
-            <input class="form-control" type="text" matInput
-              formControlName="country"
-              [matAutocomplete]="auto"
-              [formControl]="addTourismFormGroup.controls.country"
-              (blur)="onBlurCountry()"
-            >
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
-                {{country}}
-              </mat-option>
-            </mat-autocomplete>
-          </div>
-        </div>
-        <div class="panel-item">
-          <div class="panel-item-title">概要</div>
-          <div class="panel-item-input">
-            <textarea class="form-control" formControlName="tourismSummary"></textarea>
-          </div>
-        </div>
-        <div class="panel-item">
-          <div class="panel-item-title">費用（予算）</div>
-          <div class="panel-item-input">
-            <input class="form-control" formControlName="costExpectation" (change)="onChangeCostExpectation()">
-            <span class="spacer">円</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="tourismOpenTime" (change)="onChangeHours()">
+            <input class="form-control time-picker" formControlName="restaurantOpenTime" (change)="onChangeHours()">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" formControlName="tourismCloseTime" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" formControlName="restaurantCloseTime" (change)="onChangeMinutes()">
             <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">営業終了時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="tourismOpenTime" (change)="onChangeHours()">
+            <input class="form-control time-picker" formControlName="restaurantOpenTime" (change)="onChangeHours()">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" formControlName="tourismCloseTime" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" formControlName="restaurantCloseTime" (change)="onChangeMinutes()">
             <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">住所</div>
           <div class="panel-item-input">
-            <input class="form-control" formControlName="tourismUrl">
+            <input class="form-control" formControlName="restaurantAddress">
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">URL</div>
           <div class="panel-item-input">
-            <input class="form-control" formControlName="tourismUrl">
+            <input class="form-control" formControlName="restaurantUrl">
           </div>
         </div>
         <div class="panel-item mt-5" *ngIf="editMode !== EditMode.routeCreate">
