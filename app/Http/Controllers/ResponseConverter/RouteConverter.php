@@ -43,8 +43,8 @@ class RouteConverter
 
 
         return [
-            'routeDetailId' => $routeDetail->route_detail_id,
             'routeId' => $routeDetail->route_id,
+            'routeDetailId' => $routeDetail->route_detail_id,
             'beanKindDiv' => $routeDetail->beanKind->div_value,
             'beanKindDivName' => $routeDetail->beanKind->div_key_name,
             'routeDetailTourism' => $routeDetailTourism,
@@ -63,6 +63,7 @@ class RouteConverter
     {
         $tourism = $routeDetailTourism->tourism;
         return [
+            'routeId' => $routeDetailTourism->route_id,
             'routeDetailId' => $routeDetailTourism->route_detail_id,
             'tourismId' => $routeDetailTourism->tourism_id,
             'tourismRate' => $routeDetailTourism->tourism_rate,
@@ -91,6 +92,7 @@ class RouteConverter
     {
         $restaurant = $routeDetailRestaurant->restaurant;
         return [
+            'routeId' => $routeDetailRestaurant->route_id,
             'routeDetailId' => $routeDetailRestaurant->route_detail_id,
             'restaurantId' => $routeDetailRestaurant->restaurant_id,
             'restaurantRate' => $routeDetailRestaurant->restaurant_rate,
@@ -121,6 +123,7 @@ class RouteConverter
         $hotel = $routeDetailHotel->hotel;
 
         return [
+            'routeId' => $routeDetailHotel->route_id,
             'routeDetailId' => $routeDetailHotel->route_detail_id,
             'hotelId' => $routeDetailHotel->hotel_id,
             'hotelRate' => $routeDetailHotel->hotel_rate,
@@ -149,6 +152,7 @@ class RouteConverter
         $activity = $routeDetailActivity->activity;
 
         return [
+            'routeId' => $routeDetailActivity->route_id,
             'routeDetailId' => $routeDetailActivity->route_detail_id,
             'activityId' => $routeDetailActivity->activity_id,
             'activityRate' => $routeDetailActivity->activity_rate,
@@ -171,6 +175,7 @@ class RouteConverter
     public function convertRouteDetailMeal(RouteDetailMeal $routeDetailMeal): array
     {
         return [
+            'routeId' => $routeDetailMeal->route_id,
             'routeDetailId' => $routeDetailMeal->route_detail_id,
             'mealMinutes' => $routeDetailMeal->meal_minutes,
             'mealKindDiv' => $routeDetailMeal->meal_kind_div,
@@ -182,6 +187,7 @@ class RouteConverter
     public function convertRouteDetailMove(RouteDetailMove $routeDetailMove): array
     {
         return [
+            'routeId' => $routeDetailMove->route_id,
             'routeDetailId' => $routeDetailMove->route_detail_id,
             'moveMinutes' => $routeDetailMove->move_minutes,
             'moveWayDiv' => $routeDetailMove->move_way_div,
@@ -193,6 +199,7 @@ class RouteConverter
     public function convertRouteDetailTime(RouteDetailTime $routeDetailTime): array
     {
         return [
+            'routeId' => $routeDetailTime->route_id,
             'routeDetailId' => $routeDetailTime->route_detail_id,
             'scheduleDateTime' => $routeDetailTime->schedule_date_time,
         ];
@@ -201,6 +208,7 @@ class RouteConverter
     public function convertRouteDetailChecklist(RouteDetailChecklist $routeDetailChecklist): array
     {
         return [
+            'routeId' => $routeDetailChecklist->route_id,
             'routeDetailId' => $routeDetailChecklist->route_detail_id,
             'checkStatus' => $routeDetailChecklist->check_status,
             'checkContent' => $routeDetailChecklist->check_content,
@@ -210,6 +218,7 @@ class RouteConverter
     public function convertRouteDetailMemo(RouteDetailMemo $routeDetailMemo): array
     {
         return [
+            'routeId' => $routeDetailMemo->route_id,
             'routeDetailId' => $routeDetailMemo->route_detail_id,
             'memoContent' => $routeDetailMemo->memo_content,
         ];
