@@ -33,7 +33,6 @@ class RouteControllerTest extends TestCase
                 'routeId',
                 'beanKindDiv',
                 'beanKindDivName',
-                'order',
                 'routeDetailTourism',
                 'routeDetailRestaurant',
                 'routeDetailHotel',
@@ -69,141 +68,10 @@ class RouteControllerTest extends TestCase
 
     public function testStore()
     {
-        //マスタデータも新規作成
-        $response = $this->post('routes', [
-            'routeName' => 'create route and master',
-            'routeDetails' => [
-                [
-                    'beanKindDiv' => 0,
-                    'order' => 0,
-                    'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
-                        'tourism' => Tourism::factory()->definition() + [
-                            'country' => [
-                                'countryCode' => Country::first()->country_code
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 1,
-                    'order' => 1,
-                    'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
-                        'restaurant' => Restaurant::factory()->definition()
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 2,
-                    'order' => 2,
-                    'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
-                        'hotel' => Hotel::factory()->definition()
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 3,
-                    'order' => 3,
-                    'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
-                        'activity' => Activity::factory()->definition()
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 4,
-                    'order' => 4,
-                    'routeDetailMeal' => RouteDetailMealFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 5,
-                    'order' => 5,
-                    'routeDetailMove' => RouteDetailMoveFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 6,
-                    'order' => 6,
-                    'routeDetailTime' => RouteDetailTimeFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 7,
-                    'order' => 7,
-                    'routeDetailChecklist' => RouteDetailChecklistFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 8,
-                    'order' => 8,
-                    'routeDetailMemo' => RouteDetailMemoFactory::new()->definition()
-                ],
-            ]
-        ]);
-
-        $response->assertJsonStructure(self::ROUTE_STRUCTURE);
-
         //既存のマスタデータを更新
         $response = $this->post('routes', [
-            'routeName' => 'create route and update master',
-            'routeDetails' => [
-                [
-                    'beanKindDiv' => 0,
-                    'order' => 0,
-                    'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
-                        'tourism' => Tourism::factory()->definition() + [
-                            'tourismId' => Tourism::first()->tourism_id,
-                            'country' => [
-                                'countryCode' => Country::first()->country_code,
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 1,
-                    'order' => 1,
-                    'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
-                        'restaurant' => Restaurant::factory()->definition() + [
-                            'restaurantId' => Restaurant::first()->restaurant_id
-                        ]
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 2,
-                    'order' => 2,
-                    'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
-                        'hotel' => Hotel::factory()->definition() + [
-                            'hotelId' => Hotel::first()->hotel_id
-                        ]
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 3,
-                    'order' => 3,
-                    'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
-                        'activity' => Activity::factory()->definition() + [
-                            'activityId' => Activity::first()->activity_id
-                        ]
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 4,
-                    'order' => 4,
-                    'routeDetailMeal' => RouteDetailMealFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 5,
-                    'order' => 5,
-                    'routeDetailMove' => RouteDetailMoveFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 6,
-                    'order' => 6,
-                    'routeDetailTime' => RouteDetailTimeFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 7,
-                    'order' => 7,
-                    'routeDetailChecklist' => RouteDetailChecklistFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 8,
-                    'order' => 8,
-                    'routeDetailMemo' => RouteDetailMemoFactory::new()->definition()
-                ],
-            ]
+            'routeName' => 'create route',
+            'routeDetails' => $this->createTestRouteDetails()
         ]);
 
         $response->assertJsonStructure(self::ROUTE_STRUCTURE);
@@ -214,65 +82,7 @@ class RouteControllerTest extends TestCase
         $routeId = Route::first()->route_id;
         $response = $this->put("routes/$routeId", [
             'routeName' => 'update route',
-            'routeDetails' => [
-                [
-                    'beanKindDiv' => 0,
-                    'order' => 0,
-                    'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
-                        'tourism' => Tourism::factory()->definition() + [
-                            'country' => [
-                                'countryCode' => Country::first()->country_code
-                            ]
-                        ]
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 1,
-                    'order' => 1,
-                    'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
-                        'restaurant' => Restaurant::factory()->definition()
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 2,
-                    'order' => 2,
-                    'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
-                        'hotel' => Hotel::factory()->definition()
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 3,
-                    'order' => 3,
-                    'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
-                        'activity' => Activity::factory()->definition()
-                    ]
-                ],
-                [
-                    'beanKindDiv' => 4,
-                    'order' => 4,
-                    'routeDetailMeal' => RouteDetailMealFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 5,
-                    'order' => 5,
-                    'routeDetailMove' => RouteDetailMoveFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 6,
-                    'order' => 6,
-                    'routeDetailTime' => RouteDetailTimeFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 7,
-                    'order' => 7,
-                    'routeDetailChecklist' => RouteDetailChecklistFactory::new()->definition()
-                ],
-                [
-                    'beanKindDiv' => 8,
-                    'order' => 8,
-                    'routeDetailMemo' => RouteDetailMemoFactory::new()->definition()
-                ],
-            ]
+            'routeDetails' => $this->createTestRouteDetails()
         ]);
 
         $response->assertJsonStructure(self::ROUTE_STRUCTURE);
@@ -284,5 +94,55 @@ class RouteControllerTest extends TestCase
         $response = $this->delete("routes/$routeId");
 
         $response->assertJson(['result' => 'success']);
+    }
+
+    private function createTestRouteDetails(): array
+    {
+        return [
+            [
+                'beanKindDiv' => 0,
+                'routeDetailTourism' => RouteDetailTourismFactory::new()->definition() + [
+                        'tourismId' => Tourism::first()->tourism_id,
+                    ]
+            ],
+            [
+                'beanKindDiv' => 1,
+                'routeDetailRestaurant' => RouteDetailRestaurantFactory::new()->definition() + [
+                        'restaurantId' => Restaurant::first()->restaurant_id
+                    ]
+            ],
+            [
+                'beanKindDiv' => 2,
+                'routeDetailHotel' => RouteDetailHotelFactory::new()->definition() + [
+                        'hotelId' => Hotel::first()->hotel_id
+                    ]
+            ],
+            [
+                'beanKindDiv' => 3,
+                'routeDetailActivity' => RouteDetailActivityFactory::new()->definition() + [
+                        'activityId' => Activity::first()->activity_id
+                    ]
+            ],
+            [
+                'beanKindDiv' => 4,
+                'routeDetailMeal' => RouteDetailMealFactory::new()->definition()
+            ],
+            [
+                'beanKindDiv' => 5,
+                'routeDetailMove' => RouteDetailMoveFactory::new()->definition()
+            ],
+            [
+                'beanKindDiv' => 6,
+                'routeDetailTime' => RouteDetailTimeFactory::new()->definition()
+            ],
+            [
+                'beanKindDiv' => 7,
+                'routeDetailChecklist' => RouteDetailChecklistFactory::new()->definition()
+            ],
+            [
+                'beanKindDiv' => 8,
+                'routeDetailMemo' => RouteDetailMemoFactory::new()->definition()
+            ],
+        ];
     }
 }
