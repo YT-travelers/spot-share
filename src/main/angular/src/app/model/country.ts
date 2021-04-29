@@ -3,7 +3,7 @@
  */
 export interface ICountry {
   /** 国コード */
-  code?: string;
+  countryCode?: string;
   /** 国名 */
   countryName?: string;
   /** 通貨 */

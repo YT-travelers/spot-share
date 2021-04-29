@@ -4,10 +4,12 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
-import { filter as _filter } from 'lodash';
+import { filter as _filter, includes, _includes } from 'lodash';
 
 import { ITourism } from 'src/app//model/tourism';
 import { TourismService } from 'src/app/shared/tourism.service';
+import { CountryService } from 'src/app/shared/country.service';
+import { ICountry } from 'src/app/model/country';
 
 // 観光地編集モード列挙値
 export enum EditMode {
@@ -36,7 +38,7 @@ export class AddTourismPageComponent implements OnInit {
   EditMode = EditMode;
 
   /** 編集対象 */
-  tourism: ITourism = {};
+  tourism: ITourism = { country: {} };
 
   /** 画面上に表示する観光地情報のID */
   tourismId = '';
@@ -45,10 +47,10 @@ export class AddTourismPageComponent implements OnInit {
   imageTitle = '';
 
   /** 国のマスタ情報 */
-  allCountries: string[] = ['One', 'Two', 'Three']; // TODO 国のマスタ情報は初期表示時にバックから取得する
+  allCountries: ICountry[] = [];
 
   /** 国のインクリメンタルサーチ抽出結果 */
-  filteredCountries: Observable<string[]>;
+  filteredCountries: Observable<ICountry[]>;
 
   /** 連続作成フラグ */
   continueCreateFlg = true;
@@ -63,7 +65,12 @@ export class AddTourismPageComponent implements OnInit {
     /**  観光地名称 */
     tourismName: new FormControl(this.tourism.tourismName, [Validators.required]),
     /** 国 */
-    country: new FormControl(this.tourism.country),
+    countryFormGroup: new FormGroup({
+      /** 国コード（画面非表示） */
+      countryCode: new FormControl(this.tourism.country.countryCode),
+      /** 国名称 */
+      countryName: new FormControl(this.tourism.country.countryName, [Validators.required]),
+    }),
     /** 営業開始時間 */
     tourismOpenTime: new FormControl(this.tourism.tourismOpenTime),
     /** 営業終了時間 */
@@ -80,6 +87,7 @@ export class AddTourismPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private service: TourismService,
+    private countryService: CountryService,
     private toastr: ToastrService,
   ) {}
 
@@ -95,13 +103,17 @@ export class AddTourismPageComponent implements OnInit {
       requiredMinutes: 0
     })
 
-    // 国インプットのインクリメンタルサーチ購読
-    this.filteredCountries = this.addTourismFormGroup.controls.country.valueChanges
-    .pipe(
-      debounceTime(100),
-      startWith(''),
-      map(value => this._filter(value))
-    );
+    this.countryService.searchCountries().subscribe(result => {
+      this.allCountries = result;
+
+      // 国インプットのインクリメンタルサーチ購読
+      this.filteredCountries = this.countryFormGroup.valueChanges
+      .pipe(
+        debounceTime(100),
+        startWith(''),
+        map(value => this.countryFilter(value.countryName))
+      );
+    });
 
     // 観光地編集モードの判定
     this.tourismId = this.route.snapshot.paramMap.get('tourismId');
@@ -178,17 +190,24 @@ export class AddTourismPageComponent implements OnInit {
   }
 
   /**
-   * 国のBlurイベント
-   * 国のマスタのリストに存在しない値が入力されていた場合、値をクリアする
+   * 国名称のBlurイベント
+   * ・国マスタのリストに存在する値が入力されていた場合、該当する国コードを設定する
+   * ・国マスタのリストに存在しない値が入力されていた場合、国名称の値をクリアする
    */
   onBlurCountry() {
-    const isExist = _filter(this.allCountries, e => {
-      return e === this.addTourismFormGroup.controls.country.value;    
-    }).length === 1;
-
-    if (!isExist) {
-      this.addTourismFormGroup.controls.country.setValue('');
-    }
+    setTimeout(() => {
+      const country: ICountry[] = _filter(this.allCountries, e => {
+        return e.countryName === this.countryFormGroup.value.countryName;    
+      });
+  
+      if (country.length === 1) {
+        // 存在チェックOK  国コードを設定
+        this.countryFormGroup.controls.countryCode.setValue(country[0].countryCode);
+      } else {
+        // 存在チェックNG  国名称をクリア
+        this.countryFormGroup.controls.countryName.setValue('');
+      }      
+    }, 100)
   }
 
   /**
@@ -255,12 +274,12 @@ export class AddTourismPageComponent implements OnInit {
    * 国インプットのインクリメンタルサーチの絞り込み処理
    * @param value 国インプットの入力値
    */
-  private _filter(value: string): string[] {
+  private countryFilter(value: string): ICountry[] {
     let filterValue = '';
     if (value) {
-      filterValue = value.toLowerCase();
+      filterValue = value;
     }
-    return this.allCountries.filter(option => option.toLowerCase().includes(filterValue));
+    return _filter(this.allCountries, e => includes(e.countryName, filterValue));
   }
 
   /**
@@ -269,12 +288,17 @@ export class AddTourismPageComponent implements OnInit {
    */
   validate(): boolean {
     this.addTourismFormGroup.controls.tourismName.markAsDirty();
-    this.addTourismFormGroup.controls.country.markAsDirty();
+    this.countryFormGroup.controls.countryName.markAsDirty();
 
     let valid = false;
 
     // formGroupでのエラー検証
-    valid = this.addTourismFormGroup.invalid;
+    if (this.addTourismFormGroup.invalid) {
+      valid = true;
+    }
+    if (this.countryFormGroup.invalid) {
+      valid = true;
+    }    
 
     return valid; 
   }
@@ -286,6 +310,14 @@ export class AddTourismPageComponent implements OnInit {
     return value.replace(/[０-９]/g, s => {
       return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
     });
+  }
+
+  // -----------------------------------------------------------------------
+  // getter
+
+  /** 国 */
+  get countryFormGroup(): FormGroup {
+    return this.addTourismFormGroup.get('countryFormGroup') as FormGroup
   }
 
 }

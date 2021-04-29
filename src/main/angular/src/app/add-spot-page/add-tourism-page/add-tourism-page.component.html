@@ -28,7 +28,7 @@
           <div class="panel-item-title">スポット名称</div>
           <div class="panel-item-input">
             <div class="w-100">
-              <div *ngIf="this.addTourismFormGroup.controls.tourismName.invalid && this.addTourismFormGroup.controls.tourismName.dirty" class="validator-error">
+              <div *ngIf="addTourismFormGroup.controls.tourismName.invalid && addTourismFormGroup.controls.tourismName.dirty" class="validator-error">
                 未入力です
               </div>
               <input class="form-control" formControlName="tourismName" placeholder="必須">
@@ -37,16 +37,21 @@
         </div>
         <div class="panel-item">
           <div class="panel-item-title">国</div>
-          <div class="panel-item-input">
-            <input class="form-control" type="text" matInput
-              formControlName="country"
-              [matAutocomplete]="auto"
-              [formControl]="addTourismFormGroup.controls.country"
-              (blur)="onBlurCountry()"
-            >
+          <div class="panel-item-input" [formGroup]="countryFormGroup">
+            <div class="w-100">
+              <div *ngIf="countryFormGroup.controls.countryName.invalid && countryFormGroup.controls.countryName.dirty" class="validator-error">
+                未入力です
+              </div>
+              <input class="form-control" type="text" matInput
+                formControlName="countryName"
+                placeholder="必須"
+                [matAutocomplete]="auto"
+                (blur)="onBlurCountry()"
+              >
+            </div>
             <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let country of filteredCountries | async" [value]="country">
-                {{country}}
+              <mat-option *ngFor="let country of filteredCountries | async" [value]="country.countryName">
+                {{country.countryName}}
               </mat-option>
             </mat-autocomplete>
           </div>
