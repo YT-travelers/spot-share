@@ -41,6 +41,12 @@ $icon-color: blue;
     width: 100%;
     font-size: 18px;
     display: flex;
+    a {
+      width: 30rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
     button {
       margin-left: auto;
     }
