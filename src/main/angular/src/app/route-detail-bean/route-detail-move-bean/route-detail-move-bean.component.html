@@ -2,6 +2,7 @@
   <span class="material-icons more-vert">more_vert</span>
   <form [formGroup]="routeDetailMoveFormGroup">
     <div class="bean panel">
+      <span>(所要)</span>
       <input class="form-control move-minutes-input" formControlName="moveMinutes">
       <span class="spacer">分</span>
       <div class="move-kind-icon"[ngSwitch]="routeDetailMoveFormGroup.value.moveWayDiv">

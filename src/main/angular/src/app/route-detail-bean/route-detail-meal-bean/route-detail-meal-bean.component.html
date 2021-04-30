@@ -1,6 +1,7 @@
 <div class="list-bean-meal">
   <form [formGroup]="routeDetailMealFormGroup">
     <div class="bean panel">
+      <span>(所要)</span>
       <input class="form-control meal-minutes-input" formControlName="mealMinutes">
       <span class="spacer">分</span>
       <div class="meal-kind-icon"[ngSwitch]="routeDetailMealFormGroup.value.mealKindDiv">

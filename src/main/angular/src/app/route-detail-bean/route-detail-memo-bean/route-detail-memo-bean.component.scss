@@ -1,38 +1,28 @@
 .list-bean-memo {
   width: 95%;
   margin-left: auto;
-  margin-top: 5px;
-}
-
-.more-vert {
-  margin: 5px 0;
+  margin-top: 0.2rem;
 }
 
 .close {
-  font-size: 15px;
+  font-size: 1rem;
   cursor: default;
-  margin: 0 5px;
+  margin: 0 0.55em;
 }
 
 .info {
   color: cornflowerblue;
   cursor: default;
+  margin: 0 0.07rem;
 }
 
 .bean {
   display: flex;
   align-items: center;
 
-  .memo-kind-icon {
-    display: flex;
-    margin-left: 15px;
-    color: lightgreen;
-  }
-
   .memo-content-input {
     width: 100%;
-    margin-left: 10px;
-    margin-right: 5px;
+    margin-left: 0.6rem;
   }
 
   button {

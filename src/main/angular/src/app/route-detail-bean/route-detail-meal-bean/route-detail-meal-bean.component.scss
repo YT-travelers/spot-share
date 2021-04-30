@@ -1,17 +1,13 @@
 .list-bean-meal {
   width: 95%;
   margin-left: auto;
-  margin-top: 5px;
-}
-
-.more-vert {
-  margin: 5px 0;
+  margin-top: 0.2rem;
 }
 
 .close {
-  font-size: 15px;
+  font-size: 1rem;
   cursor: default;
-  margin: 0 5px;
+  margin: 0 0.55em;
 }
 
 .mat-icon {
@@ -21,16 +17,12 @@
 .bean {
   display: flex;
   align-items: center;
+  font-size: 0.75rem;
 
   .meal-kind-icon {
     display: flex;
-    margin-left: 15px;
+    margin-left: 1rem;
     color: lightgreen;
-  }
-
-  select {
-    width: auto;
-    margin-left: 10px;
   }
 
   .meal-minutes-input {
@@ -39,7 +31,23 @@
   }
 
   .meal-cost-input {
-    width: 100px;
+    width: 5rem;
     text-align: right;
+  }
+
+  input {
+    width: 4rem;
+    height: 1.5rem;
+    padding: 0 0.3rem;
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
+  }
+
+  select {
+    width: 6rem;
+    height: 1.5rem;
+    padding: 0rem;
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
   }
 }
