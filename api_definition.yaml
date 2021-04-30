@@ -774,7 +774,7 @@ components:
         routeDetailId:
           type: integer
         checkStatus:
-          type: string
+          type: integer
         checkContent:
           type: string
         routeId:
