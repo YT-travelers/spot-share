@@ -20,7 +20,7 @@ class CodeSeeder extends Seeder
             ['division' => 'YesNoDiv',          'div_name' => '有無区分',       'div_key' => 'Yes',               'div_key_name' => '有り',         'div_value' => 0],
             ['division' => 'YesNoDiv',          'div_name' => '有無区分',       'div_key' => 'No',                'div_key_name' => '無し',         'div_value' => 1],
             ['division' => 'FlgDiv',            'div_name' => 'フラグ区分',     'div_key' => 'Flagged',            'div_key_name' => 'フラグあり',    'div_value' => 0],
-            ['division' => 'FlgDiv',            'div_name' => 'フラグ区分',     'div_key' => 'NotFlagged',         'div_key_name' => 'フラグなし',    'div_value' => 0],
+            ['division' => 'FlgDiv',            'div_name' => 'フラグ区分',     'div_key' => 'NotFlagged',         'div_key_name' => 'フラグなし',    'div_value' => 1],
             ['division' => 'CheckDiv',          'div_name' => 'チェック区分',    'div_key' => 'Checked',           'div_key_name' => 'チェック済み',   'div_value' => 0],
             ['division' => 'CheckDiv',          'div_name' => 'チェック区分',    'div_key' => 'UnCheckd',          'div_key_name' => '未チェック',     'div_value' => 1],
             ['division' => 'BeanKindDiv',       'div_name' => 'ビーン種類区分',  'div_key' => 'Tourism',            'div_key_name' => '観光地',       'div_value' => 0],
