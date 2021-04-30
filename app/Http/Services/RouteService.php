@@ -56,7 +56,6 @@ class RouteService
                         $routeDetailData['route_detail_id'] = $index + 1;
                         return $routeDetailData;
                     })->toArray();
-                info($routeDetailDataList);
                 $route->routeDetails()->createMany($routeDetailDataList)->each(function (RouteDetail $routeDetail, int $index) use ($routeDetailDataList) {
                     $routeDetailData = $routeDetailDataList[$index];
                     $this->saveRouteDetailBean($routeDetail, $routeDetailData);
