@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { filter as _filter } from 'lodash';
 import { Code } from 'src/app/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
 import { IRouteDetailMove } from 'src/app/model/route-detail-move';
@@ -29,13 +30,13 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   /** ルート詳細移動情報 フォームグループ */
   routeDetailMoveFormGroup = new FormGroup({
     /** ルート詳細ID */
-    routeDetailId: new FormControl(0),
+    routeDetailId: new FormControl(),
     /** 所要時間 */
-    moveMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    moveMinutes: new FormControl("", [Validators.pattern('^[0-9]*$')]),
     /** 移動手段区分 */
     moveWayDiv: new FormControl(0),
     /** 移動費用 */
-    moveCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
+    moveCost: new FormControl("", [Validators.pattern('^[0-9]*$')])
   });
 
   constructor(
@@ -45,6 +46,12 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
+    // 移動種類区分が未設定の場合は、初期値を設定
+    const isInit = _filter(Code.MoveWayDiv.List, e => e.div === this.detail.moveWayDiv).length === 0;
+    if (isInit) {
+      this.detail.moveWayDiv = Code.MoveWayDiv.List[0].div;
+    }
+
     // 入力項目 初期値設定
     this.routeDetailMoveFormGroup.patchValue(this.detail);
     

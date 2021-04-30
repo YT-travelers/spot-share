@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { filter as _filter } from 'lodash';
 import { Code } from 'src/app/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
 import { IRouteDetailMeal } from 'src/app/model/route-detail-meal';
@@ -48,6 +48,12 @@ export class RouteDetailMealBeanComponent implements OnInit {
   // ライフサイクル
 
   ngOnInit(): void {
+    // 食事種類区分が未設定の場合は、初期値を設定
+    const isInit = _filter(Code.MealKindDiv.List, e => e.div === this.detail.mealKindDiv).length === 0;
+    if (isInit) {
+      this.detail.mealKindDiv = Code.MealKindDiv.List[0].div;
+    }
+
     // 入力項目 初期値設定
     this.routeDetailMealFormGroup.patchValue(this.detail);
 
