@@ -225,7 +225,11 @@ export class CreateRoutePageComponent implements OnInit {
 
     const routeBean: IRouteDetail = {
       routeDetailId: roudeDetailId,
-      beanKindDiv: beanKindDiv
+      beanKindDiv: beanKindDiv,
+      routeDetailMove: {},
+      routeDetailMeal: {},
+      routeDetailMemo: {},
+      routeDetailChecklist: {}
     }
 
     this.routeDetails.push(routeBean);

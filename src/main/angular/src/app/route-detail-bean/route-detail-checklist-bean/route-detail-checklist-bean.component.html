@@ -1,7 +1,7 @@
 <div class="list-bean-checklist">
   <form [formGroup]="routeDetailChecklistFormGroup">
     <div class="bean">
-      <span class="material-icons checkbox">done</span>
+      <span #checkbox class="material-icons checkbox" (click)="onClickCheckbox()">done</span>
       <input class="form-control checklist-content-input">
       <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
     </div>
