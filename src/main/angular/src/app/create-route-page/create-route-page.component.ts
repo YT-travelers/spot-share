@@ -221,15 +221,28 @@ export class CreateRoutePageComponent implements OnInit {
    */
   addRouteBean(beanKindDiv) {
     // ルート詳細IDを仮採番（正式にはバック側で採番される）
-    const roudeDetailId = this.getMaxRouteDetailId();
+    const routeDetailId = this.getMaxRouteDetailId();
 
+    // 初期値設定
     const routeBean: IRouteDetail = {
-      routeDetailId: roudeDetailId,
+      routeDetailId: routeDetailId,
       beanKindDiv: beanKindDiv,
       routeDetailMove: {},
       routeDetailMeal: {},
       routeDetailMemo: {},
       routeDetailChecklist: {}
+    }
+
+    // 初期値設定（仮採番されたルート詳細ID）
+    switch(beanKindDiv) {
+      case Code.BeanKindDiv.Move: routeBean.routeDetailMove.routeDetailId = routeDetailId;
+        break;
+      case Code.BeanKindDiv.Meal: routeBean.routeDetailMeal.routeDetailId = routeDetailId;
+      break;
+      case Code.BeanKindDiv.Memo: routeBean.routeDetailMemo.routeDetailId = routeDetailId;
+        break;
+      case Code.BeanKindDiv.Checklist: routeBean.routeDetailChecklist.routeDetailId = routeDetailId;
+        break;
     }
 
     this.routeDetails.push(routeBean);
@@ -246,6 +259,6 @@ export class CreateRoutePageComponent implements OnInit {
       }
     });
 
-    return routeDetailId;
+    return routeDetailId + 1;
   }
 }
