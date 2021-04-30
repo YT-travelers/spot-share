@@ -90,6 +90,7 @@
             (updateRouteDetailMealEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailMealEvent)="onDeleteRouteDetailEvent($event)"
           >
+            <div cdkDragHandle></div>
           </app-route-detail-meal-bean>
 
           <!-- 移動 -->
@@ -98,6 +99,7 @@
             (updateRouteDetailMoveEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailMoveEvent)="onDeleteRouteDetailEvent($event)"
           >
+            <div cdkDragHandle></div>
           </app-route-detail-move-bean>
 
           <!-- チェックリスト -->
@@ -105,7 +107,8 @@
             [detail]="detail.routeDetailChecklist"
             (updateRouteDetailChecklistEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailChecklistEvent)="onDeleteRouteDetailEvent($event)"
-          >          
+          >
+            <div cdkDragHandle></div>
           </app-route-detail-checklist-bean>
 
           <!-- メモ -->
@@ -114,6 +117,7 @@
             (updateRouteDetailMemoEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailMemoEvent)="onDeleteRouteDetailEvent($event)"
           >
+            <div cdkDragHandle></div>
           </app-route-detail-memo-bean>
           
           <!-- TODO 時間-->

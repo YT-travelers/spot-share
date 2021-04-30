@@ -124,13 +124,41 @@ $tourism-icon-color: blue;
   }
 }
 
+
+/** -------- cdkDragHandle -------- */
 // cdkDragHandle が子コンポーネントでは使用できないため、
 // 親コンポーネントでDOMを用意し、相対位置でドラッグ可能なエリアを設定
-.cdk-drag-handle {
+app-route-detail-tourism-bean .cdk-drag-handle,
+app-route-detail-restaurant-bean .cdk-drag-handle,
+app-route-detail-hotel-bean .cdk-drag-handle,
+app-route-detail-activity-bean .cdk-drag-handle {
   width: 2rem;
   height: 4.5rem;
   margin-left: 41.7rem;
   margin-top: 2.5rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}
+
+app-route-detail-meal-bean .cdk-drag-handle,
+app-route-detail-checklist-bean .cdk-drag-handle,
+app-route-detail-memo-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 2.8rem;
+  margin-left: 39.3rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}
+
+app-route-detail-move-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 2.8rem;
+  margin-left: 39.3rem;
+  margin-top: 2.1rem;
   position: absolute;
   z-index: 100;
   background-color: transparent;

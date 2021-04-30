@@ -1,23 +1,31 @@
-<div class="list-bean-meal">
-  <form [formGroup]="routeDetailMealFormGroup">
-    <div class="bean panel">
-      <span>(所要)</span>
-      <input class="form-control meal-minutes-input" formControlName="mealMinutes">
-      <span class="spacer">分</span>
-      <div class="meal-kind-icon"[ngSwitch]="routeDetailMealFormGroup.value.mealKindDiv">
-        <mat-icon *ngSwitchCase="mealKindDiv.BreakFast">local_cafe</mat-icon>
-        <mat-icon *ngSwitchCase="mealKindDiv.Lunch">fastfood</mat-icon>
-        <mat-icon *ngSwitchCase="mealKindDiv.Dinner">restaurant</mat-icon>
-        <mat-icon *ngSwitchCase="mealKindDiv.Gourmet">restaurant_menu</mat-icon>
-        <mat-icon *ngSwitchCase="mealKindDiv.Snack">local_pizza</mat-icon>
-        <mat-icon *ngSwitchCase="mealKindDiv.Other">local_bar</mat-icon>
+<div class="drag-container">
+  <ng-content></ng-content>
+  <div class="list-bean-meal">
+    <form [formGroup]="routeDetailMealFormGroup">
+      <div class="bean panel">
+        <span>(所要)</span>
+        <input class="form-control meal-minutes-input" formControlName="mealMinutes">
+        <span class="spacer">分</span>
+        <div class="meal-kind-icon"[ngSwitch]="routeDetailMealFormGroup.value.mealKindDiv">
+          <mat-icon *ngSwitchCase="mealKindDiv.BreakFast">local_cafe</mat-icon>
+          <mat-icon *ngSwitchCase="mealKindDiv.Lunch">fastfood</mat-icon>
+          <mat-icon *ngSwitchCase="mealKindDiv.Dinner">restaurant</mat-icon>
+          <mat-icon *ngSwitchCase="mealKindDiv.Gourmet">restaurant_menu</mat-icon>
+          <mat-icon *ngSwitchCase="mealKindDiv.Snack">local_pizza</mat-icon>
+          <mat-icon *ngSwitchCase="mealKindDiv.Other">local_bar</mat-icon>
+        </div>
+        <select class="form-control" formControlName="mealKindDiv">
+          <option *ngFor="let item of mealKindDivList" value={{item.div}}>{{item.name}}</option>
+        </select>
+        <input class="form-control ml-auto meal-cost-input" formControlName="mealCost">
+        <span class="spacer">円</span>
+
+        <!-- ドラッグインジケータ -->
+        <mat-icon class="bean-icon drag-handle-icon">drag_indicator</mat-icon>
+
+        <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
+
       </div>
-      <select class="form-control" formControlName="mealKindDiv">
-        <option *ngFor="let item of mealKindDivList" value={{item.div}}>{{item.name}}</option>
-      </select>
-      <input class="form-control ml-auto meal-cost-input" formControlName="mealCost">
-      <span class="spacer">円</span>
-      <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
