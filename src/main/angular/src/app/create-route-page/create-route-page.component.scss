@@ -123,3 +123,16 @@ $tourism-icon-color: blue;
     width: 100%;
   }
 }
+
+// cdkDragHandle が子コンポーネントでは使用できないため、
+// 親コンポーネントでDOMを用意し、相対位置でドラッグ可能なエリアを設定
+.cdk-drag-handle {
+  width: 2rem;
+  height: 4.5rem;
+  margin-left: 41.7rem;
+  margin-top: 2.5rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}

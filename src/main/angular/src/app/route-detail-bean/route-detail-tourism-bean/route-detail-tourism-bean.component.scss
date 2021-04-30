@@ -3,9 +3,9 @@ $icon-color: blue;
 
 /** -------- ここからビーン共通スタイル -------- */
 .close {
-  font-size: 15px;
+  font-size: 1rem;
   cursor: default;
-  margin: 0 5px;
+  margin-right: 0.3rem;
   margin-left: auto;
 }
 
@@ -14,32 +14,31 @@ $icon-color: blue;
 }
 
 .div-border-line {
-  margin: 3px 0;
-  padding-bottom: 1px;
-  border-bottom: dashed 1px #ddd;
+  margin: 0.2rem 0;
+  border-bottom: dashed 0.1rem #ddd;
 }
 
 .list-bean {
   display: flex;
   width: 100%;
-  height: 100px;
-  margin-top: 5px;
+  height: 7rem;
+  margin-top: 0.5rem;
   .thumbnail-area {
     display: flex;
     align-items: center;
-    width: 120px;
-    margin-right: 5px;
+    width: 7.5rem;
+    margin-right: 0.5rem;
     .thumbnail {
-      width: 100px;
-      height: 90px;
+      width: 6rem;
+      height: 5.5rem;
       object-fit: contain;
       margin: 0 auto;
     }
   }
   .bean-title {
-    height: 20px;
     width: 100%;
-    font-size: 18px;
+    height: 1.5rem;
+    font-size: 1rem;
     display: flex;
     a {
       width: 30rem;
@@ -52,52 +51,67 @@ $icon-color: blue;
     }
     .bean-icon {
       color: $icon-color;
-      margin-right: 5px;
+      margin-right: 0.5rem;
     }
   }
   .bean-info {
     display: flex;
+    font-size: 0.75rem;
     &-item {
       display: flex;
       align-items: center;
-      margin-bottom: 5px;
-      font-size: 14px;
+      height: 1.5rem;
+      margin-bottom: 0.5rem;
     }
     &-label {
       width: auto;
-      display: inline-block;
-      font-size: 13px;
-      height: 20px;
+      height: 1.5rem;
+      padding: 0.2rem 0;
     }
     &-left {
       width: 33%;
-      margin-right: 5px;
+      margin-right: 0.5rem;
     }
     &-center {
       width: 33%;
-      margin-right: 5px;
+      margin-right: 0.5rem;
     }
     &-right {
       width: 33%;
-      margin-right: 5px;
+      margin-right: 0.5rem;
+      text-align: right;
+      .cost-label {
+        margin-left: auto;
+      }
     }
   }
 
   ::ng-deep ngb-rating {
+    font-size: 1.1rem;
+    height: 1.5rem;
+    margin-bottom: 0.5rem;
     span {
       color: #FFFF66;
-      text-shadow: 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 4px #777;
+      text-shadow: 0rem 0rem 0rem #777, 0rem 0rem 0rem #777, 0rem 0rem 0rem #777, 0rem 0rem 0.13rem #777;
     }
+  }
+
+  // ドラッグインジケータの位置指定
+  .drag-handle-icon {
+    opacity: 0.5;
+    height: 4rem;
+    display: flex;
+    align-items: center;
   }
 }
 /** -------- ここまでビーン共通スタイル -------- */
 
 /** -------- ここからビーン専用スタイル -------- */
 input {
-  width: 60px;
-  height: 25px;
-  padding: 0 5px;
-  font-size: 14px;
-  margin-left: 5px;
+  width: 4rem;
+  height: 1.5rem;
+  padding: 0 0.3rem;
+  font-size: 0.9rem;
+  margin-left: 0.3rem;
 }
 /** -------- ここまでビーン専用スタイル -------- */

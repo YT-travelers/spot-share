@@ -1,58 +1,65 @@
-<div class="list-bean panel">
-  <div class="thumbnail-area">
-    <!-- TODO サムネイル -->
-    <img class="thumbnail" src="./favicon.ico">
-  </div>
-  <div class="w-100">
-    <div class="bean-title">
-      <mat-icon class="bean-icon">surfing</mat-icon>
-      <!-- TODO idとbeanDivを渡す-->
-      <a href="add-tourism-page;tourismId={{detail.activityId}}" target="_blank">{{detail.activity.activityName}}</a>
-      <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
+<div class="drag-container">
+  <ng-content></ng-content>
+  <div class="list-bean panel">
+    <div class="thumbnail-area">
+      <!-- TODO サムネイル -->
+      <img class="thumbnail" src="./favicon.ico">
     </div>
-
-    <div class="div-border-line"></div>
-
-    <form [formGroup]="routeDetailActivityFormGroup">
-      <div class="bean-info">
-
-        <!-- ******** bean left ******** -->
-        <div class="bean-info-left">
-          <div class="bean-info-item">
-            <span class="bean-info-label">(所要)</span>
-            <input class="form-control text-right" formControlName="activityMinutes">
-            <span *ngIf="detail.activityMinutes" class="bean-info-label">時間</span>
-          </div>
-        </div>
-
-        <!-- ******** bean center ******** -->
-        <!-- TODO 「アクティビティ開始（終了）時間」を表示するつもりだったが、シンプルにしたいからとりあえず「営業開始（終了）時間」にした（要検討） -->
-        <div class="bean-info-center">
-          <div class="bean-info-item">
-            <span class="bean-info-label">(営業開始)</span>
-            <span class="bean-info-label">{{detail.activityStartTime}}</span>
-          </div>
-          <div class="bean-info-item">
-            <span class="bean-info-label">(営業終了)</span>
-            <span class="bean-info-label">{{detail.activityEndTime}}</span>
-          </div>
-        </div>
-
-        <!-- ******** bean right ******** -->
-        <div class="bean-info-right">
-          <!-- TODO レートの更新できてるか？ -->
-          <ngb-rating
-            [rate]="detail.activityRate"
-            [max]="5"
-          ></ngb-rating>
-          <div class="bean-info-item">
-            <span class="bean-info-label">費用</span>
-            <span>：</span>
-            <input class="form-control text-right" formControlName="activityCost">
-            <span class="spacer">円</span>
-          </div>
-        </div>
+    <div class="w-100">
+      <div class="bean-title">
+        <mat-icon class="bean-icon">surfing</mat-icon>
+        <!-- TODO idとbeanDivを渡す-->
+        <a href="add-tourism-page;tourismId={{detail.activityId}}" target="_blank">{{detail.activity.activityName}}</a>
+        <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
       </div>
-    </form>
+
+      <div class="div-border-line"></div>
+
+      <form [formGroup]="routeDetailActivityFormGroup">
+        <div class="bean-info">
+
+          <!-- ******** bean left ******** -->
+          <div class="bean-info-left">
+            <div class="bean-info-item">
+              <span class="bean-info-label">(所要)</span>
+              <input class="form-control text-right" formControlName="activityMinutes">
+              <span *ngIf="detail.activityMinutes" class="bean-info-label spacer">分</span>
+            </div>
+          </div>
+
+          <!-- ******** bean center ******** -->
+          <!-- TODO 「アクティビティ開始（終了）時間」を表示するつもりだったが、シンプルにしたいからとりあえず「営業開始（終了）時間」にした（要検討） -->
+          <div class="bean-info-center">
+            <div class="bean-info-item">
+              <span class="bean-info-label">(営業開始)</span>
+              <span class="bean-info-label">{{detail.activityStartTime}}</span>
+            </div>
+            <div class="bean-info-item">
+              <span class="bean-info-label">(営業終了)</span>
+              <span class="bean-info-label">{{detail.activityEndTime}}</span>
+            </div>
+          </div>
+
+          <!-- ******** bean right ******** -->
+          <div class="bean-info-right">
+            <!-- TODO レートの更新できてるか？ -->
+            <ngb-rating
+              [rate]="detail.activityRate"
+              [max]="5"
+            ></ngb-rating>
+            <div class="bean-info-item">
+              <span class="bean-info-label cost-label">費用</span>
+              <span>：</span>
+              <input class="form-control text-right" formControlName="activityCost">
+              <span class="spacer">円</span>
+            </div>
+          </div>
+          
+          <!-- ドラッグインジケータ -->
+          <mat-icon class="bean-icon drag-handle-icon">drag_indicator</mat-icon>
+
+        </div>
+      </form>
+    </div>
   </div>
 </div>
