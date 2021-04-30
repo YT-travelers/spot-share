@@ -165,9 +165,28 @@ export class CreateRoutePageComponent implements OnInit {
    */
   onUpdateRouteDetailEvent(event) {
     // 引数のrouteDetailIdの要素を、引数で更新する
-    _each(this.routeDetails, e => {
-      if (e.routeDetailId = event.routeDetailId) {
-        e = event;
+    _each(this.routeDetails, (e: IRouteDetail, i: number, a: IRouteDetail[]) => {
+      if (e.routeDetailId === event.routeDetailId) {
+        switch(e.beanKindDiv) {
+          case Code.BeanKindDiv.Tourism: a[i].routeDetailTourism = event;
+            break;
+          case Code.BeanKindDiv.Restaurant: a[i].routeDetailRestaurant = event;
+          break;
+          case Code.BeanKindDiv.Hotel: a[i].routeDetailHotel = event;
+          break;
+          case Code.BeanKindDiv.Activity: a[i].routeDetailActivity = event;
+          break;
+          case Code.BeanKindDiv.Meal: a[i].routeDetailMeal = event;
+          break;
+          case Code.BeanKindDiv.Move: a[i].routeDetailMove = event;
+          break;
+          case Code.BeanKindDiv.Time: a[i].routeDetailTime = event;
+          break;
+          case Code.BeanKindDiv.Checklist: a[i].routeDetailChecklist = event;
+          break;
+          case Code.BeanKindDiv.Memo: a[i].routeDetailMemo = event;
+          break;
+        }
         return false;
       }
     });
