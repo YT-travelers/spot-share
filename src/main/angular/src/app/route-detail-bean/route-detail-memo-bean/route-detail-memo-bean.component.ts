@@ -34,6 +34,10 @@ export class RouteDetailMemoBeanComponent implements OnInit {
 
   ngOnInit(): void {
     // 入力項目 初期値設定
+    if (this.detail) {
+      this.detail.memoContent = "";
+    }
+
     this.routeDetailMemoFormGroup.patchValue(this.detail);
 
     // 入力値変更検知
