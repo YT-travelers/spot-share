@@ -72,13 +72,6 @@ export class AddActivityPageComponent implements OnInit {
 
   ngOnInit() {
 
-    // 所要時間はデフォルトで１時間とする
-    this.addActivityFormGroup.patchValue({
-      costExpectation: 0,
-      requiredHours: 1,
-      requiredMinutes: 0
-    })
-
     // アクティビティ編集モードの判定
     this.activityId = this.route.snapshot.paramMap.get('activityId');
     if (this.activityId) {
@@ -151,23 +144,6 @@ export class AddActivityPageComponent implements OnInit {
   onClickBack() {
     // TODO アクティビティ一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
-  }
-
-  /**
-   * 費用（予算）の変更イベント
-   * 入力チェック ＋ 変換
-   */
-  onChangeCostExpectation() {
-    // 数字のみチェック
-    let value = this.addActivityFormGroup.controls.costExpectation.value;
-    const pattern = /[0-9０-９]/;
-    if (!pattern.test(value)) {
-      this.addActivityFormGroup.controls.costExpectation.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addActivityFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
   }
 
   /**

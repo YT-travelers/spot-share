@@ -72,13 +72,6 @@ export class AddHotelPageComponent implements OnInit {
 
   ngOnInit() {
 
-    // 所要時間はデフォルトで１時間とする
-    this.addHotelFormGroup.patchValue({
-      costExpectation: 0,
-      requiredHours: 1,
-      requiredMinutes: 0
-    })
-
     // ホテル編集モードの判定
     this.hotelId = this.route.snapshot.paramMap.get('hotelId');
     if (this.hotelId) {
@@ -151,23 +144,6 @@ export class AddHotelPageComponent implements OnInit {
   onClickBack() {
     // TODO ホテル一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
-  }
-
-  /**
-   * 費用（予算）の変更イベント
-   * 入力チェック ＋ 変換
-   */
-  onChangeCostExpectation() {
-    // 数字のみチェック
-    let value = this.addHotelFormGroup.controls.costExpectation.value;
-    const pattern = /[0-9０-９]/;
-    if (!pattern.test(value)) {
-      this.addHotelFormGroup.controls.costExpectation.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addHotelFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
   }
 
   /**

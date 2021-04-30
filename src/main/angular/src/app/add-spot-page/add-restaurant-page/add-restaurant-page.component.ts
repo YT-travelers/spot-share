@@ -76,13 +76,6 @@ export class AddRestaurantPageComponent implements OnInit {
 
   ngOnInit() {
 
-    // 所要時間はデフォルトで１時間とする
-    this.addRestaurantFormGroup.patchValue({
-      costExpectation: 0,
-      requiredHours: 1,
-      requiredMinutes: 0
-    })
-
     // 飲食店編集モードの判定
     this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
     if (this.restaurantId) {
@@ -155,23 +148,6 @@ export class AddRestaurantPageComponent implements OnInit {
   onClickBack() {
     // TODO 飲食店一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
-  }
-
-  /**
-   * 費用（予算）の変更イベント
-   * 入力チェック ＋ 変換
-   */
-  onChangeCostExpectation() {
-    // 数字のみチェック
-    let value = this.addRestaurantFormGroup.controls.costExpectation.value;
-    const pattern = /[0-9０-９]/;
-    if (!pattern.test(value)) {
-      this.addRestaurantFormGroup.controls.costExpectation.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addRestaurantFormGroup.controls.costExpectation.setValue(this.toHalfWidth(value));
   }
 
   /**
