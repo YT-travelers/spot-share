@@ -22,7 +22,7 @@
           <div class="bean-info-left">
             <div class="bean-info-item">
               <span class="bean-info-label">(所要)</span>
-              <input class="form-control text-right" formControlName="activityMinutes">
+              <input class="form-control text-center" formControlName="activityMinutes">
               <span *ngIf="detail.activityMinutes" class="bean-info-label spacer">分</span>
             </div>
           </div>
@@ -31,11 +31,11 @@
           <!-- TODO 「アクティビティ開始（終了）時間」を表示するつもりだったが、シンプルにしたいからとりあえず「営業開始（終了）時間」にした（要検討） -->
           <div class="bean-info-center">
             <div class="bean-info-item">
-              <span class="bean-info-label">(営業開始)</span>
+              <span class="bean-info-label">営業開始</span>
               <span class="bean-info-label">{{detail.activityStartTime}}</span>
             </div>
             <div class="bean-info-item">
-              <span class="bean-info-label">(営業終了)</span>
+              <span class="bean-info-label">営業終了</span>
               <span class="bean-info-label">{{detail.activityEndTime}}</span>
             </div>
           </div>
@@ -50,7 +50,7 @@
             <div class="bean-info-item">
               <span class="bean-info-label cost-label">費用</span>
               <span>：</span>
-              <input class="form-control text-right" formControlName="activityCost">
+              <input class="form-control text-right cost-input" formControlName="activityCost">
               <span class="spacer">円</span>
             </div>
           </div>

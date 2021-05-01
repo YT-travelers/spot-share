@@ -83,6 +83,9 @@ $icon-color: blue;
       .cost-label {
         margin-left: auto;
       }
+      .cost-input {
+        width: 4rem;
+      }
     }
   }
 
@@ -108,7 +111,7 @@ $icon-color: blue;
 
 /** -------- ここからビーン専用スタイル -------- */
 input {
-  width: 4rem;
+  width: 2.5rem;
   height: 1.5rem;
   padding: 0 0.3rem;
   font-size: 0.9rem;

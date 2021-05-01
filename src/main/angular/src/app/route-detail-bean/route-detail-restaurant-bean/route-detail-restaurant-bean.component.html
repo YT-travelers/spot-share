@@ -22,7 +22,7 @@
           <div class="bean-info-left">
             <div class="bean-info-item">
               <span class="bean-info-label">(所要)</span>
-              <input class="form-control text-right" formControlName="restaurantMinutes">
+              <input class="form-control text-center" formControlName="restaurantMinutes">
               <span *ngIf="detail.restaurantMinutes" class="bean-info-label spacer">分</span>
             </div>
             <div class="bean-info-item">
@@ -43,11 +43,11 @@
           <!-- ******** bean center ******** -->
           <div class="bean-info-center">
             <div class="bean-info-item">
-              <span class="bean-info-label">(営業開始)</span>
+              <span class="bean-info-label">営業開始</span>
               <span class="bean-info-label">{{detail.restaurantStartTime}}</span>
             </div>
             <div class="bean-info-item">
-              <span class="bean-info-label">(営業終了)</span>
+              <span class="bean-info-label">営業終了</span>
               <span class="bean-info-label">{{detail.restaurantEndTime}}</span>
             </div>
           </div>
@@ -62,7 +62,7 @@
             <div class="bean-info-item">
               <span class="bean-info-label cost-label">費用</span>
               <span>：</span>
-              <input class="form-control text-right" formControlName="restaurantCost">
+              <input class="form-control text-right cost-input" formControlName="restaurantCost">
               <span class="spacer">円</span>
             </div>
           </div>

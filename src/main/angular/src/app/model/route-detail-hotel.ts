@@ -12,10 +12,14 @@ export interface IRouteDetailHotel {
   hotelRate?: number;
   /** 滞在時間 */
   hotelMinutes?: number;
-  /** チェックイン時間 */
-  hotelCheckInTime?: string;
-  /** チェックアウト時間 */
-  hotelCheckOutTime?: string;
+  /** チェックイン時間（時） */
+  hotelCheckInTimeHours?: string;
+  /** チェックイン時間（分） */
+  hotelCheckInTimeMinutes?: string;
+  /** チェックアウト時間（時） */
+  hotelCheckOutTimeHours?: string;
+  /** チェックアウト時間（分） */
+  hotelCheckOutTimeMinutes?: string;
   /** 朝食有無区分 */
   hotelBreakfastYesNoDiv?: number;
   /** 朝食有無区分名称 */

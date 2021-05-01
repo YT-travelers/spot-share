@@ -31,13 +31,21 @@ export class RouteDetailHotelBeanComponent implements OnInit {
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
     /** 滞在時間 */
-    hotelCost: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    hotelMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    /** チェックイン時間（時） */
+    hotelCheckInTimeHours: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    /** チェックイン時間（分） */
+    hotelCheckInTimeMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    /** チェックアウト時間（時） */
+    hotelCheckOutTimeHours: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    /** チェックアウト時間（分） */
+    hotelCheckOutTimeMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
     /** 朝食有無区分 */
     hotelBreakfastYesNoDiv: new FormControl(0),
     /** 夕食有無区分 */
     hotelDinnerYesNoDiv: new FormControl(0),
     /** 宿泊費用 */
-    hotelMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')])
+    hotelCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
   });
 
   constructor(
