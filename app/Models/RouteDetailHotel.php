@@ -21,8 +21,10 @@ class RouteDetailHotel extends Model
         'hotel_dinner_yes_no_div',
         'hotel_rate',
         'hotel_minutes',
-        'hotel_check_in_time',
-        'hotel_check_out_time',
+        'hotel_check_in_time_hours',
+        'hotel_check_in_time_minutes',
+        'hotel_check_out_time_hours',
+        'hotel_check_out_time_minutes',
         'hotel_cost',
     ];
 

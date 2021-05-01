@@ -26,8 +26,10 @@ class ActivityFactory extends Factory
     {
         return [
             'activity_name' => $this->faker->word,
-            'activity_open_time' => $this->faker->dateTime,
-            'activity_close_time' => $this->faker->dateTime,
+            'activity_open_time_hours' => $this->faker->time('H'),
+            'activity_open_time_minutes' => $this->faker->time('i'),
+            'activity_close_time_hours' => $this->faker->time('H'),
+            'activity_close_time_minutes' => $this->faker->time('i'),
             'activity_summary' => $this->faker->sentence,
             'activity_address' => $this->faker->address,
             'activity_url' => $this->faker->url,

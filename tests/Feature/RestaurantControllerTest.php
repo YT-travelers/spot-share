@@ -12,8 +12,10 @@ class RestaurantControllerTest extends TestCase
     private const RESTAURANT_STRUCTURE = [
         'restaurantId',
         'restaurantName',
-        'restaurantOpenTime',
-        'restaurantCloseTime',
+        'restaurantOpenTimeHours',
+        'restaurantOpenTimeMinutes',
+        'restaurantCloseTimeHours',
+        'restaurantCloseTimeMinutes',
         'restaurantSummary',
         'restaurantAddress',
         'restaurantUrl',

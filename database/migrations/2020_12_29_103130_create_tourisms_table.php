@@ -18,8 +18,10 @@ class CreateTourismsTable extends Migration
             $table->string('tourism_name');
             $table->string('country_code');
             $table->foreign('country_code')->references('country_code')->on('countries');
-            $table->dateTime('tourism_open_time')->nullable();
-            $table->dateTime('tourism_close_time')->nullable();
+            $table->string('tourism_open_time_hours')->nullable();
+            $table->string('tourism_open_time_minutes')->nullable();
+            $table->string('tourism_close_time_hours')->nullable();
+            $table->string('tourism_close_time_minutes')->nullable();
             $table->string('tourism_summary')->default('');
             $table->string('tourism_address')->default('');
             $table->string('tourism_url')->default('');

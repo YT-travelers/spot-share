@@ -22,8 +22,6 @@ class CreateRouteDetailActivitiesTable extends Migration
             $table->foreign('activity_id')->references('activity_id')->on('activities');
             $table->integer('activity_rate')->nullable();
             $table->integer('activity_minutes')->nullable();
-            $table->dateTime('activity_start_time')->nullable();
-            $table->dateTime('activity_end_time')->nullable();
             $table->integer('activity_cost')->nullable();
             $table->timestamps();
         });

@@ -24,8 +24,10 @@ class CreateRouteDetailHotelsTable extends Migration
             $table->integer('hotel_dinner_yes_no_div')->nullable();
             $table->integer('hotel_rate')->nullable();
             $table->integer('hotel_minutes')->nullable();
-            $table->dateTime('hotel_check_in_time')->nullable();
-            $table->dateTime('hotel_check_out_time')->nullable();
+            $table->string('hotel_check_in_time_hours')->nullable();
+            $table->string('hotel_check_in_time_minutes')->nullable();
+            $table->string('hotel_check_out_time_hours')->nullable();
+            $table->string('hotel_check_out_time_minutes')->nullable();
             $table->integer('hotel_cost')->nullable();
             $table->timestamps();
         });

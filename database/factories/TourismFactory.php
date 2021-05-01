@@ -28,8 +28,10 @@ class TourismFactory extends Factory
         return [
             'tourism_name' => $this->faker->sentence,
             'country_code' => $countryCodeList->get($countryCodeIndex),
-            'tourism_open_time' => $this->faker->dateTime,
-            'tourism_close_time' => $this->faker->dateTime,
+            'tourism_open_time_hours' => $this->faker->time('H'),
+            'tourism_open_time_minutes' => $this->faker->time('i'),
+            'tourism_close_time_hours' => $this->faker->time('H'),
+            'tourism_close_time_minutes' => $this->faker->time('i'),
             'tourism_summary' => $this->faker->sentence,
             'tourism_address' => $this->faker->address,
             'tourism_url' => $this->faker->url,
