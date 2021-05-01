@@ -20,8 +20,6 @@ class RouteDetailRestaurant extends Model
         'restaurant_meal_kind_div',
         'restaurant_rate',
         'restaurant_minutes',
-        'restaurant_start_time',
-        'restaurant_end_time',
         'restaurant_cost',
     ];
 

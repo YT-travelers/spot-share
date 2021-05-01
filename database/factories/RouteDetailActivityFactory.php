@@ -31,8 +31,6 @@ class RouteDetailActivityFactory extends Factory
             'activity_id' => $idList->get($idIndex),
             'activity_rate' => rand(1, 5),
             'activity_minutes' => rand(5, 180),
-            'activity_start_time' => $this->faker->dateTime,
-            'activity_end_time' => $this->faker->dateTime,
             'activity_cost' => rand(0, 500000),
         ];
     }

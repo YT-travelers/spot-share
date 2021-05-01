@@ -18,8 +18,6 @@ class RouteDetailActivity extends Model
         'activity_id',
         'activity_rate',
         'activity_minutes',
-        'activity_start_time',
-        'activity_end_time',
         'activity_cost',
     ];
 

@@ -18,8 +18,10 @@ class CreateRestaurantsTable extends Migration
             $table->string('restaurant_name');
             $table->integer('cuisine_genre_div')->nullable();
             $table->integer('restaurant_kind_div')->nullable();
-            $table->dateTime('restaurant_open_time')->nullable();
-            $table->dateTime('restaurant_close_time')->nullable();
+            $table->string('restaurant_open_time_hours')->nullable();
+            $table->string('restaurant_open_time_minutes')->nullable();
+            $table->string('restaurant_close_time_hours')->nullable();
+            $table->string('restaurant_close_time_minutes')->nullable();
             $table->string('restaurant_summary')->default('');
             $table->string('restaurant_address')->default('');
             $table->string('restaurant_url')->default('');

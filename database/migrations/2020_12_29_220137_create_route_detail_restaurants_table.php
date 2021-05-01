@@ -23,8 +23,6 @@ class CreateRouteDetailRestaurantsTable extends Migration
             $table->integer('restaurant_meal_kind_div')->nullable();
             $table->integer('restaurant_rate')->nullable();
             $table->integer('restaurant_minutes')->nullable();
-            $table->dateTime('restaurant_start_time')->nullable();
-            $table->dateTime('restaurant_end_time')->nullable();
             $table->integer('restaurant_cost')->nullable();
             $table->timestamps();
         });

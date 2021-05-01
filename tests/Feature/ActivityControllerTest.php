@@ -10,8 +10,10 @@ class ActivityControllerTest extends TestCase
     private const ACTIVITY_STRUCTURE = [
         'activityId',
         'activityName',
-        'activityOpenTime',
-        'activityCloseTime',
+        'activityOpenTimeHours',
+        'activityOpenTimeMinutes',
+        'activityCloseTimeHours',
+        'activityCloseTimeMinutes',
         'activitySummary',
         'activityAddress',
         'activityUrl',

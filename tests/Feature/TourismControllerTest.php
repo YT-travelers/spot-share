@@ -11,8 +11,10 @@ class TourismControllerTest extends TestCase
         'tourismId',
         'tourismName',
         'country',
-        'tourismOpenTime',
-        'tourismCloseTime',
+        'tourismOpenTimeHours',
+        'tourismOpenTimeMinutes',
+        'tourismCloseTimeHours',
+        'tourismCloseTimeMinutes',
         'tourismSummary',
         'tourismAddress',
         'tourismUrl'

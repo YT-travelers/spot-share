@@ -36,8 +36,6 @@ class RouteDetailRestaurantFactory extends Factory
             'restaurant_meal_kind_div' => $mealKindDivList->get($mealKindDivIndex),
             'restaurant_rate' => rand(1, 5),
             'restaurant_minutes' => rand(0, 600),
-            'restaurant_start_time' => $this->faker->dateTime,
-            'restaurant_end_time' => $this->faker->dateTime,
             'restaurant_cost' => rand(0, 30000),
         ];
     }
