@@ -16,17 +16,16 @@ class ActivityService
     {
         $activity = $this->activity->findOrNew($activityId);
         $activity->fill($activityData)->save();
-        if (!empty($activityImages) && env('IS_MOCK_IMAGE')) {
-            //削除された画像をDBとS3から削除する
-            $activity->activityImages
-                ->filter(function (ActivityImage $activityImage) use($activityImages) {
-                    return !collect($activityImages)
-                        ->contains('activity_image_id', $activityImage->activity_image_id);
-                })->each(function (ActivityImage $activityImage) {
-                    $activityImage->delete();
+        $activity->activityImages
+            ->filter(function (ActivityImage $activityImage) use($activityImages) {
+                return !collect($activityImages)
+                    ->contains('activity_image_id', $activityImage->activity_image_id);
+            })->each(function (ActivityImage $activityImage) {
+                $activityImage->delete();
+                if (!env('IS_MOCK_IMAGE')) {
                     //TODO: S3から画像を削除
-                });
-        }
+                }
+            });
 
         $activityImagePathList = collect($uploadFiles)
             ->map(function (\Illuminate\Http\UploadedFile $file) {
