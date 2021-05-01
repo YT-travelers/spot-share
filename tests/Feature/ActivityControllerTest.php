@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Activity;
+use App\Models\ActivityImage;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class ActivityControllerTest extends TestCase
@@ -17,6 +19,7 @@ class ActivityControllerTest extends TestCase
         'activitySummary',
         'activityAddress',
         'activityUrl',
+        'activityImages',
     ];
 
     /**
@@ -36,9 +39,17 @@ class ActivityControllerTest extends TestCase
     public function testStore()
     {
         //既存のマスタデータを更新
+        $postData = Activity
+            ::factory()
+            ->has(ActivityImage::factory())
+            ->make()
+            ->toArray();
+        $postData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
 
-        $response = $this->post('activities', Activity::factory()->make()->toArray());
-
+        $response = $this->post('activities', $postData);
         $response->assertJsonStructure(self::ACTIVITY_STRUCTURE);
     }
 
@@ -53,7 +64,17 @@ class ActivityControllerTest extends TestCase
     public function testUpdate()
     {
         $activityId = Activity::first()->activity_id;
-        $response = $this->put("/activities/$activityId", Activity::factory()->make()->toArray());
+        $updateData = Activity
+            ::factory()
+            ->has(ActivityImage::factory())
+            ->make()
+            ->toArray();
+        $updateData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
+        $response = $this->put("/activities/$activityId", $updateData);
 
         $response->assertJsonStructure(self::ACTIVITY_STRUCTURE);
     }

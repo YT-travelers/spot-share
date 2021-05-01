@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Activity;
+use App\Models\ActivityImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ActivityFactory extends Factory
@@ -15,6 +16,17 @@ class ActivityFactory extends Factory
      * @var string
      */
     protected $model = Activity::class;
+
+    /**
+     * @return ActivityFactory
+     */
+    public function configure(): ActivityFactory
+    {
+        return $this->afterCreating(function (Activity $activity) {
+            $factory = ActivityImage::factory()->count(3);
+            $factory->setActivityId($activity->activity_id)->create();
+        });
+    }
 
     /**
      * Define the model's default state.

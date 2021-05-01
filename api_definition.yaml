@@ -544,6 +544,7 @@ components:
     Tourism:
       title: Tourism
       type: object
+      x-examples: {}
       properties:
         tourismId:
           type: integer
@@ -551,30 +552,29 @@ components:
           type: string
         country:
           $ref: '#/components/schemas/Country'
-        tourismOpenTime:
-          type:
-            - string
-            - 'null'
-        tourismCloseTime:
-          type:
-            - string
-            - 'null'
         tourismSummary:
           type:
             - string
-            - 'null'
+          nullable: true
         tourismAddress:
           type:
             - string
-            - 'null'
+          nullable: true
         tourismUrl:
           type:
             - string
-            - 'null'
+          nullable: true
+        tourismOpenTimeHours:
+          type: string
+        tourismOpenTimeMinutes:
+          type: string
+        tourismCloseTimeHours:
+          type: string
+        tourismCloseTimeMinutes:
+          type: string
       required:
         - tourismId
         - tourismName
-      x-examples: {}
     RouteDetailRestaurant:
       title: RouteDetailRestaurant
       type: object
@@ -586,31 +586,23 @@ components:
         restaurantMealKindDiv:
           type:
             - integer
-            - 'null'
+          nullable: true
         restaurantMealKindDivName:
           type:
             - string
-            - 'null'
+          nullable: true
         restaurantRate:
           type:
             - integer
-            - 'null'
+          nullable: true
         restaurantMinutes:
           type:
             - integer
-            - 'null'
-        restaurantStartTime:
-          type:
-            - string
-            - 'null'
-        restaurantEndTime:
-          type:
-            - string
-            - 'null'
+          nullable: true
         restaurantCost:
           type:
             - integer
-            - 'null'
+          nullable: true
         restaurant:
           $ref: '#/components/schemas/Restaurant'
         routeId:
@@ -629,43 +621,43 @@ components:
         hotelRate:
           type:
             - integer
-            - 'null'
+          nullable: true
         hotelMinutes:
           type:
             - integer
-            - 'null'
-        hotelCheckInTime:
-          type:
-            - string
-            - 'null'
-        hotelCheckOutTime:
-          type:
-            - string
-            - 'null'
+          nullable: true
         hotelBreakfastYesNoDiv:
           type:
             - integer
-            - 'null'
+          nullable: true
         hotelBreakfastYesNoDivName:
           type:
             - string
-            - 'null'
+          nullable: true
         hotelDinnerYesNoDiv:
           type:
             - integer
-            - 'null'
+          nullable: true
         hotelDinnerYesNoDivName:
           type:
             - string
-            - 'null'
+          nullable: true
         hotelCost:
           type:
             - integer
-            - 'null'
+          nullable: true
         hotel:
           $ref: '#/components/schemas/Hotel'
         routeId:
           type: integer
+        hotelCheckInTimeHours:
+          type: string
+        hotelCheckInTimeMinutes:
+          type: string
+        hotelCheckOutTimeHours:
+          type: string
+        hotelCheckOutTimeMinutes:
+          type: string
       required:
         - routeDetailId
         - hotelId
@@ -680,23 +672,15 @@ components:
         activityRate:
           type:
             - integer
-            - 'null'
+          nullable: true
         activityMinutes:
           type:
             - integer
-            - 'null'
-        activityStartTime:
-          type:
-            - string
-            - 'null'
-        activityEndTime:
-          type:
-            - string
-            - 'null'
+          nullable: true
         activityCost:
           type:
             - integer
-            - 'null'
+          nullable: true
         activity:
           $ref: '#/components/schemas/Activity'
         routeId:
@@ -807,39 +791,39 @@ components:
         cuisineGenreDiv:
           type:
             - integer
-            - 'null'
+          nullable: true
         restaurantKindDiv:
           type:
             - integer
-            - 'null'
-        restaurantOpenTime:
-          type:
-            - string
-            - 'null'
-        restaurantCloseTime:
-          type:
-            - string
-            - 'null'
+          nullable: true
         restaurantSummary:
           type:
             - string
-            - 'null'
+          nullable: true
         restaurantAddress:
           type:
             - string
-            - 'null'
+          nullable: true
         restaurantUrl:
           type:
             - string
-            - 'null'
+          nullable: true
         cuisineGenreDivName:
           type:
             - string
-            - 'null'
+          nullable: true
         restaurantKindDivName:
           type:
             - string
-            - 'null'
+          nullable: true
+        restaurantOpenTimeHours:
+          type: string
+        restaurantOpenTimeMinutes:
+          type: string
+        restaurantCloseTimeHours:
+          type: string
+        restaurantCloseTimeMinutes:
+          type: string
       required:
         - restaurantId
         - restaurantName
@@ -882,29 +866,54 @@ components:
           type: integer
         activityName:
           type: string
-        activityOpenTime:
-          type:
-            - string
-            - 'null'
-        activityCloseTime:
-          type:
-            - string
-            - 'null'
         activitySummary:
           type:
             - string
-            - 'null'
+          nullable: true
         activityAddress:
           type:
             - string
-            - 'null'
+          nullable: true
         activityUrl:
           type:
             - string
-            - 'null'
+          nullable: true
+        activityOpenTimeHours:
+          type: string
+        activityOpenTimeMinutes:
+          type: string
+        activityCloseTimeHours:
+          type: string
+        activityCloseTimeMinutes:
+          type: string
+        activityImages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityImage'
+        uploadFiles:
+          type: array
+          description: ファイルの配列
+          items: {}
       required:
         - activityId
         - activityName
+      x-examples:
+        example-1:
+          activityId: 0
+          activityName: string
+          activitySummary: string
+          activityAddress: string
+          activityUrl: string
+          activityOpenTimeHours: string
+          activityOpenTimeMinutes: string
+          activityCloseTimeHours: string
+          activityCloseTimeMinutes: string
+          activityImages:
+            - activityImageId: 0
+              activityId: 0
+              url: string
+          uploadFiles:
+            - null
     Route:
       title: Route
       type: object
@@ -933,4 +942,14 @@ components:
           type: string
         divValue:
           type: integer
+    ActivityImage:
+      title: ActivityImage
+      type: object
+      properties:
+        activityImageId:
+          type: integer
+        activityId:
+          type: integer
+        url:
+          type: string
   responses: {}
