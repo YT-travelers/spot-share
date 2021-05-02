@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Const } from 'src/app/shared/const.const';
 import { IRouteDetailActivity } from 'src/app/model/route-detail-activity';
 
 @Component({
@@ -22,10 +23,19 @@ export class RouteDetailActivityBeanComponent implements OnInit {
   routeDetailActivityFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
+    /** アクティビティID */
+    activityId: new FormControl(0),
+    /** アクティビティ */
+    activity: new FormGroup({
+      /** アクティビテ名称 */
+      activityName: new FormControl()
+    }),
+    /** 行きたい度 */
+    activityRate: new FormControl(0),
     /** アクティビティ時間 */
-    activityMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    activityMinutes: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** アクティビティ費用 */
-    activityCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
+    activityCost: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)])
   });
 
   constructor(

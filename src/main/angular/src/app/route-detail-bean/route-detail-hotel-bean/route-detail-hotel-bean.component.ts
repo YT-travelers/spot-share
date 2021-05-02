@@ -6,7 +6,6 @@ import { ICodeList } from 'src/app/model/code-list';
 import { Const } from 'src/app/shared/const.const';
 import { NumberUtils } from 'src/app/shared/utils/number-utils.const';
 import { IRouteDetailHotel } from 'src/app/model/route-detail-hotel';
-import { createElementAccessChain } from 'typescript';
 
 @Component({
   selector: 'app-route-detail-hotel-bean',
@@ -41,6 +40,8 @@ export class RouteDetailHotelBeanComponent implements OnInit {
       /** ホテル名称 */
       hotelName: new FormControl()
     }),
+    /** 行きたい度 */
+    hotelRate: new FormControl(0),
     /** 滞在時間 */
     hotelMinutes: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** チェックイン時間（時） */

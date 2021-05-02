@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { Const } from 'src/app/shared/const.const';
 import { IRouteDetailTourism } from 'src/app/model/route-detail-tourism';
 
 @Component({
@@ -23,10 +23,19 @@ export class RouteDetailTourismBeanComponent {
   routeDetailTourismFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
+    /** 観光地ID */
+    tourismId: new FormControl(0),
+    /** 観光地 */
+    tourism: new FormGroup({
+      /** 観光地名称 */
+      tourismName: new FormControl()
+    }),
+    /** 行きたい度 */
+    tourismRate: new FormControl(0),
     /** 観光時間 */
-    tourismMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    tourismMinutes: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** 観光費用 */
-    tourismCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
+    tourismCost: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)])
   });
 
   // -----------------------------------------------------------------------

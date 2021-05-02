@@ -39,7 +39,6 @@
 
           <!-- ******** bean center ******** -->
           <div class="bean-info-center">
-            <!-- TODO ﾁｪｯｸｲﾝとﾁｪｯｸｱｳﾄの半角カナは時間を正しく表示すれば全角にできそう-->
             <div class="bean-info-item">
               <span class="bean-info-label">ﾁｪｯｸｲﾝ</span>
               <input class="form-control text-center" style="margin-left: 0.63rem" maxlength="2" formControlName="hotelCheckInTimeHours">
@@ -58,8 +57,7 @@
 
           <!-- ******** bean right ******** -->
           <div class="bean-info-right">
-            <!-- TODO レートの更新できてるか？ -->
-            <ngb-rating
+            <ngb-rating formControlName="hotelRate"
               [rate]="detail.hotelRate"
               [max]="5"
             ></ngb-rating>

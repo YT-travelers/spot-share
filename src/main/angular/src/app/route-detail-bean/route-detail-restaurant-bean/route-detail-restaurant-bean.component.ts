@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Code } from 'src/app/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
+import { Const } from 'src/app/shared/const.const';
 import { IRouteDetailRestaurant } from 'src/app/model/route-detail-restaurant';
 
 @Component({
@@ -30,12 +31,21 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
   routeDetailRestaurantFormGroup = new FormGroup({
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
+    /** 飲食店ID */
+    restaurantId: new FormControl(0),
+    /** 飲食店 */
+    restaurant: new FormGroup({
+      /** 飲食店名称 */
+      restaurantName: new FormControl()
+    }),
+    /** 行きたい度 */
+    restaurantRate: new FormControl(0),
     /** 飲食時間 */
-    restaurantMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    restaurantMinutes: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** 食事種類区分 */
     mealKindDiv: new FormControl(0),
     /** 飲食費用 */
-    restaurantCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
+    restaurantCost: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)])
   });
 
   // -----------------------------------------------------------------------
