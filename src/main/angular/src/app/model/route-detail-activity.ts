@@ -12,10 +12,6 @@ export interface IRouteDetailActivity {
   activityRate?: number;
   /** 所要時間 */
   activityMinutes?: number;
-  /** アクティビティ開始時間 */
-  activityStartTime?: string;
-  /** アクティビティ終了時間 */
-  activityEndTime?: string;
   /** アクティビティ費用 */
   activityCost?: number;
   /** アクティビティ */

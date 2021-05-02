@@ -28,7 +28,15 @@ export class RouteDetailActivityBeanComponent implements OnInit {
     /** アクティビティ */
     activity: new FormGroup({
       /** アクティビテ名称 */
-      activityName: new FormControl()
+      activityName: new FormControl(),
+      /** 営業開始時間（時） */
+      activityOpenTimeHours: new FormControl(),
+      /** 営業開始時間（分） */
+      activityOpenTimeMinutes: new FormControl(),
+      /** 営業終了時間（時） */
+      activityCloseTimeHours: new FormControl(),
+      /** 営業終了時間（分） */
+      activityCloseTimeMinutes: new FormControl(),
     }),
     /** 行きたい度 */
     activityRate: new FormControl(0),

@@ -32,11 +32,17 @@
           <div class="bean-info-center">
             <div class="bean-info-item">
               <span class="bean-info-label">営業開始</span>
-              <span class="bean-info-label">{{detail.activityStartTime}}</span>
+              <span class="bean-info-label spacer">{{detail.activity.activityOpenTimeHours}}</span>
+              <span class="bean-info-label">時</span>
+              <span class="bean-info-label spacer">{{detail.activity.activityOpenTimeMinutes}}</span>
+              <span class="bean-info-label">分</span>
             </div>
             <div class="bean-info-item">
               <span class="bean-info-label">営業終了</span>
-              <span class="bean-info-label">{{detail.activityEndTime}}</span>
+              <span class="bean-info-label spacer">{{detail.activity.activityCloseTimeHours}}</span>
+              <span class="bean-info-label">時</span>
+              <span class="bean-info-label spacer">{{detail.activity.activityCloseTimeMinutes}}</span>
+              <span class="bean-info-label">分</span>
             </div>
           </div>
 

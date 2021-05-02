@@ -71,10 +71,14 @@ export class AddTourismPageComponent implements OnInit {
       /** 国名称 */
       countryName: new FormControl(this.tourism.country.countryName, [Validators.required]),
     }),
-    /** 営業開始時間 */
-    tourismOpenTime: new FormControl(this.tourism.tourismOpenTime, [ Validators.min(0), Validators.max(24)]),
-    /** 営業終了時間 */
-    tourismCloseTime: new FormControl(this.tourism.tourismCloseTime, [ Validators.min(0), Validators.max(60)]),
+    /** 営業開始時間（時） */
+    tourismOpenTimeHours: new FormControl(this.tourism.tourismOpenTimeHours, [ Validators.min(0), Validators.max(23)]),
+    /** 営業開始時間（分） */
+    tourismOpenTimeMinutes: new FormControl(this.tourism.tourismOpenTimeMinutes, [ Validators.min(0), Validators.max(59)]),
+    /** 営業終了時間（時） */
+    tourismCloseTimeHours: new FormControl(this.tourism.tourismCloseTimeHours, [ Validators.min(0), Validators.max(23)]),
+    /** 営業終了時間（分） */
+    tourismCloseTimeMinutes: new FormControl(this.tourism.tourismCloseTimeMinutes, [ Validators.min(0), Validators.max(59)]),
     /** 概要 */
     tourismSummary: new FormControl(this.tourism.tourismSummary),
     /** 住所 */

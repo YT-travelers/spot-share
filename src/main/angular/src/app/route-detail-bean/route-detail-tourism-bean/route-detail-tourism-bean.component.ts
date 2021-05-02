@@ -28,7 +28,15 @@ export class RouteDetailTourismBeanComponent {
     /** 観光地 */
     tourism: new FormGroup({
       /** 観光地名称 */
-      tourismName: new FormControl()
+      tourismName: new FormControl(),
+      /** 営業開始時間（時） */
+      tourismOpenTimeHours: new FormControl(),
+      /** 営業開始時間（分） */
+      tourismOpenTimeMinutes: new FormControl(),
+      /** 営業終了時間（時） */
+      tourismCloseTimeHours: new FormControl(),
+      /** 営業終了時間（分） */
+      tourismCloseTimeMinutes: new FormControl(),
     }),
     /** 行きたい度 */
     tourismRate: new FormControl(0),

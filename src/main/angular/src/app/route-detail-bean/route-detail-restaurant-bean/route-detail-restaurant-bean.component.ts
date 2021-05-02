@@ -36,7 +36,15 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
     /** 飲食店 */
     restaurant: new FormGroup({
       /** 飲食店名称 */
-      restaurantName: new FormControl()
+      restaurantName: new FormControl(),
+      /** 営業開始時間（時） */
+      restaurantOpenTimeHours: new FormControl(),
+      /** 営業開始時間（分） */
+      restaurantOpenTimeMinutes: new FormControl(),
+      /** 営業終了時間（時） */
+      restaurantCloseTimeHours: new FormControl(),
+      /** 営業終了時間（分） */
+      restaurantCloseTimeMinutes: new FormControl(),
     }),
     /** 行きたい度 */
     restaurantRate: new FormControl(0),
