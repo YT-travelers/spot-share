@@ -16,10 +16,6 @@ export interface IRouteDetailRestaurant {
   restaurantMealKindDiv?: number;
   /** 食事種類区分名称 */
   restaurantMealKindDivName?: string;
-  /** 飲食開始時間 */
-  restaurantStartTime?: string;
-  /** 飲食終了時間 */
-  restaurantEndTime?: string;
   /** 飲食費用 */
   restaurantCost?: number;
   /** 飲食店 */

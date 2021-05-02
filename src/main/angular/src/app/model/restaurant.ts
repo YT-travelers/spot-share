@@ -14,10 +14,14 @@ export interface IRestaurant {
   restaurantKindDiv?: number;
   /** 飲食店種類区分名称 */
   restaurantKindDivName?: string;
-  /** 営業開始時間 */
-  restaurantOpenTime?: string;
-  /** 営業終了時間 */
-  restaurantCloseTime?: string;
+  /** 営業開始時間（時） */
+  restaurantOpenTimeHours?: string;
+  /** 営業開始時間（分） */
+  restaurantOpenTimeMinutes?: string;
+  /** 営業終了時間（時） */
+  restaurantCloseTimeHours?: string;
+  /** 営業終了時間（分） */
+  restaurantCloseTimeMinutes?: string;
   /** 住所 */
   restaurantAddress?: string;
   /** URL */

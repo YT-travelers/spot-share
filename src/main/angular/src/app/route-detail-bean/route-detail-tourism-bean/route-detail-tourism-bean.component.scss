@@ -71,6 +71,9 @@ $icon-color: blue;
     &-left {
       width: 33%;
       margin-right: 0.5rem;
+      .required-time {
+        width: 3rem;
+      }
     }
     &-center {
       width: 33%;
@@ -84,7 +87,7 @@ $icon-color: blue;
         margin-left: auto;
       }
       .cost-input {
-        width: 4rem;
+        width: 5rem;
       }
     }
   }

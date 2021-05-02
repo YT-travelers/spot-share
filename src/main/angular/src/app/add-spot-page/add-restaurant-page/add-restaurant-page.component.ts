@@ -54,10 +54,14 @@ export class AddRestaurantPageComponent implements OnInit {
     restaurantId: new FormControl(this.restaurant.restaurantId),
     /**  飲食店名称 */
     restaurantName: new FormControl(this.restaurant.restaurantName, [Validators.required]),
-    /** 営業開始時間 */
-    restaurantOpenTime: new FormControl(this.restaurant.restaurantOpenTime),
-    /** 営業終了時間 */
-    restaurantCloseTime: new FormControl(this.restaurant.restaurantCloseTime, [ Validators.min(0), Validators.max(60)]),
+    /** 営業開始時間（時） */
+    restaurantOpenTimeHours: new FormControl(this.restaurant.restaurantOpenTimeHours),
+    /** 営業開始時間（分） */
+    restaurantOpenTimeMinutes: new FormControl(this.restaurant.restaurantOpenTimeMinutes),
+    /** 営業終了時間（時） */
+    restaurantCloseTimeHours: new FormControl(this.restaurant.restaurantCloseTimeHours),
+    /** 営業終了時間（分） */
+    restaurantCloseTimeMinutes: new FormControl(this.restaurant.restaurantCloseTimeMinutes),
     /** 住所 */
     restaurantAddress: new FormControl(this.restaurant.restaurantAddress, [Validators.pattern('^[0-9]*$')]),
     /** url */
