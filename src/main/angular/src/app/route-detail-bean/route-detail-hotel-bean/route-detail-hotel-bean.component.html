@@ -22,7 +22,7 @@
           <div class="bean-info-left">
             <div class="bean-info-item">
               <span class="bean-info-label">(所要)</span>
-              <input class="form-control text-center" formControlName="hotelMinutes">
+              <input class="form-control text-center required-time" maxlength="4" formControlName="hotelMinutes">
               <span *ngIf="detail.hotelMinutes" class="bean-info-label spacer">分</span>
             </div>
             <div class="bean-info-item">
@@ -66,7 +66,7 @@
             <div class="bean-info-item">
               <span class="bean-info-label cost-label">費用</span>
               <span>：</span>
-              <input class="form-control text-right cost-input" formControlName="hotelCost">
+              <input class="form-control text-right cost-input" maxlength="8" formControlName="hotelCost">
               <span class="spacer">円</span>
             </div>
           </div>
