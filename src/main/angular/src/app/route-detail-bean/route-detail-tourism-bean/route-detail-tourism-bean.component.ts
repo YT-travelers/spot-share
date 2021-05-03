@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Const } from 'src/app/shared/const/const.const';
-import { IRouteDetailTourism } from 'src/app/model/route-detail-tourism';
+import { IRouteDetailTourism } from 'src/app/shared/model/route-detail-tourism';
 
 @Component({
   selector: 'app-route-detail-tourism-bean',

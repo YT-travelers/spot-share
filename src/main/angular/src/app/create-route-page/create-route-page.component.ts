@@ -8,10 +8,10 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 import { FormControl } from '@angular/forms';
 import { defer as _defer, remove as _remove, each as _each, forEach as _forEach } from 'lodash';
 
-import { IRoute } from 'src/app/model/route';
+import { IRoute } from 'src/app/shared/model/route';
 import { RouteService } from 'src/app/shared/service/route.service';
 import { Code } from 'src/app/shared/const/code-div.const';
-import { IRouteDetail } from 'src/app/model/route-detail';
+import { IRouteDetail } from 'src/app/shared/model/route-detail';
 
 @Component({
   selector: 'app-create-route-page',

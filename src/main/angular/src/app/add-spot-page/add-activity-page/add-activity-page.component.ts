@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
-import { IActivity } from 'src/app/model/activity';
+import { IActivity } from 'src/app/shared/model/activity';
 import { ActivityService } from 'src/app/shared/service/activity.service';
 
 // アクティビティ編集モード列挙値

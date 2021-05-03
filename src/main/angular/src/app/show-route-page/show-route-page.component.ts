@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { GridOptions } from 'ag-grid-community';
-import { IRoute } from 'src/app/model/route';
+import { IRoute } from 'src/app/shared/model/route';
 import { RouteService } from 'src/app/shared/service/route.service';
 import { Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';

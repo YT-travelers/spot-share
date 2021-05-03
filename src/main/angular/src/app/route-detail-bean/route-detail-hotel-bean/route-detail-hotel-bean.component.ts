@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, map } from 'rxjs/operators';
 import { Code } from 'src/app/shared/const/code-div.const';
-import { ICodeList } from 'src/app/model/code-list';
+import { ICodeList } from 'src/app/shared/model/code-list';
 import { Const } from 'src/app/shared/const/const.const';
 import { NumberUtils } from 'src/app/shared/utils/number-utils.const';
-import { IRouteDetailHotel } from 'src/app/model/route-detail-hotel';
+import { IRouteDetailHotel } from 'src/app/shared/model/route-detail-hotel';
 
 @Component({
   selector: 'app-route-detail-hotel-bean',

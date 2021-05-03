@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IRouteDetailMemo } from 'src/app/model/route-detail-memo';
+import { IRouteDetailMemo } from 'src/app/shared/model/route-detail-memo';
 
 @Component({
   selector: 'app-route-detail-memo-bean',

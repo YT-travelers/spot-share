@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
-import { IHotel } from 'src/app/model/hotel';
+import { IHotel } from 'src/app/shared/model/hotel';
 import { HotelService } from 'src/app/shared/service/hotel.service';
 
 // ホテル編集モード列挙値

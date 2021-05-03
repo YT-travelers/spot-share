@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter as _filter } from 'lodash';
 import { Code } from 'src/app/shared/const/code-div.const';
-import { ICodeList } from 'src/app/model/code-list';
-import { IRouteDetailMeal } from 'src/app/model/route-detail-meal';
+import { ICodeList } from 'src/app/shared/model/code-list';
+import { IRouteDetailMeal } from 'src/app/shared/model/route-detail-meal';
 
 @Component({
   selector: 'app-route-detail-meal-bean',

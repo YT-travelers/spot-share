@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
-import { IRestaurant } from 'src/app/model/restaurant';
+import { IRestaurant } from 'src/app/shared/model/restaurant';
 import { RestaurantService } from 'src/app/shared/service/restaurant.service';
 
 // 飲食店編集モード列挙値

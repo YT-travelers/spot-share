@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IHotel } from 'src/app/model/hotel';
+import { IHotel } from 'src/app/shared/model/hotel';
 
 @Injectable({ providedIn: 'root' })
 export class HotelService {

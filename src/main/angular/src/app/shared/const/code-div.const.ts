@@ -1,4 +1,4 @@
-import { ICodeList } from 'src/app/model/code-list';
+import { ICodeList } from 'src/app/shared/model/code-list';
 
 /**
  * ビーン種類区分

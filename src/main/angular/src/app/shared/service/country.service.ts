@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { ICountry } from 'src/app/model/country';
+import { ICountry } from 'src/app/shared/model/country';
 
 @Injectable({ providedIn: 'root' })
 export class CountryService {

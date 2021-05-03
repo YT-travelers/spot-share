@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
-import { ITourism } from 'src/app/model/tourism';
+import { ITourism } from 'src/app/shared/model/tourism';
 
 @Injectable({ providedIn: 'root' })
 export class TourismService {

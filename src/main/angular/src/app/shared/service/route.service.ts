@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IRoute } from 'src/app/model/route';
+import { IRoute } from 'src/app/shared/model/route';
 
 @Injectable({ providedIn: 'root' })
 export class RouteService {
