@@ -6,7 +6,7 @@ import { AddRestaurantPageComponent } from './add-restaurant-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ImageInputModule } from 'src/app/shared/image-input/image-input.module';
+import { ImageInputModule } from 'src/app/shared/component/image-input/image-input.module';
 
 @NgModule({
   declarations: [
