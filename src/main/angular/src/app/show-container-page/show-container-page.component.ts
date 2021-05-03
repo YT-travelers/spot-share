@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ShowRoutePageComponent } from '../show-route-page/show-route-page.component';
-import { ShowTourismPageComponent } from '../show-tourism-page/show-tourism-page.component';
+import { ShowRoutePageComponent } from 'src/app/show-route-page/show-route-page.component';
+import { ShowTourismPageComponent } from 'src/app/show-tourism-page/show-tourism-page.component';
 
 /**
  * 一覧ページ タブのインデックスを表す列挙値

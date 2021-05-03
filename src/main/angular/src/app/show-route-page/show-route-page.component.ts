@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, fromEvent } from 'rxjs';
 import { GridOptions } from 'ag-grid-community';
-import { IRoute } from '../model/route';
-import { RouteService } from '../shared/route.service';
+import { IRoute } from 'src/app/model/route';
+import { RouteService } from 'src/app/shared/route.service';
 import { Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs/operators';
-import { SelectModalService } from '../shared/select-modal/select-modal.service';
-import { InputRouteNameModalService } from '../shared/input-route-name-modal/input-route-name-modal.service';
+import { SelectModalService } from 'src/app/shared/select-modal/select-modal.service';
+import { InputRouteNameModalService } from 'src/app/shared/input-route-name-modal/input-route-name-modal.service';
 
 @Component({
   selector: 'app-show-route-page',
