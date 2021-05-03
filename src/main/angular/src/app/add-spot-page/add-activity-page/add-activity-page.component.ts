@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
 import { IActivity } from 'src/app/model/activity';
-import { ActivityService } from 'src/app/shared/activity.service';
+import { ActivityService } from 'src/app/shared/service/activity.service';
 
 // アクティビティ編集モード列挙値
 export enum EditMode {

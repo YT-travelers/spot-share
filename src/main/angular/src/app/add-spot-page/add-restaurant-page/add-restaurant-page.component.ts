@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
 import { IRestaurant } from 'src/app/model/restaurant';
-import { RestaurantService } from 'src/app/shared/restaurant.service';
+import { RestaurantService } from 'src/app/shared/service/restaurant.service';
 
 // 飲食店編集モード列挙値
 export enum EditMode {
