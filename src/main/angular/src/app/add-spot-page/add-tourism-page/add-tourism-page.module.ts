@@ -16,7 +16,7 @@ import { ImageInputModule } from 'src/app/shared/component/image-input/image-inp
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
     MatAutocompleteModule,
     MatSlideToggleModule,

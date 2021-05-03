@@ -24,7 +24,7 @@ import { RouteDetailMoveBeanModule } from 'src/app/route-detail-bean/route-detai
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     DragDropModule,
     MatIconModule,
     RouteDetailTourismBeanModule,

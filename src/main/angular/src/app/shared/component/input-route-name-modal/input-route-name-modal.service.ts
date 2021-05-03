@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { InputRouteNameModalContent } from './input-route-name-modal.component';
+import { InputRouteNameModalComponent } from './input-route-name-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class InputRouteNameModalService {
    * キャンセルが押下された場合はnullを返却します。
    */
   show(): Promise<string> {
-    const modalRef = this.modalService.open(InputRouteNameModalContent);
+    const modalRef = this.modalService.open(InputRouteNameModalComponent);
 
     return modalRef.result.then(routeName => {
       return routeName;

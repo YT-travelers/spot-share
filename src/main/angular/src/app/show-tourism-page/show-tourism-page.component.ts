@@ -104,7 +104,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
        input.onclick = function() {
          params.setValue(input.checked === true ? 'Y' : 'N');
        };
-       
+
        return input;
     }
   }

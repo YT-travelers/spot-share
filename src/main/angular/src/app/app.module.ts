@@ -54,7 +54,7 @@ import { InputRouteNameModalModule } from './shared/component/input-route-name-m
     SelectModalModule,
     InputRouteNameModalModule,
     HttpClientModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({

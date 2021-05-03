@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './select-modal.component.html',
   styleUrls: ['./select-modal.component.scss']
 })
-export class SelectModalContent {
+export class SelectModalComponent {
 
   /** コンテントメッセージ */
   @Input() message: string;

@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './input-route-name-modal.component.html',
   styleUrls: ['./input-route-name-modal.component.scss']
 })
-export class InputRouteNameModalContent {
+export class InputRouteNameModalComponent {
 
   /** ルートタイトル */
   routeName = '';

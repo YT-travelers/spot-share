@@ -15,7 +15,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatTabsModule,
     ShowRoutePageModule,
     ShowTourismPageModule,

@@ -13,7 +13,7 @@ import { RouteDetailActivityBeanComponent } from './route-detail-activity-bean.c
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [

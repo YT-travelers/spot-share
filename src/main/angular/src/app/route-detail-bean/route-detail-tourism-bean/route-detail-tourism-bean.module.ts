@@ -13,7 +13,7 @@ import { RouteDetailTourismBeanComponent } from './route-detail-tourism-bean.com
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [

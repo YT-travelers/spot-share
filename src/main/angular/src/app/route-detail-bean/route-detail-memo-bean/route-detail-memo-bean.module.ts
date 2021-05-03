@@ -13,7 +13,7 @@ import { RouteDetailMemoBeanComponent } from './route-detail-memo-bean.component
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [

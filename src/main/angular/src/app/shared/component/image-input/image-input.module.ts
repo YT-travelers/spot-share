@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     BrowserModule,
     FormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [

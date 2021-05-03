@@ -13,7 +13,7 @@ import { RouteDetailChecklistBeanComponent } from './route-detail-checklist-bean
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [

@@ -13,7 +13,7 @@ import { RouteDetailRestaurantBeanComponent } from './route-detail-restaurant-be
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [

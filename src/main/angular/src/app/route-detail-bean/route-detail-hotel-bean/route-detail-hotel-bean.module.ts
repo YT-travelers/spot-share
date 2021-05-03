@@ -13,7 +13,7 @@ import { RouteDetailHotelBeanComponent } from './route-detail-hotel-bean.compone
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
+    NgbModule,
     MatIconModule,
   ],
   exports: [
