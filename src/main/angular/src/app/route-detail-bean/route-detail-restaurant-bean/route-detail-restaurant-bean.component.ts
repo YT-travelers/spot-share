@@ -51,7 +51,7 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
     /** 飲食時間 */
     restaurantMinutes: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** 食事種類区分 */
-    mealKindDiv: new FormControl(0),
+    restaurantMealKindDiv: new FormControl(0),
     /** 飲食費用 */
     restaurantCost: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)])
   });
