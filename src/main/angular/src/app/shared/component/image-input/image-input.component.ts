@@ -12,7 +12,7 @@ export interface ICarousel {
 }
 
 @Component({
-  selector: 'share-image-input',
+  selector: 'app-image-input',
   templateUrl: './image-input.component.html',
   styleUrls: ['./image-input.component.scss']
 })
