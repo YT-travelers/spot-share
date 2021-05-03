@@ -7,7 +7,7 @@ import { IRestaurant } from 'src/app/shared/model/restaurant';
 @Injectable({ providedIn: 'root' })
 export class RestaurantService {
 
-  private url = 'api/restaurants'
+  private url = 'api/restaurants';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

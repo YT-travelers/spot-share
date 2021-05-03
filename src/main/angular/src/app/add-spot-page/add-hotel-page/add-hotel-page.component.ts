@@ -28,7 +28,7 @@ export class AddHotelPageComponent implements OnInit {
   @Input() selectedHotel: IHotel;
 
   /** ホテル編集モード */
-  editMode
+  editMode;
 
   /** ホテル編集モード（HTML用） */
   EditMode = EditMode;
@@ -70,7 +70,7 @@ export class AddHotelPageComponent implements OnInit {
   // -----------------------------------------------------------------------
   // ライフサイクル
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // ホテル編集モードの判定
     this.hotelId = this.route.snapshot.paramMap.get('hotelId');
@@ -106,7 +106,7 @@ export class AddHotelPageComponent implements OnInit {
   /**
    * 保存ボタン押下イベント
    */
-  onClickSave() {
+  onClickSave(): void {
 
     // 入力チェック（エラーが存在する場合は、後続の処理を中断）
     if (this.validate()) {
@@ -141,7 +141,7 @@ export class AddHotelPageComponent implements OnInit {
   /**
    * 戻るボタン押下イベント
    */
-  onClickBack() {
+  onClickBack(): void {
     // TODO ホテル一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }

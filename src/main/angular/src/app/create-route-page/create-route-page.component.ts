@@ -99,7 +99,7 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * ルート名称編集ボタン
    */
-  onClickRouteNameEditButton() {
+  onClickRouteNameEditButton(): void {
     this.editRouteName = true;
     _defer (() => {
       this.routeNameInput.nativeElement.focus();
@@ -109,7 +109,7 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * ルート名称blurイベント
    */
-  onBlurRouteName() {
+  onBlurRouteName(): void {
     this.route.routeName = this.routeName.value;
     this.editRouteName = false;
   }
@@ -119,14 +119,14 @@ export class CreateRoutePageComponent implements OnInit {
    * ルートのリストをドロップした要素に挿入します。
    * @param event CdkDragDrop
    */
-  onDropList(event) {
+  onDropList(event): void {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
   }
 
   /**
    * 観光地追加ボタン押下イベント
    */
-  onClickAddTourismButon() {
+  onClickAddTourismButon(): void {
     // 観光地一覧ページに遷移
     this.router.navigate(['/show-container-page', { routeId: this.route.routeId }]);
   }
@@ -134,14 +134,14 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * 移動手段追加ボタン押下イベント
    */
-  onClickAddMoveButon() {
+  onClickAddMoveButon(): void {
     this.addRouteBean(Code.BeanKindDiv.Move);
   }
 
   /**
    * 食事追加ボタン押下イベント
    */
-  onClickAddMealButon() {
+  onClickAddMealButon(): void {
     this.addRouteBean(Code.BeanKindDiv.Meal);
   }
 

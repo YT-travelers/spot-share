@@ -13,7 +13,6 @@ import { RouteDetailMoveBeanComponent } from './route-detail-move-bean.component
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
     MatIconModule,
   ],
   exports: [

@@ -1,4 +1,4 @@
-import { ICountry } from "./country";
+import { ICountry } from './country';
 
 /**
  * 観光地

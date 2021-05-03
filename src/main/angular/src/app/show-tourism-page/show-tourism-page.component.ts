@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { ITourism } from 'src/app/shared/model/tourism';
 import { IRoute } from 'src/app/shared/model/route';
-import { TourismService } from 'src/app/shared/service/tourism.service'
+import { TourismService } from 'src/app/shared/service/tourism.service';
 import { RouteService } from 'src/app/shared/service/route.service';
 import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
 import { IRouteDetail } from 'src/app/shared/model/route-detail';
@@ -38,10 +38,10 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   @Input ('pageMode') pageMode;
 
   /** リサイズイベント　オブザーバー */
-  resizeObservable$: Observable<Event>
+  resizeObservable$: Observable<Event>;
 
   /** リサイズイベント　購読 */
-  resizeSubscription$: Subscription
+  resizeSubscription$: Subscription;
 
   /** グリッド列定義 */
   columnDefs = [
@@ -50,7 +50,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '編集';
-        element.className = 'btn btn-outline-info btn-sm'
+        element.className = 'btn btn-outline-info btn-sm';
         element.addEventListener('click', () => {
           this.router.navigate(['/add-tourism-page', { tourismId: params.data.tourismId }]);
         });
@@ -63,7 +63,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '削除';
-        element.className = 'btn btn-outline-info btn-sm'
+        element.className = 'btn btn-outline-info btn-sm';
         element.addEventListener('click', () => {
           this.selectModal.show('スポットを削除しますか？').then(result => {
             if (result) {
@@ -78,7 +78,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
       cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
     { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
-      editable: true, 
+      editable: true,
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
@@ -91,19 +91,19 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   ];
 
   /** ag-gridに表示するチェックボックスのレンダラー */
-  checkboxCellRenderer(params) {
-    if(params.value !== 'Y' && params.value !== 'N'){
+  checkboxCellRenderer(params): HTMLInputElement {
+    if (params.value !== 'Y' && params.value !== 'N') {
       params.setValue(params.value === true || params.value === 'Y' ? 'Y' : 'N');
-    }else{
-       var input = document.createElement("input");
-       
-       input.type = "checkbox";
+    } else {
+       const input = document.createElement('input');
+
+       input.type = 'checkbox';
        input.value = params.value === true || params.value === 'Y' ? 'Y' : 'N';
        input.checked = params.value === true || params.value === 'Y' ? true : false;
-       
-       input.onclick = function(){
+
+       input.onclick = function() {
          params.setValue(input.checked === true ? 'Y' : 'N');
-       }
+       };
        
        return input;
     }
@@ -136,9 +136,9 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   // -----------------------------------------------------------------------
   // ライフライクル
 
-  ngOnInit() {
+  ngOnInit(): void {
     // リサイズイベントが大量に発生するため、100ms間引いてからグリッドの列幅を調整する
-    this.resizeObservable$ = fromEvent(window, 'resize')
+    this.resizeObservable$ = fromEvent(window, 'resize');
     this.resizeSubscription$ = this.resizeObservable$.
     pipe(
       debounceTime(100)
@@ -182,7 +182,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
   }
 
@@ -192,35 +192,35 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   /**
    * スポット登録ボタン押下イベント
    */
-  onClickAddTourism() {
+  onClickAddTourism(): void {
     this.router.navigate(['/add-tourism-page']);
   }
 
   /**
    * 飲食店登録ボタン押下イベント
    */
-  onClickAddRestaurant() {
+  onClickAddRestaurant(): void {
     this.router.navigate(['/add-restaurant-page']);
   }
 
   /**
    * ホテル登録ボタン押下イベント
    */
-  onClickAddHotel() {
+  onClickAddHotel(): void {
     this.router.navigate(['/add-hotel-page']);
   }
 
   /**
    * アクティビティ登録ボタン押下イベント
    */
-  onClickAddActivity() {
+  onClickAddActivity(): void {
     this.router.navigate(['/add-activity-page']);
   }
 
   /**
    * ルート追加ボタン押下イベント
    */
-  onClickCreateRoute() {
+  onClickCreateRoute(): void {
     const route: IRoute = {};
     route.routeDetails = [];
 
@@ -247,7 +247,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
     }
 
     // 新規作成、または更新
-    if (this.pageMode == PageMode.TourismSelect) {
+    if (this.pageMode === PageMode.TourismSelect) {
       // スポット選択モードの場合
       _forEach(route.routeDetails, (addTourism: IRouteDetail) => {
         this.route.routeDetails.push(addTourism);
@@ -274,7 +274,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   /**
    * 検索処理を実行します。
    */
-  private executeSearch() {
+  private executeSearch(): void {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
     this.tourismService.searchTourisms().subscribe(result => {
@@ -291,7 +291,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   /**
    * グリッドの列幅を調整します。
    */
-  adjustGridColumns() {
+  adjustGridColumns(): void {
     this.gridOptions.api.sizeColumnsToFit();
   }
 }

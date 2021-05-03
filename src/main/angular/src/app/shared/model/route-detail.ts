@@ -1,11 +1,11 @@
-import { IRouteDetailTourism } from "./route-detail-tourism";
-import { IRouteDetailRestaurant } from "./route-detail-restaurant";
-import { IRouteDetailHotel } from "./route-detail-hotel";
-import { IRouteDetailActivity } from "./route-detail-activity";
-import { IRouteDetailMeal } from "./route-detail-meal";
-import { IRouteDetailMove } from "./route-detail-move";
-import { IRouteDetailChecklist } from "./route-detail-checklist";
-import { IRouteDetailMemo } from "./route-detail-memo";
+import { IRouteDetailTourism } from './route-detail-tourism';
+import { IRouteDetailRestaurant } from './route-detail-restaurant';
+import { IRouteDetailHotel } from './route-detail-hotel';
+import { IRouteDetailActivity } from './route-detail-activity';
+import { IRouteDetailMeal } from './route-detail-meal';
+import { IRouteDetailMove } from './route-detail-move';
+import { IRouteDetailChecklist } from './route-detail-checklist';
+import { IRouteDetailMemo } from './route-detail-memo';
 
 /**
  * ルート詳細

@@ -72,7 +72,7 @@ export class RouteDetailMealBeanComponent implements OnInit {
   /**
    * 削除ボタン押下イベント
    */
-  onClickDeleteButton() {
+  onClickDeleteButton(): void {
     this.deleteRouteDetailMealEvent.emit(this.detail.routeDetailId);
   }
 

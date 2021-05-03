@@ -7,7 +7,7 @@ import { ITourism } from 'src/app/shared/model/tourism';
 @Injectable({ providedIn: 'root' })
 export class TourismService {
 
-  private url = 'api/tourisms'
+  private url = 'api/tourisms';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

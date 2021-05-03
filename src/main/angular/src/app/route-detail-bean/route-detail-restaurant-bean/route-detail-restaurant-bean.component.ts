@@ -24,7 +24,7 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
   /** 食事種類区分 */
   mealKindDiv = Code.MealKindDiv;
 
-  /**食事種類区分リスト */
+  /** 食事種類区分リスト */
   mealKindDivList: ICodeList[] = Code.MealKindDiv.List;
 
   /** ルート詳細飲食店 フォームグループ */
@@ -62,7 +62,7 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
   ngOnInit(): void {
     // 入力項目 初期値設定
     this.routeDetailRestaurantFormGroup.patchValue(this.detail);
-    
+
     // 入力値変更検知
     this.routeDetailRestaurantFormGroup.valueChanges.subscribe(() => {
       this.detail = this.routeDetailRestaurantFormGroup.value;
@@ -78,7 +78,7 @@ export class RouteDetailRestaurantBeanComponent implements OnInit {
   /**
    * 削除ボタン押下イベント
    */
-  onClickDeleteButton() {
+  onClickDeleteButton(): void {
     this.deleteRouteDetailRestaurantEvent.emit(this.detail.routeDetailId);
   }
 

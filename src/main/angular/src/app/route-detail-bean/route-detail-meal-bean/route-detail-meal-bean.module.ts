@@ -13,7 +13,6 @@ import { RouteDetailMealBeanComponent } from './route-detail-meal-bean.component
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
     MatIconModule,
   ],
   exports: [

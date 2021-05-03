@@ -32,11 +32,11 @@ export class RouteDetailMoveBeanComponent implements OnInit {
     /** ルート詳細ID */
     routeDetailId: new FormControl(),
     /** 所要時間 */
-    moveMinutes: new FormControl("", [Validators.pattern('^[0-9]*$')]),
+    moveMinutes: new FormControl('', [Validators.pattern('^[0-9]*$')]),
     /** 移動手段区分 */
     moveWayDiv: new FormControl(0),
     /** 移動費用 */
-    moveCost: new FormControl("", [Validators.pattern('^[0-9]*$')])
+    moveCost: new FormControl('', [Validators.pattern('^[0-9]*$')])
   });
 
   constructor(

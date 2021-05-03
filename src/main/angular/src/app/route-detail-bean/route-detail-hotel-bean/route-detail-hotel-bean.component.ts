@@ -26,7 +26,7 @@ export class RouteDetailHotelBeanComponent implements OnInit {
   /** 食事種類区分 */
   yesNoDiv = Code.YesNoDiv;
 
-  /**食事種類区分リスト */
+  /** 食事種類区分リスト */
   yesNoDivList: ICodeList[] = Code.YesNoDiv.List;
 
   /** ルート詳細ホテル フォームグループ */
@@ -69,7 +69,7 @@ export class RouteDetailHotelBeanComponent implements OnInit {
   ngOnInit(): void {
     // 入力項目 初期値設定
     this.routeDetailHotelFormGroup.patchValue(this.detail);
-    
+
     // 入力値変更検知
     this.routeDetailHotelFormGroup.valueChanges.pipe(
       debounceTime(400),
@@ -77,9 +77,9 @@ export class RouteDetailHotelBeanComponent implements OnInit {
         // チェックイン時間（時）を補完
         const checkInTimeHours = this.complementHour(this.routeDetailHotelFormGroup.value.hotelCheckInTimeHours);
         if (checkInTimeHours !== this.routeDetailHotelFormGroup.value.hotelCheckInTimeHours) {
-          this.routeDetailHotelFormGroup.controls.hotelCheckInTimeHours.setValue(checkInTimeHours);  
+          this.routeDetailHotelFormGroup.controls.hotelCheckInTimeHours.setValue(checkInTimeHours);
         }
-        
+
         // チェックイン時間（分）を補完
         const checkInTimeMinutes = this.complementMinutes(this.routeDetailHotelFormGroup.value.hotelCheckInTimeMinutes);
         if (checkInTimeMinutes !== this.routeDetailHotelFormGroup.value.hotelCheckInTimeMinutes) {
@@ -91,13 +91,13 @@ export class RouteDetailHotelBeanComponent implements OnInit {
         if (checkOutTimeHours !== this.routeDetailHotelFormGroup.value.hotelCheckOutTimeHours) {
           this.routeDetailHotelFormGroup.controls.hotelCheckOutTimeHours.setValue(checkOutTimeHours);
         }
-        
+
         // チェックアウト時間（分）を補完
         const checkOutTimeMinutes = this.complementMinutes(this.routeDetailHotelFormGroup.value.hotelCheckOutTimeMinutes);
         if (checkOutTimeMinutes !== this.routeDetailHotelFormGroup.value.hotelCheckOutTimeMinutes) {
           this.routeDetailHotelFormGroup.controls.hotelCheckOutTimeMinutes.setValue(checkOutTimeMinutes);
         }
-        
+
       }))
       .subscribe(() => {
         this.detail = this.routeDetailHotelFormGroup.value;
@@ -128,9 +128,9 @@ export class RouteDetailHotelBeanComponent implements OnInit {
    */
   private complementHour(value: string) {
     // 「数字」以外の場合、"0"を返却
-    const match = new RegExp(Const.RegularExpr.HalfNumber)
+    const match = new RegExp(Const.RegularExpr.HalfNumber);
     if (!match.test(value)) {
-      return "0";
+      return '0';
     }
     // 全角数字を半角数字に変換
     value = NumberUtils.convNumberFulltoHalf(value);
@@ -144,7 +144,7 @@ export class RouteDetailHotelBeanComponent implements OnInit {
     }
   }
 
-    /**
+  /**
    * 「分」の入力値を補完します。
    * ・数字以外の場合、"0"を返却
    * ・全角の場合、半角に変換
@@ -152,11 +152,11 @@ export class RouteDetailHotelBeanComponent implements OnInit {
    * @param value 入力値（分）
    * @returns 変換後の値
    */
-    private complementMinutes(value: string) {
+    private complementMinutes(value: string): string {
     // 「数字」以外の場合、"0"を返却
     const match = new RegExp(Const.RegularExpr.HalfNumber)
     if (!match.test(value)) {
-      return "0";
+      return '0';
     }
 
     // 全角数字を半角数字に変換

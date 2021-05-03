@@ -7,7 +7,7 @@ import { IRoute } from 'src/app/shared/model/route';
 @Injectable({ providedIn: 'root' })
 export class RouteService {
 
-  private url = 'api/routes'
+  private url = 'api/routes';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -37,7 +37,7 @@ export class ShowContainerPageComponent implements OnInit {
   @ViewChild('tourism') showTourismPageComponent: ShowTourismPageComponent;
 
   /** タブの初期選択インデックス */
-  selectedIndex
+  selectedIndex;
 
   /** スポット一覧ページ 表示モード（HTML用） */
   _pageMode = PageMode;
@@ -59,10 +59,10 @@ export class ShowContainerPageComponent implements OnInit {
         // URLパラメータに routeId が設定されている場合「スポット選択モード」で画面を表示
         this.pageMode = PageMode.TourismSelect;
       }
-    })
+    });
   }
 
-  selectedIndexChangeEvent(event) {
+  selectedIndexChangeEvent(event): void {
     switch (event) {
       case TabIndex.Route:
         this.showRoutePageComponent.adjustGridColumns();

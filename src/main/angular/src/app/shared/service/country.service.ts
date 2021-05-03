@@ -7,7 +7,7 @@ import { ICountry } from 'src/app/shared/model/country';
 @Injectable({ providedIn: 'root' })
 export class CountryService {
 
-  private url = 'api/countries'
+  private url = 'api/countries';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

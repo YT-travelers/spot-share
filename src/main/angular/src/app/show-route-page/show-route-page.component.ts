@@ -19,10 +19,10 @@ import { InputRouteNameModalService } from 'src/app/shared/component/input-route
 export class ShowRoutePageComponent implements OnInit, OnDestroy {
 
   /** リサイズイベント　オブザーバー */
-  resizeObservable$: Observable<Event>
+  resizeObservable$: Observable<Event>;
 
   /** リサイズイベント　購読 */
-  resizeSubscription$: Subscription
+  resizeSubscription$: Subscription;
 
   /** グリッド列定義 */
   columnDefs = [
@@ -31,7 +31,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '編集';
-        element.className = 'btn btn-outline-info btn-sm'
+        element.className = 'btn btn-outline-info btn-sm';
         element.addEventListener('click', () => {
           this.router.navigate(['/create-route-page', { routeId: params.data.routeId }]);
         });
@@ -44,7 +44,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
       cellRenderer: (params) => {
         const element = document.createElement('button');
         element.innerHTML = '削除';
-        element.className = 'btn btn-outline-info btn-sm'
+        element.className = 'btn btn-outline-info btn-sm';
         element.addEventListener('click', () => {
           this.selectModalSevice.show('ルートを削除しますか？').then(result => {
             if (result) {
@@ -52,14 +52,14 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
                 this.executeSearch();
               });
             }
-          });          
+          });
         });
         return element;
       },
       cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
     { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
-      editable: true, 
+      editable: true,
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
@@ -69,19 +69,19 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
 
   /** ag-gridに表示するチェックボックスのレンダラー */
   checkboxCellRenderer(params) {
-    if(params.value !== 'Y' && params.value !== 'N'){
+    if(params.value !== 'Y' && params.value !== 'N') {
       params.setValue(params.value === true || params.value === 'Y' ? 'Y' : 'N');
     }else{
-       var input = document.createElement("input");
-       
-       input.type = "checkbox";
+       const input = document.createElement('input');
+
+       input.type = 'checkbox';
        input.value = params.value === true || params.value === 'Y' ? 'Y' : 'N';
        input.checked = params.value === true || params.value === 'Y' ? true : false;
        
-       input.onclick = function(){
+       input.onclick = function() {
          params.setValue(input.checked === true ? 'Y' : 'N');
-       }
-       
+       };
+
        return input;
     }
   }
@@ -110,7 +110,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // リサイズイベントが大量に発生するため、100ms間引いてからグリッドの列幅を調整する
-    this.resizeObservable$ = fromEvent(window, 'resize')
+    this.resizeObservable$ = fromEvent(window, 'resize');
     this.resizeSubscription$ = this.resizeObservable$.
     pipe(
       debounceTime(100)
@@ -128,7 +128,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
     this.executeSearch();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.resizeSubscription$.unsubscribe();
   }
 
@@ -179,7 +179,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
   /**
    * グリッドの列幅を調整します。
    */
-  adjustGridColumns() {
+  adjustGridColumns(): void {
     this.gridOptions.api.sizeColumnsToFit();
   }
 

@@ -7,7 +7,7 @@ import { IHotel } from 'src/app/shared/model/hotel';
 @Injectable({ providedIn: 'root' })
 export class HotelService {
 
-  private url = 'api/hotels'
+  private url = 'api/hotels';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

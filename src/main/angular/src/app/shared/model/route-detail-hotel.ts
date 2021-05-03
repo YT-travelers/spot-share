@@ -1,4 +1,4 @@
-import { IHotel } from "./hotel";
+import { IHotel } from './hotel';
 
 /**
  * ルート詳細ホテル

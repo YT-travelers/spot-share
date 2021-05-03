@@ -28,7 +28,7 @@ export class AddActivityPageComponent implements OnInit {
   @Input() selectedActivity: IActivity;
 
   /** アクティビティ編集モード */
-  editMode
+  editMode;
 
   /** アクティビティ編集モード（HTML用） */
   EditMode = EditMode;
@@ -70,7 +70,7 @@ export class AddActivityPageComponent implements OnInit {
   // -----------------------------------------------------------------------
   // ライフサイクル
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // アクティビティ編集モードの判定
     this.activityId = this.route.snapshot.paramMap.get('activityId');
@@ -106,7 +106,7 @@ export class AddActivityPageComponent implements OnInit {
   /**
    * 保存ボタン押下イベント
    */
-  onClickSave() {
+  onClickSave(): void {
 
     // 入力チェック（エラーが存在する場合は、後続の処理を中断）
     if (this.validate()) {
@@ -127,21 +127,21 @@ export class AddActivityPageComponent implements OnInit {
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
       case EditMode.edit:
         this.service.updateActivity(this.activity, this.activityId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
     }
   }
 
   /**
    * 戻るボタン押下イベント
    */
-  onClickBack() {
+  onClickBack(): void {
     // TODO アクティビティ一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
@@ -150,9 +150,9 @@ export class AddActivityPageComponent implements OnInit {
    * 時間の変更イベント
    * 入力チェック ＋ 変換
    */
-  onChangeHours() {
+  onChangeHours(): void {
     // 数字のみチェック
-    let value = this.addActivityFormGroup.controls.requiredHours.value;
+    const value = this.addActivityFormGroup.controls.requiredHours.value;
     if (!this.patternNumber.test(value)) {
       this.addActivityFormGroup.controls.requiredHours.setValue(0);
       return;
@@ -202,7 +202,7 @@ export class AddActivityPageComponent implements OnInit {
     // formGroupでのエラー検証
     valid = this.addActivityFormGroup.invalid;
 
-    return valid; 
+    return valid;
   }
 
   /**

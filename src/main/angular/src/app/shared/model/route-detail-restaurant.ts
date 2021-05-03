@@ -1,4 +1,4 @@
-import { IRestaurant } from "./restaurant";
+import { IRestaurant } from './restaurant';
 
 /**
  * ルート詳細飲食店

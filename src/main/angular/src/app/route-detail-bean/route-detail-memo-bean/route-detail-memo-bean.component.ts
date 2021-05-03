@@ -23,7 +23,7 @@ export class RouteDetailMemoBeanComponent implements OnInit {
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
     /** メモ内容 */
-    memoContent: new FormControl("")
+    memoContent: new FormControl('')
   });
 
   constructor(
@@ -35,7 +35,7 @@ export class RouteDetailMemoBeanComponent implements OnInit {
   ngOnInit(): void {
     // 入力項目 初期値設定
     if (!this.detail.memoContent) {
-      this.detail.memoContent = "";
+      this.detail.memoContent = '';
     }
 
     this.routeDetailMemoFormGroup.patchValue(this.detail);
@@ -55,7 +55,7 @@ export class RouteDetailMemoBeanComponent implements OnInit {
   /**
    * 削除ボタン押下イベント
    */
-  onClickDeleteButton() {
+  onClickDeleteButton(): void {
     this.deleteRouteDetailMemoEvent.emit(this.detail.routeDetailId);
   }
 

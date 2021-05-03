@@ -1,4 +1,4 @@
-import { ITourism } from "./tourism";
+import { ITourism } from './tourism';
 
 /**
  * ルート詳細観光地

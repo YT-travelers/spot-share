@@ -1,4 +1,4 @@
-import { IActivity } from "./activity";
+import { IActivity } from './activity';
 
 /**
  * ルート詳細アクティビティ

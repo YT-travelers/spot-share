@@ -8,7 +8,7 @@ export class NumberUtils {
    * @param value 数字
    * @returns 半角数字
    */
-  static convNumberFulltoHalf(value: string) {
+  static convNumberFulltoHalf(value: string): string {
     return value.replace(/[０-９]/g, s => {
       return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
     });

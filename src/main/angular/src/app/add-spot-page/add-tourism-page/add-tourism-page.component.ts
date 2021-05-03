@@ -6,10 +6,12 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { filter as _filter, includes, _includes } from 'lodash';
 
+import { NumberUtils } from 'src/app/shared/utils/number-utils.const';
+import { Const } from 'src/app/shared/const/const.const';
 import { ITourism } from 'src/app/shared/model/tourism';
+import { ICountry } from 'src/app/shared/model/country';
 import { TourismService } from 'src/app/shared/service/tourism.service';
 import { CountryService } from 'src/app/shared/service/country.service';
-import { ICountry } from 'src/app/shared/model/country';
 
 // 観光地編集モード列挙値
 export enum EditMode {
@@ -54,9 +56,6 @@ export class AddTourismPageComponent implements OnInit {
 
   /** 連続作成フラグ */
   continueCreateFlg = true;
-
-  /** 正規表現　全角数字 or 半角数字のみ */
-  patternNumber = /[0-9０-９]/;
 
   /** 観光地情報 フォームグループ */
   addTourismFormGroup = new FormGroup({
@@ -276,11 +275,13 @@ export class AddTourismPageComponent implements OnInit {
    */
    private complementHour(value: string) {
     // 「数字」以外の場合、"0"を返却
-    if (!this.patternNumber.test(value)) {
+    const match = new RegExp(Const.RegularExpr.HalfNumber)
+    if (!match.test(value)) {
       return "0";
     }
-    // 全角を半角に変換
-    value = this.toHalfWidth(value);
+
+    // 全角数字を半角数字に変換
+    value = NumberUtils.convNumberFulltoHalf(value);
 
     // 23(時)より高い値の場合は 23(時)に変換
     const maxMinutes = 23;
@@ -301,12 +302,13 @@ export class AddTourismPageComponent implements OnInit {
    */
    private complementMinutes(value: string) {
     // 「数字」以外の場合、"0"を返却
-    if (!this.patternNumber.test(value)) {
+    const match = new RegExp(Const.RegularExpr.HalfNumber)
+    if (!match.test(value)) {
       return "0";
     }
 
-    // 全角を半角に変換
-    value = this.toHalfWidth(value);
+    // 全角数字を半角数字に変換
+    value = NumberUtils.convNumberFulltoHalf(value);
 
     // 59(分)より高い値の場合は 59(分)に変換
     const maxMinutes = 59;
@@ -315,15 +317,6 @@ export class AddTourismPageComponent implements OnInit {
     } else {
       return value;
     }
-  }
-
-  /**
-   * 半角数字を全角数字に変換します。
-   */
-   private toHalfWidth(value) {
-    return value.replace(/[０-９]/g, s => {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
   }
 
   // -----------------------------------------------------------------------

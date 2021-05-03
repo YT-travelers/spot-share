@@ -13,7 +13,7 @@ import { InputRouteNameModalContent } from './input-route-name-modal.component';
     FormsModule,
     NgbModule.forRoot(),
     ReactiveFormsModule,
-  ],entryComponents: [
+  ], entryComponents: [
   ],
   providers: [],
 })
