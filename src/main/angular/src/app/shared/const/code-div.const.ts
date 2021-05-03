@@ -1,4 +1,4 @@
-import { ICodeList } from 'src/app/shared/model/code-list';
+import { ICodeList } from '../model/code-list';
 
 /**
  * ビーン種類区分
@@ -25,31 +25,31 @@ export namespace Code.BeanKindDiv {
 
     /** ビーン種類区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "観光地" },
-        { div: 1, name: "飲食店" },
-        { div: 2, name: "ホテル" },
-        { div: 3, name: "アクティビティ" },
-        { div: 4, name: "食事" },
-        { div: 5, name: "移動" },
-        { div: 6, name: "時間" },
-        { div: 7, name: "チェックリスト" },
-        { div: 8, name: "メモ" },
-    ]
+        { div: 0, name: '観光地' },
+        { div: 1, name: '飲食店' },
+        { div: 2, name: 'ホテル' },
+        { div: 3, name: 'アクティビティ' },
+        { div: 4, name: '食事' },
+        { div: 5, name: '移動' },
+        { div: 6, name: '時間' },
+        { div: 7, name: 'チェックリスト' },
+        { div: 8, name: 'メモ' },
+    ];
 }
 
 /**
  * ビーン種類区分名称
  */
 export namespace Code.BeanKindDivName {
-    export const Tourism = "観光地";
-    export const Restaurant = "飲食店";
-    export const Hotel = "ホテル";
-    export const Activity = "アクティビティ";
-    export const Meal = "食事";
-    export const Move = "移動";
-    export const Time = "時間";
-    export const Checklist = "チェックリスト";
-    export const Memo = "メモ";
+    export const Tourism = '観光地';
+    export const Restaurant = '飲食店';
+    export const Hotel = 'ホテル';
+    export const Activity = 'アクティビティ';
+    export const Meal = '食事';
+    export const Move = '移動';
+    export const Time = '時間';
+    export const Checklist = 'チェックリスト';
+    export const Memo = 'メモ';
 }
 
 /**
@@ -63,17 +63,17 @@ export namespace Code.CheckDiv {
 
     /** チェック区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "チェック済み" },
-        { div: 1, name: "未チェック" },
-    ]
+        { div: 0, name: 'チェック済み' },
+        { div: 1, name: '未チェック' },
+    ];
 }
 
 /**
  * チェック区分名称
  */
 export namespace Code.CheckDivName {
-    export const Checked = "チェック済み";
-    export const UnCheckd = "未チェック";
+    export const Checked = 'チェック済み';
+    export const UnCheckd = '未チェック';
 }
 
 /**
@@ -119,49 +119,49 @@ export namespace Code.CuisineGenreDiv {
 
     /** 料理ジャンル区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "海鮮・寿司" },
-        { div: 1, name: "魚料理" },
-        { div: 2, name: "和食・日本料理" },
-        { div: 3, name: "ラーメン・麺類" },
-        { div: 4, name: "丼もの" },
-        { div: 5, name: "揚げ物" },
-        { div: 6, name: "お好み焼き・粉物" },
-        { div: 7, name: "アジア・エスニック" },
-        { div: 8, name: "中華" },
-        { div: 9, name: "イタリアン" },
-        { div: 10, name: "洋食" },
-        { div: 11, name: "フレンチ" },
-        { div: 12, name: "ビストロ" },
-        { div: 13, name: "焼き肉・ステーキ" },
-        { div: 14, name: "焼き鳥" },
-        { div: 15, name: "串料理" },
-        { div: 16, name: "鍋" },
-        { div: 17, name: "その他" },
-    ]
+        { div: 0, name: '海鮮・寿司' },
+        { div: 1, name: '魚料理' },
+        { div: 2, name: '和食・日本料理' },
+        { div: 3, name: 'ラーメン・麺類' },
+        { div: 4, name: '丼もの' },
+        { div: 5, name: '揚げ物' },
+        { div: 6, name: 'お好み焼き・粉物' },
+        { div: 7, name: 'アジア・エスニック' },
+        { div: 8, name: '中華' },
+        { div: 9, name: 'イタリアン' },
+        { div: 10, name: '洋食' },
+        { div: 11, name: 'フレンチ' },
+        { div: 12, name: 'ビストロ' },
+        { div: 13, name: '焼き肉・ステーキ' },
+        { div: 14, name: '焼き鳥' },
+        { div: 15, name: '串料理' },
+        { div: 16, name: '鍋' },
+        { div: 17, name: 'その他' },
+    ];
 }
 
 /**
  * 料理ジャンル区分名称
  */
 export namespace Code.CuisineGenreDivName {
-    export const Seafood = "海鮮・寿司";
-    export const FishDishes = "魚料理";
-    export const JapaneseFood = "和食・日本料理";
-    export const Noodles = "ラーメン・麺類";
-    export const Donburi = "丼もの";
-    export const FriedFood = "揚げ物";
-    export const GrilledFood = "お好み焼き・粉物";
-    export const Asian = "アジア・エスニック";
-    export const ChineseCuisine = "中華";
-    export const Italian = "イタリアン";
-    export const WesternFood = "洋食";
-    export const French = "フレンチ";
-    export const Bistro = "ビストロ";
-    export const Steak = "焼き肉・ステーキ";
-    export const Yakitori = "焼き鳥";
-    export const Skewers = "串料理";
-    export const Pot = "鍋";
-    export const Other = "その他";
+    export const Seafood = '海鮮・寿司';
+    export const FishDishes = '魚料理';
+    export const JapaneseFood = '和食・日本料理';
+    export const Noodles = 'ラーメン・麺類';
+    export const Donburi = '丼もの';
+    export const FriedFood = '揚げ物';
+    export const GrilledFood = 'お好み焼き・粉物';
+    export const Asian = 'アジア・エスニック';
+    export const ChineseCuisine = '中華';
+    export const Italian = 'イタリアン';
+    export const WesternFood = '洋食';
+    export const French = 'フレンチ';
+    export const Bistro = 'ビストロ';
+    export const Steak = '焼き肉・ステーキ';
+    export const Yakitori = '焼き鳥';
+    export const Skewers = '串料理';
+    export const Pot = '鍋';
+    export const Other = 'その他';
 }
 
 /**
@@ -171,21 +171,21 @@ export namespace Code.FlgDiv {
     /** フラグあり */
     export const Flagged = 0;
     /** フラグなし */
-    export const NotFlagged = 0;
+    export const NotFlagged = 1;
 
     /** フラグ区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "フラグあり" },
-        { div: 0, name: "フラグなし" },
-    ]
+        { div: 0, name: 'フラグあり' },
+        { div: 1, name: 'フラグなし' },
+    ];
 }
 
 /**
  * フラグ区分名称
  */
 export namespace Code.FlgDivName {
-    export const Flagged = "フラグあり";
-    export const NotFlagged = "フラグなし";
+    export const Flagged = 'フラグあり';
+    export const NotFlagged = 'フラグなし';
 }
 
 /**
@@ -207,25 +207,25 @@ export namespace Code.HotelKindDiv {
 
     /** ホテル種類区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "ホテル" },
-        { div: 1, name: "旅館" },
-        { div: 2, name: "ゲストハウス" },
-        { div: 3, name: "ユースホステル" },
-        { div: 4, name: "キャンプ" },
-        { div: 5, name: "その他" },
-    ]
+        { div: 0, name: 'ホテル' },
+        { div: 1, name: '旅館' },
+        { div: 2, name: 'ゲストハウス' },
+        { div: 3, name: 'ユースホステル' },
+        { div: 4, name: 'キャンプ' },
+        { div: 5, name: 'その他' },
+    ];
 }
 
 /**
  * ホテル種類区分名称
  */
 export namespace Code.HotelKindDivName {
-    export const Hotel = "ホテル";
-    export const Ryokan = "旅館";
-    export const GuestHouse = "ゲストハウス";
-    export const YouthHostel = "ユースホステル";
-    export const Camp = "キャンプ";
-    export const Other = "その他";
+    export const Hotel = 'ホテル';
+    export const Ryokan = '旅館';
+    export const GuestHouse = 'ゲストハウス';
+    export const YouthHostel = 'ユースホステル';
+    export const Camp = 'キャンプ';
+    export const Other = 'その他';
 }
 
 /**
@@ -239,17 +239,17 @@ export namespace Code.LogicalDeleteDiv {
 
     /** 論理削除区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "有効" },
-        { div: 1, name: "論理削除済み" },
-    ]
+        { div: 0, name: '有効' },
+        { div: 1, name: '論理削除済み' },
+    ];
 }
 
 /**
  * 論理削除区分名称
  */
 export namespace Code.LogicalDeleteDivName {
-    export const Valid = "有効";
-    export const LgicalDeleted = "論理削除済み";
+    export const Valid = '有効';
+    export const LgicalDeleted = '論理削除済み';
 }
 
 /**
@@ -271,25 +271,25 @@ export namespace Code.MealKindDiv {
 
     /** 食事種類区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "朝食" },
-        { div: 1, name: "昼食" },
-        { div: 2, name: "夜食" },
-        { div: 3, name: "グルメ" },
-        { div: 4, name: "おやつ" },
-        { div: 5, name: "その他" },
-    ]
+        { div: 0, name: '朝食' },
+        { div: 1, name: '昼食' },
+        { div: 2, name: '夜食' },
+        { div: 3, name: 'グルメ' },
+        { div: 4, name: 'おやつ' },
+        { div: 5, name: 'その他' },
+    ];
 }
 
 /**
  * 食事種類区分名称
  */
 export namespace Code.MealKindDivName {
-    export const BreakFast = "朝食";
-    export const Lunch = "昼食";
-    export const Dinner = "夜食";
-    export const Gourmet = "グルメ";
-    export const Snack = "おやつ";
-    export const Other = "その他";
+    export const BreakFast = '朝食';
+    export const Lunch = '昼食';
+    export const Dinner = '夜食';
+    export const Gourmet = 'グルメ';
+    export const Snack = 'おやつ';
+    export const Other = 'その他';
 }
 
 /**
@@ -325,39 +325,39 @@ export namespace Code.MoveWayDiv {
 
     /** 移動手段区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "徒歩" },
-        { div: 1, name: "自転車" },
-        { div: 2, name: "バイク" },
-        { div: 3, name: "車" },
-        { div: 4, name: "タクシー" },
-        { div: 5, name: "バス" },
-        { div: 6, name: "電車" },
-        { div: 7, name: "寝台列車" },
-        { div: 8, name: "新幹線" },
-        { div: 9, name: "飛行機" },
-        { div: 10, name: "船" },
-        { div: 11, name: "フェリー" },
-        { div: 12, name: "その他" },
-    ]
+        { div: 0, name: '徒歩' },
+        { div: 1, name: '自転車' },
+        { div: 2, name: 'バイク' },
+        { div: 3, name: '車' },
+        { div: 4, name: 'タクシー' },
+        { div: 5, name: 'バス' },
+        { div: 6, name: '電車' },
+        { div: 7, name: '寝台列車' },
+        { div: 8, name: '新幹線' },
+        { div: 9, name: '飛行機' },
+        { div: 10, name: '船' },
+        { div: 11, name: 'フェリー' },
+        { div: 12, name: 'その他' },
+    ];
 }
 
 /**
  * 移動手段区分名称
  */
 export namespace Code.MoveWayDivName {
-    export const OnFoot = "徒歩";
-    export const Bycycle = "自転車";
-    export const Bike = "バイク";
-    export const Car = "車";
-    export const Taxi = "タクシー";
-    export const Bus = "バス";
-    export const Train = "電車";
-    export const SleeperTrain = "寝台列車";
-    export const Shinkansen = "新幹線";
-    export const AirPlane = "飛行機";
-    export const Ship = "船";
-    export const Ferry = "フェリー";
-    export const Other = "その他";
+    export const OnFoot = '徒歩';
+    export const Bycycle = '自転車';
+    export const Bike = 'バイク';
+    export const Car = '車';
+    export const Taxi = 'タクシー';
+    export const Bus = 'バス';
+    export const Train = '電車';
+    export const SleeperTrain = '寝台列車';
+    export const Shinkansen = '新幹線';
+    export const AirPlane = '飛行機';
+    export const Ship = '船';
+    export const Ferry = 'フェリー';
+    export const Other = 'その他';
 }
 
 /**
@@ -385,31 +385,31 @@ export namespace Code.RestaurantKindDiv {
 
     /** 飲食店種類区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "レストラン" },
-        { div: 1, name: "居酒屋" },
-        { div: 2, name: "バー" },
-        { div: 3, name: "カフェ" },
-        { div: 4, name: "ファミレス" },
-        { div: 5, name: "ファーストフード" },
-        { div: 6, name: "ビュッフェ" },
-        { div: 7, name: "バイキング" },
-        { div: 8, name: "その他" },
-    ]
+        { div: 0, name: 'レストラン' },
+        { div: 1, name: '居酒屋' },
+        { div: 2, name: 'バー' },
+        { div: 3, name: 'カフェ' },
+        { div: 4, name: 'ファミレス' },
+        { div: 5, name: 'ファーストフード' },
+        { div: 6, name: 'ビュッフェ' },
+        { div: 7, name: 'バイキング' },
+        { div: 8, name: 'その他' },
+    ];
 }
 
 /**
  * 飲食店種類区分名称
  */
 export namespace Code.RestaurantKindDivName {
-    export const Restaurant = "レストラン";
-    export const Izakaya = "居酒屋";
-    export const Bar = "バー";
-    export const Cafe = "カフェ";
-    export const FamilyRestaurant = "ファミレス";
-    export const FastFood = "ファーストフード";
-    export const Buffet = "ビュッフェ";
-    export const Viking = "バイキング";
-    export const Other = "その他";
+    export const Restaurant = 'レストラン';
+    export const Izakaya = '居酒屋';
+    export const Bar = 'バー';
+    export const Cafe = 'カフェ';
+    export const FamilyRestaurant = 'ファミレス';
+    export const FastFood = 'ファーストフード';
+    export const Buffet = 'ビュッフェ';
+    export const Viking = 'バイキング';
+    export const Other = 'その他';
 }
 
 /**
@@ -423,16 +423,15 @@ export namespace Code.YesNoDiv {
 
     /** 有無区分List */
     export const List: ICodeList[] = [
-        { div: 0, name: "有り" },
-        { div: 1, name: "無し" },
-    ]
+        { div: 0, name: '有り' },
+        { div: 1, name: '無し' },
+    ];
 }
 
 /**
  * 有無区分名称
  */
 export namespace Code.YesNoDivName {
-    export const Yes = "有り";
-    export const No = "無し";
+    export const Yes = '有り';
+    export const No = '無し';
 }
-
