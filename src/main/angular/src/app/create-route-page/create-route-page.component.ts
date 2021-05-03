@@ -8,9 +8,9 @@ import { MatSpinner } from '@angular/material/progress-spinner';
 import { FormControl } from '@angular/forms';
 import { defer as _defer, remove as _remove, each as _each, forEach as _forEach } from 'lodash';
 
-import { IRoute } from '../model/route';
+import { IRoute } from 'src/app/model/route';
 import { RouteService } from '../shared/route.service';
-import { Code } from '../const/code-div.const';
+import { Code } from 'src/app/shared/const/code-div.const';
 import { IRouteDetail } from '../model/route-detail';
 
 @Component({

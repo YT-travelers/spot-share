@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Code } from 'src/app/const/code-div.const';
+import { Code } from 'src/app/shared/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
 import { Const } from 'src/app/shared/const.const';
 import { IRouteDetailRestaurant } from 'src/app/model/route-detail-restaurant';

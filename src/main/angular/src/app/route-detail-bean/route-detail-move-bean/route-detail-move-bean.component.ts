@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter as _filter } from 'lodash';
-import { Code } from 'src/app/const/code-div.const';
+import { Code } from 'src/app/shared/const/code-div.const';
 import { ICodeList } from 'src/app/model/code-list';
 import { IRouteDetailMove } from 'src/app/model/route-detail-move';
 

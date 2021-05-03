@@ -15,7 +15,7 @@ import { TourismService } from 'src/app/shared/tourism.service'
 import { RouteService } from 'src/app/shared/route.service';
 import { SelectModalService } from 'src/app/shared/select-modal/select-modal.service';
 import { IRouteDetail } from 'src/app/model/route-detail';
-import { Code } from 'src/app/const/code-div.const';
+import { Code } from 'src/app/shared/const/code-div.const';
 
 /**
  * スポット一覧ページ 表示モードを表す列挙値

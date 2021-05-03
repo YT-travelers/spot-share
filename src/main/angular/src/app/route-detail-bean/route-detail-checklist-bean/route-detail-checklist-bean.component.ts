@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { filter as _filter } from 'lodash'
-import { Code } from 'src/app/const/code-div.const';
+import { Code } from 'src/app/shared/const/code-div.const';
 import { IRouteDetailChecklist } from 'src/app/model/route-detail-checklist';
 
 @Component({
