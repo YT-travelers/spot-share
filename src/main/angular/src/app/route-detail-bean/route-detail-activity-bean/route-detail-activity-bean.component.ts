@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Const } from 'src/app/shared/const.const';
+import { Const } from 'src/app/shared/const/const.const';
 import { IRouteDetailActivity } from 'src/app/model/route-detail-activity';
 
 @Component({
