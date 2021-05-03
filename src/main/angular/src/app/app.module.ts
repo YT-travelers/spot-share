@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { SelectModalModule } from './shared/select-modal/select-modal.module';
+import { SelectModalModule } from './shared/component/select-modal/select-modal.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

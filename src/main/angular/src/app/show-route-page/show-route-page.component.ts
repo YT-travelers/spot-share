@@ -8,7 +8,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { debounceTime } from 'rxjs/operators';
-import { SelectModalService } from 'src/app/shared/select-modal/select-modal.service';
+import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
 import { InputRouteNameModalService } from 'src/app/shared/component/input-route-name-modal/input-route-name-modal.service';
 
 @Component({

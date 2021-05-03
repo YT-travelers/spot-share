@@ -13,7 +13,7 @@ import { ITourism } from 'src/app/shared/model/tourism';
 import { IRoute } from 'src/app/shared/model/route';
 import { TourismService } from 'src/app/shared/service/tourism.service'
 import { RouteService } from 'src/app/shared/service/route.service';
-import { SelectModalService } from 'src/app/shared/select-modal/select-modal.service';
+import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
 import { IRouteDetail } from 'src/app/shared/model/route-detail';
 import { Code } from 'src/app/shared/const/code-div.const';
 
