@@ -9,7 +9,7 @@ import { FormControl } from '@angular/forms';
 import { defer as _defer, remove as _remove, each as _each, forEach as _forEach } from 'lodash';
 
 import { IRoute } from 'src/app/model/route';
-import { RouteService } from 'src/app/shared/route.service';
+import { RouteService } from 'src/app/shared/service/route.service';
 import { Code } from 'src/app/shared/const/code-div.const';
 import { IRouteDetail } from 'src/app/model/route-detail';
 

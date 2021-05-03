@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ITourism } from 'src/app/model/tourism';
 import { IRoute } from 'src/app/model/route';
 import { TourismService } from 'src/app/shared/service/tourism.service'
-import { RouteService } from 'src/app/shared/route.service';
+import { RouteService } from 'src/app/shared/service/route.service';
 import { SelectModalService } from 'src/app/shared/select-modal/select-modal.service';
 import { IRouteDetail } from 'src/app/model/route-detail';
 import { Code } from 'src/app/shared/const/code-div.const';
