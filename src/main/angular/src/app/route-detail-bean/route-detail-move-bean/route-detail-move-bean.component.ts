@@ -54,7 +54,7 @@ export class RouteDetailMoveBeanComponent implements OnInit {
 
     // 入力項目 初期値設定
     this.routeDetailMoveFormGroup.patchValue(this.detail);
-    
+
     // 入力値変更検知
     this.routeDetailMoveFormGroup.valueChanges.subscribe(() => {
       this.detail = this.routeDetailMoveFormGroup.value;
@@ -70,7 +70,7 @@ export class RouteDetailMoveBeanComponent implements OnInit {
   /**
    * 削除ボタン押下イベント
    */
-  onClickDeleteButton() {
+  onClickDeleteButton(): void {
     this.deleteRouteDetailMoveEvent.emit(this.detail.routeDetailId);
   }
 

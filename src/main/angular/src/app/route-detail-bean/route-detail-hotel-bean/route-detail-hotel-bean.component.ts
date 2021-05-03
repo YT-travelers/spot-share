@@ -113,7 +113,7 @@ export class RouteDetailHotelBeanComponent implements OnInit {
   /**
    * 削除ボタン押下イベント
    */
-  onClickDeleteButton() {
+  onClickDeleteButton(): void {
     this.deleteRouteDetailHotelEvent.emit(this.detail.routeDetailId);
   }
 
@@ -126,7 +126,7 @@ export class RouteDetailHotelBeanComponent implements OnInit {
    * ・全角の場合、半角に変換
    * ・23より大きい数字の場合は、23に変換
    */
-  private complementHour(value: string) {
+  private complementHour(value: string): string {
     // 「数字」以外の場合、"0"を返却
     const match = new RegExp(Const.RegularExpr.HalfNumber);
     if (!match.test(value)) {
@@ -154,7 +154,7 @@ export class RouteDetailHotelBeanComponent implements OnInit {
    */
     private complementMinutes(value: string): string {
     // 「数字」以外の場合、"0"を返却
-    const match = new RegExp(Const.RegularExpr.HalfNumber)
+    const match = new RegExp(Const.RegularExpr.HalfNumber);
     if (!match.test(value)) {
       return '0';
     }

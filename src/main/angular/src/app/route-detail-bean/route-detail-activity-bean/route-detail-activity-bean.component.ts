@@ -55,7 +55,7 @@ export class RouteDetailActivityBeanComponent implements OnInit {
   ngOnInit(): void {
     // 入力項目 初期値設定
     this.routeDetailActivityFormGroup.patchValue(this.detail);
-    
+
     // 入力値変更検知
     this.routeDetailActivityFormGroup.valueChanges.subscribe(() => {
       this.detail = this.routeDetailActivityFormGroup.value;
@@ -71,7 +71,7 @@ export class RouteDetailActivityBeanComponent implements OnInit {
   /**
    * 削除ボタン押下イベント
    */
-  onClickDeleteButton() {
+  onClickDeleteButton(): void {
     this.deleteRouteDetailActivityEvent.emit(this.detail.routeDetailId);
   }
 

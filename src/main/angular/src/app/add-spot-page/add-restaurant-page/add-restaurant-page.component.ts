@@ -28,7 +28,7 @@ export class AddRestaurantPageComponent implements OnInit {
   @Input() selectedRestaurant: IRestaurant;
 
   /** 飲食店編集モード */
-  editMode
+  editMode;
 
   /** 飲食店編集モード（HTML用） */
   EditMode = EditMode;
@@ -78,7 +78,7 @@ export class AddRestaurantPageComponent implements OnInit {
   // -----------------------------------------------------------------------
   // ライフサイクル
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // 飲食店編集モードの判定
     this.restaurantId = this.route.snapshot.paramMap.get('restaurantId');
@@ -114,7 +114,7 @@ export class AddRestaurantPageComponent implements OnInit {
   /**
    * 保存ボタン押下イベント
    */
-  onClickSave() {
+  onClickSave(): void {
 
     // 入力チェック（エラーが存在する場合は、後続の処理を中断）
     if (this.validate()) {
@@ -135,21 +135,21 @@ export class AddRestaurantPageComponent implements OnInit {
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
       case EditMode.edit:
         this.service.updateRestaurant(this.restaurant, this.restaurantId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
     }
   }
 
   /**
    * 戻るボタン押下イベント
    */
-  onClickBack() {
+  onClickBack(): void {
     // TODO 飲食店一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
@@ -160,7 +160,7 @@ export class AddRestaurantPageComponent implements OnInit {
    */
   onChangeHours() {
     // 数字のみチェック
-    let value = this.addRestaurantFormGroup.controls.requiredHours.value;
+    const value = this.addRestaurantFormGroup.controls.requiredHours.value;
     if (!this.patternNumber.test(value)) {
       this.addRestaurantFormGroup.controls.requiredHours.setValue(0);
       return;
@@ -210,7 +210,7 @@ export class AddRestaurantPageComponent implements OnInit {
     // formGroupでのエラー検証
     valid = this.addRestaurantFormGroup.invalid;
 
-    return valid; 
+    return valid;
   }
 
   /**

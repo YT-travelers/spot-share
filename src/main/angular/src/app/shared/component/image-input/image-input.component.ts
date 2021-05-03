@@ -36,16 +36,15 @@ export class ImageInputComponent {
 
   /**
    * ファイルドロップで画像が別タブ表示されないように伝播を止める
-   * @param event 
    */
-  onDragOver(event) {
+  onDragOver(event): void {
     event.preventDefault();
   }
 
   /**
    * ファイルドロップイベント
    */
-  onDrop(event) {  
+  onDrop(event): void {
     // ファイルドロップで画像が別タブ表示されないように伝播を止める
     event.preventDefault();
     this.readFile(event, true);
@@ -54,14 +53,13 @@ export class ImageInputComponent {
   /**
    * ファイルドロップゾーンクリックイベント
    * type=file のクリックイベントを呼び出してファイル選択ダイアログを表示します。
-   * @param event 
    */
-  onClickDropZone() {
-    const fileReader = document.getElementById('file-reader')
-    
+  onClickDropZone(): void {
+    const fileReader = document.getElementById('file-reader');
+
     fileReader.onchange = e => {
       this.readFile(e, false);
-    }
+    };
 
     fileReader.click();
   }
@@ -69,7 +67,7 @@ export class ImageInputComponent {
   /**
    * 画像削除ボタン
    */
-  onClickDeleteImage() {
+  onClickDeleteImage(): void {
     const elements = this.getSlideElements();
 
     let i = 0;
@@ -93,7 +91,7 @@ export class ImageInputComponent {
    * carouselスライド変更イベント
    * @param event NgbSlideEvent
    */
-  onSlide(event) {
+  onSlide(event): void {
     _forEach(this.carouselInfos, (e: ICarousel) => {
       if (e.id === event.current) {
         this.imageTitle = e.imageTitle;
@@ -105,7 +103,7 @@ export class ImageInputComponent {
    * 画像のタイトル変更イベント
    * @param event 入力値
    */
-  onChangeImageTitle(event) {
+  onChangeImageTitle(event): void {
 
     const currentId = this.getCurrentSlideId();
 
@@ -125,7 +123,7 @@ export class ImageInputComponent {
    * @param event ファイル読み込みイベント
    * @param isDropEvent ドラッグイベントでの読み込みかどうか true → ドラッグイベント  false → クリックイベント
    */
-  private readFile(event, isDropEvent) {
+  private readFile(event, isDropEvent): void {
 
     let files = null;
 
@@ -135,16 +133,16 @@ export class ImageInputComponent {
       files = event.target.files;
     }
 
-    if(files) {
+    if (files) {
       // ファイル読み込み
       _forEach(files, e => {
         // readerを毎回初期化しないとエラーになる
-        let reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (() => {
           const item: ICarousel = {
             image: reader.result,
             imageTitle: e.name,
-          }
+          };
           this.carouselInfos.push(item);
           this.imageTitle = e.name;
         });
@@ -172,17 +170,17 @@ export class ImageInputComponent {
   /**
    * carouselのスライドの画像表示部のエレメントを返却します。
    */
-  private getSlideElements() {
+  private getSlideElements(): NodeListOf<Element> {
     return document.querySelectorAll('ngb-carousel > ol > li');
   }
 
   /**
    * NgbCarouselのアクティブなIDを返却します。
-   * 
+   *
    * bootstrapのcarouselに一番最後（右側）に追加した画像のslideIdを取得するメソッドが無いため、
    * querySelectorAll()で取得したエレメントから判断。
    */
-  private getCurrentSlideId() {
+  private getCurrentSlideId(): string {
     const element = this.getSlideElements();
     if (element.length > 0) {
       return element[element.length - 1].id;

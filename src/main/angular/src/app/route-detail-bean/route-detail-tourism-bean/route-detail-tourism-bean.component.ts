@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Const } from 'src/app/shared/const/const.const';
 import { IRouteDetailTourism } from 'src/app/shared/model/route-detail-tourism';
@@ -8,7 +8,7 @@ import { IRouteDetailTourism } from 'src/app/shared/model/route-detail-tourism';
   templateUrl: './route-detail-tourism-bean.component.html',
   styleUrls: ['./route-detail-tourism-bean.component.scss']
 })
-export class RouteDetailTourismBeanComponent {
+export class RouteDetailTourismBeanComponent implements OnInit {
 
   /** ルート詳細観光地 */
   @Input() detail: IRouteDetailTourism;
@@ -51,7 +51,7 @@ export class RouteDetailTourismBeanComponent {
   ngOnInit(): void {
     // 入力項目 初期値設定
     this.routeDetailTourismFormGroup.patchValue(this.detail);
-    
+
     // 入力値変更検知
     this.routeDetailTourismFormGroup.valueChanges.subscribe(() => {
       this.detail = this.routeDetailTourismFormGroup.value;
@@ -67,7 +67,7 @@ export class RouteDetailTourismBeanComponent {
   /**
    * 観光地ビーン削除ボタン押下イベント
    */
-   onClickDeleteButton() {
+   onClickDeleteButton(): void {
     this.deleteRouteDetailTourismEvent.emit(this.detail.routeDetailId);
   }
 

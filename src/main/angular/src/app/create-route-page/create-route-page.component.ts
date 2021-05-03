@@ -148,44 +148,44 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * チェックリスト追加ボタン押下イベント
    */
-  onClickAddChcklistButon() {
+  onClickAddChcklistButon(): void {
     this.addRouteBean(Code.BeanKindDiv.Checklist);
   }
 
   /**
    * メモ追加ボタン押下イベント
    */
-  onClickAddMemoButon() {
+  onClickAddMemoButon(): void {
     this.addRouteBean(Code.BeanKindDiv.Memo);
   }
-  
+
   /**
    * ビーン更新イベント
    * @param event ルート詳細
    */
-  onUpdateRouteDetailEvent(event) {
+  onUpdateRouteDetailEvent(event): void {
     // 引数のrouteDetailIdの要素を、引数で更新する
     _each(this.routeDetails, (e: IRouteDetail, i: number, a: IRouteDetail[]) => {
       if (e.routeDetailId === event.routeDetailId) {
-        switch(e.beanKindDiv) {
+        switch (e.beanKindDiv) {
           case Code.BeanKindDiv.Tourism: a[i].routeDetailTourism = event;
             break;
           case Code.BeanKindDiv.Restaurant: a[i].routeDetailRestaurant = event;
-          break;
+            break;
           case Code.BeanKindDiv.Hotel: a[i].routeDetailHotel = event;
-          break;
+            break;
           case Code.BeanKindDiv.Activity: a[i].routeDetailActivity = event;
-          break;
+            break;
           case Code.BeanKindDiv.Meal: a[i].routeDetailMeal = event;
-          break;
+            break;
           case Code.BeanKindDiv.Move: a[i].routeDetailMove = event;
-          break;
+            break;
           case Code.BeanKindDiv.Time: a[i].routeDetailTime = event;
-          break;
+            break;
           case Code.BeanKindDiv.Checklist: a[i].routeDetailChecklist = event;
-          break;
+            break;
           case Code.BeanKindDiv.Memo: a[i].routeDetailMemo = event;
-          break;
+            break;
         }
         return false;
       }
@@ -196,7 +196,7 @@ export class CreateRoutePageComponent implements OnInit {
    * ビーン削除ボタン押下イベント
    * @param event ルート詳細ID
    */
-  onDeleteRouteDetailEvent(event) {
+  onDeleteRouteDetailEvent(event): void {
     _remove(this.routeDetails, e => {
       return e.routeDetailId === event;
     });
@@ -205,7 +205,7 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * 保存ボタン押下イベント
    */
-  onClickSave() {
+  onClickSave(): void {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
 
@@ -228,7 +228,7 @@ export class CreateRoutePageComponent implements OnInit {
    * ルート一覧画面にリダイレクトします。
    * @param errorMessage トーストで表示します。
    */
-  navigateToShowPage(errorMessage?) {
+  navigateToShowPage(errorMessage?): void {
     if (errorMessage) {
       this.toastr.error(errorMessage, 'エラー');
     }
@@ -238,7 +238,7 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * ルートにビーンを追加します。
    */
-  addRouteBean(beanKindDiv) {
+  addRouteBean(beanKindDiv): void {
     // ルート詳細IDを仮採番（正式にはバック側で採番される）
     const routeDetailId = this.getMaxRouteDetailId();
 
@@ -250,14 +250,14 @@ export class CreateRoutePageComponent implements OnInit {
       routeDetailMeal: {},
       routeDetailMemo: {},
       routeDetailChecklist: {}
-    }
+    };
 
     // 初期値設定（仮採番されたルート詳細ID）
-    switch(beanKindDiv) {
+    switch (beanKindDiv) {
       case Code.BeanKindDiv.Move: routeBean.routeDetailMove.routeDetailId = routeDetailId;
         break;
       case Code.BeanKindDiv.Meal: routeBean.routeDetailMeal.routeDetailId = routeDetailId;
-      break;
+        break;
       case Code.BeanKindDiv.Memo: routeBean.routeDetailMemo.routeDetailId = routeDetailId;
         break;
       case Code.BeanKindDiv.Checklist: routeBean.routeDetailChecklist.routeDetailId = routeDetailId;
@@ -270,7 +270,7 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * this.routeDetails配列の中で一番大きいrouteDetailIdを返却します。
    */
-  getMaxRouteDetailId() {
+  getMaxRouteDetailId(): number {
     let routeDetailId = 1;
     _forEach(this.routeDetails, e => {
       if (e.routeDetailId > routeDetailId) {

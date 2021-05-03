@@ -69,15 +69,15 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
 
   /** ag-gridに表示するチェックボックスのレンダラー */
   checkboxCellRenderer(params) {
-    if(params.value !== 'Y' && params.value !== 'N') {
+    if (params.value !== 'Y' && params.value !== 'N') {
       params.setValue(params.value === true || params.value === 'Y' ? 'Y' : 'N');
-    }else{
+    } else {
        const input = document.createElement('input');
 
        input.type = 'checkbox';
        input.value = params.value === true || params.value === 'Y' ? 'Y' : 'N';
        input.checked = params.value === true || params.value === 'Y' ? true : false;
-       
+
        input.onclick = function() {
          params.setValue(input.checked === true ? 'Y' : 'N');
        };
@@ -138,7 +138,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
   /**
    * ルート作成ボタン押下イベント
    */
-  onClickCreateRoute() {
+  onClickCreateRoute(): void {
     // TODO ルートのタイトルをリクエストボディに設定
     this.inputrouteNameModalService.show().then(routeName => {
       if (routeName) {
@@ -152,7 +152,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
           this.router.navigate(['/create-route-page', { routeId: response.routeId }]);
         });
       }
-    });  
+    });
 
   }
 
@@ -162,7 +162,7 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
   /**
    * 検索処理を実行します。
    */
-  private executeSearch() {
+  private executeSearch(): void {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
     this.routeService.searchRoutes().subscribe(result => {

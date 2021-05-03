@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { filter as _filter } from 'lodash';
 import { Code } from 'src/app/shared/const/code-div.const';
@@ -9,7 +9,7 @@ import { IRouteDetailChecklist } from 'src/app/shared/model/route-detail-checkli
   templateUrl: './route-detail-checklist-bean.component.html',
   styleUrls: ['./route-detail-checklist-bean.component.scss']
 })
-export class RouteDetailChecklistBeanComponent implements OnInit {
+export class RouteDetailChecklistBeanComponent implements OnInit, AfterViewInit {
 
   @ViewChild('checkbox') private checkbox: ElementRef;
 

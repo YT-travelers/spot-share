@@ -127,14 +127,14 @@ export class AddHotelPageComponent implements OnInit {
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
       case EditMode.edit:
         this.service.updateHotel(this.hotel, this.hotelId).subscribe(result => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
     }
   }
 
@@ -152,7 +152,7 @@ export class AddHotelPageComponent implements OnInit {
    */
   onChangeHours() {
     // 数字のみチェック
-    let value = this.addHotelFormGroup.controls.requiredHours.value;
+    const value = this.addHotelFormGroup.controls.requiredHours.value;
     if (!this.patternNumber.test(value)) {
       this.addHotelFormGroup.controls.requiredHours.setValue(0);
       return;
@@ -202,7 +202,7 @@ export class AddHotelPageComponent implements OnInit {
     // formGroupでのエラー検証
     valid = this.addHotelFormGroup.invalid;
 
-    return valid; 
+    return valid;
   }
 
   /**

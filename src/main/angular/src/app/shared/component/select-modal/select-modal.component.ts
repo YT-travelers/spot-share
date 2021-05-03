@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'select-modal',
+  selector: 'app-select-modal',
   templateUrl: './select-modal.component.html',
   styleUrls: ['./select-modal.component.scss']
 })

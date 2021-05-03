@@ -34,7 +34,7 @@ export class AddTourismPageComponent implements OnInit {
   @Input() selectedTourism: ITourism;
 
   /** 観光地編集モード */
-  editMode
+  editMode;
 
   /** 観光地編集モード（HTML用） */
   EditMode = EditMode;
@@ -97,7 +97,7 @@ export class AddTourismPageComponent implements OnInit {
   // -----------------------------------------------------------------------
   // ライフサイクル
 
-  ngOnInit() {
+  ngOnInit(): void {
 
     // 国マスタ取得
     this.countryService.searchCountries().subscribe(result => {
@@ -146,7 +146,7 @@ export class AddTourismPageComponent implements OnInit {
   /**
    * 保存ボタン押下イベント
    */
-  onClickSave() {
+  onClickSave(): void {
 
     // 入力チェック（エラーが存在する場合は、後続の処理を中断）
     if (this.validate()) {
@@ -167,21 +167,21 @@ export class AddTourismPageComponent implements OnInit {
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
       case EditMode.edit:
         this.service.updateTourism(this.tourism, this.tourismId).subscribe(() => {
           this.toastr.success('更新が完了しました。', '成功');
         }, error => {
           this.toastr.error('更新に失敗しました。' + error.status + '：' + error.statusText, 'エラー');
         });
-      break;
+        break;
     }
   }
 
   /**
    * 戻るボタン押下イベント
    */
-  onClickBack() {
+  onClickBack(): void {
     // TODO 観光地一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
@@ -191,20 +191,20 @@ export class AddTourismPageComponent implements OnInit {
    * ・国マスタのリストに存在する値が入力されていた場合、該当する国コードを設定する
    * ・国マスタのリストに存在しない値が入力されていた場合、国名称の値をクリアする
    */
-  onBlurCountry() {
+  onBlurCountry(): void {
     setTimeout(() => {
       const country: ICountry[] = _filter(this.allCountries, e => {
-        return e.countryName === this.country.value.countryName;    
+        return e.countryName === this.country.value.countryName;
       });
-  
+
       if (country.length === 1) {
         // 存在チェックOK  国コードを設定
         this.country.controls.countryCode.setValue(country[0].countryCode);
       } else {
         // 存在チェックNG  国名称をクリア
         this.country.controls.countryName.setValue('');
-      }      
-    }, 100)
+      }
+    }, 100);
   }
 
   /**
@@ -212,7 +212,7 @@ export class AddTourismPageComponent implements OnInit {
    * 入力チェック ＋ 変換
    * @param 入力値（時間）
    */
-  onChangeHours(event) {
+  onChangeHours(event): void {
     // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
     // TODO 時間と分を結合した値を、設定する必要がある
     this.complementHour(event);
@@ -223,7 +223,7 @@ export class AddTourismPageComponent implements OnInit {
    * 入力チェック ＋ 変換
    * @param 入力値（分）
    */
-  onChangeMinutes(event) {
+  onChangeMinutes(event): void {
     // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
     // TODO 時間と分を結合した値を、設定する必要がある
     this.complementMinutes(event);
@@ -260,24 +260,24 @@ export class AddTourismPageComponent implements OnInit {
     }
     if (this.country.invalid) {
       valid = true;
-    }    
+    }
 
-    return valid; 
+    return valid;
   }
 
   /**
    * 「時間」の入力値を補完します。
-   * ・数字以外の場合、"0"を返却
+   * ・数字以外の場合、'0'を返却
    * ・全角の場合、半角に変換
    * ・23より大きい数字の場合は、23に変換
    * @param value 入力値（時間）
    * @returns 変換後の値
    */
-   private complementHour(value: string) {
-    // 「数字」以外の場合、"0"を返却
-    const match = new RegExp(Const.RegularExpr.HalfNumber)
+   private complementHour(value: string): string {
+    // 「数字」以外の場合、'0'を返却
+    const match = new RegExp(Const.RegularExpr.HalfNumber);
     if (!match.test(value)) {
-      return "0";
+      return '0';
     }
 
     // 全角数字を半角数字に変換
@@ -294,17 +294,17 @@ export class AddTourismPageComponent implements OnInit {
 
   /**
    * 「分」の入力値を補完します。
-   * ・数字以外の場合、"0"を返却
+   * ・数字以外の場合、'0'を返却
    * ・全角の場合、半角に変換
    * ・59より大きい数字の場合は、59に変換
    * @param value 入力値（分）
    * @returns 変換後の値
    */
-   private complementMinutes(value: string) {
-    // 「数字」以外の場合、"0"を返却
-    const match = new RegExp(Const.RegularExpr.HalfNumber)
+   private complementMinutes(value: string): string {
+    // 「数字」以外の場合、'0'を返却
+    const match = new RegExp(Const.RegularExpr.HalfNumber);
     if (!match.test(value)) {
-      return "0";
+      return '0';
     }
 
     // 全角数字を半角数字に変換
@@ -324,7 +324,7 @@ export class AddTourismPageComponent implements OnInit {
 
   /** 国 */
   get country(): FormGroup {
-    return this.addTourismFormGroup.get('country') as FormGroup
+    return this.addTourismFormGroup.get('country') as FormGroup;
   }
 
 }

@@ -166,7 +166,7 @@ export class AddActivityPageComponent implements OnInit {
    * 時間（分）の変更イベント
    * 入力チェック ＋ 変換
    */
-  onChangeMinutes() {
+  onChangeMinutes(): void {
     // 数字のみチェック
     let value = this.addActivityFormGroup.controls.requiredMinutes.value;
     if (!this.patternNumber.test(value)) {

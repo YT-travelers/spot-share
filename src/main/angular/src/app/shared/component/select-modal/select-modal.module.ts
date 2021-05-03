@@ -12,7 +12,7 @@ import { SelectModalContent } from './select-modal.component';
     BrowserModule,
     FormsModule,
     NgbModule.forRoot(),
-  ],entryComponents: [
+  ], entryComponents: [
   ],
   providers: [],
 })

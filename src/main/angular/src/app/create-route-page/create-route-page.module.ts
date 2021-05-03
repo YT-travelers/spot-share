@@ -6,7 +6,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatIconModule } from '@angular/material/icon';
 import { CreateRoutePageComponent } from 'src/app/create-route-page/create-route-page.component';
 import { RouteDetailTourismBeanModule } from 'src/app/route-detail-bean/route-detail-tourism-bean/route-detail-tourism-bean.module';
-import { RouteDetailRestaurantBeanModule } from 'src/app/route-detail-bean/route-detail-restaurant-bean/route-detail-restaurant-bean.module';
+import {
+  RouteDetailRestaurantBeanModule
+} from 'src/app/route-detail-bean/route-detail-restaurant-bean/route-detail-restaurant-bean.module';
 import { RouteDetailHotelBeanModule } from 'src/app/route-detail-bean/route-detail-hotel-bean/route-detail-hotel-bean.module';
 import { RouteDetailActivityBeanModule } from 'src/app/route-detail-bean/route-detail-activity-bean/route-detail-activity-bean.module';
 import { RouteDetailChecklistBeanModule } from 'src/app/route-detail-bean/route-detail-checklist-bean/route-detail-checklist-bean.module';
