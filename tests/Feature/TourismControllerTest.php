@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 use App\Models\Tourism;
+use App\Models\TourismImage;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class TourismControllerTest extends TestCase
@@ -17,7 +19,8 @@ class TourismControllerTest extends TestCase
         'tourismCloseTimeMinutes',
         'tourismSummary',
         'tourismAddress',
-        'tourismUrl'
+        'tourismUrl',
+        'tourismImages',
     ];
     /**
      * A basic feature test example.
@@ -33,9 +36,17 @@ class TourismControllerTest extends TestCase
 
     public function testStore()
     {
-        $postData = Tourism::factory()->make()->toArray();
-        $response = $this->post('tourisms', $postData);
+        $postData = Tourism
+            ::factory()
+            ->has(TourismImage::factory())
+            ->make()
+            ->toArray();
+        $postData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
 
+        $response = $this->post('tourisms', $postData);
         $response->assertJsonStructure(self::TOURISM_STRUCTURE);
     }
 
@@ -49,7 +60,16 @@ class TourismControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $updateData = Tourism::factory()->make()->toArray();
+        $updateData = Tourism
+            ::factory()
+            ->has(TourismImage::factory())
+            ->make()
+            ->toArray();
+        $updateData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
         $tourismId = Tourism::first()->tourism_id;
         $response = $this->put("/tourisms/$tourismId", $updateData);
 

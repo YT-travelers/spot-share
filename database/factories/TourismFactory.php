@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Country;
 use App\Models\Tourism;
+use App\Models\TourismImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TourismFactory extends Factory
@@ -14,6 +15,17 @@ class TourismFactory extends Factory
      * @var string
      */
     protected $model = Tourism::class;
+
+    /**
+     * @return TourismFactory
+     */
+    public function configure(): TourismFactory
+    {
+        return $this->afterCreating(function (Tourism $tourism) {
+            $factory = TourismImage::factory()->count(3);
+            $factory->setTourismId($tourism->tourism_id)->create();
+        });
+    }
 
     /**
      * Define the model's default state.
