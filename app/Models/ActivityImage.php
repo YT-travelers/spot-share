@@ -13,14 +13,14 @@ class ActivityImage extends Model
 
     protected $guarded = ['activity_image_id'];
 
-    //HACK: pathはバックエンド側でのみ使用される値
-    protected $hidden = ['path'];
+    //HACK: activity_image_keyはバックエンド側でのみ使用される値
+    protected $hidden = ['activity_image_key'];
 
-    protected $appends = ['url'];
+    protected $appends = ['activity_image_url'];
 
-    public function getUrlAttribute(): string
+    public function getActivityImageUrlAttribute(): string
     {
         $generator = app(ImageUrlGenerator::class);
-        return $generator->generate($this->path);
+        return $generator->generate($this->activity_image_key);
     }
 }

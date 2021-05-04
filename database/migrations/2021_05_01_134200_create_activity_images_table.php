@@ -16,8 +16,11 @@ class CreateActivityImagesTable extends Migration
         Schema::create('activity_images', function (Blueprint $table) {
             $table->id('activity_image_id');
             $table->unsignedBigInteger('activity_id');
+//            $table->unsignedBigInteger('activity_id');
+//            $table->unsignedBigInteger('activity_image_id');
+//            $table->primary(['activity_id', 'activity_image_id']);
             $table->foreign('activity_id')->references('activity_id')->on('activities')->cascadeOnDelete();
-            $table->string('path');
+            $table->string('activity_image_key');
             $table->timestamps();
         });
     }

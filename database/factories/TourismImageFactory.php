@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Activity;
-use App\Models\ActivityImage;
+use App\Models\Tourism;
+use App\Models\TourismImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ActivityImageFactory extends Factory
+class TourismImageFactory extends Factory
 {
 
     /**
@@ -14,7 +14,7 @@ class ActivityImageFactory extends Factory
      *
      * @var string
      */
-    protected $model = ActivityImage::class;
+    protected $model = TourismImage::class;
 
     /**
      * Define the model's default state.
@@ -24,16 +24,16 @@ class ActivityImageFactory extends Factory
     public function definition()
     {
         return [
-            'activity_id' => Activity::factory(),
-            'activity_image_key' => '/activity/sample.png'
+            'tourism_id' => Tourism::factory(),
+            'tourism_image_key' => '/tourism/sample.png'
         ];
     }
 
-    public function setActivityId(int $activityId)
+    public function setTourismId(int $tourismId)
     {
-        return $this->state(function () use ($activityId) {
+        return $this->state(function () use ($tourismId) {
             return [
-                'activity_id' => $activityId,
+                'tourism_id' => $tourismId,
             ];
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Tourism extends Model
 {
@@ -12,6 +13,8 @@ class Tourism extends Model
     protected $primaryKey = 'tourism_id';
 
     protected $guarded = ['tourism_id'];
+
+    protected $with = ['tourismImages'];
 
     public function country(): BelongsTo
     {
@@ -30,5 +33,10 @@ class Tourism extends Model
         unset($array['countryCode']);
 
         return $array;
+    }
+
+    public function tourismImages(): HasMany
+    {
+        return $this->hasMany(TourismImage::class, 'tourism_id', 'tourism_id');
     }
 }
