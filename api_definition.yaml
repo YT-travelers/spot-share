@@ -572,6 +572,14 @@ components:
           type: string
         tourismCloseTimeMinutes:
           type: string
+        tourismImages:
+          type: array
+          items:
+            $ref: '#/components/schemas/TourismImage'
+        uploadFiles:
+          type: array
+          description: ファイルの配列
+          items: {}
       required:
         - tourismId
         - tourismName
@@ -950,6 +958,16 @@ components:
           type: integer
         activityId:
           type: integer
-        url:
+        activityImageUrl:
+          type: string
+    TourismImage:
+      title: TourismImage
+      type: object
+      properties:
+        tourismId:
+          type: integer
+        tourismImageId:
+          type: integer
+        tourismImageUrl:
           type: string
   responses: {}
