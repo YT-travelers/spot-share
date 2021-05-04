@@ -25,7 +25,7 @@ class ActivityImageFactory extends Factory
     {
         return [
             'activity_id' => Activity::factory(),
-            'path' => '/activity/sample.png'
+            'activity_image_key' => '/activity/sample.png'
         ];
     }
 
