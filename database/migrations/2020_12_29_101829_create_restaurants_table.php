@@ -22,9 +22,9 @@ class CreateRestaurantsTable extends Migration
             $table->string('restaurant_open_time_minutes')->nullable();
             $table->string('restaurant_close_time_hours')->nullable();
             $table->string('restaurant_close_time_minutes')->nullable();
-            $table->string('restaurant_summary')->default('');
-            $table->string('restaurant_address')->default('');
-            $table->string('restaurant_url')->default('');
+            $table->string('restaurant_summary')->nullable();
+            $table->string('restaurant_address')->nullable();
+            $table->string('restaurant_url')->nullable();
             $table->timestamps();
         });
     }

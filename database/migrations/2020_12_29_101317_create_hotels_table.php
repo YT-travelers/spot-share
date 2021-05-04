@@ -17,9 +17,9 @@ class CreateHotelsTable extends Migration
             $table->id('hotel_id');
             $table->string('hotel_name');
             $table->integer('hotel_kind_div')->nullable();
-            $table->string('hotel_summary')->default('');
-            $table->string('hotel_address')->default('');
-            $table->string('hotel_url')->default('');
+            $table->string('hotel_summary')->nullable();
+            $table->string('hotel_address')->nullable();
+            $table->string('hotel_url')->nullable();
             $table->timestamps();
         });
     }

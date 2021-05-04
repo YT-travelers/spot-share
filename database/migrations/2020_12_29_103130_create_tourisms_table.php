@@ -22,9 +22,9 @@ class CreateTourismsTable extends Migration
             $table->string('tourism_open_time_minutes')->nullable();
             $table->string('tourism_close_time_hours')->nullable();
             $table->string('tourism_close_time_minutes')->nullable();
-            $table->string('tourism_summary')->default('');
-            $table->string('tourism_address')->default('');
-            $table->string('tourism_url')->default('');
+            $table->string('tourism_summary')->nullable();
+            $table->string('tourism_address')->nullable();
+            $table->string('tourism_url')->nullable();
             $table->timestamps();
         });
     }
