@@ -2,8 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Code\HotelKindDiv;
 use App\Models\Hotel;
+use App\Models\HotelImage;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class HotelControllerTest extends TestCase
@@ -16,6 +17,8 @@ class HotelControllerTest extends TestCase
         'hotelUrl',
         'hotelKindDiv',
         'hotelKindDivName',
+        'hotelUrl',
+        'hotelImages',
     ];
 
     /**
@@ -32,9 +35,17 @@ class HotelControllerTest extends TestCase
 
     public function testStore()
     {
-        $postData = Hotel::factory()->make()->toArray();
-        $response = $this->post('hotels', $postData);
+        $postData = Hotel
+            ::factory()
+            ->has(HotelImage::factory())
+            ->make()
+            ->toArray();
+        $postData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
 
+        $response = $this->post('hotels', $postData);
         $response->assertJsonStructure(self::HOTEL_STRUCTURE);
     }
 
@@ -48,7 +59,16 @@ class HotelControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $updateData = Hotel::factory()->make()->toArray();
+        $updateData = Hotel
+            ::factory()
+            ->has(HotelImage::factory())
+            ->make()
+            ->toArray();
+        $updateData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
         $hotelId = Hotel::first()->hotel_id;
         $response = $this->put("/hotels/$hotelId", $updateData);
 

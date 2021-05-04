@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Code\HotelKindDiv;
 use App\Models\Hotel;
+use App\Models\HotelImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HotelFactory extends Factory
@@ -14,6 +15,17 @@ class HotelFactory extends Factory
      * @var string
      */
     protected $model = Hotel::class;
+
+    /**
+     * @return HotelFactory
+     */
+    public function configure(): HotelFactory
+    {
+        return $this->afterCreating(function (Hotel $hotel) {
+            $factory = HotelImage::factory()->count(3);
+            $factory->setHotelId($hotel->hotel_id)->create();
+        });
+    }
 
     /**
      * Define the model's default state.

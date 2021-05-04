@@ -5,12 +5,15 @@ namespace App\Models;
 use App\Models\Code\HotelKindDiv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Hotel extends Model
 {
     protected $primaryKey = 'hotel_id';
 
     protected $guarded = ['hotel_id'];
+
+    protected $with = ['hotelImages'];
 
     use HasFactory;
 
@@ -26,5 +29,10 @@ class Hotel extends Model
         $array['hotelKindDivName'] = $this->hotelKind->div_key_name;
 
         return $array;
+    }
+
+    public function hotelImages(): HasMany
+    {
+        return $this->hasMany(HotelImage::class, 'hotel_id', 'hotel_id');
     }
 }
