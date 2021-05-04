@@ -25,7 +25,7 @@ class ActivityController extends CrudController
         return $this->storeOrUpdate($request, $id);
     }
 
-    private function storeOrUpdate(Request $request, int $id = null)
+    private function storeOrUpdate(Request $request, int $id = null): JsonResponse
     {
         $uploadFiles = $request->file('uploadFiles', []);
         $activityImages = $request->get('activityImages', []);

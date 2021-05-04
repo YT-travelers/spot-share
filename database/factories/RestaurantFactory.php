@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Code\CuisineGenreDiv;
 use App\Models\Code\RestaurantKindDiv;
 use App\Models\Restaurant;
+use App\Models\RestaurantImage;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RestaurantFactory extends Factory
@@ -15,6 +16,17 @@ class RestaurantFactory extends Factory
      * @var string
      */
     protected $model = Restaurant::class;
+
+    /**
+     * @return RestaurantFactory
+     */
+    public function configure(): RestaurantFactory
+    {
+        return $this->afterCreating(function (Restaurant $restaurant) {
+            $factory = RestaurantImage::factory()->count(3);
+            $factory->setRestaurantId($restaurant->restaurant_id)->create();
+        });
+    }
 
     /**
      * codesテーブルとcountriesテーブルが存在することを前提にしています

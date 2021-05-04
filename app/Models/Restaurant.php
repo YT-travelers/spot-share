@@ -6,6 +6,7 @@ use App\Models\Code\CuisineGenreDiv;
 use App\Models\Code\RestaurantKindDiv;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Restaurant extends Model
 {
@@ -14,6 +15,8 @@ class Restaurant extends Model
     protected $primaryKey = 'restaurant_id';
 
     protected $guarded = ['restaurant_id'];
+
+    protected $with = ['restaurantImages'];
 
     public function cuisineGenre(): BelongsTo
     {
@@ -34,5 +37,10 @@ class Restaurant extends Model
         $array['restaurantKindDivName'] = $this->restaurantKind->div_key_name;
 
         return $array;
+    }
+
+    public function restaurantImages(): HasMany
+    {
+        return $this->hasMany(RestaurantImage::class, 'restaurant_id', 'restaurant_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\RestaurantService;
 use App\Models\Restaurant;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use JetBrains\PhpStorm\Pure;
 
 class RestaurantController extends CrudController
 {
-    #[Pure] public function __construct(protected Restaurant $restaurant)
+    #[Pure] public function __construct(protected Restaurant $restaurant, private RestaurantService $restaurantService)
     {
         parent::__construct($this->restaurant);
     }
@@ -20,7 +21,26 @@ class RestaurantController extends CrudController
      */
     public function store(Request $request): JsonResponse
     {
-        $data = $request->except(['cuisineGenreDivName', 'restaurantKindDivName']);
-        return parent::store($request->replace($data));
+        return $this->storeAndUpdate($request);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function update(Request $request, int $id): JsonResponse
+    {
+        return $this->storeAndUpdate($request, $id);
+    }
+
+    private function storeAndUpdate(Request $request, int $id = null): JsonResponse
+    {
+        $uploadFiles = $request->file('uploadFiles', []);
+        $restaurantImages = $request->get('restaurantImages', []);
+        $restaurantData = makeArraySnakeRecursively($request->except(['cuisineGenreDivName', 'restaurantKindDivName']));
+        $response = $this->restaurantService->saveRestaurant($restaurantData, $restaurantImages, $uploadFiles, $id);
+
+        return response()->json($response);
     }
 }

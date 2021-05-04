@@ -34,7 +34,12 @@ class TourismController extends CrudController
         return $this->storeOrUpdate($request, $id);
     }
 
-    private function storeOrUpdate(Request $request, int $id = null)
+    /**
+     * @param Request $request
+     * @param int|null $id
+     * @return JsonResponse
+     */
+    private function storeOrUpdate(Request $request, int $id = null): JsonResponse
     {
         $uploadFiles = $request->file('uploadFiles', []);
         $tourismImages = $request->get('tourismImages', []);

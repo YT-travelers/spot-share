@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Code\CuisineGenreDiv;
-use App\Models\Code\RestaurantKindDiv;
 use App\Models\Restaurant;
+use App\Models\RestaurantImage;
+use Illuminate\Http\UploadedFile;
 use Tests\TestCase;
 
 class RestaurantControllerTest extends TestCase
@@ -23,6 +23,8 @@ class RestaurantControllerTest extends TestCase
         'cuisineGenreDivName',
         'restaurantKindDiv',
         'restaurantKindDivName',
+        'restaurantUrl',
+        'restaurantImages',
     ];
     /**
      * A basic feature test example.
@@ -38,9 +40,17 @@ class RestaurantControllerTest extends TestCase
 
     public function testStore()
     {
-        $postData = Restaurant::factory()->make()->toArray();
-        $response = $this->post('restaurants', $postData);
+        $postData = Restaurant
+            ::factory()
+            ->has(RestaurantImage::factory())
+            ->make()
+            ->toArray();
+        $postData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
 
+        $response = $this->post('restaurants', $postData);
         $response->assertJsonStructure(self::RESTAURANT_STRUCTURE);
     }
 
@@ -54,7 +64,16 @@ class RestaurantControllerTest extends TestCase
 
     public function testUpdate()
     {
-        $updateData = Restaurant::factory()->make()->toArray();
+        $updateData = Restaurant
+            ::factory()
+            ->has(RestaurantImage::factory())
+            ->make()
+            ->toArray();
+        $updateData['uploadFiles'] = [
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+            UploadedFile::fake()->image('dummy.jpg', 800, 800),
+        ];
         $restaurantId = Restaurant::first()->restaurant_id;
         $response = $this->put("/restaurants/$restaurantId", $updateData);
 
