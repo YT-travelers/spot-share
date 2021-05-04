@@ -832,6 +832,14 @@ components:
           type: string
         restaurantCloseTimeMinutes:
           type: string
+        restaurantImages:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestaurantImage'
+        uploadfiles:
+          type: array
+          description: ファイルの配列
+          items: {}
       required:
         - restaurantId
         - restaurantName
@@ -846,23 +854,31 @@ components:
         hotelKindDiv:
           type:
             - integer
-            - 'null'
+          nullable: true
         hotelKindDivName:
           type:
             - string
-            - 'null'
+          nullable: true
         hotelSummary:
           type:
             - string
-            - 'null'
+          nullable: true
         hotelAddress:
           type:
             - string
-            - 'null'
+          nullable: true
         hotelUrl:
           type:
             - string
-            - 'null'
+          nullable: true
+        hotelImages:
+          type: array
+          items:
+            $ref: '#/components/schemas/HotelImage'
+        uploadFiles:
+          type: array
+          description: ファイルの配列
+          items: {}
       required:
         - hotelId
         - hotelName
@@ -969,5 +985,25 @@ components:
         tourismImageId:
           type: integer
         tourismImageUrl:
+          type: string
+    RestaurantImage:
+      title: RestaurantImage
+      type: object
+      properties:
+        restaurantImageId:
+          type: integer
+        restaurantId:
+          type: integer
+        restaurantImageUrl:
+          type: string
+    HotelImage:
+      title: HotelImage
+      type: object
+      properties:
+        hotelImageId:
+          type: integer
+        hotelId:
+          type: integer
+        hotelImageUrl:
           type: string
   responses: {}

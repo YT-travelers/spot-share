@@ -17,15 +17,15 @@ class ActivityController extends CrudController
 
     public function store(Request $request): JsonResponse
     {
-        $uploadFiles = $request->file('uploadFiles', []);
-        $activityImages = $request->get('activityImages', []);
-        $activityData = makeArraySnakeRecursively($request->except(['activityImages', 'uploadFiles']));
-        $response = $this->activityService->saveActivity($activityData, $activityImages, $uploadFiles);
-
-        return response()->json($response);
+        return $this->storeOrUpdate($request);
     }
 
     public function update(Request $request, int $id): JsonResponse
+    {
+        return $this->storeOrUpdate($request, $id);
+    }
+
+    private function storeOrUpdate(Request $request, int $id = null): JsonResponse
     {
         $uploadFiles = $request->file('uploadFiles', []);
         $activityImages = $request->get('activityImages', []);
