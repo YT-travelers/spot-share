@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\Services\ImageUrlGenerator;
+use App\Infrastructure\StorageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TourismImage extends Model
@@ -20,7 +20,10 @@ class TourismImage extends Model
 
     public function getTourismImageUrlAttribute(): string
     {
-        $generator = app(ImageUrlGenerator::class);
-        return $generator->generate($this->tourism_image_key);
+        /**
+         * @var StorageService $storageService
+         */
+        $storageService = app(StorageService::class);
+        return $storageService->createPreSignedUrl($this->tourism_image_key);
     }
 }

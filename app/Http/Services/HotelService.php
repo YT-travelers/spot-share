@@ -2,13 +2,14 @@
 
 namespace App\Http\Services;
 
+use App\Infrastructure\StorageService;
 use App\Models\Hotel;
 use App\Models\HotelImage;
 use JetBrains\PhpStorm\Pure;
 
 class HotelService
 {
-    #[Pure] public function __construct(private Hotel $hotel)
+    #[Pure] public function __construct(private Hotel $hotel, private StorageService $storageService)
     {
     }
 
@@ -25,7 +26,7 @@ class HotelService
                 ->contains('hotel_image_id', $hotelImage->hotel_image_id);
         })->map(function (HotelImage $hotelImage) {
             if (!env('IS_MOCK_IMAGE')) {
-                //TODO: S3から画像を削除
+                $this->storageService->delete($hotelImage->hotel_image_key);
             }
             return $hotelImage->hotel_image_id;
         });
@@ -40,11 +41,10 @@ class HotelService
         $storedHotelImages = collect($uploadFiles)
             ->map(function (\Illuminate\Http\UploadedFile $file) use ($hotel, $hotelImages) {
                 if (env('IS_MOCK_IMAGE')) {
-                    return ['hotel_image_key' => '/hotel/sample.png'];
+                    return ['hotel_image_key' => 'hotel/sample.png'];
                 }
 
-                //TODO: $fileをS3に保存してキーを返す
-                $key = 'error.png';
+                $key = $this->storageService->storeWithUuid($file, 'hotel/');
                 return ['hotel_image_key' => $key, 'hotel_id' => $hotel->hotel_id];
             });
 

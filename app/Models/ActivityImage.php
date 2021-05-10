@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Services\ImageUrlGenerator;
+use App\Infrastructure\StorageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ActivityImage extends Model
@@ -20,7 +21,10 @@ class ActivityImage extends Model
 
     public function getActivityImageUrlAttribute(): string
     {
-        $generator = app(ImageUrlGenerator::class);
-        return $generator->generate($this->activity_image_key);
+        /**
+         * @var StorageService $storageService
+         */
+        $storageService = app(StorageService::class);
+        return $storageService->createPreSignedUrl($this->activity_image_key);
     }
 }

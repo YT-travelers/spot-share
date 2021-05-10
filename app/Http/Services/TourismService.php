@@ -2,13 +2,14 @@
 
 namespace App\Http\Services;
 
+use App\Infrastructure\StorageService;
 use App\Models\Tourism;
 use App\Models\TourismImage;
 use JetBrains\PhpStorm\Pure;
 
 class TourismService
 {
-    #[Pure] public function __construct(private Tourism $tourism)
+    #[Pure] public function __construct(private Tourism $tourism, private StorageService $storageService)
     {
     }
 
@@ -25,7 +26,7 @@ class TourismService
                 ->contains('tourism_image_id', $tourismImage->tourism_image_id);
         })->map(function (TourismImage $tourismImage) {
             if (!env('IS_MOCK_IMAGE')) {
-                //TODO: S3から画像を削除
+                $this->storageService->delete($tourismImage->tourism_image_key);
             }
             return $tourismImage->tourism_image_id;
         });
@@ -40,11 +41,10 @@ class TourismService
         $storedTourismImages = collect($uploadFiles)
             ->map(function (\Illuminate\Http\UploadedFile $file) use ($tourism, $tourismImages) {
                 if (env('IS_MOCK_IMAGE')) {
-                    return ['tourism_image_key' => '/tourism/sample.png'];
+                    return ['tourism_image_key' => 'tourism/sample.png'];
                 }
 
-                //TODO: $fileをS3に保存してキーを返す
-                $key = 'error.png';
+                $key = $this->storageService->storeWithUuid($file, 'tourism/');
                 return ['tourism_image_key' => $key, 'tourism_id' => $tourism->tourism_id];
             });
 
