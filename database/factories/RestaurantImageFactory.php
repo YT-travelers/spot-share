@@ -25,7 +25,7 @@ class RestaurantImageFactory extends Factory
     {
         return [
             'restaurant_id' => Restaurant::factory(),
-            'restaurant_image_key' => '/restaurant/sample.png'
+            'restaurant_image_key' => 'restaurant/sample.png'
         ];
     }
 
