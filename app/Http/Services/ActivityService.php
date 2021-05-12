@@ -2,13 +2,14 @@
 
 namespace App\Http\Services;
 
+use App\Infrastructure\StorageService;
 use App\Models\Activity;
 use App\Models\ActivityImage;
 use JetBrains\PhpStorm\Pure;
 
 class ActivityService
 {
-    #[Pure] public function __construct(private Activity $activity)
+    #[Pure] public function __construct(private Activity $activity, private StorageService $storageService)
     {
     }
 
@@ -25,7 +26,7 @@ class ActivityService
                 ->contains('activity_image_id', $activityImage->activity_image_id);
         })->map(function (ActivityImage $activityImage) {
             if (!env('IS_MOCK_IMAGE')) {
-                //TODO: S3から画像を削除
+                $this->storageService->delete($activityImage->activity_image_key);
             }
             return $activityImage->activity_image_id;
         });
@@ -40,11 +41,10 @@ class ActivityService
         $storedActivityImages = collect($uploadFiles)
             ->map(function (\Illuminate\Http\UploadedFile $file) use ($activity, $activityImages) {
                 if (env('IS_MOCK_IMAGE')) {
-                    return ['activity_image_key' => '/activity/sample.png'];
+                    return ['activity_image_key' => 'activity/sample.png'];
                 }
 
-                //TODO: $fileをS3に保存してキーを返す
-                $key = 'error.png';
+                $key = $this->storageService->storeWithUuid($file, 'activity/');
                 return ['activity_image_key' => $key, 'activity_id' => $activity->activity_id];
             });
 

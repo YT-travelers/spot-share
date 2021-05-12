@@ -2,13 +2,14 @@
 
 namespace App\Http\Services;
 
+use App\Infrastructure\StorageService;
 use App\Models\Restaurant;
 use App\Models\RestaurantImage;
 use JetBrains\PhpStorm\Pure;
 
 class RestaurantService
 {
-    #[Pure] public function __construct(private Restaurant $restaurant)
+    #[Pure] public function __construct(private Restaurant $restaurant, private StorageService $storageService)
     {
     }
 
@@ -25,7 +26,7 @@ class RestaurantService
                 ->contains('restaurant_image_id', $restaurantImage->restaurant_image_id);
         })->map(function (RestaurantImage $restaurantImage) {
             if (!env('IS_MOCK_IMAGE')) {
-                //TODO: S3から画像を削除
+                $this->storageService->delete($restaurantImage->restaurant_image_key);
             }
             return $restaurantImage->restaurant_image_id;
         });
@@ -40,11 +41,10 @@ class RestaurantService
         $storedRestaurantImages = collect($uploadFiles)
             ->map(function (\Illuminate\Http\UploadedFile $file) use ($restaurant, $restaurantImages) {
                 if (env('IS_MOCK_IMAGE')) {
-                    return ['restaurant_image_key' => '/restaurant/sample.png'];
+                    return ['restaurant_image_key' => 'restaurant/sample.png'];
                 }
 
-                //TODO: $fileをS3に保存してキーを返す
-                $key = 'error.png';
+                $key = $this->storageService->storeWithUuid($file, 'restaurant/');
                 return ['restaurant_image_key' => $key, 'restaurant_id' => $restaurant->restaurant_id];
             });
 

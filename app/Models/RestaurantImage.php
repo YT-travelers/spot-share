@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Services\ImageUrlGenerator;
+use App\Infrastructure\StorageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class RestaurantImage extends Model
@@ -20,7 +21,10 @@ class RestaurantImage extends Model
 
     public function getRestaurantImageUrlAttribute(): string
     {
-        $generator = app(ImageUrlGenerator::class);
-        return $generator->generate($this->restaurant_image_key);
+        /**
+         * @var StorageService $storageService
+         */
+        $storageService = app(StorageService::class);
+        return $storageService->createPreSignedUrl($this->restaurant_image_key);
     }
 }
