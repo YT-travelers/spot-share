@@ -25,7 +25,7 @@ class HotelImageFactory extends Factory
     {
         return [
             'hotel_id' => Hotel::factory(),
-            'hotel_image_key' => '/hotel/sample.png'
+            'hotel_image_key' => 'hotel/sample.png'
         ];
     }
 

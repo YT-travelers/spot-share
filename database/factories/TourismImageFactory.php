@@ -25,7 +25,7 @@ class TourismImageFactory extends Factory
     {
         return [
             'tourism_id' => Tourism::factory(),
-            'tourism_image_key' => '/tourism/sample.png'
+            'tourism_image_key' => 'tourism/sample.png'
         ];
     }
 
