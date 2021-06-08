@@ -1,4 +1,5 @@
 import { ICountry } from './country';
+import { ITourismImage } from './tourismImage';
 
 /**
  * 観光地
@@ -24,4 +25,8 @@ export interface ITourism {
   tourismAddress?: string;
   /** URL */
   tourismUrl?: string;
+  /** 観光地画像 */
+  tourismImages?: ITourismImage[];
+  /** アップロード画像 */
+  uploadFiles?: string[];
 }

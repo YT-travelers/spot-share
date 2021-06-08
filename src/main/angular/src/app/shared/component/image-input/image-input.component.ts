@@ -21,7 +21,7 @@ export class ImageInputComponent {
   @ViewChild('carousel') carousel: NgbCarousel;
 
   /** 新しい画像が読み込まれた際にイベントを発火します。 */
-  @Output() readFileEvent: EventEmitter<string> = new EventEmitter();
+  @Output() readFileEvent: EventEmitter<ICarousel[]> = new EventEmitter();
 
   /** 画面表示用　画像タイトル */
   imageTitle = '';
@@ -160,9 +160,11 @@ export class ImageInputComponent {
           // 追加した画像を表示
           const id = this.getCurrentSlideId();
           this.carousel.select(id);
+
+          // 読み込んだ画像のバイナリデータを親コンポーネントに通知
+          this.readFileEvent.emit(this.carouselInfos);
       }, 100);
 
-      this.readFileEvent.emit();
     }
 
   }

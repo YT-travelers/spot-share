@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
-import { filter as _filter, includes, _includes } from 'lodash';
+import { filter as _filter, includes, _includes, forEach as _forEach } from 'lodash';
 
 import { NumberUtils } from 'src/app/shared/utils/number-utils.const';
 import { Const } from 'src/app/shared/const/const.const';
@@ -84,6 +84,8 @@ export class AddTourismPageComponent implements OnInit {
     tourismAddress: new FormControl(this.tourism.tourismAddress),
     /** url */
     tourismUrl: new FormControl(this.tourism.tourismUrl),
+    /** アップロード画像 */
+    uploadFiles: new FormControl(this.tourism.uploadFiles),
   });
 
   constructor(
@@ -227,6 +229,19 @@ export class AddTourismPageComponent implements OnInit {
     // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
     // TODO 時間と分を結合した値を、設定する必要がある
     this.complementMinutes(event);
+  }
+
+  /**
+   * 画像読み込みイベント
+   * @param event 読み込んだ画像のバイナリデータ
+   */
+  onReadFileEvent(event) {
+    const images = [];
+    _forEach(event, e => {
+      images.push(e.image);
+    })
+
+    this.addTourismFormGroup.controls.uploadFiles.setValue(images);
   }
 
   // -----------------------------------------------------------------------
