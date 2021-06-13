@@ -24,7 +24,7 @@ import { RouteDetailMealBeanModule } from './route-detail-bean/route-detail-meal
 import { RouteDetailMemoBeanModule } from './route-detail-bean/route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from './route-detail-bean/route-detail-move-bean/route-detail-move-bean.module';
 import { ShowContainerPageModule } from './show-container-page/show-container-page.module';
-import { ShowTourismPageModule } from './show-tourism-page/show-tourism-page.module';
+import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
 import { InputRouteNameModalModule } from './shared/component/input-route-name-modal/input-route-name-modal.module';
 
@@ -49,7 +49,7 @@ import { InputRouteNameModalModule } from './shared/component/input-route-name-m
     RouteDetailMemoBeanModule,
     RouteDetailMoveBeanModule,
     ShowContainerPageModule,
-    ShowTourismPageModule,
+    ShowSpotPageModule,
     ShowRoutePageModule,
     SelectModalModule,
     InputRouteNameModalModule,

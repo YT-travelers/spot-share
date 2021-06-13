@@ -7,7 +7,7 @@ import { IActivity } from 'src/app/shared/model/activity';
 @Injectable({ providedIn: 'root' })
 export class ActivityService {
 
-  private url = 'api/activitys';
+  private url = 'api/activities';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

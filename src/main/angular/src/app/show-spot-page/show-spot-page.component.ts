@@ -1,21 +1,23 @@
-import { Component, OnInit, HostListener, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { GridOptions } from 'ag-grid-community';
-import { Observable, Subscription, fromEvent } from 'rxjs';
+import { Observable, Subscription, fromEvent, forkJoin } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { forEach as _forEach, filter as _filter } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 
-import { ITourism } from 'src/app/shared/model/tourism';
 import { IRoute } from 'src/app/shared/model/route';
 import { TourismService } from 'src/app/shared/service/tourism.service';
 import { RouteService } from 'src/app/shared/service/route.service';
 import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
 import { IRouteDetail } from 'src/app/shared/model/route-detail';
 import { Code } from 'src/app/shared/const/code-div.const';
+import { RestaurantService } from '../shared/service/restaurant.service';
+import { HotelService } from '../shared/service/hotel.service';
+import { ActivityService } from '../shared/service/activity.service';
 
 /**
  * スポット一覧ページ 表示モードを表す列挙値
@@ -24,15 +26,15 @@ enum PageMode {
   // 通常モード
   Normal = 0,
   // スポット選択モード
-  TourismSelect,
+  SpotSelect,
 }
 
 @Component({
-  selector: 'app-show-tourism-page',
-  templateUrl: './show-tourism-page.component.html',
-  styleUrls: ['./show-tourism-page.component.scss']
+  selector: 'app-show-spot-page',
+  templateUrl: './show-spot-page.component.html',
+  styleUrls: ['./show-spot-page.component.scss']
 })
-export class ShowTourismPageComponent implements OnInit, OnDestroy {
+export class ShowSpotPageComponent implements OnInit, OnDestroy {
 
   /** スポット一覧ページ 表示モード */
   @Input ('pageMode') pageMode;
@@ -52,7 +54,19 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
         element.innerHTML = '編集';
         element.className = 'btn btn-outline-info btn-sm';
         element.addEventListener('click', () => {
-          this.router.navigate(['/add-tourism-page', { tourismId: params.data.tourismId }]);
+          if (params.data.tourismId) {
+            // 観光地追加ページに遷移
+            this.router.navigate(['/add-tourism-page', { tourismId: params.data.tourismId }]);
+          } else if (params.data.restaurantId) {
+            // 飲食店追加ページに遷移
+            this.router.navigate(['/add-restaurant-page', { restaurantId: params.data.restaurantId }]);
+          } else if (params.data.hotelId) {
+            // ホテル追加ページに遷移
+            this.router.navigate(['/add-hotel-page', { tourhotelIdismId: params.data.hotelId }]);
+          } else if (params.data.activityId) {
+            // アクティビティ追加ページに遷移
+            this.router.navigate(['/add-activity-page', { activityId: params.data.activityId }]);
+          }          
         });
         return element;
       },
@@ -67,9 +81,27 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
         element.addEventListener('click', () => {
           this.selectModal.show('スポットを削除しますか？').then(result => {
             if (result) {
-              this.tourismService.deleteTourism(params.data.tourismId).subscribe(() => {
-                this.executeSearch();
-              });
+              if (params.data.tourismId) {
+                // 観光地を削除
+                this.tourismService.deleteTourism(params.data.tourismId).subscribe(() => {
+                  this.executeSearch();
+                });
+              } else if (params.data.restaurantId) {
+                // 飲食店を削除
+                this.restaurantService.deleteRestaurant(params.data.restaurantId).subscribe(() => {
+                  this.executeSearch();
+                });
+              } else if (params.data.hotelId) {
+                // ホテルを削除
+                this.hotelService.deleteHotel(params.data.hotelId).subscribe(() => {
+                  this.executeSearch();
+                });
+              } else if (params.data.activityId) {
+                // アクティビティを削除
+                this.activityService.deleteActivity(params.data.activityId).subscribe(() => {
+                  this.executeSearch();
+                });
+              }
             }
           });
         });
@@ -82,12 +114,9 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
-    { headerName: '国', field: 'country.countryName', sortable: true, filter: true, tooltipField: 'country', minWidth: '160' },
-    { headerName: '観光地名', field: 'tourismName', sortable: true, filter: true, tooltipField: 'tourismName', minWidth: '160' },
-    { headerName: '営業開始時間', field: 'tourismOpenTime', sortable: true, filter: true, tooltipField: 'tourismOpenTime', minWidth: '160' },
-    { headerName: '営業終了時間', field: 'tourismCloseTime', sortable: true, filter: true, tooltipField: 'tourismCloseTime', minWidth: '160' },
-    { headerName: 'URL', field: 'tourismUrl', sortable: true, filter: true, tooltipField: 'tourismUrl', minWidth: '160' },
-    { headerName: '概要', field: 'tourismSummary', sortable: true, filter: true, tooltipField: 'tourismSummary', minWidth: '160' },
+    { headerName: '種類', field: 'beanKindDiv', sortable: true, filter: true, tooltipField: 'beanKindDiv', minWidth: '135', maxWidth: '135' },
+    { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country', minWidth: '220', maxWidth: '220' },
+    { headerName: 'スポット', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName', minWidth: '160' },
   ];
 
   /** ag-gridに表示するチェックボックスのレンダラー */
@@ -118,13 +147,16 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   overlayRef;
 
   /** スポット一覧（グリッド表示用データ） */
-  tourismList: ITourism[] = [];
+  spotList = [];
 
   /** スポット追加対象（ルート作成ページから遷移した場合に使用） */
   route: IRoute = {};
 
   constructor(
     private tourismService: TourismService,
+    private restaurantService: RestaurantService,
+    private hotelService: HotelService,
+    private activityService: ActivityService,
     private routeService: RouteService,
     private selectModal: SelectModalService,
     private router: Router,
@@ -156,7 +188,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
     this.executeSearch();
 
     // スポット選択モードの場合
-    if (this.pageMode === PageMode.TourismSelect) {
+    if (this.pageMode === PageMode.SpotSelect) {
 
       // グリッドから編集ボタンと削除ボタンを削除
       this.columnDefs = _filter(this.columnDefs, e => {
@@ -224,7 +256,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
     const route: IRoute = {};
     route.routeDetails = [];
 
-    this.tourismList.forEach(e => {
+    this.spotList.forEach(e => {
       if (e['select'] === 'Y') {
         route.routeDetails.push(
           {
@@ -247,7 +279,7 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
     }
 
     // 新規作成、または更新
-    if (this.pageMode === PageMode.TourismSelect) {
+    if (this.pageMode === PageMode.SpotSelect) {
       // スポット選択モードの場合
       _forEach(route.routeDetails, (addTourism: IRouteDetail) => {
         this.route.routeDetails.push(addTourism);
@@ -277,12 +309,53 @@ export class ShowTourismPageComponent implements OnInit, OnDestroy {
   private executeSearch(): void {
     // ローディング開始
     this.overlayRef.attach(new ComponentPortal(MatSpinner));
-    this.tourismService.searchTourisms().subscribe(result => {
-      this.tourismList = result;
+
+    const searchObservables = [
+      this.tourismService.searchTourisms(),
+      this.restaurantService.searchRestaurants(),
+      this.hotelService.searchHotels(),
+      this.activityService.searchActivitys(),
+    ];
+
+    const dataList = [];
+
+    forkJoin(searchObservables).subscribe(observables => {
+      // results: 各Observables（４つ）
+      _forEach(observables, observable => {
+        // result: 各検索の結果
+        _forEach(observable, result => {
+          let data;
+          if (result.tourismId) {
+            data = {
+              beanKindDiv: '観光地',
+              tourismId: result.tourismId,
+              spotName: result.tourismName,
+              country: result.country.countryName,
+            }
+          } else if (result.restaurantId) {
+            data = {
+              beanKindDiv: '飲食店',
+              restaurantId: result.restaurantId,
+              spotName: result.restaurantName,
+            }
+          } else if (result.hotelId) {
+            data = {
+              beanKindDiv: 'ホテル',
+              hotelId: result.hotelId,
+              spotName: result.hotelName,
+            }
+          } else if (result.activityId) {
+            data = {
+              beanKindDiv: 'アクティビティ',
+              activityId: result.activityId,
+              spotName: result.activityName,
+            }
+          }
+          dataList.push(data);
+        });
+        this.spotList = dataList;
+      });
       this.adjustGridColumns();
-      // ローディング終了
-      this.overlayRef.detach();
-    }, () => {
       // ローディング終了
       this.overlayRef.detach();
     });

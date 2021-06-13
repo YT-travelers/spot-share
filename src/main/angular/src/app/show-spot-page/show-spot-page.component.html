@@ -17,32 +17,32 @@
         <button type="button" (click)="onClickAddTourism()" class="btn btn-outline-primary ml-2">
             <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
-              <span class="ml-2">スポット追加</span>
+              <span class="ml-2">観光地</span>
             </div>
         </button>
         <button type="button" (click)="onClickAddRestaurant()" class="btn btn-outline-primary ml-2">
             <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
-              <span class="ml-2">飲食店追加</span>
+              <span class="ml-2">飲食店</span>
             </div>
         </button>
         <button type="button" (click)="onClickAddHotel()" class="btn btn-outline-primary ml-2">
             <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
-              <span class="ml-2">ホテル追加</span>
+              <span class="ml-2">ホテル</span>
             </div>
         </button>
         <button type="button" (click)="onClickAddActivity()" class="btn btn-outline-primary ml-2">
             <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
-              <span class="ml-2">アクティビティ追加</span>
+              <span class="ml-2">アクティビティ</span>
             </div>
         </button>
       </div>
     </div>
     <ag-grid-angular
       class="ag-theme-alpine"
-      [rowData]="tourismList"
+      [rowData]="spotList"
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
     ></ag-grid-angular>

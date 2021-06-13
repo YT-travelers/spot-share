@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ShowRoutePageComponent } from 'src/app/show-route-page/show-route-page.component';
-import { ShowTourismPageComponent } from 'src/app/show-tourism-page/show-tourism-page.component';
+import { ShowSpotPageComponent } from 'src/app/show-spot-page/show-spot-page.component';
 
 /**
  * 一覧ページ タブのインデックスを表す列挙値
@@ -34,7 +34,7 @@ export class ShowContainerPageComponent implements OnInit {
   @ViewChild('route') showRoutePageComponent: ShowRoutePageComponent;
 
   /** スポット一覧ページコンポーネント */
-  @ViewChild('tourism') showTourismPageComponent: ShowTourismPageComponent;
+  @ViewChild('tourism') ShowSpotPageComponent: ShowSpotPageComponent;
 
   /** タブの初期選択インデックス */
   selectedIndex;
@@ -68,7 +68,7 @@ export class ShowContainerPageComponent implements OnInit {
         this.showRoutePageComponent.adjustGridColumns();
         break;
       case TabIndex.Tourism:
-        this.showTourismPageComponent.adjustGridColumns();
+        this.ShowSpotPageComponent.adjustGridColumns();
         break;
       default:
         // 何もしない

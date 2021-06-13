@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AgGridModule } from 'ag-grid-angular';
-import { ShowTourismPageComponent } from './show-tourism-page.component';
+import { ShowSpotPageComponent } from './show-spot-page.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule, MatSpinner } from '@angular/material/progress-spinner';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
-    ShowTourismPageComponent
+    ShowSpotPageComponent
   ],
   imports: [
     BrowserModule,
@@ -22,11 +22,11 @@ import { OverlayModule } from '@angular/cdk/overlay';
     OverlayModule,
   ],
   exports: [
-    ShowTourismPageComponent,
+    ShowSpotPageComponent,
   ],
   entryComponents: [
     MatSpinner,
   ],
   providers: [],
 })
-export class ShowTourismPageModule { }
+export class ShowSpotPageModule { }
