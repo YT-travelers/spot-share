@@ -39,7 +39,7 @@ class RestaurantService
 
         //画像をストレージへ保存
         $storedRestaurantImages = collect($uploadFiles)
-            ->map(function (\Illuminate\Http\UploadedFile $file) use ($restaurant, $restaurantImages) {
+            ->map(function (string $file) use ($restaurant, $restaurantImages) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['restaurant_image_key' => 'restaurant/sample.png'];
                 }
