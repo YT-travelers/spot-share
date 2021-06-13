@@ -39,7 +39,7 @@ class ActivityService
 
         //画像をストレージへ保存
         $storedActivityImages = collect($uploadFiles)
-            ->map(function (\Illuminate\Http\UploadedFile $file) use ($activity, $activityImages) {
+            ->map(function (string $file) use ($activity, $activityImages) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['activity_image_key' => 'activity/sample.png'];
                 }

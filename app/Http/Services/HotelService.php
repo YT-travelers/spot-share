@@ -39,7 +39,7 @@ class HotelService
 
         //画像をストレージへ保存
         $storedHotelImages = collect($uploadFiles)
-            ->map(function (\Illuminate\Http\UploadedFile $file) use ($hotel, $hotelImages) {
+            ->map(function (string $file) use ($hotel, $hotelImages) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['hotel_image_key' => 'hotel/sample.png'];
                 }
