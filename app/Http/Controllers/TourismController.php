@@ -42,7 +42,7 @@ class TourismController extends CrudController
     private function storeOrUpdate(Request $request, int $id = null): JsonResponse
     {
         $uploadFiles = $request->get('uploadFiles', []);
-        $tourismImages = $request->get('tourismImages', []);
+        $tourismImages = makeArraySnakeRecursively($request->get('tourismImages', []));
         $tourismData = makeArraySnakeRecursively($request->except(['tourismImages', 'uploadFiles']));
         $tourismData['country_code'] = $tourismData['country_code'] ?? $tourismData['country']['country_code'];
         unset($tourismData['country']);
