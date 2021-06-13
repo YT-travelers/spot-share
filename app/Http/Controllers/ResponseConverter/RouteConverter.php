@@ -86,6 +86,7 @@ class RouteConverter
                 'tourismSummary' => $tourism->tourism_summary,
                 'tourismAddress' => $tourism->tourism_address,
                 'tourismUrl' => $tourism->tourism_url,
+                'tourismImages' => $tourism->tourismImages->toArray()
             ],
         ];
     }
@@ -116,6 +117,7 @@ class RouteConverter
                 'restaurantSummary' => $restaurant->restaurant_summary,
                 'restaurantAddress' => $restaurant->restaurant_address,
                 'restaurantUrl' => $restaurant->restaurant_url,
+                'restaurantImages' => $restaurant->restaurantImages->toArray()
             ],
         ];
     }
@@ -146,7 +148,8 @@ class RouteConverter
                 'hotelKindDivName' => $hotel->hotelKind->div_key_name,
                 'hotelSummary' => $hotel->hotel_summary,
                 'hotelAddress' => $hotel->hotel_address,
-                'hotelUrl' => $hotel->hotel_url
+                'hotelUrl' => $hotel->hotel_url,
+                'hotelImages' => $hotel->hotelImages->toArray()
             ]
         ];
     }
@@ -172,6 +175,7 @@ class RouteConverter
                 'activitySummary' => $activity->activity_summary,
                 'activityAddress' => $activity->activity_address,
                 'activityUrl' => $activity->activity_url,
+                'activityImages' => $activity->activityImages->toArray()
             ]
         ];
     }
