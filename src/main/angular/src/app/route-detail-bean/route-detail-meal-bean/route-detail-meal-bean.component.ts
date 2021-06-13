@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter as _filter } from 'lodash';
 import { Code } from 'src/app/shared/const/code-div.const';
+import { Const } from 'src/app/shared/const/const.const';
 import { ICodeList } from 'src/app/shared/model/code-list';
 import { IRouteDetailMeal } from 'src/app/shared/model/route-detail-meal';
 
@@ -32,13 +33,13 @@ export class RouteDetailMealBeanComponent implements OnInit {
     /** ルート詳細ID */
     routeDetailId: new FormControl(0),
     /** 所要時間 */
-    mealMinutes: new FormControl(0, [Validators.pattern('^[0-9]*$')]),
+    mealMinutes: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** 食事種類区分 */
     mealKindDiv: new FormControl(0),
     /** 食事種類区分名称 */
     mealKindDivName: new FormControl(Code.MealKindDiv.List[0].div),
     /** 食事費用 */
-    mealCost: new FormControl(0, [Validators.pattern('^[0-9]*$')])
+    mealCost: new FormControl(0, [Validators.pattern(Const.RegularExpr.HalfNumber)])
   });
 
   constructor(

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { filter as _filter } from 'lodash';
 import { Code } from 'src/app/shared/const/code-div.const';
+import { Const } from 'src/app/shared/const/const.const';
 import { ICodeList } from 'src/app/shared/model/code-list';
 import { IRouteDetailMove } from 'src/app/shared/model/route-detail-move';
 
@@ -32,11 +33,11 @@ export class RouteDetailMoveBeanComponent implements OnInit {
     /** ルート詳細ID */
     routeDetailId: new FormControl(),
     /** 所要時間 */
-    moveMinutes: new FormControl('', [Validators.pattern('^[0-9]*$')]),
+    moveMinutes: new FormControl('', [Validators.pattern(Const.RegularExpr.HalfNumber)]),
     /** 移動手段区分 */
     moveWayDiv: new FormControl(0),
     /** 移動費用 */
-    moveCost: new FormControl('', [Validators.pattern('^[0-9]*$')])
+    moveCost: new FormControl('', [Validators.pattern(Const.RegularExpr.HalfNumber)])
   });
 
   constructor(

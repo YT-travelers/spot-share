@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
+import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { IActivity } from 'src/app/shared/model/activity';
 import { ActivityService } from 'src/app/shared/service/activity.service';
 
@@ -45,17 +46,22 @@ export class AddActivityPageComponent implements OnInit {
   /** 連続作成フラグ */
   continueCreateFlg = true;
 
-  /** 正規表現　全角数字 or 半角数字のみ */
-  patternNumber = /[0-9０-９]/;
-
   /** アクティビティ情報 フォームグループ */
   addActivityFormGroup = new FormGroup({
     /** アクティビティID */
     activityId: new FormControl(this.activity.activityId),
     /**  アクティビティ名称 */
     activityName: new FormControl(this.activity.activityName, [Validators.required]),
+    /** 営業開始時間（時） */
+    activityOpenTimeHours: new FormControl(this.activity.activityOpenTimeHours, [ Validators.min(0), Validators.max(23)]),
+    /** 営業開始時間（分） */
+    activityOpenTimeMinutes: new FormControl(this.activity.activityOpenTimeMinutes, [ Validators.min(0), Validators.max(59)]),
+    /** 営業終了時間（時） */
+    activityCloseTimeHours: new FormControl(this.activity.activityCloseTimeHours, [ Validators.min(0), Validators.max(23)]),
+    /** 営業終了時間（分） */
+    activityCloseTimeMinutes: new FormControl(this.activity.activityCloseTimeMinutes, [ Validators.min(0), Validators.max(59)]),
     /** 住所 */
-    activityAddress: new FormControl(this.activity.activityAddress, [Validators.pattern('^[0-9]*$')]),
+    activityAddress: new FormControl(this.activity.activityAddress),
     /** url */
     activityUrl: new FormControl(this.activity.activityUrl),
   });
@@ -147,43 +153,39 @@ export class AddActivityPageComponent implements OnInit {
   }
 
   /**
-   * 時間の変更イベント
+   * 営業開始時間の変更イベント
    * 入力チェック ＋ 変換
-   */
-  onChangeHours(): void {
-    // 数字のみチェック
-    const value = this.addActivityFormGroup.controls.requiredHours.value;
-    if (!this.patternNumber.test(value)) {
-      this.addActivityFormGroup.controls.requiredHours.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addActivityFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+   * @param 入力値（時間）
+  */
+   onChangeOpenHours(value): void {
+    this.addActivityFormGroup.controls.activityOpenTimeHours.setValue(TimeUtils.complementHour(value));
   }
 
   /**
-   * 時間（分）の変更イベント
+   * 営業終了時間の変更イベント
    * 入力チェック ＋ 変換
+   * @param 入力値（時間）
    */
-  onChangeMinutes(): void {
-    // 数字のみチェック
-    let value = this.addActivityFormGroup.controls.requiredMinutes.value;
-    if (!this.patternNumber.test(value)) {
-      this.addActivityFormGroup.controls.requiredMinutes.setValue(0);
-      return;
-    }
+  onChangeCloseHours(value): void {
+    this.addActivityFormGroup.controls.activityCloseTimeHours.setValue(TimeUtils.complementHour(value));
+  }
 
-    // 全角を半角に変換
-    value = this.toHalfWidth(value);
+  /**
+   * 営業開始時間（分）の変更イベント
+   * 入力チェック ＋ 変換
+   * @param 入力値（分）
+   */
+  onChangeOpenMinutes(value): void {
+    this.addActivityFormGroup.controls.activityOpenTimeMinutes.setValue(TimeUtils.complementMinutes(value));
+  }
 
-    // 60(分)より高い値の場合は 60(分)に変換
-    const maxMinutes = 60;
-    if (Number(value) > maxMinutes ) {
-      this.addActivityFormGroup.controls.requiredMinutes.setValue(maxMinutes);
-    } else {
-      this.addActivityFormGroup.controls.requiredMinutes.setValue(value);
-    }
+  /**
+   * 営業終了時間（分）の変更イベント
+   * 入力チェック ＋ 変換
+   * @param 入力値（分）
+   */
+  onChangeCloseMinutes(value): void {
+    this.addActivityFormGroup.controls.activityCloseTimeMinutes.setValue(TimeUtils.complementMinutes(value));
   }
 
   // -----------------------------------------------------------------------
@@ -195,7 +197,6 @@ export class AddActivityPageComponent implements OnInit {
    */
   validate(): boolean {
     this.addActivityFormGroup.controls.activityName.markAsDirty();
-    this.addActivityFormGroup.controls.country.markAsDirty();
 
     let valid = false;
 
@@ -203,15 +204,6 @@ export class AddActivityPageComponent implements OnInit {
     valid = this.addActivityFormGroup.invalid;
 
     return valid;
-  }
-
-  /**
-   * 半角を全角に変換します。
-   */
-  toHalfWidth(value) {
-    return value.replace(/[０-９]/g, s => {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
   }
 
 }

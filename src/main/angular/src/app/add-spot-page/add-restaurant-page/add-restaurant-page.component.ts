@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { filter as _filter } from 'lodash';
 
+import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { IRestaurant } from 'src/app/shared/model/restaurant';
 import { RestaurantService } from 'src/app/shared/service/restaurant.service';
 
@@ -45,9 +46,6 @@ export class AddRestaurantPageComponent implements OnInit {
   /** 連続作成フラグ */
   continueCreateFlg = true;
 
-  /** 正規表現　全角数字 or 半角数字のみ */
-  patternNumber = /[0-9０-９]/;
-
   /** 飲食店情報 フォームグループ */
   addRestaurantFormGroup = new FormGroup({
     /** 飲食店ID */
@@ -55,15 +53,15 @@ export class AddRestaurantPageComponent implements OnInit {
     /**  飲食店名称 */
     restaurantName: new FormControl(this.restaurant.restaurantName, [Validators.required]),
     /** 営業開始時間（時） */
-    restaurantOpenTimeHours: new FormControl(this.restaurant.restaurantOpenTimeHours),
+    restaurantOpenTimeHours: new FormControl(this.restaurant.restaurantOpenTimeHours, [ Validators.min(0), Validators.max(23)]),
     /** 営業開始時間（分） */
-    restaurantOpenTimeMinutes: new FormControl(this.restaurant.restaurantOpenTimeMinutes),
+    restaurantOpenTimeMinutes: new FormControl(this.restaurant.restaurantOpenTimeMinutes, [ Validators.min(0), Validators.max(59)]),
     /** 営業終了時間（時） */
-    restaurantCloseTimeHours: new FormControl(this.restaurant.restaurantCloseTimeHours),
+    restaurantCloseTimeHours: new FormControl(this.restaurant.restaurantCloseTimeHours, [ Validators.min(0), Validators.max(23)]),
     /** 営業終了時間（分） */
-    restaurantCloseTimeMinutes: new FormControl(this.restaurant.restaurantCloseTimeMinutes),
+    restaurantCloseTimeMinutes: new FormControl(this.restaurant.restaurantCloseTimeMinutes, [ Validators.min(0), Validators.max(59)]),
     /** 住所 */
-    restaurantAddress: new FormControl(this.restaurant.restaurantAddress, [Validators.pattern('^[0-9]*$')]),
+    restaurantAddress: new FormControl(this.restaurant.restaurantAddress),
     /** url */
     restaurantUrl: new FormControl(this.restaurant.restaurantUrl),
   });
@@ -150,48 +148,43 @@ export class AddRestaurantPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    // TODO 飲食店一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
 
   /**
-   * 時間の変更イベント
+   * 営業開始時間の変更イベント
    * 入力チェック ＋ 変換
-   */
-  onChangeHours(): void {
-    // 数字のみチェック
-    const value = this.addRestaurantFormGroup.controls.requiredHours.value;
-    if (!this.patternNumber.test(value)) {
-      this.addRestaurantFormGroup.controls.requiredHours.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addRestaurantFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
+   * @param 入力値（時間）
+  */
+  onChangeOpenHours(value): void {
+    this.addRestaurantFormGroup.controls.restaurantOpenTimeHours.setValue(TimeUtils.complementHour(value));
   }
 
   /**
-   * 時間（分）の変更イベント
+   * 営業終了時間の変更イベント
    * 入力チェック ＋ 変換
+   * @param 入力値（時間）
    */
-  onChangeMinutes(): void {
-    // 数字のみチェック
-    let value = this.addRestaurantFormGroup.controls.requiredMinutes.value;
-    if (!this.patternNumber.test(value)) {
-      this.addRestaurantFormGroup.controls.requiredMinutes.setValue(0);
-      return;
-    }
+  onChangeCloseHours(value): void {
+    this.addRestaurantFormGroup.controls.restaurantCloseTimeHours.setValue(TimeUtils.complementHour(value));
+  }
 
-    // 全角を半角に変換
-    value = this.toHalfWidth(value);
+  /**
+   * 営業開始時間（分）の変更イベント
+   * 入力チェック ＋ 変換
+   * @param 入力値（分）
+   */
+  onChangeOpenMinutes(value): void {
+    this.addRestaurantFormGroup.controls.restaurantOpenTimeMinutes.setValue(TimeUtils.complementMinutes(value));
+  }
 
-    // 60(分)より高い値の場合は 60(分)に変換
-    const maxMinutes = 60;
-    if (Number(value) > maxMinutes ) {
-      this.addRestaurantFormGroup.controls.requiredMinutes.setValue(maxMinutes);
-    } else {
-      this.addRestaurantFormGroup.controls.requiredMinutes.setValue(value);
-    }
+  /**
+   * 営業終了時間（分）の変更イベント
+   * 入力チェック ＋ 変換
+   * @param 入力値（分）
+   */
+  onChangeCloseMinutes(value): void {
+    this.addRestaurantFormGroup.controls.restaurantCloseTimeMinutes.setValue(TimeUtils.complementMinutes(value));
   }
 
   // -----------------------------------------------------------------------
@@ -203,7 +196,6 @@ export class AddRestaurantPageComponent implements OnInit {
    */
   validate(): boolean {
     this.addRestaurantFormGroup.controls.restaurantName.markAsDirty();
-    this.addRestaurantFormGroup.controls.country.markAsDirty();
 
     let valid = false;
 
@@ -211,15 +203,6 @@ export class AddRestaurantPageComponent implements OnInit {
     valid = this.addRestaurantFormGroup.invalid;
 
     return valid;
-  }
-
-  /**
-   * 半角を全角に変換します。
-   */
-  toHalfWidth(value) {
-    return value.replace(/[０-９]/g, s => {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
   }
 
 }

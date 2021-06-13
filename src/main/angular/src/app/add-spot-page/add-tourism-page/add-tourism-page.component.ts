@@ -6,13 +6,12 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { filter as _filter, includes, _includes, forEach as _forEach } from 'lodash';
 
-import { NumberUtils } from 'src/app/shared/utils/number-utils.const';
-import { Const } from 'src/app/shared/const/const.const';
-import { ITourism } from 'src/app/shared/model/tourism';
+import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { ICountry } from 'src/app/shared/model/country';
+import { ITourism } from 'src/app/shared/model/tourism';
+import { ITourismImage } from 'src/app/shared/model/tourismImage';
 import { TourismService } from 'src/app/shared/service/tourism.service';
 import { CountryService } from 'src/app/shared/service/country.service';
-import { ITourismImage } from 'src/app/shared/model/tourismImage';
 
 // 観光地編集モード列挙値
 export enum EditMode {
@@ -187,7 +186,6 @@ export class AddTourismPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    // TODO 観光地一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
 
@@ -213,25 +211,39 @@ export class AddTourismPageComponent implements OnInit {
   }
 
   /**
-   * 時間の変更イベント
+   * 営業開始時間の変更イベント
    * 入力チェック ＋ 変換
    * @param 入力値（時間）
    */
-  onChangeHours(event): void {
-    // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
-    // TODO 時間と分を結合した値を、設定する必要がある
-    this.complementHour(event);
+  onChangeOpenHours(value): void {
+    this.addTourismFormGroup.controls.tourismOpenTimeHours.setValue(TimeUtils.complementHour(value));
   }
 
   /**
-   * 時間（分）の変更イベント
+   * 営業終了時間の変更イベント
+   * 入力チェック ＋ 変換
+   * @param 入力値（時間）
+   */
+  onChangeCloseHours(value): void {
+    this.addTourismFormGroup.controls.tourismCloseTimeHours.setValue(TimeUtils.complementHour(value));
+  }
+
+  /**
+   * 営業開始時間（分）の変更イベント
    * 入力チェック ＋ 変換
    * @param 入力値（分）
    */
-  onChangeMinutes(event): void {
-    // TODO 営業開始時間、営業終了時間の分岐が未実装のため、入力値を設定できていない
-    // TODO 時間と分を結合した値を、設定する必要がある
-    this.complementMinutes(event);
+  onChangeOpenMinutes(value): void {
+    this.addTourismFormGroup.controls.tourismOpenTimeMinutes.setValue(TimeUtils.complementMinutes(value));
+  }
+
+  /**
+   * 営業終了時間（分）の変更イベント
+   * 入力チェック ＋ 変換
+   * @param 入力値（分）
+   */
+  onChangeCloseMinutes(value): void {
+    this.addTourismFormGroup.controls.tourismCloseTimeMinutes.setValue(TimeUtils.complementMinutes(value));
   }
 
   /**
@@ -297,60 +309,6 @@ export class AddTourismPageComponent implements OnInit {
     }
 
     return valid;
-  }
-
-  /**
-   * 「時間」の入力値を補完します。
-   * ・数字以外の場合、'0'を返却
-   * ・全角の場合、半角に変換
-   * ・23より大きい数字の場合は、23に変換
-   * @param value 入力値（時間）
-   * @returns 変換後の値
-   */
-   private complementHour(value: string): string {
-    // 「数字」以外の場合、'0'を返却
-    const match = new RegExp(Const.RegularExpr.HalfNumber);
-    if (!match.test(value)) {
-      return '0';
-    }
-
-    // 全角数字を半角数字に変換
-    value = NumberUtils.convNumberFulltoHalf(value);
-
-    // 23(時)より高い値の場合は 23(時)に変換
-    const maxMinutes = 23;
-    if (Number(value) > maxMinutes ) {
-      return maxMinutes.toString();
-    } else {
-      return value;
-    }
-  }
-
-  /**
-   * 「分」の入力値を補完します。
-   * ・数字以外の場合、'0'を返却
-   * ・全角の場合、半角に変換
-   * ・59より大きい数字の場合は、59に変換
-   * @param value 入力値（分）
-   * @returns 変換後の値
-   */
-   private complementMinutes(value: string): string {
-    // 「数字」以外の場合、'0'を返却
-    const match = new RegExp(Const.RegularExpr.HalfNumber);
-    if (!match.test(value)) {
-      return '0';
-    }
-
-    // 全角数字を半角数字に変換
-    value = NumberUtils.convNumberFulltoHalf(value);
-
-    // 59(分)より高い値の場合は 59(分)に変換
-    const maxMinutes = 59;
-    if (Number(value) > maxMinutes ) {
-      return maxMinutes.toString();
-    } else {
-      return value;
-    }
   }
 
   // -----------------------------------------------------------------------

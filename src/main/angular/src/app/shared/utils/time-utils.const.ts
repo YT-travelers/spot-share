@@ -2,9 +2,36 @@ import { NumberUtils } from 'src/app/shared/utils/number-utils.const';
 import { Const } from 'src/app/shared/const/const.const';
 
 /**
- * 数時間ユーティリティ
+ * 時間ユーティリティ
  */
- export class TimeUtils {
+export class TimeUtils {
+  /**
+     * 「時間」の入力値を補完します。
+     * ・数字以外の場合、'0'を返却
+     * ・全角の場合、半角に変換
+     * ・23より大きい数字の場合は、23に変換
+     * @param value 入力値（時間）
+     * @returns 変換後の値
+     */
+  static complementHour(value: string): string {
+    // 「数字」以外の場合、'0'を返却
+    const match = new RegExp(Const.RegularExpr.HalfNumber);
+    if (!match.test(value)) {
+      return '0';
+    }
+
+    // 全角数字を半角数字に変換
+    value = NumberUtils.convNumberFulltoHalf(value);
+
+    // 23(時)より高い値の場合は 23(時)に変換
+    const maxMinutes = 23;
+    if (Number(value) > maxMinutes ) {
+      return maxMinutes.toString();
+    } else {
+      return value;
+    }
+  }
+
   /**
    * 「分」の入力値を補完します。
    * ・数字以外の場合、'0'を返却
@@ -13,24 +40,23 @@ import { Const } from 'src/app/shared/const/const.const';
    * @param value 入力値（分）
    * @returns 変換後の値
    */
-   static complementMinutes(value: string): string {
-      // 「数字」以外の場合、'0'を返却
-      const match = new RegExp(Const.RegularExpr.HalfNumber);
-      if (!match.test(value)) {
-        return '0';
-      }
-
-      // 全角数字を半角数字に変換
-      value = NumberUtils.convNumberFulltoHalf(value);
-
-      // 59(分)より高い値の場合は 59(分)に変換
-      const maxMinutes = 59;
-      if (Number(value) > maxMinutes ) {
-        return maxMinutes.toString();
-      } else {
-        return value;
-      }
+  static complementMinutes(value: string): string {
+    // 「数字」以外の場合、'0'を返却
+    const match = new RegExp(Const.RegularExpr.HalfNumber);
+    if (!match.test(value)) {
+      return '0';
     }
 
+    // 全角数字を半角数字に変換
+    value = NumberUtils.convNumberFulltoHalf(value);
+
+    // 59(分)より高い値の場合は 59(分)に変換
+    const maxMinutes = 59;
+    if (Number(value) > maxMinutes ) {
+      return maxMinutes.toString();
+    } else {
+      return value;
+    }
+  }
+
 }
-  

@@ -18,7 +18,7 @@
         </button>
         <span class="title">アクティビティを追加</span>
       </div>
-      <form id="add-touris-item" class="panel-body" [formGroup]="addActivityFormGroup">
+      <form class="panel-body" [formGroup]="addActivityFormGroup">
         <div class="panel-item">
           <app-spot-image-input class="w-100">
           </app-spot-image-input>
@@ -33,6 +33,24 @@
               </div>
               <input class="form-control" formControlName="activityName" placeholder="必須">
             </div>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">営業開始時間</div>
+          <div class="panel-item-input">
+            <input class="form-control time-picker" formControlName="activityOpenTimeHours" (change)="onChangeOpenHours($event.target.value)">
+            <span class="spacer">時</span>
+            <input class="form-control time-picker" formControlName="activityOpenTimeMinutes" (change)="onChangeOpenMinutes($event.target.value)">
+            <span class="spacer">分</span>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">営業終了時間</div>
+          <div class="panel-item-input">
+            <input class="form-control time-picker" formControlName="activityCloseTimeHours" (change)="onChangeCloseHours($event.target.value)">
+            <span class="spacer">時</span>
+            <input class="form-control time-picker" formControlName="activityCloseTimeMinutes" (change)="onChangeCloseMinutes($event.target.value)">
+            <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">

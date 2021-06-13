@@ -18,7 +18,7 @@
         </button>
         <span class="title">観光地を追加</span>
       </div>
-      <form id="add-touris-item" class="panel-body" [formGroup]="addTourismFormGroup">
+      <form class="panel-body" [formGroup]="addTourismFormGroup">
         <div class="panel-item">
           <app-spot-image-input class="w-100"
             [images]="tourism.tourismImages"
@@ -67,18 +67,18 @@
         <div class="panel-item">
           <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTimeHours" (change)="onChangeHours($event)">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTimeHours" (change)="onChangeOpenHours($event.target.value)">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTimeMinutes" (change)="onChangeMinutes($event)">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTimeMinutes" (change)="onChangeOpenMinutes($event.target.value)">
             <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">営業終了時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTimeHours" (change)="onChangeHours($event)">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTimeHours" (change)="onChangeCloseHours($event.target.value)">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTimeMinutes" (change)="onChangeMinutes($event)">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTimeMinutes" (change)="onChangeCloseMinutes($event.target.value)">
             <span class="spacer">分</span>
           </div>
         </div>

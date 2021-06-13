@@ -18,7 +18,7 @@
         </button>
         <span class="title">飲食店を追加</span>
       </div>
-      <form id="add-touris-item" class="panel-body" [formGroup]="addRestaurantFormGroup">
+      <form class="panel-body" [formGroup]="addRestaurantFormGroup">
         <div class="panel-item">
           <app-spot-image-input class="w-100">
           </app-spot-image-input>
@@ -38,18 +38,18 @@
         <div class="panel-item">
           <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="restaurantOpenTime" (change)="onChangeHours()">
+            <input class="form-control time-picker" formControlName="restaurantOpenTimeHours" (change)="onChangeOpenHours($event.target.value)">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" formControlName="restaurantCloseTime" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" formControlName="restaurantOpenTimeMinutes" (change)="onChangeOpenMinutes($event.target.value)">
             <span class="spacer">分</span>
           </div>
         </div>
         <div class="panel-item">
           <div class="panel-item-title">営業終了時間</div>
           <div class="panel-item-input">
-            <input class="form-control time-picker" formControlName="restaurantOpenTime" (change)="onChangeHours()">
+            <input class="form-control time-picker" formControlName="restaurantCloseTimeHours" (change)="onChangeCloseHours($event.target.value)">
             <span class="spacer">時</span>
-            <input class="form-control time-picker" formControlName="restaurantCloseTime" (change)="onChangeMinutes()">
+            <input class="form-control time-picker" formControlName="restaurantCloseTimeMinutes" (change)="onChangeCloseMinutes($event.target.value)">
             <span class="spacer">分</span>
           </div>
         </div>

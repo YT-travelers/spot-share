@@ -45,9 +45,6 @@ export class AddHotelPageComponent implements OnInit {
   /** 連続作成フラグ */
   continueCreateFlg = true;
 
-  /** 正規表現　全角数字 or 半角数字のみ */
-  patternNumber = /[0-9０-９]/;
-
   /** ホテル情報 フォームグループ */
   addHotelFormGroup = new FormGroup({
     /** ホテルID */
@@ -55,7 +52,7 @@ export class AddHotelPageComponent implements OnInit {
     /**  ホテル名称 */
     hotelName: new FormControl(this.hotel.hotelName, [Validators.required]),
     /** 住所 */
-    hotelAddress: new FormControl(this.hotel.hotelAddress, [Validators.pattern('^[0-9]*$')]),
+    hotelAddress: new FormControl(this.hotel.hotelAddress),
     /** url */
     hotelUrl: new FormControl(this.hotel.hotelUrl),
   });
@@ -146,46 +143,6 @@ export class AddHotelPageComponent implements OnInit {
     this.router.navigate(['/show-container-page']);
   }
 
-  /**
-   * 時間の変更イベント
-   * 入力チェック ＋ 変換
-   */
-  onChangeHours(): void {
-    // 数字のみチェック
-    const value = this.addHotelFormGroup.controls.requiredHours.value;
-    if (!this.patternNumber.test(value)) {
-      this.addHotelFormGroup.controls.requiredHours.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    this.addHotelFormGroup.controls.requiredHours.setValue(this.toHalfWidth(value));
-  }
-
-  /**
-   * 時間（分）の変更イベント
-   * 入力チェック ＋ 変換
-   */
-  onChangeMinutes(): void {
-    // 数字のみチェック
-    let value = this.addHotelFormGroup.controls.requiredMinutes.value;
-    if (!this.patternNumber.test(value)) {
-      this.addHotelFormGroup.controls.requiredMinutes.setValue(0);
-      return;
-    }
-
-    // 全角を半角に変換
-    value = this.toHalfWidth(value);
-
-    // 60(分)より高い値の場合は 60(分)に変換
-    const maxMinutes = 60;
-    if (Number(value) > maxMinutes ) {
-      this.addHotelFormGroup.controls.requiredMinutes.setValue(maxMinutes);
-    } else {
-      this.addHotelFormGroup.controls.requiredMinutes.setValue(value);
-    }
-  }
-
   // -----------------------------------------------------------------------
   // 処理
 
@@ -195,7 +152,6 @@ export class AddHotelPageComponent implements OnInit {
    */
   validate(): boolean {
     this.addHotelFormGroup.controls.hotelName.markAsDirty();
-    this.addHotelFormGroup.controls.country.markAsDirty();
 
     let valid = false;
 
@@ -203,15 +159,6 @@ export class AddHotelPageComponent implements OnInit {
     valid = this.addHotelFormGroup.invalid;
 
     return valid;
-  }
-
-  /**
-   * 半角を全角に変換します。
-   */
-  toHalfWidth(value) {
-    return value.replace(/[０-９]/g, s => {
-      return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
-    });
   }
 
 }
