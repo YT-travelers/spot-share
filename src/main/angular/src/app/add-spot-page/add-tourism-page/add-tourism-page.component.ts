@@ -12,6 +12,7 @@ import { ITourism } from 'src/app/shared/model/tourism';
 import { ICountry } from 'src/app/shared/model/country';
 import { TourismService } from 'src/app/shared/service/tourism.service';
 import { CountryService } from 'src/app/shared/service/country.service';
+import { ITourismImage } from 'src/app/shared/model/tourismImage';
 
 // 観光地編集モード列挙値
 export enum EditMode {
@@ -84,6 +85,8 @@ export class AddTourismPageComponent implements OnInit {
     tourismAddress: new FormControl(this.tourism.tourismAddress),
     /** url */
     tourismUrl: new FormControl(this.tourism.tourismUrl),
+    /** 観光地画像 */
+    tourismImages: new FormControl(this.tourism.tourismImages),
     /** アップロード画像 */
     uploadFiles: new FormControl(this.tourism.uploadFiles),
   });
@@ -232,16 +235,32 @@ export class AddTourismPageComponent implements OnInit {
   }
 
   /**
-   * 画像読み込みイベント
-   * @param event 読み込んだ画像のバイナリデータ
+   * 画像情報配列更新イベント
+   * @param event 画像情報配列
    */
-  onReadFileEvent(event) {
+   onUpdateCarouselInfosEvent(event) {
+    // アップロード画像のバイナリデータ配列
+    const uploadFiles = [];
+    // アップロード済みの画像情報配列
     const images = [];
+
     _forEach(event, e => {
-      images.push(e.image);
+      if (e.newUploadFlg) {
+        uploadFiles.push(e.inputImageBinary);
+      } else {
+        const image: ITourismImage = {
+          tourismId: e.tourismId,
+          tourismImageId: e.tourismImageId,
+          tourismImageUrl: e.tourismImageUrl,
+        }
+        images.push(image);
+      }
     })
 
-    this.addTourismFormGroup.controls.uploadFiles.setValue(images);
+    // アップロード用画像の格納
+    this.addTourismFormGroup.controls.uploadFiles.setValue(uploadFiles);
+    // 既存の画像情報を格納
+    this.addTourismFormGroup.controls.tourismImages.setValue(images);
   }
 
   // -----------------------------------------------------------------------

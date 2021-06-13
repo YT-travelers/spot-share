@@ -21,7 +21,8 @@
       <form id="add-touris-item" class="panel-body" [formGroup]="addTourismFormGroup">
         <div class="panel-item">
           <app-image-input class="w-100"
-            (readFileEvent)="onReadFileEvent($event)"
+            [images]="tourism.tourismImages"
+            (updateCarouselInfosEvent)="onUpdateCarouselInfosEvent($event)"
           ></app-image-input>
         </div>
         <hr>

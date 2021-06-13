@@ -1,22 +1,20 @@
 <div class="carousel-area" *ngIf="carouselInfos.length > 0">
-  <ngb-carousel #carousel
-    [interval]="0"
-    [showNavigationArrows]="carouselInfos.length >= 2"
-    [showNavigationIndicators]="carouselInfos.length >= 2"
-    (slide)="onSlide($event)"
-  >
-    <ng-template ngbSlide *ngFor="let info of carouselInfos">
-      <div class="picsum-img-wrapper">
-        <img class="carousel" [src]="info.image">
-      </div>
-    </ng-template>
-  </ngb-carousel>
   <div class="image-info">
-    <input class="form-control" [value]="imageTitle" (change)="onChangeImageTitle($event)">
     <button class="btn btn-outline-secondary" *ngIf="carouselInfos.length > 0" (click)="onClickDeleteImage()">
       <mat-icon>delete_forever</mat-icon>
     </button>
   </div>
+  <ngb-carousel #carousel
+    [interval]="0"
+    [showNavigationArrows]="carouselInfos.length >= 2"
+    [showNavigationIndicators]="carouselInfos.length >= 2"
+  >
+    <ng-template ngbSlide *ngFor="let info of carouselInfos">
+      <div class="picsum-img-wrapper">
+        <img class="carousel" [src]="info.inputImageBinary">
+      </div>
+    </ng-template>
+  </ngb-carousel>
 </div>
 
 <input id="file-reader" type="file" class="hide" multiple="multiple" accept="image/*"> 

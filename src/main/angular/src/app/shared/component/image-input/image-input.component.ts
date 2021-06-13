@@ -1,14 +1,18 @@
-import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
-import { NgbCarousel } from '@ng-bootstrap/ng-bootstrap';
-import { forEach as _forEach} from 'lodash';
+import { Component, EventEmitter, Input, OnChanges, Output, ViewChild } from '@angular/core';
+import { NgbCarousel, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { forEach as _forEach, head as _head } from 'lodash';
+import { ITourismImage } from 'src/app/shared/model/tourismImage';
+import { IRestaurantImage } from 'src/app/shared/model/restaurantImage';
+import { IHotelImage } from 'src/app/shared/model/hotelImage';
+import { IActivityImage } from 'src/app/shared/model/activityImage';
 
 export interface ICarousel {
   /** NgbCarouselが自動で付与するid */
   id?: string;
   /** 画像バイナリデータ */
-  image?: string | ArrayBuffer;
-  /** 画像タイトル */
-  imageTitle?: string;
+  inputImageBinary: string | ArrayBuffer;
+  /** 新しく追加する画像かを判定するフラグ*/
+  newUploadFlg: boolean;
 }
 
 @Component({
@@ -16,20 +20,57 @@ export interface ICarousel {
   templateUrl: './image-input.component.html',
   styleUrls: ['./image-input.component.scss']
 })
-export class ImageInputComponent {
+export class ImageInputComponent implements OnChanges  {
 
   @ViewChild('carousel') carousel: NgbCarousel;
 
-  /** 新しい画像が読み込まれた際にイベントを発火します。 */
-  @Output() readFileEvent: EventEmitter<ICarousel[]> = new EventEmitter();
+  /** 画像初期読み込み */
+  @Input() images: ICarousel[];
 
-  /** 画面表示用　画像タイトル */
-  imageTitle = '';
+  /** 画像情報配列の内容が更新されたイベントを発火します。 */
+  @Output() updateCarouselInfosEvent: EventEmitter<ICarousel[]> = new EventEmitter();
 
   /** NgbCarouselに表示している画像データを管理する */
   carouselInfos: ICarousel[] = [];
 
-  constructor() { }
+  constructor(config: NgbCarouselConfig) {
+    config.showNavigationArrows = true;
+    config.showNavigationIndicators = true;
+  }
+
+  // -----------------------------------------------------------------------
+  // ライフサイクル
+
+  ngOnChanges() {
+    // 画像初期読み込み
+    if (this.images && this.images.length > 0) {
+      // 画像情報のマスタの種類を判定する用
+      const headImage = _head(this.images);
+      // コンポーネント用に変換したオブジェクト格納用
+      let pushImage;
+
+      if (headImage.tourismId) {
+        // 観光地画像をコンポーネント用のオブジェクトに変換
+        pushImage = this.convertTourismImage();
+
+      } else if (headImage.restaurantId) {
+        // 飲食店画像をコンポーネント用のオブジェクトに変換
+        pushImage = this.convertRestaurantImage();
+
+      } else if (headImage.hotelId) {
+        // ホテル画像をコンポーネント用のオブジェクトに変換
+        pushImage = this.convertHotelImage();
+
+      } else if (headImage.ActivityId) {
+        // アクティビティ画像をコンポーネント用のオブジェクトに変換
+        pushImage = this.convertActivityImage();
+
+      }
+
+      // 変換後のオブジェクトをフィールドに格納
+      this.carouselInfos = pushImage;
+    }
+  }
 
   // -----------------------------------------------------------------------
   // イベント
@@ -85,34 +126,9 @@ export class ImageInputComponent {
     // アクティブなスライドを削除する
     this.carouselInfos.splice(i, 1);
 
-  }
+    // 最新の画像情報配列を親コンポーネントに通知する
+    this.updateCarouselInfosEvent.emit(this.carouselInfos);
 
-  /**
-   * carouselスライド変更イベント
-   * @param event NgbSlideEvent
-   */
-  onSlide(event): void {
-    _forEach(this.carouselInfos, (e: ICarousel) => {
-      if (e.id === event.current) {
-        this.imageTitle = e.imageTitle;
-      }
-    });
-  }
-
-  /**
-   * 画像のタイトル変更イベント
-   * @param event 入力値
-   */
-  onChangeImageTitle(event): void {
-
-    const currentId = this.getCurrentSlideId();
-
-    _forEach(this.carouselInfos, (e: ICarousel) => {
-      if (e.id === currentId) {
-        this.imageTitle = event.target.value;
-        e.imageTitle = event.target.value;
-      }
-    });
   }
 
   // -----------------------------------------------------------------------
@@ -140,11 +156,10 @@ export class ImageInputComponent {
         const reader = new FileReader();
         reader.onload = (() => {
           const item: ICarousel = {
-            image: reader.result,
-            imageTitle: e.name,
+            inputImageBinary: reader.result,
+            newUploadFlg: true,
           };
           this.carouselInfos.push(item);
-          this.imageTitle = e.name;
         });
         reader.readAsDataURL(e);
       });
@@ -161,8 +176,8 @@ export class ImageInputComponent {
           const id = this.getCurrentSlideId();
           this.carousel.select(id);
 
-          // 読み込んだ画像のバイナリデータを親コンポーネントに通知
-          this.readFileEvent.emit(this.carouselInfos);
+          // 最新の画像情報配列を親コンポーネントに通知する
+          this.updateCarouselInfosEvent.emit(this.carouselInfos);
       }, 100);
 
     }
@@ -189,6 +204,98 @@ export class ImageInputComponent {
     } else {
       return '';
     }
+  }
+
+  /**
+   * 観光地画像をコンポーネント用のオブジェクトに変換
+   * @returns
+   */
+   convertTourismImage() {
+    const images = [];
+    _forEach(this.images, (e: ITourismImage) => {
+      const image = {
+        // 親コンポーネントで使用する
+        tourismId: e.tourismId,
+        tourismImageId: e.tourismImageId,
+        tourismImageUrl: e.tourismImageUrl,
+
+        // 画像コンポーネントで使用する
+        inputImageBinary: e.tourismImageUrl,
+        newUploadFlg: false,
+      }
+      images.push(image);
+    });
+
+    return images;
+  }
+
+  /**
+   * 飲食店画像をコンポーネント用のオブジェクトに変換
+   * @returns
+   */
+  convertRestaurantImage() {
+    const images = [];
+    _forEach(this.images, (e: IRestaurantImage) => {
+      const image = {
+        // 親コンポーネントで使用する
+        restaurantId: e.restaurantId,
+        restaurantImageId: e.restaurantImageId,
+        restaurantImageUrl: e.restaurantImageUrl,
+
+        // 画像コンポーネントで使用する
+        inputImageBinary: e.restaurantImageUrl,
+        newUploadFlg: false,
+      }
+      images.push(image);
+    });
+
+    return images;
+  }
+
+  /**
+   * ホテル画像をコンポーネント用のオブジェクトに変換
+   * @returns
+   */
+  convertHotelImage() {
+    const images = [];
+    _forEach(this.images, (e: IHotelImage) => {
+      const image = {
+        // 親コンポーネントで使用する
+        hotelId: e.hotelId,
+        hotelImageId: e.hotelImageId,
+        hotelImageUrl: e.hotelImageUrl,
+
+        // 画像コンポーネントで使用する
+        inputImageBinary: e.hotelImageUrl,
+        newUploadFlg: false,
+      }
+      images.push(image);
+    });
+
+    return images;
+  }
+
+  /**
+   * アクティビティ画像をコンポーネント用のオブジェクトに変換
+   * @returns
+   */
+  convertActivityImage() {
+    const images = [];
+    _forEach(this.images, (e: IActivityImage) => {
+      const image = {
+        // 親コンポーネントで使用する
+        activityId: e.activityId,
+        activityImageId: e.activityImageId,
+        activityImageUrl: e.activityImageUrl,
+
+        // 画像コンポーネントで使用する
+        inputImageBinary: e.activityImageUrl,
+        newUploadFlg: false,
+      }
+      images.push(image);
+    });
+
+    return images;
   }
 
 }
