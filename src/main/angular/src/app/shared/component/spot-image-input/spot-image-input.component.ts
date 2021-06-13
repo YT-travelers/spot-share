@@ -16,11 +16,11 @@ export interface ICarousel {
 }
 
 @Component({
-  selector: 'app-image-input',
-  templateUrl: './image-input.component.html',
-  styleUrls: ['./image-input.component.scss']
+  selector: 'app-spot-image-input',
+  templateUrl: './spot-image-input.component.html',
+  styleUrls: ['./spot-image-input.component.scss']
 })
-export class ImageInputComponent implements OnChanges  {
+export class SpotImageInputComponent implements OnChanges  {
 
   @ViewChild('carousel') carousel: NgbCarousel;
 

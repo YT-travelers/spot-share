@@ -20,10 +20,10 @@
       </div>
       <form id="add-touris-item" class="panel-body" [formGroup]="addTourismFormGroup">
         <div class="panel-item">
-          <app-image-input class="w-100"
+          <app-spot-image-input class="w-100"
             [images]="tourism.tourismImages"
             (updateCarouselInfosEvent)="onUpdateCarouselInfosEvent($event)"
-          ></app-image-input>
+          ></app-spot-image-input>
         </div>
         <hr>
         <div class="panel-item">
