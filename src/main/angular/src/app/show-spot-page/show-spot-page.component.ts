@@ -62,7 +62,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
             this.router.navigate(['/add-restaurant-page', { restaurantId: params.data.restaurantId }]);
           } else if (params.data.hotelId) {
             // ホテル追加ページに遷移
-            this.router.navigate(['/add-hotel-page', { tourhotelIdismId: params.data.hotelId }]);
+            this.router.navigate(['/add-hotel-page', { hotelId: params.data.hotelId }]);
           } else if (params.data.activityId) {
             // アクティビティ追加ページに遷移
             this.router.navigate(['/add-activity-page', { activityId: params.data.activityId }]);

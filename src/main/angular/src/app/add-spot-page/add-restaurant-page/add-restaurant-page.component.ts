@@ -2,10 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { filter as _filter } from 'lodash';
+import { filter as _filter, forEach as _forEach } from 'lodash';
 
 import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { IRestaurant } from 'src/app/shared/model/restaurant';
+import { IRestaurantImage } from 'src/app/shared/model/restaurantImage';
 import { RestaurantService } from 'src/app/shared/service/restaurant.service';
 
 // 飲食店編集モード列挙値
@@ -40,9 +41,6 @@ export class AddRestaurantPageComponent implements OnInit {
   /** 画面上に表示する飲食店情報のID */
   restaurantId = '';
 
-  /** 画像タイトル */
-  imageTitle = '';
-
   /** 連続作成フラグ */
   continueCreateFlg = true;
 
@@ -64,6 +62,10 @@ export class AddRestaurantPageComponent implements OnInit {
     restaurantAddress: new FormControl(this.restaurant.restaurantAddress),
     /** url */
     restaurantUrl: new FormControl(this.restaurant.restaurantUrl),
+    /** 飲食店画像 */
+    restaurantImages: new FormControl(this.restaurant.restaurantImages),
+    /** アップロード画像 */
+    uploadFiles: new FormControl(this.restaurant.uploadFiles),
   });
 
   constructor(
@@ -185,6 +187,35 @@ export class AddRestaurantPageComponent implements OnInit {
    */
   onChangeCloseMinutes(value): void {
     this.addRestaurantFormGroup.controls.restaurantCloseTimeMinutes.setValue(TimeUtils.complementMinutes(value));
+  }
+
+  /**
+   * 画像情報配列更新イベント
+   * @param event 画像情報配列
+   */
+  onUpdateCarouselInfosEvent(event) {
+    // アップロード画像のバイナリデータ配列
+    const uploadFiles = [];
+    // アップロード済みの画像情報配列
+    const images = [];
+
+    _forEach(event, e => {
+      if (e.newUploadFlg) {
+        uploadFiles.push(e.inputImageBinary);
+      } else {
+        const image: IRestaurantImage = {
+          restaurantId: e.restaurantId,
+          restaurantImageId: e.restaurantImageId,
+          restaurantImageUrl: e.restaurantImageUrl,
+        }
+        images.push(image);
+      }
+    })
+
+    // アップロード用画像の格納
+    this.addRestaurantFormGroup.controls.uploadFiles.setValue(uploadFiles);
+    // 既存の画像情報を格納
+    this.addRestaurantFormGroup.controls.restaurantImages.setValue(images);
   }
 
   // -----------------------------------------------------------------------

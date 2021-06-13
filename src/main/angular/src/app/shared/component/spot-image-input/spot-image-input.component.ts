@@ -61,7 +61,7 @@ export class SpotImageInputComponent implements OnChanges  {
         // ホテル画像をコンポーネント用のオブジェクトに変換
         pushImage = this.convertHotelImage();
 
-      } else if (headImage.ActivityId) {
+      } else if (headImage.activityId) {
         // アクティビティ画像をコンポーネント用のオブジェクトに変換
         pushImage = this.convertActivityImage();
 

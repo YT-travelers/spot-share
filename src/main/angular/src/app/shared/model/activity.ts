@@ -1,3 +1,5 @@
+import { IActivityImage } from "./activityImage";
+
 /**
  * アクティビティ
  */
@@ -20,4 +22,8 @@ export interface IActivity {
   activityAddress?: string;
   /** URL */
   activityUrl?: string;
+  /** アクティビティ画像 */
+  activityImages?: IActivityImage[];
+  /** アップロード画像 */
+  uploadFiles?: string[];
 }

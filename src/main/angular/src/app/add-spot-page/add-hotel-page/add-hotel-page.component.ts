@@ -2,9 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { filter as _filter } from 'lodash';
+import { filter as _filter, forEach as _forEach } from 'lodash';
 
 import { IHotel } from 'src/app/shared/model/hotel';
+import { IHotelImage } from 'src/app/shared/model/hotelImage';
 import { HotelService } from 'src/app/shared/service/hotel.service';
 
 // ホテル編集モード列挙値
@@ -39,9 +40,6 @@ export class AddHotelPageComponent implements OnInit {
   /** 画面上に表示するホテル情報のID */
   hotelId = '';
 
-  /** 画像タイトル */
-  imageTitle = '';
-
   /** 連続作成フラグ */
   continueCreateFlg = true;
 
@@ -55,6 +53,10 @@ export class AddHotelPageComponent implements OnInit {
     hotelAddress: new FormControl(this.hotel.hotelAddress),
     /** url */
     hotelUrl: new FormControl(this.hotel.hotelUrl),
+    /** ホテル画像 */
+    hotelImages: new FormControl(this.hotel.hotelImages),
+    /** アップロード画像 */
+    uploadFiles: new FormControl(this.hotel.uploadFiles),
   });
 
   constructor(
@@ -139,8 +141,36 @@ export class AddHotelPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    // TODO ホテル一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
+  }
+
+  /**
+   * 画像情報配列更新イベント
+   * @param event 画像情報配列
+   */
+  onUpdateCarouselInfosEvent(event) {
+    // アップロード画像のバイナリデータ配列
+    const uploadFiles = [];
+    // アップロード済みの画像情報配列
+    const images = [];
+
+    _forEach(event, e => {
+      if (e.newUploadFlg) {
+        uploadFiles.push(e.inputImageBinary);
+      } else {
+        const image: IHotelImage = {
+          hotelId: e.hotelId,
+          hotelImageId: e.hotelImageId,
+          hotelImageUrl: e.hotelImageUrl,
+        }
+        images.push(image);
+      }
+    })
+
+    // アップロード用画像の格納
+    this.addHotelFormGroup.controls.uploadFiles.setValue(uploadFiles);
+    // 既存の画像情報を格納
+    this.addHotelFormGroup.controls.hotelImages.setValue(images);
   }
 
   // -----------------------------------------------------------------------

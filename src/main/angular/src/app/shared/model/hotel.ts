@@ -1,3 +1,5 @@
+import { IHotelImage } from "./hotelImage";
+
 /**
  * ホテル
  */
@@ -16,4 +18,8 @@ export interface IHotel {
   hotelAddress?: string;
   /** URL */
   hotelUrl?: string;
+  /** ホテル画像 */
+  hotelImages?: IHotelImage[];
+  /** アップロード画像 */
+  uploadFiles?: string[];
 }

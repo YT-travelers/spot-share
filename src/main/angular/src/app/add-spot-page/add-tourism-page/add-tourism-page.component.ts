@@ -45,9 +45,6 @@ export class AddTourismPageComponent implements OnInit {
   /** 画面上に表示する観光地情報のID */
   tourismId = '';
 
-  /** 画像タイトル */
-  imageTitle = '';
-
   /** 国のマスタ情報 */
   allCountries: ICountry[] = [];
 

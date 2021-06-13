@@ -20,7 +20,10 @@
       </div>
       <form class="panel-body" [formGroup]="addHotelFormGroup">
         <div class="panel-item">
-          <app-spot-image-input class="w-100">
+          <app-spot-image-input class="w-100"
+            [images]="hotel.hotelImages"
+            (updateCarouselInfosEvent)="onUpdateCarouselInfosEvent($event)"
+          >
           </app-spot-image-input>
         </div>
         <hr>

@@ -1,3 +1,5 @@
+import { IRestaurantImage } from "./restaurantImage";
+
 /**
  * 飲食店
  */
@@ -26,4 +28,8 @@ export interface IRestaurant {
   restaurantAddress?: string;
   /** URL */
   restaurantUrl?: string;
+  /** 飲食店画像 */
+  restaurantImages?: IRestaurantImage[];
+  /** アップロード画像 */
+  uploadFiles?: string[];
 }

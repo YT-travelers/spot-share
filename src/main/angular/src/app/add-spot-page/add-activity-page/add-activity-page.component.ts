@@ -2,10 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { filter as _filter } from 'lodash';
+import { filter as _filter, forEach as _forEach } from 'lodash';
 
 import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { IActivity } from 'src/app/shared/model/activity';
+import { IActivityImage } from 'src/app/shared/model/activityImage';
 import { ActivityService } from 'src/app/shared/service/activity.service';
 
 // アクティビティ編集モード列挙値
@@ -40,9 +41,6 @@ export class AddActivityPageComponent implements OnInit {
   /** 画面上に表示するアクティビティ情報のID */
   activityId = '';
 
-  /** 画像タイトル */
-  imageTitle = '';
-
   /** 連続作成フラグ */
   continueCreateFlg = true;
 
@@ -64,6 +62,10 @@ export class AddActivityPageComponent implements OnInit {
     activityAddress: new FormControl(this.activity.activityAddress),
     /** url */
     activityUrl: new FormControl(this.activity.activityUrl),
+    /** アクティビティ画像 */
+    activityImages: new FormControl(this.activity.activityImages),
+    /** アップロード画像 */
+    uploadFiles: new FormControl(this.activity.uploadFiles),
   });
 
   constructor(
@@ -148,7 +150,6 @@ export class AddActivityPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    // TODO アクティビティ一覧タブが表示された状態で遷移させる
     this.router.navigate(['/show-container-page']);
   }
 
@@ -186,6 +187,35 @@ export class AddActivityPageComponent implements OnInit {
    */
   onChangeCloseMinutes(value): void {
     this.addActivityFormGroup.controls.activityCloseTimeMinutes.setValue(TimeUtils.complementMinutes(value));
+  }
+
+  /**
+   * 画像情報配列更新イベント
+   * @param event 画像情報配列
+   */
+  onUpdateCarouselInfosEvent(event) {
+    // アップロード画像のバイナリデータ配列
+    const uploadFiles = [];
+    // アップロード済みの画像情報配列
+    const images = [];
+
+    _forEach(event, e => {
+      if (e.newUploadFlg) {
+        uploadFiles.push(e.inputImageBinary);
+      } else {
+        const image: IActivityImage = {
+          activityId: e.activityId,
+          activityImageId: e.activityImageId,
+          activityImageUrl: e.activityImageUrl,
+        }
+        images.push(image);
+      }
+    })
+
+    // アップロード用画像の格納
+    this.addActivityFormGroup.controls.uploadFiles.setValue(uploadFiles);
+    // 既存の画像情報を格納
+    this.addActivityFormGroup.controls.activityImages.setValue(images);
   }
 
   // -----------------------------------------------------------------------
