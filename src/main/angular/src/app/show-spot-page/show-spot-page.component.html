@@ -13,7 +13,7 @@
   <div class="container-fulid m-content">
     <div class="title-area">
       <span class="page-title">スポット一覧</span>
-      <div class="title-area-right">
+      <div class="title-area-right" *ngIf="pageMode !==  _pageMode.SpotSelect">
         <button type="button" (click)="onClickAddTourism()" class="btn btn-outline-primary ml-2">
             <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>

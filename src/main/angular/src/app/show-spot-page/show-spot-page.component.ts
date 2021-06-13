@@ -39,6 +39,9 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   /** スポット一覧ページ 表示モード */
   @Input ('pageMode') pageMode;
 
+  /** スポット一覧ページ 表示モード（HTML用） */
+  _pageMode = PageMode;
+
   /** リサイズイベント　オブザーバー */
   resizeObservable$: Observable<Event>;
 
@@ -256,15 +259,42 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     const route: IRoute = {};
     route.routeDetails = [];
 
-    this.spotList.forEach(e => {
+    _forEach(this.spotList, e => {
       if (e['select'] === 'Y') {
-        route.routeDetails.push(
-          {
+        let data;
+        if (e.tourismId) {
+          // 観光地
+          data = {
             routeDetailId: null,
             beanKindDiv: Code.BeanKindDiv.Tourism,
             routeDetailTourism: { tourismId: e.tourismId }
           }
-        );
+        } else if (e.restaurantId) {
+          // 飲食店
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Restaurant,
+            routeDetailRestaurant: { restaurantId: e.restaurantId }
+          }
+
+        } else if (e.hotelId) {
+          // ホテル
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Hotel,
+            routeDetailHotel: { hotelId: e.hotelId }
+          }
+
+        } else if (e.activityId) {
+          // アクティビティ
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Activity,
+            routeDetailActivity: { activityId: e.activityId }
+          }
+
+        }
+        route.routeDetails.push(data);
       }
     });
 
@@ -281,8 +311,8 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     // 新規作成、または更新
     if (this.pageMode === PageMode.SpotSelect) {
       // スポット選択モードの場合
-      _forEach(route.routeDetails, (addTourism: IRouteDetail) => {
-        this.route.routeDetails.push(addTourism);
+      _forEach(route.routeDetails, (addSpot: IRouteDetail) => {
+        this.route.routeDetails.push(addSpot);
       });
 
       // 更新
