@@ -99,8 +99,8 @@ export class CreateRoutePageComponent implements OnInit {
   /**
    * 戻るボタン押下イベント
    */
-  onClickBack() {
-    // TODO
+  onClickBack(): void {
+    this.router.navigate(['/show-container-page']);
   }
 
   /**
