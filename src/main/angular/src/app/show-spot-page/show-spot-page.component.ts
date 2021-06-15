@@ -225,6 +225,15 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   // イベント
 
   /**
+   * 戻るボタン押下イベント（スポット選択モードの場合のみ表示されるボタンのイベント）
+   */
+  onClickBack(): void {
+    // 編集中の「ルート作成ページ」に遷移する
+    const routeId = this.activateRoute.snapshot.paramMap.get('routeId');
+    this.router.navigate(['/create-route-page', { routeId: routeId }]);
+  }
+
+  /**
    * スポット登録ボタン押下イベント
    */
   onClickAddTourism(): void {
