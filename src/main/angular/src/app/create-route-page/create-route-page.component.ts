@@ -97,6 +97,13 @@ export class CreateRoutePageComponent implements OnInit {
   // イベント
 
   /**
+   * 戻るボタン押下イベント
+   */
+  onClickBack() {
+    // TODO
+  }
+
+  /**
    * ルート名称編集ボタン
    */
   onClickRouteNameEditButton(): void {

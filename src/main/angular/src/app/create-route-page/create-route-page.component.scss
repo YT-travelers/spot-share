@@ -4,56 +4,54 @@ html, body {
   height: auto;
 }
 
-.close {
-  font-size: 15px;
-  cursor: default;
-  margin: 0 5px;
-  margin-left: auto;
+.back-button {
+  border-radius: 2rem;
+  height: 1.9rem;
+  padding: 0.3rem 0.15rem;
+  .material-icons {
+    font-size: 1.3rem;
+  }
 }
 
 .route-page {
-  max-width: 700px;
+  max-width: 45.8rem;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 1rem;
 }
 
 .icon-btn {
   display: flex;
   align-items: center;
   text-align: center; 
-  width: 60px;
-  height: 50px;
-  padding: 0 12px;
+  width: 2.5rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
 }
 
 .route-title-area {
   width: 100%;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  .route-title-input {
+    margin-left: 1rem;
+  }
   .route-title {
-    margin-bottom: 5px ;
-    font-size: 40px;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
     line-height: 1.2;
   }
   .title-edit-btn {
     color: #d3d3d3;
-    height: 50px;
-    padding: 12px 12px;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.8rem;
     cursor: default;
     &:hover {
-      font-size: 27px;
+      font-size: 1.8rem;
     }
-  }
-}
-
-.maps {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 5px;
-  iframe {
-    width: 100%;
   }
 }
 
@@ -70,22 +68,14 @@ html, body {
   height: 100px;
 }
 
-.list-bean {
-  .div-border-line {
-    margin: 3px 0;
-    padding-bottom: 1px;
-    border-bottom: dashed 1px #ddd;
-  }
-}
-
 .route-footer {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 1rem;
 
   .option-item-area {
     display: flex;
     align-items: center;
-    height: 40px;
+    height: 2.5rem;
 
     .option-items {
       display: flex;
@@ -93,13 +83,12 @@ html, body {
       margin-left: auto;
 
       mat-icon {
-        width: 40px;
-        height: 35px;
-        font-size: 35px;
+        width: 2rem;
+        height: 2rem;
+        font-size: 2.2rem;
         cursor: default;
         &:hover {
-          font-size: 40px;
-          margin-bottom: 5px;
+          font-size: 2.5rem;
         }
       }
 
@@ -123,7 +112,7 @@ html, body {
     }
   }
   .save-btn {
-    margin-top: 5px;
+    margin-top: 0.3rem;
     width: 100%;
   }
 }

@@ -13,7 +13,10 @@
   <div class="container-fulid route-page">
     
     <div class="route-title-area">
-      <input *ngIf="editRouteName" class="form-control" type="text" #routeNameInput
+      <button type="button" (click)="onClickBack()" class="btn btn-outline-info back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <input *ngIf="editRouteName" class="form-control route-title-input" type="text" #routeNameInput
         [formControl]="routeName"
         (blur)="onBlurRouteName(event)"
       >
