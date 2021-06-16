@@ -151,6 +151,13 @@ export class CreateRoutePageComponent implements OnInit {
   onClickAddMealButon(): void {
     this.addRouteBean(Code.BeanKindDiv.Meal);
   }
+  
+  /**
+   * 時間追加ボタン押下イベント
+   */
+  onClickAddTimeButon(): void {
+    this.addRouteBean(Code.BeanKindDiv.Time);
+  }
 
   /**
    * チェックリスト追加ボタン押下イベント
@@ -256,7 +263,8 @@ export class CreateRoutePageComponent implements OnInit {
       routeDetailMove: {},
       routeDetailMeal: {},
       routeDetailMemo: {},
-      routeDetailChecklist: {}
+      routeDetailChecklist: {},
+      routeDetailTime: {},
     };
 
     // 初期値設定（仮採番されたルート詳細ID）
@@ -268,6 +276,8 @@ export class CreateRoutePageComponent implements OnInit {
       case Code.BeanKindDiv.Memo: routeBean.routeDetailMemo.routeDetailId = routeDetailId;
         break;
       case Code.BeanKindDiv.Checklist: routeBean.routeDetailChecklist.routeDetailId = routeDetailId;
+        break;
+      case Code.BeanKindDiv.Time: routeBean.routeDetailTime.routeDetailId = routeDetailId;
         break;
     }
 

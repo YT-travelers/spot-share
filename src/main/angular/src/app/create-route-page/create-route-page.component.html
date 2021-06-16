@@ -105,6 +105,7 @@
             (updateRouteDetailTimeEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailTimeEvent)="onDeleteRouteDetailEvent($event)"
           >
+            <div cdkDragHandle></div>
           </app-route-detail-time-bean>
 
           <!-- チェックリスト -->
@@ -144,6 +145,10 @@
           <!-- 食事追加 -->
           <div class="icon-btn">
             <mat-icon class="add-btn-meal" placement="top" ngbTooltip="食事" (click)="onClickAddMealButon()">restaurant</mat-icon>
+          </div>
+          <!-- 時間追加 -->
+          <div class="icon-btn">
+            <mat-icon class="add-btn-time" placement="top" ngbTooltip="日時" (click)="onClickAddTimeButon()">schedule</mat-icon>
           </div>
           <!-- チェックリスト -->
           <div class="icon-btn">

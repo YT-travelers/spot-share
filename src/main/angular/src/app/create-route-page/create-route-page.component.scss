@@ -157,3 +157,13 @@ app-route-detail-move-bean .cdk-drag-handle {
   background-color: transparent;
   cursor: move;
 }
+
+app-route-detail-time-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 2.3em;
+  margin-left: 15.2rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}
