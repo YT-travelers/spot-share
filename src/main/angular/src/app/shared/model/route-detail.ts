@@ -6,6 +6,7 @@ import { IRouteDetailMeal } from './route-detail-meal';
 import { IRouteDetailMove } from './route-detail-move';
 import { IRouteDetailChecklist } from './route-detail-checklist';
 import { IRouteDetailMemo } from './route-detail-memo';
+import { IRouteDetailTime } from './route-detail-time';
 
 /**
  * ルート詳細
@@ -32,7 +33,7 @@ export interface IRouteDetail {
   /** ルート詳細 移動 */
   routeDetailMove?: IRouteDetailMove;
   /** ルート詳細 時間 */
-  routeDetailTime?: string; // TODO
+  routeDetailTime?: IRouteDetailTime;
   /** ルート詳細 チェックリスト */
   routeDetailChecklist?: IRouteDetailChecklist;
   /** ルート詳細 メモ */

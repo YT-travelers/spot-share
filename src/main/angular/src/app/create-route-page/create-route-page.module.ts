@@ -15,6 +15,7 @@ import { RouteDetailChecklistBeanModule } from 'src/app/route-detail-bean/route-
 import { RouteDetailMealBeanModule } from 'src/app/route-detail-bean/route-detail-meal-bean/route-detail-meal-bean.module';
 import { RouteDetailMemoBeanModule } from 'src/app/route-detail-bean/route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from 'src/app/route-detail-bean/route-detail-move-bean/route-detail-move-bean.module';
+import { RouteDetailTimeBeanModule } from 'src/app/route-detail-bean/route-detail-time-bean/route-detail-time-bean.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RouteDetailMoveBeanModule } from 'src/app/route-detail-bean/route-detai
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,
     RouteDetailMoveBeanModule,
+    RouteDetailTimeBeanModule,
   ],
   providers: [],
 })

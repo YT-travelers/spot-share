@@ -23,6 +23,7 @@ import { RouteDetailChecklistBeanModule } from './route-detail-bean/route-detail
 import { RouteDetailMealBeanModule } from './route-detail-bean/route-detail-meal-bean/route-detail-meal-bean.module';
 import { RouteDetailMemoBeanModule } from './route-detail-bean/route-detail-memo-bean/route-detail-memo-bean.module';
 import { RouteDetailMoveBeanModule } from './route-detail-bean/route-detail-move-bean/route-detail-move-bean.module';
+import { RouteDetailTimeBeanModule } from './route-detail-bean/route-detail-time-bean/route-detail-time-bean.module';
 import { ShowContainerPageModule } from './show-container-page/show-container-page.module';
 import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
@@ -48,6 +49,7 @@ import { InputRouteNameModalModule } from './shared/component/input-route-name-m
     RouteDetailMealBeanModule,
     RouteDetailMemoBeanModule,
     RouteDetailMoveBeanModule,
+    RouteDetailTimeBeanModule,
     ShowContainerPageModule,
     ShowSpotPageModule,
     ShowRoutePageModule,

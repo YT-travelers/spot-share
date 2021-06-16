@@ -99,6 +99,14 @@
             <div cdkDragHandle></div>
           </app-route-detail-move-bean>
 
+          <!-- 時間-->
+          <app-route-detail-time-bean *ngIf="detail.beanKindDiv === beanKindDiv.Time"
+            [detail]="detail.routeDetailTime"
+            (updateRouteDetailTimeEvent)="onUpdateRouteDetailEvent($event)"
+            (deleteRouteDetailTimeEvent)="onDeleteRouteDetailEvent($event)"
+          >
+          </app-route-detail-time-bean>
+
           <!-- チェックリスト -->
           <app-route-detail-checklist-bean *ngIf="detail.beanKindDiv === beanKindDiv.Checklist"
             [detail]="detail.routeDetailChecklist"
@@ -116,9 +124,6 @@
           >
             <div cdkDragHandle></div>
           </app-route-detail-memo-bean>
-          
-          <!-- TODO 時間-->
-
 
         </div>
       </div>
