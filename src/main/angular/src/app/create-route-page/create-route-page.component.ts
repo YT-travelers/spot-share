@@ -6,7 +6,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { FormControl } from '@angular/forms';
-import { defer as _defer, remove as _remove, each as _each, forEach as _forEach } from 'lodash';
+import { defer as _defer, remove as _remove, each as _each, forEach as _forEach, head as _head } from 'lodash';
 
 import { IRoute } from 'src/app/shared/model/route';
 import { RouteService } from 'src/app/shared/service/route.service';
@@ -36,6 +36,9 @@ export class CreateRoutePageComponent implements OnInit {
 
   /** ルート名称 */
   routeName = new FormControl(this.route.routeName);
+
+  /** ルート詳細一覧の先頭のルート詳細ID（時間ビーン）を保持 */
+  headRouteDetailId = 0;
 
   /** ローディングオーバーレイ */
   overlayRef;
@@ -76,8 +79,19 @@ export class CreateRoutePageComponent implements OnInit {
     this.routeService.getRoute(this.routeId).subscribe(result => {
       if (result) {
         this.route = result;
-        this.routeDetails = this.route.routeDetails;
         this.routeName.setValue(this.route.routeName);
+
+        this.routeDetails = this.route.routeDetails;
+        
+        if (this.routeDetails.length === 0) {
+          // ルート詳細が0件の場合は先頭に時間ビーンを格納する
+          this.addRouteBean(Code.BeanKindDiv.Time);
+          // 先頭の時間ビーンのルート詳細IDを保持
+          this.headRouteDetailId = 1;
+        } else {
+          // 先頭の時間ビーンのルート詳細IDを保持
+          this.headRouteDetailId = _head(this.routeDetails).routeDetailId;
+        }
       } else {
         this.navigateToShowPage('データの取得に失敗しました。');
       }
@@ -127,7 +141,13 @@ export class CreateRoutePageComponent implements OnInit {
    * @param event CdkDragDrop
    */
   onDropList(event): void {
-    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    if (event.currentIndex === 0) {
+      // 先頭の時間ビーンを並び替えようとした場合、エラー
+      this.toastr.error('先頭の時間は並び替えられません。', 'エラー');
+    } else {
+      // 並び替え確定
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    }
   }
 
   /**
@@ -288,7 +308,7 @@ export class CreateRoutePageComponent implements OnInit {
    * this.routeDetails配列の中で一番大きいrouteDetailIdを返却します。
    */
   getMaxRouteDetailId(): number {
-    let routeDetailId = 1;
+    let routeDetailId = 0;
     _forEach(this.routeDetails, e => {
       if (e.routeDetailId > routeDetailId) {
         routeDetailId = e.routeDetailId;

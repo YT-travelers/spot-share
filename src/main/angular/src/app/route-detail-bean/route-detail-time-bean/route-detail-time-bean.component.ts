@@ -16,6 +16,9 @@ export class RouteDetailTimeBeanComponent implements OnInit {
   /** ルート詳細時間 */
   @Input() detail: IRouteDetailTime;
 
+  /** ルート詳細一覧の先頭ビーンかどうか */
+  @Input() isHeadBean: boolean;
+
   /** ルート詳細更新イベント通知 */
   @Output() updateRouteDetailTimeEvent: EventEmitter<IRouteDetailTime> = new EventEmitter();
 

@@ -24,9 +24,9 @@
         <input class="form-control time-picker" maxlength="2" [value]="scheduleDateTime.minutes" (change)="onChangeMinutes($event.target.value)">
 
       <!-- ドラッグインジケータ -->
-      <mat-icon class="bean-icon drag-handle-icon">drag_indicator</mat-icon>
+      <mat-icon *ngIf="!isHeadBean" class="bean-icon drag-handle-icon">drag_indicator</mat-icon>
 
-      <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
+      <span *ngIf="!isHeadBean" class="material-icons close" (click)="onClickDeleteButton()">close</span>
     </div>
   </div>
 </div>

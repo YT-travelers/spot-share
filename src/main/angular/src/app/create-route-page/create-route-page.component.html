@@ -24,10 +24,7 @@
       <mat-icon *ngIf="!editRouteName" class="title-edit-btn" (click)="onClickRouteNameEditButton()">edit</mat-icon>
     </div>
 
-    <div class="no-route" *ngIf="routeDetails.length === 0">
-      <span>スポットが一つも登録されていません。</span>
-    </div>
-    <div cdkDropListGroup *ngIf="routeDetails.length > 0">
+    <div cdkDropListGroup>
       <div cdkDropList
         [cdkDropListData]="routeDetails"
         (cdkDropListDropped)="onDropList($event)">
@@ -90,10 +87,11 @@
           <!-- 時間-->
           <app-route-detail-time-bean *ngIf="detail.beanKindDiv === beanKindDiv.Time"
             [detail]="detail.routeDetailTime"
+            [isHeadBean]="headRouteDetailId === detail.routeDetailId"
             (updateRouteDetailTimeEvent)="onUpdateRouteDetailEvent($event)"
             (deleteRouteDetailTimeEvent)="onDeleteRouteDetailEvent($event)"
           >
-            <div cdkDragHandle></div>
+            <div [class.invisible]="headRouteDetailId === detail.routeDetailId" cdkDragHandle></div>
           </app-route-detail-time-bean>
 
           <!-- チェックリスト -->
