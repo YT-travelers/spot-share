@@ -24,18 +24,6 @@
       <mat-icon *ngIf="!editRouteName" class="title-edit-btn" (click)="onClickRouteNameEditButton()">edit</mat-icon>
     </div>
 
-    <!-- TODO １日目、２日目、、、のタブをいつか実装する
-    <mat-tab-group animationDuration="0ms">
-      <mat-tab label="リスト">
-      </mat-tab>
-        <mat-tab label="観光地">
-        </mat-tab>
-      </mat-tab-group>-->
-
-    <div class="start-date-bean panel">
-      9/20 ,2020AM 7:00
-    </div>
-
     <div class="no-route" *ngIf="routeDetails.length === 0">
       <span>スポットが一つも登録されていません。</span>
     </div>
@@ -148,7 +136,7 @@
           </div>
           <!-- 時間追加 -->
           <div class="icon-btn">
-            <mat-icon class="add-btn-time" placement="top" ngbTooltip="日時" (click)="onClickAddTimeButon()">schedule</mat-icon>
+            <mat-icon class="add-btn-time" placement="top" ngbTooltip="日時" (click)="onClickAddTimeButon()">date_range</mat-icon>
           </div>
           <!-- チェックリスト -->
           <div class="icon-btn">
