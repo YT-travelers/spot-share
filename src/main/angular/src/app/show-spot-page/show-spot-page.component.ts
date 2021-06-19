@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
@@ -7,16 +7,20 @@ import { GridOptions } from 'ag-grid-community';
 import { Observable, Subscription, fromEvent, forkJoin } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { forEach as _forEach, filter as _filter } from 'lodash';
-import { ToastrService } from 'ngx-toastr';
 
-import { TourismService } from 'src/app/shared/service/tourism.service';
-import { RouteService } from 'src/app/shared/service/route.service';
-import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
-import { IRouteDetail } from 'src/app/shared/model/route-detail';
 import { Code } from 'src/app/shared/const/code-div.const';
-import { RestaurantService } from '../shared/service/restaurant.service';
-import { HotelService } from '../shared/service/hotel.service';
-import { ActivityService } from '../shared/service/activity.service';
+import { IRouteDetail } from 'src/app/shared/model/route-detail';
+import { ITourism } from 'src/app/shared/model/tourism';
+import { IRestaurant } from 'src/app/shared/model/restaurant';
+import { IHotel } from 'src/app/shared/model/hotel';
+import { IActivity } from 'src/app/shared/model/activity';
+
+import { RouteService } from 'src/app/shared/service/route.service';
+import { TourismService } from 'src/app/shared/service/tourism.service';
+import { RestaurantService } from 'src/app/shared/service/restaurant.service';
+import { HotelService } from 'src/app/shared/service/hotel.service';
+import { ActivityService } from 'src/app/shared/service/activity.service';
+import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
 
 @Component({
   selector: 'app-show-spot-page',
@@ -103,7 +107,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
-    { headerName: '種類', field: 'beanKindDiv', sortable: true, filter: true, tooltipField: 'beanKindDiv', minWidth: '135', maxWidth: '135' },
+    { headerName: '種類', field: 'beanKindDivName', sortable: true, filter: true, tooltipField: 'beanKindDivName', minWidth: '135', maxWidth: '135' },
     { headerName: '国', field: 'country', sortable: true, filter: true, tooltipField: 'country', minWidth: '220', maxWidth: '220' },
     { headerName: 'スポット', field: 'spotName', sortable: true, filter: true, tooltipField: 'spotName', minWidth: '160' },
   ];
@@ -147,8 +151,6 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     private selectModal: SelectModalService,
     private router: Router,
     private overlay: Overlay,
-    private activateRoute: ActivatedRoute,
-    private toastr: ToastrService,
   ) {}
 
   // -----------------------------------------------------------------------
@@ -273,29 +275,49 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
         _forEach(observable, result => {
           let data;
           if (result.tourismId) {
+            const tourism: ITourism = result;
             data = {
-              beanKindDiv: '観光地',
-              tourismId: result.tourismId,
-              spotName: result.tourismName,
-              country: result.country.countryName,
+              beanKindDiv: Code.BeanKindDiv.Tourism,
+              beanKindDivName: Code.BeanKindDivName.Tourism,
+              tourismId: tourism.tourismId,
+              spotName: tourism.tourismName,
+              country: tourism.country.countryName,
+              openTimeHour: tourism.tourismOpenTimeHours,
+              openTimeMinute: tourism.tourismOpenTimeMinutes,
+              closeTimeHour: tourism.tourismCloseTimeHours,
+              closeTimeMinute: tourism.tourismCloseTimeMinutes,
             }
           } else if (result.restaurantId) {
+            const restaurant: IRestaurant = result;
             data = {
-              beanKindDiv: '飲食店',
-              restaurantId: result.restaurantId,
-              spotName: result.restaurantName,
+              beanKindDiv: Code.BeanKindDiv.Restaurant,
+              beanKindDivName: Code.BeanKindDivName.Restaurant,
+              restaurantId: restaurant.restaurantId,
+              spotName: restaurant.restaurantName,
+              openTimeHour: restaurant.restaurantOpenTimeHours,
+              openTimeMinute: restaurant.restaurantOpenTimeMinutes,
+              closeTimeHour: restaurant.restaurantCloseTimeHours,
+              closeTimeMinute: restaurant.restaurantCloseTimeMinutes,
             }
           } else if (result.hotelId) {
+            const hotel: IHotel = result;
             data = {
-              beanKindDiv: 'ホテル',
-              hotelId: result.hotelId,
-              spotName: result.hotelName,
+              beanKindDiv: Code.BeanKindDiv.Hotel,
+              beanKindDivName: Code.BeanKindDivName.Hotel,
+              hotelId: hotel.hotelId,
+              spotName: hotel.hotelName,
             }
           } else if (result.activityId) {
+            const activity: IActivity = result;
             data = {
-              beanKindDiv: 'アクティビティ',
-              activityId: result.activityId,
-              spotName: result.activityName,
+              beanKindDiv: Code.BeanKindDiv.Activity,
+              beanKindDivName: Code.BeanKindDivName.Activity,
+              activityId: activity.activityId,
+              spotName: activity.activityName,
+              openTimeHour: activity.activityOpenTimeHours,
+              openTimeMinute: activity.activityOpenTimeMinutes,
+              closeTimeHour: activity.activityCloseTimeHours,
+              closeTimeMinute: activity.activityCloseTimeMinutes,
             }
           }
           dataList.push(data);
@@ -322,46 +344,119 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   private createRouteObject(): IRouteDetail[] {
     const routeDetails = [];
 
-    _forEach(this.spotList, e => {
-      if (e['select'] === 'Y') {
-        let data;
-        if (e.tourismId) {
+    _forEach(this.spotList, gridData => {
+      if (gridData['select'] === 'Y') {
+        let routeDetail: IRouteDetail;
+        if (gridData.tourismId) {
           // 観光地
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Tourism,
-            routeDetailTourism: { tourismId: e.tourismId }
-          }
-        } else if (e.restaurantId) {
+          routeDetail = this.createRouteDetailToursimObject(gridData);
+        } else if (gridData.restaurantId) {
           // 飲食店
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Restaurant,
-            routeDetailRestaurant: { restaurantId: e.restaurantId }
-          }
-
-        } else if (e.hotelId) {
+          routeDetail = this.createRouteDetailRestaurantObject(gridData);
+        } else if (gridData.hotelId) {
           // ホテル
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Hotel,
-            routeDetailHotel: { hotelId: e.hotelId }
-          }
-
-        } else if (e.activityId) {
+          routeDetail = this.createRouteDetailHotelObject(gridData);
+        } else if (gridData.activityId) {
           // アクティビティ
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Activity,
-            routeDetailActivity: { activityId: e.activityId }
-          }
-
+          routeDetail = this.createRouteDetailActivityObject(gridData);
         }
-        routeDetails.push(data);
+        routeDetails.push(routeDetail);
       }
     });
 
     return routeDetails;
+  }
+
+  /**
+   * グリッドで選択された行データから「ルート詳細観光地」オブジェクトに作成します。
+   * @param gridData 
+   * @returns 
+   */
+  private createRouteDetailToursimObject(gridData): IRouteDetail {
+    const routeDetail: IRouteDetail = {
+      routeDetailId: null,
+      beanKindDiv: Code.BeanKindDiv.Tourism,
+      routeDetailTourism: {
+        tourismId: gridData.tourismId,
+        tourism: {
+          tourismName: gridData.spotName,
+          tourismOpenTimeHours: gridData.openTimeHour,
+          tourismOpenTimeMinutes: gridData.openTimeMinute,
+          tourismCloseTimeHours: gridData.closeTimeHour,
+          tourismCloseTimeMinutes: gridData.closeTimeMinute,
+        }
+      }
+    };
+
+    return routeDetail;
+  }
+
+  /**
+   * グリッドで選択された行データから「ルート詳細飲食店」オブジェクトに作成します。
+   * @param gridData 
+   * @returns 
+   */
+  private createRouteDetailRestaurantObject(gridData): IRouteDetail  {
+    const routeDetail: IRouteDetail = {
+      routeDetailId: null,
+      beanKindDiv: gridData.beanKindDiv,
+      routeDetailRestaurant: {
+        restaurantId: gridData.restaurantId,
+        restaurant: {
+          restaurantName: gridData.spotName,
+          restaurantOpenTimeHours: gridData.openTimeHour,
+          restaurantOpenTimeMinutes: gridData.openTimeMinute,
+          restaurantCloseTimeHours: gridData.closeTimeHour,
+          restaurantCloseTimeMinutes: gridData.closeTimeMinute,
+        }
+      }
+    };
+
+    return routeDetail;
+  }
+
+  /**
+   * グリッドで選択された行データから「ルート詳細ホテル」オブジェクトに作成します。
+   * @param gridData 
+   * @returns 
+   */
+  private createRouteDetailHotelObject(gridData): IRouteDetail  {
+    const routeDetail: IRouteDetail = {
+      routeDetailId: null,
+      beanKindDiv: gridData.beanKindDiv,
+      routeDetailHotel: {
+        hotelId: gridData.hotelId,
+        hotel: {
+          hotelName: gridData.spotName,
+        }
+      }
+    };
+
+    return routeDetail;
+  }
+
+  /**
+   * グリッドで選択された行データから「ルート詳細アクティビティ」オブジェクトに作成します。
+   * @param gridData 
+   * @returns 
+   */
+  private createRouteDetailActivityObject(gridData): IRouteDetail  {
+    const routeDetail: IRouteDetail = {
+      routeDetailId: null,
+      beanKindDiv: gridData.beanKindDiv,
+      routeDetailActivity: {
+        activityId: gridData.activityId,
+        activity: {
+          activityName: gridData.spotName,
+          activityOpenTimeHours: gridData.openTimeHour,
+          activityOpenTimeMinutes: gridData.openTimeMinute,
+          activityCloseTimeHours: gridData.closeTimeHour,
+          activityCloseTimeMinutes: gridData.closeTimeMinute,
+        }
+      }
+    };
+
+    return routeDetail;
   }
 
   /**
