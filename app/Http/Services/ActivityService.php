@@ -62,4 +62,15 @@ class ActivityService
 
         return $activity->find($activity->activity_id)->toArray();
     }
+
+    public function deleteImage(int $activityId)
+    {
+        if (env('IS_MOCK_IMAGE')) {
+            return;
+        }
+        $activity = $this->activity->findOrFail($activityId);
+        $activity->activityImages->each(function (ActivityImage $activityImage) {
+            $this->storageService->delete($activityImage->activity_image_key);
+        });
+    }
 }
