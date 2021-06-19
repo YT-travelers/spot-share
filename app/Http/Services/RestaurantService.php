@@ -39,12 +39,12 @@ class RestaurantService
 
         //画像をストレージへ保存
         $storedRestaurantImages = collect($uploadFiles)
-            ->map(function (string $file) use ($restaurant, $restaurantImages) {
+            ->map(function (string $base64Data) use ($restaurant, $restaurantImages) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['restaurant_image_key' => 'restaurant/sample.png'];
                 }
 
-                $key = $this->storageService->storeWithUuid($file, 'restaurant/');
+                $key = $this->storageService->storeDataEncodedByBase64WithUUid($base64Data, 'restaurant/');
                 return ['restaurant_image_key' => $key, 'restaurant_id' => $restaurant->restaurant_id];
             });
 

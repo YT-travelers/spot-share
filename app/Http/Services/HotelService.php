@@ -39,12 +39,12 @@ class HotelService
 
         //画像をストレージへ保存
         $storedHotelImages = collect($uploadFiles)
-            ->map(function (string $file) use ($hotel, $hotelImages) {
+            ->map(function (string $base64Data) use ($hotel, $hotelImages) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['hotel_image_key' => 'hotel/sample.png'];
                 }
 
-                $key = $this->storageService->storeWithUuid($file, 'hotel/');
+                $key = $this->storageService->storeDataEncodedByBase64WithUUid($base64Data, 'hotel/');
                 return ['hotel_image_key' => $key, 'hotel_id' => $hotel->hotel_id];
             });
 

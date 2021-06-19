@@ -39,17 +39,12 @@ class TourismService
 
         //画像をストレージへ保存
         $storedTourismImages = collect($uploadFiles)
-            ->map(function (string $file) use ($tourism) {
-                // Base64文字列をデコードしてバイナリに変換
-//                list(, $fileData) = explode(';', $file_base64);
-//                list(, $fileData) = explode(',', $fileData);
-//                $fileData = base64_decode($fileData);
-//                $fileName = str_random(40).'.txt';
+            ->map(function (string $base64Data) use ($tourism) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['tourism_image_key' => 'tourism/sample.png'];
                 }
 
-                $key = $this->storageService->storeWithUuid($file, 'tourism/');
+                $key = $this->storageService->storeDataEncodedByBase64WithUUid($base64Data, 'tourism/');
                 return ['tourism_image_key' => $key, 'tourism_id' => $tourism->tourism_id];
             });
 

@@ -25,6 +25,23 @@ class StorageService
         ]);
     }
 
+    public function storeDataEncodedByBase64WithUUid(string $base64Data, string $prefix): string
+    {
+        list($metaData, $fileData) = explode(';', $base64Data);
+        list(, $extension) = explode('/', $metaData);
+        list(, $fileData) = explode(',', $fileData);
+        $fileData = base64_decode($fileData);
+        $_key = uniqid($prefix, true);
+        $key = $_key. ".$extension";
+        $this->s3Client->upload(
+            env('AWS_BUCKET'),
+            $key,
+            $fileData
+        );
+
+        return $key;
+    }
+
     public function storeWithUuid(File $file, string $prefix = ""): string
     {
         $_key = uniqid($prefix, true);
