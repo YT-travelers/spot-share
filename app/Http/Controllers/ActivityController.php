@@ -34,4 +34,14 @@ class ActivityController extends CrudController
 
         return response()->json($response);
     }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
+    {
+        $this->activityService->deleteImage($id);
+        return parent::destroy($id);
+    }
 }

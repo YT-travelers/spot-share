@@ -50,4 +50,14 @@ class TourismController extends CrudController
 
         return response()->json($response);
     }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
+    {
+        $this->tourismService->deleteImage($id);
+        return parent::destroy($id);
+    }
 }

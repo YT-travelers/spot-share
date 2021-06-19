@@ -67,4 +67,15 @@ class TourismService
 
         return $tourism->find($tourism->tourism_id)->toArray();
     }
+
+    public function deleteImage(int $tourismId)
+    {
+        if (env('IS_MOCK_IMAGE')) {
+            return;
+        }
+        $tourism = $this->tourism->findOrFail($tourismId);
+        $tourism->tourismImages->each(function (TourismImage $tourismImage) {
+            $this->storageService->delete($tourismImage->tourism_image_key);
+        });
+    }
 }

@@ -62,4 +62,15 @@ class RestaurantService
 
         return $restaurant->find($restaurant->restaurant_id)->toArray();
     }
+
+    public function deleteImage(int $restaurantId)
+    {
+        if (env('IS_MOCK_IMAGE')) {
+            return;
+        }
+        $restaurant = $this->restaurant->findOrFail($restaurantId);
+        $restaurant->restaurantImages->each(function (RestaurantImage $restaurantImage) {
+            $this->storageService->delete($restaurantImage->restaurant_image_key);
+        });
+    }
 }

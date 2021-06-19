@@ -62,4 +62,15 @@ class HotelService
 
         return $hotel->find($hotel->hotel_id)->toArray();
     }
+
+    public function deleteImage(int $hotelId)
+    {
+        if (env('IS_MOCK_IMAGE')) {
+            return;
+        }
+        $hotel = $this->hotel->findOrFail($hotelId);
+        $hotel->hotelImages->each(function (HotelImage $hotelImage) {
+            $this->storageService->delete($hotelImage->hotel_image_key);
+        });
+    }
 }

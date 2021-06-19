@@ -43,4 +43,14 @@ class HotelController extends CrudController
 
         return response()->json($response);
     }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
+    {
+        $this->hotelService->deleteImage($id);
+        return parent::destroy($id);
+    }
 }

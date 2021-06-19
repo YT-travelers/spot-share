@@ -43,4 +43,14 @@ class RestaurantController extends CrudController
 
         return response()->json($response);
     }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
+    {
+        $this->restaurantService->deleteImage($id);
+        return parent::destroy($id);
+    }
 }
