@@ -9,15 +9,6 @@ ng-deep .modal-dialog {
   max-width: none !important;
 }
 
-.back-button {
-  border-radius: 2rem;
-  height: 1.9rem;
-  padding: 0.3rem 0.15rem;
-  .material-icons {
-    font-size: 1.3rem;
-  }
-}
-
 .route-page {
   max-width: 45.8rem;
   margin: 0 auto;
@@ -58,19 +49,6 @@ ng-deep .modal-dialog {
       font-size: 1.8rem;
     }
   }
-}
-
-.start-date-bean {
-  text-align: center;
-  width: fit-content !important;
-  padding: 5px 15px !important;
-}
-
-.no-route {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
 }
 
 .route-footer {

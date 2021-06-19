@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
   justify-content: space-between;
 
   &-right {
@@ -10,8 +10,8 @@
     margin-left: auto;
 
     button {
-      height: 30px;
-      padding: 0 20px;
+      height: 2rem;
+      padding: 0 1rem;
       
       .add-tourism-button {
         display: flex;
@@ -20,17 +20,13 @@
     }
   }
 
-  .back-button {
-    border-radius: 2rem;
-    height: 1.9rem;
-    padding: 0.3rem 0.15rem;
-    .material-icons {
-      font-size: 1.3rem;
-    }
-  }
+}
 
+.footer-button {
+  margin-top: 1rem;
+  width: 100%;
 }
 
 ag-grid-angular {
-  height: calc(100% - 100px);
+  height: calc(100% - 5.5rem);
 }

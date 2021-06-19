@@ -7,23 +7,17 @@ html,body {
 .m-content {
   width: 100%;
   height: 100%;
-  padding: 20px;
-}
-
-input {
-  height: 30px;
-  border-width: 1px;
-  border-radius: 6px;
+  padding: 1.4rem;
 }
 
 textarea {
-  height: 150px !important;
-  border-width: 1px;
-  border-radius: 6px;
+  height: 10rem !important;
+  border-width: 0.1rem;
+  border-radius: 0.5rem;
 }
 
 .spacer {
-  margin: 0 5px;
+  margin: 0 0.3rem;
   text-align: center;
 }
 
@@ -33,12 +27,23 @@ ag-grid-angular {
 
 .panel {
   width: 100%;
-  padding: 10px 5px;
+  padding: 0.6rem 0.3rem;
   background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0.1rem 0.1rem rgba(0,0,0,.05);
+  box-shadow: 0 0.1rem 0.1rem rgb(0 0 0 / 5%);
+}
+
+// -----------------------------------------------------------------------
+// icon
+.back-button {
+  border-radius: 2rem !important;
+  height: 1.9rem !important;
+  padding: 0.3rem 0.15rem !important;
+  .material-icons {
+    font-size: 1.3rem !important;
+  }
 }
 
 // -----------------------------------------------------------------------
@@ -124,4 +129,11 @@ app-select-add-spot-modal {
 // モーダルの z-index が 1050
 .cdk-overlay-container {
   z-index: 1100;
+}
+
+// -----------------------------------------------------------------------
+// toast
+
+.toast-top-center {
+  margin-top: 3rem;
 }
