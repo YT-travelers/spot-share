@@ -36,7 +36,7 @@ class HotelController extends CrudController
 
     private function storeAndUpdate(Request $request, int $id = null): JsonResponse
     {
-        $uploadFiles = $request->get('uploadFiles', []);
+        $uploadFiles = $request->get('uploadFiles', []) ?? [];
         $hotelImages = makeArraySnakeRecursively($request->get('hotelImages', []));
         $hotelData = makeArraySnakeRecursively($request->except(['hotelKindDivName']));
         $response = $this->hotelService->saveHotel($hotelData, $hotelImages, $uploadFiles, $id);
