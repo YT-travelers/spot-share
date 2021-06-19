@@ -39,12 +39,12 @@ class ActivityService
 
         //画像をストレージへ保存
         $storedActivityImages = collect($uploadFiles)
-            ->map(function (string $file) use ($activity, $activityImages) {
+            ->map(function (string $base64Data) use ($activity, $activityImages) {
                 if (env('IS_MOCK_IMAGE')) {
                     return ['activity_image_key' => 'activity/sample.png'];
                 }
 
-                $key = $this->storageService->storeWithUuid($file, 'activity/');
+                $key = $this->storageService->storeDataEncodedByBase64WithUUid($base64Data, 'activity/');
                 return ['activity_image_key' => $key, 'activity_id' => $activity->activity_id];
             });
 
