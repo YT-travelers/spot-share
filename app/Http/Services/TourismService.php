@@ -22,7 +22,7 @@ class TourismService
         $deletedTourismImageIdList = $tourism->tourismImages
         ->filter(function (TourismImage $tourismImage) use($tourismImages) {
             //DBに存在するが新しいデータには存在しないレコードをフィルタ
-            return collect($tourismImages)
+            return !collect($tourismImages)
                 ->contains('tourism_image_id', $tourismImage->tourism_image_id);
         })->map(function (TourismImage $tourismImage) {
             if (!env('IS_MOCK_IMAGE')) {

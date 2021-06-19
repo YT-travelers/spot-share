@@ -22,7 +22,7 @@ class ActivityService
         $deletedActivityImageIdList = $activity->activityImages
         ->filter(function (ActivityImage $activityImage) use($activityImages) {
             //DBに存在するが新しいデータには存在しないレコードをフィルタ
-            return collect($activityImages)
+            return !collect($activityImages)
                 ->contains('activity_image_id', $activityImage->activity_image_id);
         })->map(function (ActivityImage $activityImage) {
             if (!env('IS_MOCK_IMAGE')) {
