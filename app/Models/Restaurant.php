@@ -31,10 +31,10 @@ class Restaurant extends Model
     public function toArray(): array
     {
         $array = parent::toArray();
-        $array['cuisineGenreDiv'] = $this->cuisineGenre->div_value;
-        $array['cuisineGenreDivName'] = $this->cuisineGenre->div_key_name;
-        $array['restaurantKindDiv'] = $this->restaurantKind->div_value;
-        $array['restaurantKindDivName'] = $this->restaurantKind->div_key_name;
+        $array['cuisineGenreDiv'] = $this->cuisineGenre->div_value ?? null;
+        $array['cuisineGenreDivName'] = $this->cuisineGenre->div_key_name ?? null;
+        $array['restaurantKindDiv'] = $this->restaurantKind->div_value ?? null;
+        $array['restaurantKindDivName'] = $this->restaurantKind->div_key_name ?? null;
 
         return $array;
     }

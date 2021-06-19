@@ -25,8 +25,8 @@ class Hotel extends Model
     public function toArray(): array
     {
         $array = parent::toArray();
-        $array['hotelKindDiv'] = $this->hotelKind->div_value;
-        $array['hotelKindDivName'] = $this->hotelKind->div_key_name;
+        $array['hotelKindDiv'] = $this->hotelKind->div_value ?? null;
+        $array['hotelKindDivName'] = $this->hotelKind->div_key_name ?? null;
 
         return $array;
     }

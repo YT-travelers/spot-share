@@ -28,7 +28,7 @@ class ActivityController extends CrudController
     private function storeOrUpdate(Request $request, int $id = null): JsonResponse
     {
         $uploadFiles = $request->get('uploadFiles', []) ?? [];
-        $activityImages = makeArraySnakeRecursively($request->get('activityImages', []));
+        $activityImages = makeArraySnakeRecursively($request->get('activityImages', []) ?? []);
         $activityData = makeArraySnakeRecursively($request->except(['activityImages', 'uploadFiles']));
         $response = $this->activityService->saveActivity($activityData, $activityImages, $uploadFiles, $id);
 
