@@ -52,3 +52,35 @@ input.ng-dirty.ng-invalid {
   border-color: red;
   background-color: pink;
 }
+
+// -----------------------------------------------------------------------
+// modal
+
+.modal-xxl {
+  width: 95% !important;
+  max-width: none !important;
+  height: 90%;
+}
+
+.modal-content {
+  height: 100%;
+}
+
+.modal-body {
+  height: 85%;
+}
+
+app-select-add-spot-modal {
+  height: 100%;
+  ag-grid-angular {
+    height: 100% !important;
+  }
+}
+
+// -----------------------------------------------------------------------
+// loading
+
+// モーダルの z-index が 1050
+.cdk-overlay-container {
+  z-index: 1100;
+}

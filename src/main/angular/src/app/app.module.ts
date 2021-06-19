@@ -28,6 +28,7 @@ import { ShowContainerPageModule } from './show-container-page/show-container-pa
 import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
 import { InputRouteNameModalModule } from './shared/component/input-route-name-modal/input-route-name-modal.module';
+import { SelectAddSpotModalModule } from './shared/component/select-add-spot-modal/select-add-spot-modal.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { InputRouteNameModalModule } from './shared/component/input-route-name-m
     ShowContainerPageModule,
     ShowSpotPageModule,
     ShowRoutePageModule,
+    SelectAddSpotModalModule,
     SelectModalModule,
     InputRouteNameModalModule,
     HttpClientModule,

@@ -1,0 +1,21 @@
+.modal-header {
+  padding: 0.7rem;
+  align-items: center;
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+
+}
+
+.modal-body {
+  padding: 0 1rem;
+}
+
+.modal-footer {
+  padding: 0.5rem;
+
+  button {
+    width: 10rem;
+  }
+}

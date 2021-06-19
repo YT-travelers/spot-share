@@ -9,7 +9,6 @@ import { debounceTime } from 'rxjs/operators';
 import { forEach as _forEach, filter as _filter } from 'lodash';
 import { ToastrService } from 'ngx-toastr';
 
-import { IRoute } from 'src/app/shared/model/route';
 import { TourismService } from 'src/app/shared/service/tourism.service';
 import { RouteService } from 'src/app/shared/service/route.service';
 import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
@@ -19,16 +18,6 @@ import { RestaurantService } from '../shared/service/restaurant.service';
 import { HotelService } from '../shared/service/hotel.service';
 import { ActivityService } from '../shared/service/activity.service';
 
-/**
- * スポット一覧ページ 表示モードを表す列挙値
- */
-enum PageMode {
-  // 通常モード
-  Normal = 0,
-  // スポット選択モード
-  SpotSelect,
-}
-
 @Component({
   selector: 'app-show-spot-page',
   templateUrl: './show-spot-page.component.html',
@@ -37,10 +26,7 @@ enum PageMode {
 export class ShowSpotPageComponent implements OnInit, OnDestroy {
 
   /** スポット一覧ページ 表示モード */
-  @Input ('pageMode') pageMode;
-
-  /** スポット一覧ページ 表示モード（HTML用） */
-  _pageMode = PageMode;
+  @Input ('spotSelectMode') spotSelectMode: boolean;
 
   /** リサイズイベント　オブザーバー */
   resizeObservable$: Observable<Event>;
@@ -152,9 +138,6 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   /** スポット一覧（グリッド表示用データ） */
   spotList = [];
 
-  /** スポット追加対象（ルート作成ページから遷移した場合に使用） */
-  route: IRoute = {};
-
   constructor(
     private tourismService: TourismService,
     private restaurantService: RestaurantService,
@@ -191,7 +174,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     this.executeSearch();
 
     // スポット選択モードの場合
-    if (this.pageMode === PageMode.SpotSelect) {
+    if (this.spotSelectMode) {
 
       // グリッドから編集ボタンと削除ボタンを削除
       this.columnDefs = _filter(this.columnDefs, e => {
@@ -201,19 +184,6 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
         return true;
       });
 
-      // URLからスポットを追加するルートIDを取得
-      const routeId = this.activateRoute.snapshot.paramMap.get('routeId');
-
-      // スポット追加対象のルートを取得する
-      this.routeService.getRoute(routeId).subscribe(result => {
-        if (result) {
-          this.route = result;
-        }
-      }, error => {
-        // エラーの場合はルート作成ページに返す
-        this.toastr.error('ルートの取得に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
-        this.router.navigate(['/show-container-page']);
-      });
     }
   }
 
@@ -223,15 +193,6 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
 
   // -----------------------------------------------------------------------
   // イベント
-
-  /**
-   * 戻るボタン押下イベント（スポット選択モードの場合のみ表示されるボタンのイベント）
-   */
-  onClickBack(): void {
-    // 編集中の「ルート作成ページ」に遷移する
-    const routeId = this.activateRoute.snapshot.paramMap.get('routeId');
-    this.router.navigate(['/create-route-page', { routeId: routeId }]);
-  }
 
   /**
    * スポット登録ボタン押下イベント
@@ -265,50 +226,10 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
    * ルート追加ボタン押下イベント
    */
   onClickCreateRoute(): void {
-    const route: IRoute = {};
-    route.routeDetails = [];
-
-    _forEach(this.spotList, e => {
-      if (e['select'] === 'Y') {
-        let data;
-        if (e.tourismId) {
-          // 観光地
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Tourism,
-            routeDetailTourism: { tourismId: e.tourismId }
-          }
-        } else if (e.restaurantId) {
-          // 飲食店
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Restaurant,
-            routeDetailRestaurant: { restaurantId: e.restaurantId }
-          }
-
-        } else if (e.hotelId) {
-          // ホテル
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Hotel,
-            routeDetailHotel: { hotelId: e.hotelId }
-          }
-
-        } else if (e.activityId) {
-          // アクティビティ
-          data = {
-            routeDetailId: null,
-            beanKindDiv: Code.BeanKindDiv.Activity,
-            routeDetailActivity: { activityId: e.activityId }
-          }
-
-        }
-        route.routeDetails.push(data);
-      }
-    });
+    const routeDetails = this.createRouteObject();
 
     // チェックボックスが一つも選択されていない場合
-    if (route.routeDetails.length === 0) {
+    if (routeDetails.length === 0) {
       this.selectModal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {
         // 何もしない
       });
@@ -317,25 +238,12 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // 新規作成、または更新
-    if (this.pageMode === PageMode.SpotSelect) {
-      // スポット選択モードの場合
-      _forEach(route.routeDetails, (addSpot: IRouteDetail) => {
-        this.route.routeDetails.push(addSpot);
-      });
-
-      // 更新
-      this.routeService.updateRoute(this.route, this.route.routeId).subscribe(result => {
-        // ルート作成ページに遷移
-        this.router.navigate(['/create-route-page', { routeId: result.routeId }]);
-      });
-    } else {
-      // 通常モードの場合、新規作成
-      this.routeService.createRoute(route).subscribe(result => {
-        // ルート作成ページに遷移
-        this.router.navigate(['/create-route-page', { routeId: result.routeId }]);
-      });
-    }
+    // 新規ルート作成
+    const route = { routeDetails: routeDetails };
+    this.routeService.createRoute(route).subscribe(result => {
+      // ルート作成ページに遷移
+      this.router.navigate(['/create-route-page', { routeId: result.routeId }]);
+    });
 
   }
 
@@ -406,4 +314,71 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
   adjustGridColumns(): void {
     this.gridOptions.api.sizeColumnsToFit();
   }
+
+  /**
+   * チェックボックスにチェックをつけているスポットをrouteDetailsに格納したIRouteオブジェクトを返却します。
+   * @returns
+   */
+  private createRouteObject(): IRouteDetail[] {
+    const routeDetails = [];
+
+    _forEach(this.spotList, e => {
+      if (e['select'] === 'Y') {
+        let data;
+        if (e.tourismId) {
+          // 観光地
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Tourism,
+            routeDetailTourism: { tourismId: e.tourismId }
+          }
+        } else if (e.restaurantId) {
+          // 飲食店
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Restaurant,
+            routeDetailRestaurant: { restaurantId: e.restaurantId }
+          }
+
+        } else if (e.hotelId) {
+          // ホテル
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Hotel,
+            routeDetailHotel: { hotelId: e.hotelId }
+          }
+
+        } else if (e.activityId) {
+          // アクティビティ
+          data = {
+            routeDetailId: null,
+            beanKindDiv: Code.BeanKindDiv.Activity,
+            routeDetailActivity: { activityId: e.activityId }
+          }
+
+        }
+        routeDetails.push(data);
+      }
+    });
+
+    return routeDetails;
+  }
+
+  /**
+   * スポット選択モーダルの追加ボタンが押下された際に呼び出され、チェックボックスを選択したスポット詳細配列を返却します。
+   * @returns
+   */
+  public getSelectSpot(): IRouteDetail[] {
+    const routeDetails: IRouteDetail[] = this.createRouteObject();
+
+    // チェックボックスが一つも選択されていない場合
+    if (routeDetails.length === 0) {
+      this.selectModal.show('ルートに追加するスポットが１つも選択されていません。', true).then(() => {
+        // 何もしない
+      });
+    }
+
+    return  routeDetails;
+  }
+
 }

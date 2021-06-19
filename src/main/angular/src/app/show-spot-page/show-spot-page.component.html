@@ -12,12 +12,7 @@
 <body>
   <div class="container-fulid m-content">
     <div class="title-area">
-      <div *ngIf="pageMode ===  _pageMode.SpotSelect">
-        <button type="button" (click)="onClickBack()" class="btn btn-outline-info back-button">
-          <mat-icon>arrow_back</mat-icon>
-        </button>
-      </div>
-      <div class="title-area-right" *ngIf="pageMode !==  _pageMode.SpotSelect">
+      <div class="title-area-right" *ngIf="!spotSelectMode">
         <button type="button" (click)="onClickAddTourism()" class="btn btn-outline-primary ml-2">
             <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
@@ -50,7 +45,7 @@
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
     ></ag-grid-angular>
-    <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary footer-button">
+    <button type="button" *ngIf="!spotSelectMode" (click)="onClickCreateRoute()" class="btn btn-outline-primary footer-button">
       <span>ルートに追加</span>
     </button>
   </div>

@@ -12,6 +12,7 @@ import { IRoute } from 'src/app/shared/model/route';
 import { RouteService } from 'src/app/shared/service/route.service';
 import { Code } from 'src/app/shared/const/code-div.const';
 import { IRouteDetail } from 'src/app/shared/model/route-detail';
+import { SelectAddSpotModalService } from 'src/app/shared/component/select-add-spot-modal/select-add-spot-modal.service';
 
 @Component({
   selector: 'app-create-route-page',
@@ -52,6 +53,7 @@ export class CreateRoutePageComponent implements OnInit {
     private toastr: ToastrService,
     private overlay: Overlay,
     private routeService: RouteService,
+    private selectAddSpotModalService: SelectAddSpotModalService,
   ) { }
 
   // -----------------------------------------------------------------------
@@ -151,11 +153,18 @@ export class CreateRoutePageComponent implements OnInit {
   }
 
   /**
-   * 観光地追加ボタン押下イベント
+   * スポット追加ボタン押下イベント
    */
-  onClickAddTourismButon(): void {
-    // 観光地一覧ページに遷移
-    this.router.navigate(['/show-container-page', { routeId: this.route.routeId }]);
+  onClickAddSpotButon(): void {
+    // スポット選択モーダルを表示
+    this.selectAddSpotModalService.show().then((rtnValue: any) => {
+      // ルート詳細配列にキャスト
+      const routeDetails: IRouteDetail[] = <IRouteDetail[]>rtnValue;
+      
+      if (routeDetails && routeDetails.length > 0) {
+        this.routeDetails = this.routeDetails.concat(routeDetails);
+      }
+    });
   }
 
   /**

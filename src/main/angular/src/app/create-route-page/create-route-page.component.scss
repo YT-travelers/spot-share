@@ -4,6 +4,11 @@ html, body {
   height: auto;
 }
 
+ng-deep .modal-dialog {
+  width: 95%;
+  max-width: none !important;
+}
+
 .back-button {
   border-radius: 2rem;
   height: 1.9rem;

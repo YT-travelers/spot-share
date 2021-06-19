@@ -58,33 +58,8 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
       },
       cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
-    { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
-      editable: true,
-      cellRenderer: this.checkboxCellRenderer,
-      cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
-    },
     { headerName: 'ルート名', field: 'routeName', sortable: true, filter: true },
   ];
-
-
-  /** ag-gridに表示するチェックボックスのレンダラー */
-  checkboxCellRenderer(params) {
-    if (params.value !== 'Y' && params.value !== 'N') {
-      params.setValue(params.value === true || params.value === 'Y' ? 'Y' : 'N');
-    } else {
-       const input = document.createElement('input');
-
-       input.type = 'checkbox';
-       input.value = params.value === true || params.value === 'Y' ? 'Y' : 'N';
-       input.checked = params.value === true || params.value === 'Y' ? true : false;
-
-       input.onclick = function() {
-         params.setValue(input.checked === true ? 'Y' : 'N');
-       };
-
-       return input;
-    }
-  }
 
   /** グリッドオプション */
   gridOptions: GridOptions = <GridOptions> {
