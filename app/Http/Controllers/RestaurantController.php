@@ -37,7 +37,7 @@ class RestaurantController extends CrudController
     private function storeAndUpdate(Request $request, int $id = null): JsonResponse
     {
         $uploadFiles = $request->get('uploadFiles', []) ?? [];
-        $restaurantImages = makeArraySnakeRecursively($request->get('restaurantImages', []));
+        $restaurantImages = makeArraySnakeRecursively($request->get('restaurantImages', []) ?? []);
         $restaurantData = makeArraySnakeRecursively($request->except(['cuisineGenreDivName', 'restaurantKindDivName']));
         $response = $this->restaurantService->saveRestaurant($restaurantData, $restaurantImages, $uploadFiles, $id);
 
