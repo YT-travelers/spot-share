@@ -60,14 +60,55 @@ input.ng-dirty.ng-invalid {
   width: 95% !important;
   max-width: none !important;
   height: 90%;
+
+  .modal-content {
+    height: 100%;
+  }
+  
+  .modal-header {
+    padding: 0.7rem !important;
+    align-items: center;
+  
+    .modal-title {
+      font-size: 1.5rem;
+    }
+  
+  }
+  
+  .modal-body {
+    height: 85%;
+    padding: 0 1rem !important;
+  }
+
+  .modal-footer {
+    padding: 0.5rem;
+
+    button {
+      width: 10rem;
+      padding: 0.5rem !important;
+    }
+  }
 }
 
-.modal-content {
-  height: 100%;
+.modal-header {
+  padding: 0.7rem !important;
+  align-items: center;
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
 }
 
 .modal-body {
-  height: 85%;
+  padding: 1rem;
+}
+
+.modal-footer {
+  padding: 0.5rem;
+
+  button {
+    width: 8rem;
+  }
 }
 
 app-select-add-spot-modal {
