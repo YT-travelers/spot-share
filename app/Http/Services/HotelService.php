@@ -22,7 +22,7 @@ class HotelService
         $deletedHotelImageIdList = $hotel->hotelImages
         ->filter(function (HotelImage $hotelImage) use($hotelImages) {
             //DBに存在するが新しいデータには存在しないレコードをフィルタ
-            return collect($hotelImages)
+            return !collect($hotelImages)
                 ->contains('hotel_image_id', $hotelImage->hotel_image_id);
         })->map(function (HotelImage $hotelImage) {
             if (!env('IS_MOCK_IMAGE')) {

@@ -22,7 +22,7 @@ class RestaurantService
         $deletedRestaurantImageIdList = $restaurant->restaurantImages
         ->filter(function (RestaurantImage $restaurantImage) use($restaurantImages) {
             //DBに存在するが新しいデータには存在しないレコードをフィルタ
-            return collect($restaurantImages)
+            return !collect($restaurantImages)
                 ->contains('restaurant_image_id', $restaurantImage->restaurant_image_id);
         })->map(function (RestaurantImage $restaurantImage) {
             if (!env('IS_MOCK_IMAGE')) {
