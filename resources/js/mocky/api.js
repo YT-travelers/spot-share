@@ -3,12 +3,14 @@ var fs = require('fs');
 
 var api = '/api';
 
-var spots = require('./spots.json');
+var tourisms = require('./tourism.json');
+var routes = require('./route.json');
+var routedetails = require('./route-detail.json');
 
 mocky.createServer([
   // 作成API
   {
-    url: api+'/spots',
+    url: api+'/tourisms',
     method: 'post',
     res: function(req, res, callback) {
       setTimeout(function() {
@@ -21,13 +23,37 @@ mocky.createServer([
   },
   // 検索API
   {
-    url: api+'/spots',
+    url: api+'/tourisms',
     method: 'get',
     res: function(req, res, callback) {
       setTimeout(function() {
         callback(null, {
           status: 200,
-          body: JSON.stringify(spots)
+          body: JSON.stringify(tourisms)
+        });
+      }, 1000);
+    }
+  },
+  {
+    url: api+'/routes',
+    method: 'get',
+    res: function(req, res, callback) {
+      setTimeout(function() {
+        callback(null, {
+          status: 200,
+          body: JSON.stringify(routes)
+        });
+      }, 1000);
+    }
+  },
+  {
+    url: api+'/routes/1',
+    method: 'get',
+    res: function(req, res, callback) {
+      setTimeout(function() {
+        callback(null, {
+          status: 200,
+          body: JSON.stringify(routedetails)
         });
       }, 1000);
     }

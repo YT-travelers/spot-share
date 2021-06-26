@@ -1,0 +1,5 @@
+[
+  { "routetNumber": "1", "scheduleDateTime": "2020/01/01", "country": "日本" },
+  { "routetNumber": "2", "scheduleDateTime": "2020/01/02", "country": "インド" },
+  { "routetNumber": "3", "scheduleDateTime": "2020/01/03", "country": "トルコ" }
+]

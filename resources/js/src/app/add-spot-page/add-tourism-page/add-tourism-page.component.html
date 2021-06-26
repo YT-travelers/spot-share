@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>観光地登録</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+</head>
+
+<body>
+  <div class="container-fulid m-content">
+    <div id="main-content" class="panel panel-default">
+      <div class="panel-header">
+        <button type="button" (click)="onClickBack()" class="btn btn-outline-info back-button">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <span class="title">観光地を追加</span>
+      </div>
+      <form class="panel-body" [formGroup]="addTourismFormGroup">
+        <div class="panel-item">
+          <app-spot-image-input class="w-100"
+            [images]="tourism.tourismImages"
+            (updateCarouselInfosEvent)="onUpdateCarouselInfosEvent($event)"
+          ></app-spot-image-input>
+        </div>
+        <hr>
+        <div class="panel-item">
+          <div class="panel-item-title">スポット名称</div>
+          <div class="panel-item-input">
+            <div class="w-100">
+              <div *ngIf="addTourismFormGroup.controls.tourismName.invalid && addTourismFormGroup.controls.tourismName.dirty" class="validator-error">
+                未入力です
+              </div>
+              <input class="form-control" formControlName="tourismName" placeholder="必須">
+            </div>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">国</div>
+          <div class="panel-item-input" [formGroup]="country">
+            <div class="w-100">
+              <div *ngIf="country.controls.countryName.invalid && country.controls.countryName.dirty" class="validator-error">
+                未入力です
+              </div>
+              <input class="form-control" type="text" matInput
+                formControlName="countryName"
+                placeholder="必須"
+                [matAutocomplete]="auto"
+                (blur)="onBlurCountry()"
+              >
+            </div>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let country of filteredCountries | async" [value]="country.countryName">
+                {{country.countryName}}
+              </mat-option>
+            </mat-autocomplete>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">概要</div>
+          <div class="panel-item-input">
+            <textarea class="form-control" formControlName="tourismSummary"></textarea>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">営業開始時間</div>
+          <div class="panel-item-input">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTimeHours" (change)="onChangeOpenHours($event.target.value)">
+            <span class="spacer">時</span>
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismOpenTimeMinutes" (change)="onChangeOpenMinutes($event.target.value)">
+            <span class="spacer">分</span>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">営業終了時間</div>
+          <div class="panel-item-input">
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTimeHours" (change)="onChangeCloseHours($event.target.value)">
+            <span class="spacer">時</span>
+            <input class="form-control time-picker" maxlength="2" formControlName="tourismCloseTimeMinutes" (change)="onChangeCloseMinutes($event.target.value)">
+            <span class="spacer">分</span>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">住所</div>
+          <div class="panel-item-input">
+            <input class="form-control" formControlName="tourismAddress">
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">URL</div>
+          <div class="panel-item-input">
+            <input class="form-control" formControlName="tourismUrl">
+          </div>
+        </div>
+        <div class="panel-item mt-5" *ngIf="editMode !== EditMode.routeCreate">
+          <div class="panel-item-title">連続で作成する</div>
+          <div class="panel-item-input">
+            <mat-slide-toggle [color]="'primary'" [(ngModel)]="continueCreateFlg" [ngModelOptions]="{standalone: true}"></mat-slide-toggle>
+          </div>
+        </div>
+      </form>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" (click)="onClickSave()">
+          <span>保存</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

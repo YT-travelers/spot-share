@@ -1,0 +1,50 @@
+{ 
+  "routeid": 1,
+  "routeName": "日本",  
+  "routeDetails": [
+    { 
+      "routeId": 1,
+      "routeDetailId": 1,
+      "beanKindDiv": 0,
+      "order": 1,
+      "deleteRequestFlg": 0,
+      "routeDetailTourism": {
+        "routeDetailId": 1,
+        "tourismId": 1,
+        "tourismRate": 3,
+        "tourismMinutes": 20,
+        "tourismCost": 1500,
+        "tourism": {
+          "tourismId": 1,
+          "tourismName": "東京",
+          "country": {},
+          "tourismOpenTime": "900",
+          "tourismCloseTime": "1000",
+          "tourismSummary": "概要テスト",
+          "tourismAddress": "住所テスト",
+          "tourismUrl": "URLテスト"
+        }
+      },
+      "routeDetailRestaurant": {},
+      "routeDetailHotel": {},
+      "routeDetailActivity": {},
+      "routeDetailMeal": {},
+      "routeDetailMove": {},
+      "routeDetailTime": {},
+      "routeDetailChecklist": {},
+      "routeDetailMemo": {}
+    },
+    {
+      "restaurantId": 1,
+      "restaurantName": "レストラン名称",
+      "cuisineGenreDiv": 0,
+      "cuisineGenreDivName": "海鮮・寿司",
+      "restaurantKindDiv": 0,
+      "restaurantKindDivName": "レストラン",
+      "restaurantOpenTime": "900",
+      "restaurantCloseTime": "1000",
+      "restaurantAddress": "住所テスト",
+      "restaurantUrl": "URLテスト"
+    }
+  ]
+}

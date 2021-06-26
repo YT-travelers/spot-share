@@ -1,0 +1,139 @@
+html,body {
+  width: 100%;
+  height: 100%;
+  background-color: #F5F5F5;
+}
+
+.m-content {
+  width: 100%;
+  height: 100%;
+  padding: 1.4rem;
+}
+
+textarea {
+  height: 10rem !important;
+  border-width: 0.1rem;
+  border-radius: 0.5rem;
+}
+
+.spacer {
+  margin: 0 0.3rem;
+  text-align: center;
+}
+
+ag-grid-angular {
+  height: 100%;
+}
+
+.panel {
+  width: 100%;
+  padding: 0.6rem 0.3rem;
+  background-color: #fff;
+  border: 0.1rem solid #ddd;
+  border-radius: 0.5rem;
+  -webkit-box-shadow: 0 0.1rem 0.1rem rgba(0,0,0,.05);
+  box-shadow: 0 0.1rem 0.1rem rgb(0 0 0 / 5%);
+}
+
+// -----------------------------------------------------------------------
+// icon
+.back-button {
+  border-radius: 2rem !important;
+  height: 1.9rem !important;
+  padding: 0.3rem 0.15rem !important;
+  .material-icons {
+    font-size: 1.3rem !important;
+  }
+}
+
+// -----------------------------------------------------------------------
+// validator
+
+.validator-error {
+  color: red;
+}
+
+input.ng-dirty.ng-invalid {
+  border-color: red;
+  background-color: pink;
+}
+
+// -----------------------------------------------------------------------
+// modal
+
+.modal-xxl {
+  width: 95% !important;
+  max-width: none !important;
+  height: 90%;
+
+  .modal-content {
+    height: 100%;
+  }
+  
+  .modal-header {
+    padding: 0.7rem !important;
+    align-items: center;
+  
+    .modal-title {
+      font-size: 1.5rem;
+    }
+  
+  }
+  
+  .modal-body {
+    height: 85%;
+    padding: 0 1rem !important;
+  }
+
+  .modal-footer {
+    padding: 0.5rem;
+
+    button {
+      width: 10rem;
+      padding: 0.5rem !important;
+    }
+  }
+}
+
+.modal-header {
+  padding: 0.7rem !important;
+  align-items: center;
+
+  .modal-title {
+    font-size: 1.5rem;
+  }
+}
+
+.modal-body {
+  padding: 1rem;
+}
+
+.modal-footer {
+  padding: 0.5rem;
+
+  button {
+    width: 8rem;
+  }
+}
+
+app-select-add-spot-modal {
+  height: 100%;
+  ag-grid-angular {
+    height: 100% !important;
+  }
+}
+
+// -----------------------------------------------------------------------
+// loading
+
+// モーダルの z-index が 1050
+.cdk-overlay-container {
+  z-index: 1100;
+}
+
+// -----------------------------------------------------------------------
+// toast
+
+.toast-top-center {
+  margin-top: 3rem;
+}

@@ -1,0 +1,69 @@
+<div class="drag-container">
+  <ng-content></ng-content>
+  <div class="list-bean panel">
+    <div class="thumbnail-area">
+      <!-- TODO サムネイル -->
+      <img class="thumbnail" src="./favicon.ico">
+    </div>
+    <div class="w-100">
+      <div class="bean-title">
+        <mat-icon class="bean-icon">location_on</mat-icon>
+        <!-- TODO idとbeanDivを渡す-->
+        <a href="add-tourism-page;tourismId={{detail.tourismId}}" target="_blank">{{detail.tourism.tourismName}}</a>
+        <span class="material-icons close" (click)="onClickDeleteButton()">close</span>
+      </div>
+
+      <div class="div-border-line"></div>
+    
+      <form [formGroup]="routeDetailTourismFormGroup">
+        <div class="bean-info">
+
+          <!-- ******** bean left ******** -->
+          <div class="bean-info-left">
+            <div class="bean-info-item">
+              <span class="bean-info-label">(所要)</span>
+              <input class="form-control text-center required-time" maxlength="4" formControlName="tourismMinutes">
+              <span *ngIf="detail.tourismMinutes" class="bean-info-label spacer">分</span>
+            </div>
+          </div>
+
+          <!-- ******** bean center ******** -->
+          <div class="bean-info-center">
+            <div class="bean-info-item">
+              <span class="bean-info-label">営業開始</span>
+              <span class="bean-info-label spacer">{{detail.tourism.tourismOpenTimeHours}}</span>
+              <span class="bean-info-label">時</span>
+              <span class="bean-info-label spacer">{{detail.tourism.tourismOpenTimeMinutes}}</span>
+              <span class="bean-info-label">分</span>
+            </div>
+            <div class="bean-info-item">
+              <span class="bean-info-label">営業終了</span>
+              <span class="bean-info-label spacer">{{detail.tourism.tourismCloseTimeHours}}</span>
+              <span class="bean-info-label">時</span>
+              <span class="bean-info-label spacer">{{detail.tourism.tourismCloseTimeMinutes}}</span>
+              <span class="bean-info-label">分</span>
+            </div>
+          </div>
+
+          <!-- ******** bean right ******** -->
+          <div class="bean-info-right">
+            <ngb-rating formControlName="tourismRate"
+              [rate]="detail.tourismRate"
+              [max]="5"
+            ></ngb-rating>
+            <div class="bean-info-item">
+              <span class="bean-info-label cost-label">費用</span>
+              <span>：</span>
+              <input class="form-control text-right cost-input" maxlength="8" formControlName="tourismCost">
+              <span class="spacer">円</span>
+            </div>
+          </div>
+
+          <!-- ドラッグインジケータ -->
+          <mat-icon class="bean-icon drag-handle-icon">drag_indicator</mat-icon>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

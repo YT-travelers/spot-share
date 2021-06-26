@@ -13,7 +13,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
   ],
   imports: [
     BrowserModule,
-    NgbModule.forRoot(),
+    NgbModule,
     AgGridModule.withComponents([]),
     MatIconModule,
     MatProgressSpinnerModule,

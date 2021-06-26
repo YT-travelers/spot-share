@@ -2,39 +2,31 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
   justify-content: space-between;
 
   &-right {
     display: flex;
+    margin-left: auto;
 
     button {
-      height: 30px;
-      padding: 0 20px;
+      height: 2rem;
+      padding: 0 1rem;
       
-      .add-spot-button {
+      .add-tourism-button {
         display: flex;
         align-items: center;
       }
     }
   }
 
-  .page-title {
-    font-size: x-large;
-  }
-
-  input {
-    width: 100%;
-    max-width: 700px;
-  }
-
 }
 
 .footer-button {
-  margin-top: 10px;
+  margin-top: 1rem;
   width: 100%;
 }
 
 ag-grid-angular {
-  height: calc(100% - 100px);
+  height: calc(100% - 5.5rem);
 }

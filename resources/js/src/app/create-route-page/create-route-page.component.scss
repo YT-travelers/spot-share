@@ -1,139 +1,64 @@
+$tourism-icon-color: blue;
+
+html, body {
+  height: auto;
+}
+
+ng-deep .modal-dialog {
+  width: 95%;
+  max-width: none !important;
+}
+
 .route-page {
-  max-width: 700px;
+  max-width: 45.8rem;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 1rem;
 }
 
 .icon-btn {
   display: flex;
   align-items: center;
   text-align: center; 
-  width: 60px;
-  height: 50px;
-  padding: 0 12px;
+  width: 3.5rem;
+  height: 1.5rem;
+  padding: 0 0.5rem;
 }
 
 .route-title-area {
   width: 100%;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  .route-title-input {
+    margin-left: 1rem;
+  }
   .route-title {
-    margin-bottom: 5px ;
-    font-size: 40px;
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
     line-height: 1.2;
   }
   .title-edit-btn {
     color: #d3d3d3;
-    height: 50px;
-    padding: 12px 12px;
+    width: 3rem;
+    height: 3rem;
+    padding: 0.8rem;
     cursor: default;
     &:hover {
-      font-size: 27px;
-    }
-  }
-}
-
-.maps {
-  text-align: center;
-  width: 100%;
-  margin-bottom: 5px;
-  iframe {
-    width: 100%;
-  }
-}
-
-.no-spot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100px;
-}
-
-.panel {
-  width: 100%;
-  padding: 10px 5px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  box-shadow: 0 1px 1px rgba(0,0,0,.05);
-}
-
-.list-bean {
-  .delete-btn {
-    border: none;
-    border-radius: 50px;
-    height: 30px;
-    width: 30px;
-    vertical-align: middle;
-    align-items: center;
-    padding: 8px;
-    margin: -5px 0 0 0;
-    line-height: 0;
-  }
-
-  .div-border-line {
-    width: calc(100% - 40px);
-    margin: 3px 0;
-    padding-bottom: 1px;
-    border-bottom: dashed 1px #ddd;
-  }
-
-  &-spot {
-    display: flex;
-    width: 100%;
-    height: 100px;
-    margin-top: 5px;
-    .thumbnail-area {
-      display: flex;
-      align-items: center;
-      width: 120px;
-      margin-right: 5px;
-      .thumbnail {
-        width: 100px;
-        height: 90px;
-        object-fit: contain;
-        margin: 0 auto;
-      }
-    }
-    .spot-title {
-      height: 20px;
-      width: 100%;
-      font-size: 18px;
-      display: flex;
-      button {
-        margin-left: auto;
-      }
-    }
-
-    ::ng-deep ngb-rating {
-      span {
-        color: #FFFF66;
-        text-shadow: 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 0px #777, 0px 0px 4px #777;
-      }
-    }
-  }
-
-  &-move {
-    width: 95%;
-    margin-left: auto;
-    margin-top: 5px;
-    div {
-      margin-bottom: 3px;
+      font-size: 1.8rem;
     }
   }
 }
 
 .route-footer {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 1rem;
 
   .option-item-area {
     display: flex;
     align-items: center;
-    height: 40px;
+    height: 2.5rem;
 
     .option-items {
       display: flex;
@@ -141,34 +66,87 @@
       margin-left: auto;
 
       mat-icon {
-        width: 40px;
-        height: 35px;
-        font-size: 35px;
+        width: 2rem;
+        height: 2rem;
+        font-size: 2.2rem;
         cursor: default;
         &:hover {
-          font-size: 40px;
-          margin-bottom: 5px;
+          font-size: 2.5rem;
         }
       }
 
       .add-btn {
-        &-spot {
-          color: blue;
+        &-tourism {
+          color: $tourism-icon-color;
         }
         &-move {
           color: orange;
         }
         &-meal {
-          color: green;
-        }
-        &-hotel {
           color: red;
+        }
+        &-checklist {
+          color: limegreen;
+        }
+        &-memo {
+          color: cornflowerblue;
         }
       }
     }
   }
   .save-btn {
-    margin-top: 5px;
+    margin-top: 0.3rem;
     width: 100%;
   }
+}
+
+
+/** -------- cdkDragHandle -------- */
+// cdkDragHandle が子コンポーネントでは使用できないため、
+// 親コンポーネントでDOMを用意し、相対位置でドラッグ可能なエリアを設定
+app-route-detail-tourism-bean .cdk-drag-handle,
+app-route-detail-restaurant-bean .cdk-drag-handle,
+app-route-detail-hotel-bean .cdk-drag-handle,
+app-route-detail-activity-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 4.5rem;
+  margin-left: 41.7rem;
+  margin-top: 2.5rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}
+
+app-route-detail-meal-bean .cdk-drag-handle,
+app-route-detail-checklist-bean .cdk-drag-handle,
+app-route-detail-memo-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 2.8rem;
+  margin-left: 39.3rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}
+
+app-route-detail-move-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 2.8rem;
+  margin-left: 39.3rem;
+  margin-top: 2.1rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
+}
+
+app-route-detail-time-bean .cdk-drag-handle {
+  width: 2rem;
+  height: 3.9rem;
+  margin-left: 13.1rem;
+  position: absolute;
+  z-index: 100;
+  background-color: transparent;
+  cursor: move;
 }

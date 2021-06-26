@@ -1,0 +1,32 @@
+<div class="drag-container">
+  <ng-content></ng-content>
+
+  <div class="list-bean-time">
+    <div class="bean panel">
+
+        <!-- カレンダー表示用インプット（非表示） -->
+        <input class="invisible-calendar-input" ngbDatepicker
+          #datepicker="ngbDatepicker"
+          [minDate]="{year: 1990, month: 1, day: 1}"
+          [maxDate]="{year: 2050, month: 12, day: 31}"
+          (dateSelect)="onDateSelection($event)"
+        >
+        <!-- 日付表示-->
+        <input class="form-control date-picker" type="text" readonly
+          [value]="dispScheduleDateTime"
+          (click)="datepicker.toggle()"
+        >
+
+        <!-- 時間-->
+        <input class="form-control time-picker" maxlength="2" [value]="scheduleDateTime.hour" (change)="onChangeHours($event.target.value)">
+        <span class="spacer">:</span>
+        <!-- 分 -->
+        <input class="form-control time-picker" maxlength="2" [value]="scheduleDateTime.minutes" (change)="onChangeMinutes($event.target.value)">
+
+      <!-- ドラッグインジケータ -->
+      <mat-icon *ngIf="!isHeadBean" class="bean-icon drag-handle-icon">drag_indicator</mat-icon>
+
+      <span *ngIf="!isHeadBean" class="material-icons close" (click)="onClickDeleteButton()">close</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+.list-bean-move {
+  width: 95%;
+  margin-left: auto;
+  margin-top: 0.2rem;
+}
+
+.more-vert {
+  margin: 0.2rem 0;
+  cursor: default;
+}
+
+.close {
+  font-size: 1rem;
+  cursor: default;
+  margin: 0 0.2em;
+}
+
+.mat-icon {
+  cursor: default;
+}
+
+.bean {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+
+  .move-kind-icon {
+    display: flex;
+    margin-left: 1rem;
+    color: navy;
+  }
+
+  .move-minutes-input {
+    width: 4rem;
+    text-align: right;
+  }
+
+  .move-cost-input {
+    width: 5rem;
+    text-align: right;
+  }
+
+  input {
+    width: 4rem;
+    height: 1.5rem;
+    padding: 0 0.3rem;
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
+  }
+
+  select {
+    width: 6rem;
+    height: 1.5rem;
+    padding: 0rem;
+    font-size: 0.9rem;
+    margin-left: 0.3rem;
+  }
+}
+
+// ドラッグインジケータの位置指定
+.drag-handle-icon {
+  opacity: 0.5;
+  height: 1rem;
+  width: 1.5rem;
+  margin: 0 1rem;
+  display: flex;
+  align-items: center;
+}

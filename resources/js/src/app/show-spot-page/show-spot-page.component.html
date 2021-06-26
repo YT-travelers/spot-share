@@ -12,12 +12,29 @@
 <body>
   <div class="container-fulid m-content">
     <div class="title-area">
-      <span class="page-title">スポット一覧</span>
-      <div class="title-area-right">
-        <button type="button" (click)="onClickAddSpot()" class="btn btn-outline-primary ml-2">
-            <div class="add-spot-button">
+      <div class="title-area-right" *ngIf="!spotSelectMode">
+        <button type="button" (click)="onClickAddTourism()" class="btn btn-outline-primary ml-2">
+            <div class="add-tourism-button">
               <mat-icon>add_circle_outline</mat-icon>
-              <span class="ml-2">スポット追加</span>
+              <span class="ml-2">観光地</span>
+            </div>
+        </button>
+        <button type="button" (click)="onClickAddRestaurant()" class="btn btn-outline-primary ml-2">
+            <div class="add-tourism-button">
+              <mat-icon>add_circle_outline</mat-icon>
+              <span class="ml-2">飲食店</span>
+            </div>
+        </button>
+        <button type="button" (click)="onClickAddHotel()" class="btn btn-outline-primary ml-2">
+            <div class="add-tourism-button">
+              <mat-icon>add_circle_outline</mat-icon>
+              <span class="ml-2">ホテル</span>
+            </div>
+        </button>
+        <button type="button" (click)="onClickAddActivity()" class="btn btn-outline-primary ml-2">
+            <div class="add-tourism-button">
+              <mat-icon>add_circle_outline</mat-icon>
+              <span class="ml-2">アクティビティ</span>
             </div>
         </button>
       </div>
@@ -28,7 +45,7 @@
       [columnDefs]="columnDefs"
       [gridOptions]="gridOptions"
     ></ag-grid-angular>
-    <button type="button" (click)="onClickCreateRoute()" class="btn btn-outline-primary footer-button">
+    <button type="button" *ngIf="!spotSelectMode" (click)="onClickCreateRoute()" class="btn btn-outline-primary footer-button">
       <span>ルートに追加</span>
     </button>
   </div>

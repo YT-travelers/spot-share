@@ -1,0 +1,13 @@
+<div class="modal-header">
+  <span class="modal-title">スポットを選ぶ</span>
+  <button type="button" class="btn btn-outline-secondary" aria-label="Close" (click)="activeModal.dismiss('dismiss')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <app-show-spot-page #showSpotPageComponent [spotSelectMode]="true"></app-show-spot-page>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="activeModal.dismiss('cancel')">キャンセル</button>
+  <button type="button" class="btn btn-success" (click)="onClickDone()">追加</button>
+</div>

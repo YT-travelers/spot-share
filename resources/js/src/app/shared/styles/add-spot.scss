@@ -1,0 +1,83 @@
+/**
+ * スポット追加コンポーネント用スタイル
+ */
+app-add-tourism-page,
+app-add-restaurant-page,
+app-add-hotel-page,
+app-add-activity-page {
+  html, body {
+    height: auto;
+  }
+  
+  .panel {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: unset;
+  
+    &-default {
+      border-color: #ddd;
+    }
+  
+    &-header {
+      display: flex;
+      align-items: center;
+      padding: 0.6rem 0.8rem;
+      background-color: #f8f8f8;
+      border-color: #ddd;
+      .title {
+        margin-left: 0.6rem;
+        font-size: 1.3rem;
+      }
+    }
+    
+    &-body {
+      padding: 1rem;
+      width: 100%;
+    }
+  
+    &-item {
+      margin: 0.6rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      &-title {
+        font-weight: lighter;
+        min-width: 9rem;
+      }
+      &-input {
+        width: 100%;
+        min-width: 18rem;
+        max-width: 30rem;
+        display: flex;
+        align-items: center;
+        input {
+          width: 100%;
+        }
+        .time-picker {
+          width: 4em;
+          text-align: center;
+        }
+      }
+      textarea {
+        width: 100%;
+        min-width: 18rem;
+        max-width: 30rem;
+      }
+    }
+  
+    &-footer {
+      text-align: center;
+      padding: 0.6rem;
+      background-color: #f5f5f5;
+  
+      button {
+        width: 30%;
+        min-width: 18rem;
+      }
+    }
+  }
+    
+  #show-tourism-item {
+    overflow-y: scroll;
+  }
+}

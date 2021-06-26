@@ -16,7 +16,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
     AgGridModule.withComponents([]),
     MatIconModule,
     MatProgressSpinnerModule,
