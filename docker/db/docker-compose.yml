@@ -1,0 +1,19 @@
+version: "3"
+services:
+  db:
+    image: mysql:8.0
+    volumes:
+      - db-store:/var/lib/mysql
+      - ./logs:/var/log/mysql
+      - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${SPOT_SHARE_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - TZ=Asia/Tokyo
+    ports:
+      - 3306:3306
+
+volumes:
+  db-store:
