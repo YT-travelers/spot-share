@@ -159,10 +159,26 @@ export class CreateRoutePageComponent implements OnInit {
     // スポット選択モーダルを表示
     this.selectAddSpotModalService.show().then((rtnValue: any) => {
       // ルート詳細配列にキャスト
-      const routeDetails: IRouteDetail[] = <IRouteDetail[]>rtnValue;
+      const rtnRouteDetails: IRouteDetail[] = <IRouteDetail[]>rtnValue;
       
-      if (routeDetails && routeDetails.length > 0) {
-        this.routeDetails = this.routeDetails.concat(routeDetails);
+      if (rtnRouteDetails && rtnRouteDetails.length > 0) {
+        _forEach(rtnRouteDetails, (e: IRouteDetail)  => {
+          const maxRouteDetailId = this.getMaxRouteDetailId();
+          e.routeDetailId = maxRouteDetailId;
+
+          switch (e.beanKindDiv) {
+            case Code.BeanKindDiv.Tourism: e.routeDetailTourism.routeDetailId = maxRouteDetailId;
+              break;
+            case Code.BeanKindDiv.Restaurant: e.routeDetailRestaurant.routeDetailId = maxRouteDetailId;
+              break;
+            case Code.BeanKindDiv.Hotel: e.routeDetailHotel.routeDetailId = maxRouteDetailId;
+              break;
+            case Code.BeanKindDiv.Activity: e.routeDetailActivity.routeDetailId = maxRouteDetailId;
+              break;
+          }
+
+          this.routeDetails.push(e);
+        });
       }
     });
   }

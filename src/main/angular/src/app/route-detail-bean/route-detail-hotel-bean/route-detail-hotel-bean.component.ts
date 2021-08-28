@@ -24,18 +24,18 @@ export class RouteDetailHotelBeanComponent implements OnInit {
   /** ビーン削除イベント通知 */
   @Output() deleteRouteDetailHotelEvent: EventEmitter<number> = new EventEmitter();
 
-  /** 食事種類区分 */
+  /** 朝食有無区分 */
   yesNoDiv = Code.YesNoDiv;
 
-  /** 食事種類区分リスト */
+  /** 食事有無区分リスト */
   yesNoDivList: ICodeList[] = Code.YesNoDiv.List;
 
   /** ルート詳細ホテル フォームグループ */
   routeDetailHotelFormGroup = new FormGroup({
     /** ルート詳細ID */
-    routeDetailId: new FormControl(),
+    routeDetailId: new FormControl(0),
     /** ホテルID */
-    hotelId: new FormControl(),
+    hotelId: new FormControl(0),
     /** ホテル */
     hotel: new FormGroup({
       /** ホテル名称 */
@@ -73,7 +73,6 @@ export class RouteDetailHotelBeanComponent implements OnInit {
 
     // 入力値変更検知
     this.routeDetailHotelFormGroup.valueChanges.pipe(
-      debounceTime(400),
       map(() => {
         // チェックイン時間（時）を補完
         const checkInTimeHours = TimeUtils.complementHour(this.routeDetailHotelFormGroup.value.hotelCheckInTimeHours);
