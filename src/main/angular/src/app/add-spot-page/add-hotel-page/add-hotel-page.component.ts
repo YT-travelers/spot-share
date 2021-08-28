@@ -7,6 +7,8 @@ import { filter as _filter, forEach as _forEach } from 'lodash';
 import { IHotel } from 'src/app/shared/model/hotel';
 import { IHotelImage } from 'src/app/shared/model/hotelImage';
 import { HotelService } from 'src/app/shared/service/hotel.service';
+import { Code } from 'src/app/shared/const/code-div.const';
+import { ICodeList } from 'src/app/shared/model/code-list';
 
 // ホテル編集モード列挙値
 export enum EditMode {
@@ -37,6 +39,9 @@ export class AddHotelPageComponent implements OnInit {
   /** 編集対象 */
   hotel: IHotel = {};
 
+  /** ホテル種類区分リスト */
+  HotelKindDivList: ICodeList[] = Code.HotelKindDiv.List;
+
   /** 画面上に表示するホテル情報のID */
   hotelId = '';
 
@@ -49,6 +54,10 @@ export class AddHotelPageComponent implements OnInit {
     hotelId: new FormControl(this.hotel.hotelId),
     /**  ホテル名称 */
     hotelName: new FormControl(this.hotel.hotelName, [Validators.required]),
+    /** ホテルID */
+    hotelSummary: new FormControl(this.hotel.hotelSummary),
+    /** ホテル種類区分 */
+    hotelKindDiv: new FormControl(0),
     /** 住所 */
     hotelAddress: new FormControl(this.hotel.hotelAddress),
     /** url */

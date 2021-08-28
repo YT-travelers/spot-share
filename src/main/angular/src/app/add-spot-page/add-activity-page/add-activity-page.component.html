@@ -39,6 +39,12 @@
           </div>
         </div>
         <div class="panel-item">
+          <div class="panel-item-title">概要</div>
+          <div class="panel-item-input">
+            <textarea class="form-control" formControlName="activitySummary"></textarea>
+          </div>
+        </div>
+        <div class="panel-item">
           <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
             <input class="form-control time-picker" formControlName="activityOpenTimeHours" (change)="onChangeOpenHours($event.target.value)">

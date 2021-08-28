@@ -8,6 +8,8 @@ import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { IRestaurant } from 'src/app/shared/model/restaurant';
 import { IRestaurantImage } from 'src/app/shared/model/restaurantImage';
 import { RestaurantService } from 'src/app/shared/service/restaurant.service';
+import { Code } from 'src/app/shared/const/code-div.const';
+import { ICodeList } from 'src/app/shared/model/code-list';
 
 // 飲食店編集モード列挙値
 export enum EditMode {
@@ -38,6 +40,12 @@ export class AddRestaurantPageComponent implements OnInit {
   /** 編集対象 */
   restaurant: IRestaurant = {};
 
+  /** 飲食店種類区分リスト */
+  RestaurantKindDivList: ICodeList[] = Code.RestaurantKindDiv.List;
+  
+  /** 料理ジャンル区分リスト */
+  CuisineGenreDivList: ICodeList[] = Code.CuisineGenreDiv.List;
+
   /** 画面上に表示する飲食店情報のID */
   restaurantId = '';
 
@@ -50,6 +58,12 @@ export class AddRestaurantPageComponent implements OnInit {
     restaurantId: new FormControl(this.restaurant.restaurantId),
     /**  飲食店名称 */
     restaurantName: new FormControl(this.restaurant.restaurantName, [Validators.required]),
+    /** 概要 */
+    restaurantSummary: new FormControl(this.restaurant.restaurantSummary),
+    /** 飲食店種類区分 */
+    restaurantKindDiv: new FormControl(0),
+    /** 料理ジャンル区分 */
+    cuisineGenreDiv: new FormControl(0),
     /** 営業開始時間（時） */
     restaurantOpenTimeHours: new FormControl(this.restaurant.restaurantOpenTimeHours, [ Validators.min(0), Validators.max(23)]),
     /** 営業開始時間（分） */

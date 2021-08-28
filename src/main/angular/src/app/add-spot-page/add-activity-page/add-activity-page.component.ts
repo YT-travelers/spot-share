@@ -50,6 +50,8 @@ export class AddActivityPageComponent implements OnInit {
     activityId: new FormControl(this.activity.activityId),
     /**  アクティビティ名称 */
     activityName: new FormControl(this.activity.activityName, [Validators.required]),
+    /** アクティビティ概要 */
+    activitySummary: new FormControl(this.activity.activitySummary),
     /** 営業開始時間（時） */
     activityOpenTimeHours: new FormControl(this.activity.activityOpenTimeHours, [ Validators.min(0), Validators.max(23)]),
     /** 営業開始時間（分） */

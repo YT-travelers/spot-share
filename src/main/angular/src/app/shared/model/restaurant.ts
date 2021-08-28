@@ -24,6 +24,8 @@ export interface IRestaurant {
   restaurantCloseTimeHours?: string;
   /** 営業終了時間（分） */
   restaurantCloseTimeMinutes?: string;
+  /** 概要 */
+  restaurantSummary?: string;
   /** 住所 */
   restaurantAddress?: string;
   /** URL */
