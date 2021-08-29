@@ -10,6 +10,7 @@ import { IRestaurantImage } from 'src/app/shared/model/restaurantImage';
 import { RestaurantService } from 'src/app/shared/service/restaurant.service';
 import { Code } from 'src/app/shared/const/code-div.const';
 import { ICodeList } from 'src/app/shared/model/code-list';
+import { TabIndex } from 'src/app/shared/const/const.const';
 
 // 飲食店編集モード列挙値
 export enum EditMode {
@@ -146,8 +147,8 @@ export class AddRestaurantPageComponent implements OnInit {
             this.restaurant = {};
             this.addRestaurantFormGroup.reset();
           } else {
-            // 連続作成フラグがOFFの場合、一覧画面に戻る
-            this.router.navigate(['/show-container-page']);
+            // 連続作成フラグがOFFの場合、スポット一覧画面に戻る
+            this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
@@ -167,7 +168,7 @@ export class AddRestaurantPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    this.router.navigate(['/show-container-page']);
+    this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
   }
 
   /**
