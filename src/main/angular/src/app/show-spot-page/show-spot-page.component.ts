@@ -105,7 +105,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
       cellStyle: { 'line-height': '30px', 'text-align': 'center', 'padding': '3px' }
     },
     { headerName: '選択', field: 'select', checkboxSelection: 'true',  minWidth: '65', maxWidth: '65',
-      editable: true,
+      editable: false,
       cellRenderer: this.checkboxCellRenderer,
       cellStyle: { 'text-align': 'center', 'padding-top': '5px' }
     },
