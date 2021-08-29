@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription, fromEvent } from 'rxjs';
-import { GridOptions } from 'ag-grid-community';
-import { IRoute } from 'src/app/shared/model/route';
-import { RouteService } from 'src/app/shared/service/route.service';
 import { Router } from '@angular/router';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { GridOptions } from 'ag-grid-community';
+import { Observable, Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+
+import { IRoute } from 'src/app/shared/model/route';
+import { RouteService } from 'src/app/shared/service/route.service';
 import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
 import { InputRouteNameModalService } from 'src/app/shared/component/input-route-name-modal/input-route-name-modal.service';
 
@@ -114,7 +115,6 @@ export class ShowRoutePageComponent implements OnInit, OnDestroy {
    * ルート作成ボタン押下イベント
    */
   onClickCreateRoute(): void {
-    // TODO ルートのタイトルをリクエストボディに設定
     this.inputrouteNameModalService.show().then(routeName => {
       if (routeName) {
 

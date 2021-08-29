@@ -9,6 +9,7 @@ import { debounceTime } from 'rxjs/operators';
 import { forEach as _forEach, filter as _filter } from 'lodash';
 
 import { Code } from 'src/app/shared/const/code-div.const';
+import { IRoute } from 'src/app/shared/model/route';
 import { IRouteDetail } from 'src/app/shared/model/route-detail';
 import { ITourism } from 'src/app/shared/model/tourism';
 import { IRestaurant } from 'src/app/shared/model/restaurant';
@@ -21,6 +22,7 @@ import { RestaurantService } from 'src/app/shared/service/restaurant.service';
 import { HotelService } from 'src/app/shared/service/hotel.service';
 import { ActivityService } from 'src/app/shared/service/activity.service';
 import { SelectModalService } from 'src/app/shared/component/select-modal/select-modal.service';
+import { InputRouteNameModalService } from '../shared/component/input-route-name-modal/input-route-name-modal.service';
 
 @Component({
   selector: 'app-show-spot-page',
@@ -149,6 +151,7 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     private activityService: ActivityService,
     private routeService: RouteService,
     private selectModal: SelectModalService,
+    private inputrouteNameModalService: InputRouteNameModalService,
     private router: Router,
     private overlay: Overlay,
   ) {}
@@ -241,12 +244,19 @@ export class ShowSpotPageComponent implements OnInit, OnDestroy {
     }
 
     // 新規ルート作成
-    const route = { routeDetails: routeDetails };
-    this.routeService.createRoute(route).subscribe(result => {
-      // ルート作成ページに遷移
-      this.router.navigate(['/create-route-page', { routeId: result.routeId }]);
-    });
+    this.inputrouteNameModalService.show().then(routeName => {
+      if (routeName) {
 
+        const route: IRoute = { routeDetails: routeDetails };
+        route.routeName = routeName;
+
+        // ルート作成リクエスト
+        this.routeService.createRoute(route).subscribe(response => {
+          // ルート作成ページに遷移
+          this.router.navigate(['/create-route-page', { routeId: response.routeId }]);
+        });
+      }
+    });
   }
 
   // -----------------------------------------------------------------------
