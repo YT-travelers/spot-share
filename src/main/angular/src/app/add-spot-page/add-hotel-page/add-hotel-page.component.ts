@@ -131,6 +131,9 @@ export class AddHotelPageComponent implements OnInit {
             // 連続作成フラグがONの場合、編集対象をクリアする
             this.hotel = {};
             this.addHotelFormGroup.reset();
+          } else {
+            // 連続作成フラグがOFFの場合、一覧画面に戻る
+            this.router.navigate(['/show-container-page']);
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
