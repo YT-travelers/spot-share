@@ -39,6 +39,20 @@
           </div>
         </div>
         <div class="panel-item">
+          <div class="panel-item-title">概要</div>
+          <div class="panel-item-input">
+            <textarea class="form-control" formControlName="hotelSummary"></textarea>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">種類</div>
+          <div class="panel-item-input">
+            <select class="form-control" formControlName="hotelKindDiv">
+              <option *ngFor="let item of HotelKindDivList" value={{item.div}}>{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="panel-item">
           <div class="panel-item-title">住所</div>
           <div class="panel-item-input">
             <input class="form-control" formControlName="hotelAddress">

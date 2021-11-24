@@ -39,6 +39,28 @@
           </div>
         </div>
         <div class="panel-item">
+          <div class="panel-item-title">概要</div>
+          <div class="panel-item-input">
+            <textarea class="form-control" formControlName="restaurantSummary"></textarea>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">種類</div>
+          <div class="panel-item-input">
+            <select class="form-control" formControlName="restaurantKindDiv">
+              <option *ngFor="let item of RestaurantKindDivList" value={{item.div}}>{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-title">料理ジャンル</div>
+          <div class="panel-item-input">
+            <select class="form-control" formControlName="cuisineGenreDiv">
+              <option *ngFor="let item of CuisineGenreDivList" value={{item.div}}>{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="panel-item">
           <div class="panel-item-title">営業開始時間</div>
           <div class="panel-item-input">
             <input class="form-control time-picker" formControlName="restaurantOpenTimeHours" (change)="onChangeOpenHours($event.target.value)">

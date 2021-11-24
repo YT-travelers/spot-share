@@ -8,6 +8,7 @@ import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { IActivity } from 'src/app/shared/model/activity';
 import { IActivityImage } from 'src/app/shared/model/activityImage';
 import { ActivityService } from 'src/app/shared/service/activity.service';
+import { TabIndex } from 'src/app/shared/const/const.const';
 
 // アクティビティ編集モード列挙値
 export enum EditMode {
@@ -50,6 +51,8 @@ export class AddActivityPageComponent implements OnInit {
     activityId: new FormControl(this.activity.activityId),
     /**  アクティビティ名称 */
     activityName: new FormControl(this.activity.activityName, [Validators.required]),
+    /** アクティビティ概要 */
+    activitySummary: new FormControl(this.activity.activitySummary),
     /** 営業開始時間（時） */
     activityOpenTimeHours: new FormControl(this.activity.activityOpenTimeHours, [ Validators.min(0), Validators.max(23)]),
     /** 営業開始時間（分） */
@@ -131,6 +134,9 @@ export class AddActivityPageComponent implements OnInit {
             // 連続作成フラグがONの場合、編集対象をクリアする
             this.activity = {};
             this.addActivityFormGroup.reset();
+          } else {
+            // 連続作成フラグがOFFの場合、スポット一覧画面に戻る
+            this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
@@ -150,7 +156,7 @@ export class AddActivityPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    this.router.navigate(['/show-container-page']);
+    this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
   }
 
   /**

@@ -7,6 +7,9 @@ import { filter as _filter, forEach as _forEach } from 'lodash';
 import { IHotel } from 'src/app/shared/model/hotel';
 import { IHotelImage } from 'src/app/shared/model/hotelImage';
 import { HotelService } from 'src/app/shared/service/hotel.service';
+import { Code } from 'src/app/shared/const/code-div.const';
+import { ICodeList } from 'src/app/shared/model/code-list';
+import { TabIndex } from 'src/app/shared/const/const.const';
 
 // ホテル編集モード列挙値
 export enum EditMode {
@@ -37,6 +40,9 @@ export class AddHotelPageComponent implements OnInit {
   /** 編集対象 */
   hotel: IHotel = {};
 
+  /** ホテル種類区分リスト */
+  HotelKindDivList: ICodeList[] = Code.HotelKindDiv.List;
+
   /** 画面上に表示するホテル情報のID */
   hotelId = '';
 
@@ -49,6 +55,10 @@ export class AddHotelPageComponent implements OnInit {
     hotelId: new FormControl(this.hotel.hotelId),
     /**  ホテル名称 */
     hotelName: new FormControl(this.hotel.hotelName, [Validators.required]),
+    /** ホテルID */
+    hotelSummary: new FormControl(this.hotel.hotelSummary),
+    /** ホテル種類区分 */
+    hotelKindDiv: new FormControl(0),
     /** 住所 */
     hotelAddress: new FormControl(this.hotel.hotelAddress),
     /** url */
@@ -122,6 +132,9 @@ export class AddHotelPageComponent implements OnInit {
             // 連続作成フラグがONの場合、編集対象をクリアする
             this.hotel = {};
             this.addHotelFormGroup.reset();
+          } else {
+            // 連続作成フラグがOFFの場合、スポット一覧画面に戻る
+            this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
@@ -141,7 +154,7 @@ export class AddHotelPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    this.router.navigate(['/show-container-page']);
+    this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
   }
 
   /**

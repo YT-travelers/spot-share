@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime } from 'rxjs/operators';
 import { filter as _filter, includes, _includes, forEach as _forEach } from 'lodash';
 
+import { TabIndex } from 'src/app/shared/const/const.const';
 import { TimeUtils } from 'src/app/shared/utils/time-utils.const';
 import { ICountry } from 'src/app/shared/model/country';
 import { ITourism } from 'src/app/shared/model/tourism';
@@ -164,6 +165,9 @@ export class AddTourismPageComponent implements OnInit {
             // 連続作成フラグがONの場合、編集対象をクリアする
             this.tourism = {};
             this.addTourismFormGroup.reset();
+          } else {
+            // 連続作成フラグがOFFの場合、スポット一覧画面に戻る
+            this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
           }
         }, error => {
           this.toastr.error('登録に失敗しました。'　+ error.status + '：' + error.statusText, 'エラー');
@@ -183,7 +187,7 @@ export class AddTourismPageComponent implements OnInit {
    * 戻るボタン押下イベント
    */
   onClickBack(): void {
-    this.router.navigate(['/show-container-page']);
+    this.router.navigate(['/show-container-page', { selectIndex: TabIndex.Spot }]);
   }
 
   /**
