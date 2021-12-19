@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ログイン</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+</head>
+
+<body>
+  <div class="container-fulid m-content">
+    <div id="main-content" class="panel panel-default">
+      <div class="panel-header">
+        <span class="title">ログイン</span>
+      </div>
+      <form id="login-item" class="panel-body">
+        <div class="panel-item">
+          <div class="panel-item-email">メールアドレス&nbsp;&nbsp;</div>
+          <div class="panel-item-input">
+            <div class="w-100">
+              <div *ngIf="this.emailControl.invalid && this.emailControl.dirty" class="validator-error">
+                未入力です
+              </div>
+              <input name="email" class="form-control" [formControl]="emailControl" placeholder="必須">
+            </div>
+          </div>
+        </div>
+        <div class="panel-item">
+          <div class="panel-item-password">パスワード &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+          <div class="panel-item-input">
+            <div class="w-100">
+              <div *ngIf="this.passwordControl.invalid && this.passwordControl.dirty" class="validator-error">
+                未入力です
+              </div>
+              <input name="password" type="password" class="form-control" [formControl]="passwordControl" placeholder="必須">
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" (click)="onClickLogin()">
+          <span>ログイン</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

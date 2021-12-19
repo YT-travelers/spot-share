@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,8 +27,11 @@ import { RouteDetailTimeBeanModule } from './route-detail-bean/route-detail-time
 import { ShowContainerPageModule } from './show-container-page/show-container-page.module';
 import { ShowSpotPageModule } from './show-spot-page/show-spot-page.module';
 import { ShowRoutePageModule } from './show-route-page/show-route-page.module';
+import { LoginPageModule } from './login-page/login-page.module';
 import { InputRouteNameModalModule } from './shared/component/input-route-name-modal/input-route-name-modal.module';
 import { SelectAddSpotModalModule } from './shared/component/select-add-spot-modal/select-add-spot-modal.module';
+import { XsrfInterceptor } from './shared/utils/xsrf-interceptor';
+import { UnauthorizedInterceptor } from './shared/utils/unauthorized-interceptor ';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { SelectAddSpotModalModule } from './shared/component/select-add-spot-mod
     ShowContainerPageModule,
     ShowSpotPageModule,
     ShowRoutePageModule,
+    LoginPageModule,
     SelectAddSpotModalModule,
     SelectModalModule,
     InputRouteNameModalModule,
@@ -66,7 +70,10 @@ import { SelectAddSpotModalModule } from './shared/component/select-add-spot-mod
       positionClass: 'toast-top-center',
     })
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: XsrfInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: UnauthorizedInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

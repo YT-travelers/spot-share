@@ -6,6 +6,7 @@ import { AddHotelPageComponent } from './add-spot-page/add-hotel-page/add-hotel-
 import { AddActivityPageComponent } from './add-spot-page/add-activity-page/add-activity-page.component';
 import { CreateRoutePageComponent } from './create-route-page/create-route-page.component';
 import { ShowContainerPageComponent } from './show-container-page/show-container-page.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
   { path: 'show-container-page', component: ShowContainerPageComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'add-hotel-page', component: AddHotelPageComponent },
   { path: 'add-activity-page', component: AddActivityPageComponent },
   { path: 'create-route-page', component: CreateRoutePageComponent },
-  { path: '', redirectTo: '/show-container-page', pathMatch: 'full' },
+  { path: '', redirectTo: '/login-page', pathMatch: 'full' },
+  { path: 'login-page', component: LoginPageComponent },
 ];
 
 @NgModule({
