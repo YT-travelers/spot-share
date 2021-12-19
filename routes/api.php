@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\CountryController;
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\RouteController;
@@ -21,13 +20,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 //Route::middleware('web')
-Route::apiResource('routes', RouteController::class);
-Route::apiResource('restaurants', RestaurantController::class);
-Route::apiResource('hotels', HotelController::class);
-Route::apiResource('tourisms', TourismController::class);
-Route::apiResource('activities', ActivityController::class);
-Route::get('countries', 'App\Http\Controllers\CountryController@index');
-Route::get('codes', 'App\Http\Controllers\CodeController@index');
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('routes', RouteController::class);
+    Route::apiResource('restaurants', RestaurantController::class);
+    Route::apiResource('hotels', HotelController::class);
+    Route::apiResource('tourisms', TourismController::class);
+    Route::apiResource('activities', ActivityController::class);
+    Route::get('countries', 'App\Http\Controllers\CountryController@index');
+    Route::get('codes', 'App\Http\Controllers\CodeController@index');
+});
+
+Route::post("auth/login", 'App\Http\Controllers\AuthController@login');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
